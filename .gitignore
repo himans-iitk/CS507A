@@ -11,3 +11,6 @@ data/raw/*
 
 # regenerable logs
 data/processed/*.log
+
+# labelling tool access token
+coding/.labeltool_token

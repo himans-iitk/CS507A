@@ -24,6 +24,21 @@ from gapstudy.labels import CODING, LabelStore
 PROCESSED = PROJECT_ROOT / "data" / "processed"
 HERE = Path(__file__).resolve().parent
 LABEL_FIELDS = ("categories", "coverage", "evidence", "need", "barriers", "flags", "notes", "seconds")
+FORBIDDEN = """<!doctype html><title>Token needed</title>
+<body style="font:15px/1.5 system-ui;max-width:640px;margin:40px auto;padding:0 16px">
+<h2>Access token missing or wrong</h2>
+<p>Open the tool with the full link printed in the terminal where you started it, including
+<code>?token=...</code>. The token is also saved in <code>coding/.labeltool_token</code>.</p>
+<p>After opening it once with the token, this browser remembers it.</p></body>"""
+
+
+def persistent_token(coding_dir: Path) -> str:
+    """One token per checkout, reused across restarts so saved links keep working."""
+    path = Path(coding_dir) / ".labeltool_token"
+    if not path.exists():
+        path.write_text(secrets.token_urlsafe(16))
+        path.chmod(0o600)
+    return path.read_text().strip()
 
 
 def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token: str | None = None) -> Flask:
@@ -36,19 +51,19 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
     prelabels = (pd.read_csv(prelabel_path).set_index("unit_id").categories.map(json.loads).to_dict()
                  if prelabel_path.exists() else {})
     meta = queue.drop_duplicates("unit_id").set_index("unit_id")
-    token = token or secrets.token_urlsafe(16)
+    token = token or persistent_token(coding_dir)
     app.config["TOKEN"] = token
 
     @app.before_request
     def check_token():
         given = request.args.get("token") or request.cookies.get("token") or request.headers.get("X-Token")
         if given != token:
-            abort(403)
+            return FORBIDDEN, 403
 
     @app.after_request
     def remember_token(resp):
         if request.args.get("token") == token:
-            resp.set_cookie("token", token, httponly=True, samesite="Strict")
+            resp.set_cookie("token", token, httponly=True, samesite="Lax", max_age=60 * 60 * 24 * 90)
         return resp
 
     def coding_pass() -> int:
@@ -113,8 +128,10 @@ def main() -> None:
     ap.add_argument("--port", type=int, default=8507)
     args = ap.parse_args()
     app = create_app()
-    print(f"\n  Labelling tool: http://localhost:{args.port}/?token={app.config['TOKEN']}\n"
-          f"  Re-code pass:   http://localhost:{args.port}/?pass=2&token={app.config['TOKEN']}\n")
+    print(f"\n  Open this link (it stays the same across restarts):\n"
+          f"    http://localhost:{args.port}/?token={app.config['TOKEN']}\n"
+          f"  Re-code pass (from mid-November):\n"
+          f"    http://localhost:{args.port}/?pass=2&token={app.config['TOKEN']}\n")
     app.run(host="127.0.0.1", port=args.port, debug=False)
 
 

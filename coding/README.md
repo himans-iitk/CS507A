@@ -18,10 +18,18 @@ cd ~/CS507A
 .venv/bin/python -m gapstudy.labeltool.app          # prints a URL with ?token=...
 ```
 
-Open the printed URL in your browser. In VS Code (Remote SSH) port 8507 is forwarded
-automatically (see the **Ports** tab); otherwise run `ssh -L 8507:localhost:8507 <login node>` on
-your laptop first. Stop the server with Ctrl+C. Labels are saved on every click of
-**Save & next**, so you can stop at any time.
+Open the printed URL in your browser, **including the `?token=...` part**. In VS Code (Remote
+SSH) port 8507 is forwarded automatically (see the **Ports** tab); otherwise run
+`ssh -L 8507:localhost:8507 <login node>` on your laptop first. Stop the server with Ctrl+C.
+Labels are saved on every click of **Save & next**, so you can stop at any time.
+
+The token stays the same across restarts (stored in `coding/.labeltool_token`, git-ignored), and
+the browser remembers it after the first visit. "Access token missing" means the link was opened
+without it, e.g. via the Ports tab's globe button; print the full link with:
+
+```bash
+echo "http://localhost:8507/?token=$(cat coding/.labeltool_token)"
+```
 
 Keys: `1`–`4` coverage · `Ctrl+Enter` save and next · `/` search the human docs.
 
