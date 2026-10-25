@@ -111,9 +111,10 @@
 const params = new URLSearchParams(location.search);
 const PASS = params.get("pass") === "2" ? 2 : 1;
 const TOKEN = params.get("token") || "";
+const RECHECK = params.get("recheck") === "1";
 let state = null, current = null, startedAt = 0, evidence = new Set();
 
-const api = (path, opts = {}) => fetch(`${path}${path.includes("?") ? "&" : "?"}pass=${PASS}`,
+const api = (path, opts = {}) => fetch(`${path}${path.includes("?") ? "&" : "?"}pass=${PASS}${RECHECK ? "&recheck=1" : ""}`,
   { ...opts, headers: { "X-Token": TOKEN, "Content-Type": "application/json", ...(opts.headers || {}) } })
   .then(r => { if (!r.ok) throw new Error(r.status + " " + r.statusText); return r.json(); });
 
@@ -154,7 +155,8 @@ function setChecked(name, values) {
 
 async function loadState() {
   state = await api("/api/state");
-  document.getElementById("title").textContent = PASS === 2 ? "Re-code (pass 2, blind)" : "Unit coding (pass 1)";
+  document.getElementById("title").textContent = PASS === 2 ? "Re-code (pass 2, blind)"
+    : RECHECK ? `Re-check pilot (codebook ${state.codebook.version})` : "Unit coding (pass 1)";
   document.getElementById("count").textContent = `${state.done} / ${state.total}`;
   document.getElementById("bar").style.width = state.total ? `${100 * state.done / state.total}%` : "0";
   const b = document.getElementById("banner");

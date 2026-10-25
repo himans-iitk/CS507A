@@ -81,6 +81,11 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
         p = coding_pass()
         ids = store.queue(p, queue)
         done = store.latest(p)
+        if request.args.get("recheck") and p == 1:
+            # after a codebook revision: pilot units labelled under an older version
+            ids = [u for u in queue[queue.set == "pilot"].unit_id
+                   if u in done and done[u].get("codebook_version") != codebook["version"]]
+            done = {u: r for u, r in done.items() if r.get("codebook_version") == codebook["version"]}
         todo = [u for u in ids if u not in done]
         pending, next_date = store.recode_pending(queue)
         by_set = {s: {"total": int(n), "done": int(sum(u in done for u in g.unit_id))}

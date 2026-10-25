@@ -42,21 +42,37 @@ Keys: `1`–`4` coverage · `Ctrl+Enter` save and next · `/` search the human d
 | Nov 4 – Nov 14 | **Main set** (141 repos), ~100 units/day. | 1,065 |
 | Nov 16 – Nov 19 | **Re-code**: open `…/?pass=2&token=…`. Only reliability units whose first label is ≥ 14 days old appear, shuffled, with your first labels hidden. | 338 |
 
-## Optional: LLM category suggestions
-
-Serve any open-source instruction model with an OpenAI-compatible API (vLLM, Ollama or
-llama.cpp), then:
+## After the pilot: report and codebook v1.0
 
 ```bash
-.venv/bin/python -m gapstudy.prelabel --base-url http://localhost:8000/v1 --model <model> --limit 20
+.venv/bin/python -m gapstudy.pilot_report      # writes analysis/phase4/pilot_report.md
 ```
 
-Check the 20 trial suggestions before running on everything. Suggestions appear in the tool as
-pre-ticked ★ categories. Only categories are pre-labelled; coverage is always yours, because it is
-the ground truth for the RQ3 detector. Record the exact model name and version for the paper.
+It lists every note and flagged unit (the hard cases), consistency problems (e.g. *partial*
+without evidence), label distributions and your pace. Send it to Claude to revise the codebook to
+v1.0. Then re-check the pilot units against v1.0: open the tool with `&recheck=1` added to the
+link. Only pilot units labelled under an older codebook version are shown.
 
-Running a model on the cluster: compute nodes have no internet, so download the weights on a
-login node, then start the server inside a GPU job (`salloc --gpus=1 ...`) and tunnel to it.
+## Optional: LLM category suggestions
+
+Model: **Qwen3-Coder-30B-A3B-Instruct** (Apache-2.0), pinned to revision `b2cff64…`. It runs on
+one H100 through vLLM. One-time setup on a login node:
+
+```bash
+bash scripts/llm/setup_vllm.sh        # vLLM environment in $SCRATCH/vllm-venv
+bash scripts/llm/download_model.sh    # ~61 GB of weights to $SCRATCH/hf_models/
+```
+
+Then a trial on 20 units, check the suggestions, and run the rest:
+
+```bash
+sbatch --export=ALL,LIMIT=20 scripts/llm/prelabel.sbatch
+sbatch scripts/llm/prelabel.sbatch    # skips units already pre-labelled
+```
+
+Suggestions appear in the tool as pre-ticked ★ categories. Only categories are pre-labelled;
+coverage is always yours, because it is the ground truth for the RQ3 detector. The pilot report
+shows how well the suggestions agree with your choices.
 
 ## Regenerating the inputs
 

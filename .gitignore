@@ -14,3 +14,7 @@ data/processed/*.log
 
 # labelling tool access token
 coding/.labeltool_token
+
+# Slurm and vLLM logs
+logs/*
+!logs/.gitkeep
