@@ -1,0 +1,35 @@
+{
+  "repo": "llbbl/codeigniter-chat",
+  "tool": "claude",
+  "rank": 19,
+  "stars": 78.0,
+  "snapshot_commit": "7255f41cdc40a1cfde2f6dcf5e7073f8b720dbb1",
+  "snapshot_date": "2025-06-07T18:54:16Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "9f0ab2bfd81f686bae62c11b76889bad51c6779b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 402,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "6c2fd867693467e3c547d9fd8f363db454f7a6ab",
+    "file": "README.md",
+    "format": "md",
+    "words": 532,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "contributing.md",
+    "blob_sha": "5a25698bf76a2932a077ac1e061aa7c97fde56ef",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1062,
+    "blob_verified": true
+  }
+}

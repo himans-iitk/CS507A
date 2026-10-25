@@ -1,0 +1,35 @@
+{
+  "repo": "popstas/scad-models",
+  "tool": "agents",
+  "rank": 28,
+  "stars": 5.0,
+  "snapshot_commit": "55f856831c41ccb5ae4635e32d0b0317ffa99816",
+  "snapshot_date": "2025-06-22T09:22:47Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "26573e780a1075a0a3b8c7bd1765d90758e9f623",
+    "file": "agent.md",
+    "format": "md",
+    "words": 220,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c021f56f17e487e9e4d7bc9a4b4b54af9469f75d",
+    "file": "README.md",
+    "format": "md",
+    "words": 52,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5e74e78d867fe2d558ffee789e60c3c035f1b5b1",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 33,
+    "blob_verified": true
+  }
+}

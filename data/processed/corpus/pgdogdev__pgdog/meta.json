@@ -1,0 +1,35 @@
+{
+  "repo": "pgdogdev/pgdog",
+  "tool": "claude",
+  "rank": 11,
+  "stars": 2706.0,
+  "snapshot_commit": "fc4def0dfa980a4127d88e6104a786da52cfa4e7",
+  "snapshot_date": "2025-09-12T20:08:33Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "5ab59889a3206d5617f829ebdebac45dbb9b3734",
+    "file": "agent.md",
+    "format": "md",
+    "words": 489,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "6159040e059ed3a4434e5c1d6b6b502721369465",
+    "file": "README.md",
+    "format": "md",
+    "words": 1144,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "118ff0f9eb9370c5dab1d3282b8bd59f04962417",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 153,
+    "blob_verified": true
+  }
+}

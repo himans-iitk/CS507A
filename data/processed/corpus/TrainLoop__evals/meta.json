@@ -1,0 +1,35 @@
+{
+  "repo": "TrainLoop/evals",
+  "tool": "claude",
+  "rank": 17,
+  "stars": 61.0,
+  "snapshot_commit": "fc3980bfd82133365ed06169f1988f46ebc1d69b",
+  "snapshot_date": "2025-07-22T01:45:01Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "72921abfca1e4f9b4000a946baf8240a2b3c4301",
+    "file": "agent.md",
+    "format": "md",
+    "words": 955,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4238b3e2e0499c5b277038a685049808aa7e2c33",
+    "file": "README.md",
+    "format": "md",
+    "words": 255,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "60c1df5e092c34e1bd686d2d0797598eded881d3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 258,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "compiler-explorer/compiler-explorer",
+  "tool": "copilot-instructions",
+  "rank": 21,
+  "stars": 18122.0,
+  "snapshot_commit": "00ee2fc8b0983993536204b749fc4b05b470f993",
+  "snapshot_date": "2025-10-06T15:00:53Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c5c5f05cc14882914570b684235404aef8ce8b03",
+    "file": "agent.md",
+    "format": "md",
+    "words": 50,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a6eae15238a672544b3c45997417c3f0ff817214",
+    "file": "README.md",
+    "format": "md",
+    "words": 1145,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "66fac6a76583e739fd4b0d4c6c5d5501a36dab4f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 803,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "uxlfoundation/oneDAL",
+  "tool": "agents",
+  "rank": 38,
+  "stars": 643.0,
+  "snapshot_commit": "aad11c28cc005a9cc1f4a235567aaf92e134703a",
+  "snapshot_date": "2025-09-16T14:09:19Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "7e704ce4fd593c620421f0b75ceb931cac95803d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 508,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b7e7fcf07cf6539e54b8e53e5af7191db3ae39b5",
+    "file": "README.md",
+    "format": "md",
+    "words": 781,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1eea6a6c964e646939b7abdca3e88c186e44888f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 887,
+    "blob_verified": true
+  }
+}

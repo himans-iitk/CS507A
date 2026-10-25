@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/azure-devops-mcp",
+  "tool": "copilot-instructions",
+  "rank": 45,
+  "stars": 917.0,
+  "snapshot_commit": "e038446f1bad5acde34c9fa3330915f2febc448b",
+  "snapshot_date": "2025-07-10T12:05:57Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "ca75a6da25e91da9f52ad97f1e0e1392e7fc8d72",
+    "file": "agent.md",
+    "format": "md",
+    "words": 162,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "13bef12df336d5e332d25db0a13b8f9a421dd0f0",
+    "file": "README.md",
+    "format": "md",
+    "words": 1707,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ae0f472f8fe7ac97952588cb0b8c97e7514c6545",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 451,
+    "blob_verified": true
+  }
+}

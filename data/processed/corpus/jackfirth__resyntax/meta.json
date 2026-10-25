@@ -1,0 +1,35 @@
+{
+  "repo": "jackfirth/resyntax",
+  "tool": "copilot-instructions",
+  "rank": 64,
+  "stars": 66.0,
+  "snapshot_commit": "f8db0ba5793d3bd7ec21398f10e19b7384ea2111",
+  "snapshot_date": "2025-10-29T09:42:25Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "7cdc11132f90cb4fb0e18c50851a624e3ffd3b29",
+    "file": "agent.md",
+    "format": "md",
+    "words": 482,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d0e6305aa99b9baa210317a78a385031fe8bc30e",
+    "file": "README.md",
+    "format": "md",
+    "words": 163,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "83d57ec8eb58d68d47b04a1cf4e45192b4c2ca84",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 47,
+    "blob_verified": true
+  }
+}

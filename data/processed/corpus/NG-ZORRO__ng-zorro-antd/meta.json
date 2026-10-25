@@ -1,0 +1,35 @@
+{
+  "repo": "NG-ZORRO/ng-zorro-antd",
+  "tool": "copilot-instructions",
+  "rank": 33,
+  "stars": 9097.0,
+  "snapshot_commit": "bc3c1328ff1b9217b11a616df6a400f61451da38",
+  "snapshot_date": "2025-09-06T08:11:05Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "9cb8b7f99b93082b1d4eacf9dc3ea6ce1a2bba85",
+    "file": "agent.md",
+    "format": "md",
+    "words": 289,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "17f7aa4e3f3e75576af5ba5ab27d27fd562a6fea",
+    "file": "README.md",
+    "format": "md",
+    "words": 662,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "597ee3f3c4250770497c3edc906f58948360c347",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1614,
+    "blob_verified": true
+  }
+}

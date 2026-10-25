@@ -1,0 +1,35 @@
+{
+  "repo": "ArtifactLabs/git-recycle-bin",
+  "tool": "agents",
+  "rank": 7,
+  "stars": 6.0,
+  "snapshot_commit": "c1ab7f262dc1186816584d419a3eee2487b5560e",
+  "snapshot_date": "2025-06-13T21:43:53Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 7,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "b9134d594ad46cbd36d06a8f728c75b9d52a04e4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 552,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "readme.md",
+    "blob_sha": "96ed9877bd8bedba329b94b67c510809d6ae1340",
+    "file": "README.md",
+    "format": "md",
+    "words": 631,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "21841f0677fa98c42117aaf2278b821931f6847e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 141,
+    "blob_verified": true
+  }
+}

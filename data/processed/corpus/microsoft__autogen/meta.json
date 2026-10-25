@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/autogen",
+  "tool": "copilot-instructions",
+  "rank": 3,
+  "stars": 50869.0,
+  "snapshot_commit": "29846cb26b588d4a977991f9f967805751ea65a3",
+  "snapshot_date": "2025-09-16T09:24:44Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "752303147aa32edc22c1a8f0be6bbff66740f4c9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1192,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "5cb2b948ae00a92e7dfd40fda808b81b8ec02b5b",
+    "file": "README.md",
+    "format": "md",
+    "words": 1061,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ba1168b608d691d3bc091bbe84700e4f7d9a812c",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1079,
+    "blob_verified": true
+  }
+}

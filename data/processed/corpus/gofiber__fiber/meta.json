@@ -1,0 +1,35 @@
+{
+  "repo": "gofiber/fiber",
+  "tool": "agents",
+  "rank": 24,
+  "stars": 38174.0,
+  "snapshot_commit": "534aa882e1957b86d757877458028b21dff20edd",
+  "snapshot_date": "2025-10-22T13:47:12Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 11,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "24a89a1870b46270824cf6eedf06469d3552ec27",
+    "file": "agent.md",
+    "format": "md",
+    "words": 317,
+    "blob_verified": true
+  },
+  "README": {
+    "path": ".github/README.md",
+    "blob_sha": "5e318ae79951e837e13fddf500fdb069acf231c4",
+    "file": "README.md",
+    "format": "md",
+    "words": 3165,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "0a4bdf9035253c32a5e6d2bd0d8aa903dbb2b082",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 239,
+    "blob_verified": true
+  }
+}

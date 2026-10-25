@@ -1,0 +1,35 @@
+{
+  "repo": "Shopify/roast",
+  "tool": "claude",
+  "rank": 43,
+  "stars": 952.0,
+  "snapshot_commit": "3d4cb98371c15404f92a6d7dfe82143cae91f8cf",
+  "snapshot_date": "2025-06-13T16:03:24Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 23,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "17d52400de8bcd827bd2c9cc1d7497750c031fef",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1993,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "245f4b46ee31af5a098bb210679dfad4231f886d",
+    "file": "README.md",
+    "format": "md",
+    "words": 4983,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "df481cf3f45f69b50fb2c642e193b28715d6e815",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 234,
+    "blob_verified": true
+  }
+}

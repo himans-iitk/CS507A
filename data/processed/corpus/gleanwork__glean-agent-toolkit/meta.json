@@ -1,0 +1,35 @@
+{
+  "repo": "gleanwork/glean-agent-toolkit",
+  "tool": "agents",
+  "rank": 36,
+  "stars": 42.0,
+  "snapshot_commit": "94427dcb5dac606106028b60b1c16f630f74bbb8",
+  "snapshot_date": "2025-09-28T02:33:34Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "c80b4dbc8f95719a5dd5a597b2e4fdbbabc80020",
+    "file": "agent.md",
+    "format": "md",
+    "words": 386,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f7455461774a15b27c5003095089cf4bc064816c",
+    "file": "README.md",
+    "format": "md",
+    "words": 1477,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1b09faa9509910d6dce1ac2bdf77d7ce3071e60a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 399,
+    "blob_verified": true
+  }
+}

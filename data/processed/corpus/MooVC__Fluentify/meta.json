@@ -1,0 +1,35 @@
+{
+  "repo": "MooVC/Fluentify",
+  "tool": "agents",
+  "rank": 30,
+  "stars": 40.0,
+  "snapshot_commit": "9301f1eddc41312985b90c1c9c4aa3e0cabd24c3",
+  "snapshot_date": "2025-08-17T08:30:27Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "0256dcd173cd5738d84097e7b44c9c756262d77a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 396,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4683d1105d4c4c1840d9565968d2d540f5320654",
+    "file": "README.md",
+    "format": "md",
+    "words": 1149,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "a56a9e985bc39368a23b242a8a80688a135414e1",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2283,
+    "blob_verified": true
+  }
+}

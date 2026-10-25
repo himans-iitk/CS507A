@@ -1,0 +1,35 @@
+{
+  "repo": "Pirate-Weather/pirate-weather-code",
+  "tool": "agents",
+  "rank": 50,
+  "stars": 36.0,
+  "snapshot_commit": "96cf66811563e6a0ab22bd01ee78d8ff8d797519",
+  "snapshot_date": "2025-06-27T18:29:50Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "00633fb90a9ca6eb226ecaecfbc0db415c118869",
+    "file": "agent.md",
+    "format": "md",
+    "words": 37,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "bc19551b108c7378f6c932920d6053b00224807f",
+    "file": "README.md",
+    "format": "md",
+    "words": 1681,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "74feebd5dbc69dc5aada22e7ccdbea1fe1e26209",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 314,
+    "blob_verified": true
+  }
+}

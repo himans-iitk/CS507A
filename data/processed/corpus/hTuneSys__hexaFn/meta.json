@@ -1,0 +1,35 @@
+{
+  "repo": "hTuneSys/hexaFn",
+  "tool": "copilot-instructions",
+  "rank": 34,
+  "stars": 11.0,
+  "snapshot_commit": "0e41252af9cdd10fe300ef72829c78462d7167ff",
+  "snapshot_date": "2025-06-05T11:52:10Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 15,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "0e6ddde54b25f32e272209cb523039ddf9b49931",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1072,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "121b8652a9d476c7e96f0268271011488305880f",
+    "file": "README.md",
+    "format": "md",
+    "words": 1183,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "3addd43bbbb3ca34b46212d7fa59844356bff6b4",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 442,
+    "blob_verified": true
+  }
+}

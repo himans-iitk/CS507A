@@ -1,0 +1,35 @@
+{
+  "repo": "owncast/owncast",
+  "tool": "copilot-instructions",
+  "rank": 15,
+  "stars": 10552.0,
+  "snapshot_commit": "29b5100114068f792fc84495afc8c77796737af2",
+  "snapshot_date": "2025-07-13T09:21:46Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 9,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "fbe3fc3272a400035e74372ec586071f0a3647e6",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1245,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "dbf647902f143dd7cfdb21de4630532d4648ae47",
+    "file": "README.md",
+    "format": "md",
+    "words": 878,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0df12f8d2814c742bcd5bbf200b72cfb54ad5608",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 118,
+    "blob_verified": true
+  }
+}

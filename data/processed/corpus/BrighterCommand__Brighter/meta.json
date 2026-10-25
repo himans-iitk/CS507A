@@ -1,0 +1,35 @@
+{
+  "repo": "BrighterCommand/Brighter",
+  "tool": "claude",
+  "rank": 9,
+  "stars": 2312.0,
+  "snapshot_commit": "9dcb3d9bf7bc3a594281733bfddba11f1e69a4ea",
+  "snapshot_date": "2025-10-12T21:33:19Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "daa51a9bc59cc656a9dac517b0e69e27f95003b4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 147,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "af4caeeeb3c2433ec54f5b7ecff01641f0e62c23",
+    "file": "README.md",
+    "format": "md",
+    "words": 719,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "Contributing.md",
+    "blob_sha": "2340606c8cfcc50f68e861b6bc170543df226f18",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 4324,
+    "blob_verified": true
+  }
+}

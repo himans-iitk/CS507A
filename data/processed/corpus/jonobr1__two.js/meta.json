@@ -1,0 +1,35 @@
+{
+  "repo": "jonobr1/two.js",
+  "tool": "claude",
+  "rank": 22,
+  "stars": 8538.0,
+  "snapshot_commit": "d4a2ae146ee97b7493a022fecbf3d2ccbe20e79c",
+  "snapshot_date": "2025-09-23T17:29:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "504db07257af7a3d040ab5238b642d0b505e936f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1069,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "aebe9e1ca1f2613bd42cc41d5062ac46497fa4b4",
+    "file": "README.md",
+    "format": "md",
+    "words": 835,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4365858443d002cf97a78e44b44511c528def477",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 302,
+    "blob_verified": true
+  }
+}

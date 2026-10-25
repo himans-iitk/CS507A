@@ -1,0 +1,35 @@
+{
+  "repo": "equalizedigital/accessibility-checker",
+  "tool": "copilot-instructions",
+  "rank": 35,
+  "stars": 19.0,
+  "snapshot_commit": "449c1ce462e2b14ebf610771896086358c1f16bd",
+  "snapshot_date": "2025-08-27T20:06:03Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c7abdd53197b24c40db48cbb858725902f385b6c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1808,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "afdb454a823a3faa9c4d400c87e758bf0407a5bc",
+    "file": "README.md",
+    "format": "md",
+    "words": 591,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "5921a3be29026643506d1ee5da4c5889ae092f89",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 628,
+    "blob_verified": true
+  }
+}

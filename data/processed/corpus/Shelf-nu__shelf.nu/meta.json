@@ -1,0 +1,35 @@
+{
+  "repo": "Shelf-nu/shelf.nu",
+  "tool": "agents",
+  "rank": 3,
+  "stars": 2259.0,
+  "snapshot_commit": "dc154d2909b26b8279b325f5331d560e01363ccf",
+  "snapshot_date": "2025-10-23T10:45:03Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "27c42e9f27d3e511376842b70c1d76132499bdc5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1081,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c79cf8809909bb9a14d3b105cf6e440ab374dcfd",
+    "file": "README.md",
+    "format": "md",
+    "words": 592,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "65abef557b6f06eb6e72e042cdc588a28b3f6453",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 152,
+    "blob_verified": true
+  }
+}

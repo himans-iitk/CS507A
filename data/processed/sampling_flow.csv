@@ -1,0 +1,12 @@
+step,claude,agents,copilot-instructions,total
+all agent files in package,922,694,687,2303
+minus repo no longer exists,891,672,675,2238
+minus fork,878,656,666,2200
+minus archived,846,638,639,2123
+minus snapshot commit not found,816,603,629,2048
+minus agent file is a symlink,761,588,616,1965
+minus agent file only links elsewhere,738,583,604,1925
+minus agent file not in English,714,567,588,1869
+minus copy of another repo's agent file,710,555,570,1835
+minus no README at snapshot,705,551,568,1824
+minus no CONTRIBUTING at snapshot,252,214,289,755

@@ -1,0 +1,35 @@
+{
+  "repo": "replicatedhq/chartsmith",
+  "tool": "claude",
+  "rank": 10,
+  "stars": 9.0,
+  "snapshot_commit": "583e4e93297ea4bbf3a48ac715b3d8a5b8605eff",
+  "snapshot_date": "2025-04-01T21:07:15Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "f9479fff391f25cf7f5fc97099e6fce6dd1127bc",
+    "file": "agent.md",
+    "format": "md",
+    "words": 76,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "20ec458e05f63622b480ef62f695b4653e1dcfe9",
+    "file": "README.md",
+    "format": "md",
+    "words": 20,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "f213578977914012a8af369e83980c2004f48842",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 99,
+    "blob_verified": true
+  }
+}

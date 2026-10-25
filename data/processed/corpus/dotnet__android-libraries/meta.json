@@ -1,0 +1,35 @@
+{
+  "repo": "dotnet/android-libraries",
+  "tool": "copilot-instructions",
+  "rank": 63,
+  "stars": 283.0,
+  "snapshot_commit": "97a7c0dd9bda3bfa3a326c8158f3f24ab4952838",
+  "snapshot_date": "2025-10-30T16:05:01Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "9ad1d1d90ab6bec1d7797b3da5c6ac1b3621e7ac",
+    "file": "agent.md",
+    "format": "md",
+    "words": 965,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "df345ad54ca8474253e1951412d658dc32c07f7e",
+    "file": "README.md",
+    "format": "md",
+    "words": 413,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "57b077e6f23e40a1dcbe0b352e3b3a982e44c24c",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 150,
+    "blob_verified": true
+  }
+}

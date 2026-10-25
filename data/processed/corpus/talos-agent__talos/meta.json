@@ -1,0 +1,35 @@
+{
+  "repo": "talos-agent/talos",
+  "tool": "agents",
+  "rank": 13,
+  "stars": 13.0,
+  "snapshot_commit": "de21cc2dd2e107ad2f6c48e5dbf4bd548fd2c4db",
+  "snapshot_date": "2025-08-09T05:03:22Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "52cfbf989a38b54ca2f967864db9a65c885b6bc2",
+    "file": "agent.md",
+    "format": "md",
+    "words": 257,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2a312e6ab6ef1e84a06919a4455baf524f06f0c7",
+    "file": "README.md",
+    "format": "md",
+    "words": 1078,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7595dd30181fb4b347e73d0963b8e5cca7505cd8",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 514,
+    "blob_verified": true
+  }
+}

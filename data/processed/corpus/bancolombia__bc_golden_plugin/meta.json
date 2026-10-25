@@ -1,0 +1,35 @@
+{
+  "repo": "bancolombia/bc_golden_plugin",
+  "tool": "copilot-instructions",
+  "rank": 25,
+  "stars": 10.0,
+  "snapshot_commit": "eb80a135db17c5b9f7d1690ecf8a7b5b097fcd46",
+  "snapshot_date": "2025-08-25T13:12:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "80b429d87e5d29a5a5efa081855d055c1ea82d1b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 545,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "55b0e71d228b971bc99dbe14d2a8857fe56c87ef",
+    "file": "README.md",
+    "format": "md",
+    "words": 1379,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "c703509b4f6b8fbe104b0d15b4c88fd22fa524da",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 206,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "evmts/tevm-monorepo",
+  "tool": "claude",
+  "rank": 67,
+  "stars": 408.0,
+  "snapshot_commit": "cc20d7baedd7df3fac1e1f858cf5cb8a2f683650",
+  "snapshot_date": "2025-07-10T23:57:54Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 10,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e9b4797a9e3db0a08198d94eb0b02c4b323587ea",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3469,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8dbaf414261ffcdcc5a2171f41caafa4f9c4647e",
+    "file": "README.md",
+    "format": "md",
+    "words": 1043,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "f5f7367474e35ebcc8725a153c7aca8b43f1698d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1281,
+    "blob_verified": true
+  }
+}

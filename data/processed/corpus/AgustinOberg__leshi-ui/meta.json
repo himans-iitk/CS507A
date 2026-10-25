@@ -1,0 +1,35 @@
+{
+  "repo": "AgustinOberg/leshi-ui",
+  "tool": "claude",
+  "rank": 14,
+  "stars": 16.0,
+  "snapshot_commit": "2402445c7908bd59cc16975d247600de22fc749c",
+  "snapshot_date": "2025-07-01T21:02:34Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e2ff3b035d1a74a013d2f8a457b39b5b344e3ac1",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2426,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "67de224b5e9526b43523a4a9d46fe9da090462eb",
+    "file": "README.md",
+    "format": "md",
+    "words": 1510,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/contributing.md",
+    "blob_sha": "cf02d6a1de9942f5f73ec1a0b3712d2f1c26a6a8",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 84,
+    "blob_verified": true
+  }
+}

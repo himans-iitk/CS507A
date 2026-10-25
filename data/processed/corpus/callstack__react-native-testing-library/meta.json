@@ -1,0 +1,35 @@
+{
+  "repo": "callstack/react-native-testing-library",
+  "tool": "claude",
+  "rank": 27,
+  "stars": 3280.0,
+  "snapshot_commit": "332c724e3e5e225708b1fd59ff4ad3847b1d28d9",
+  "snapshot_date": "2025-08-28T07:15:48Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "9b2bdfde34538c3eb923a3b9bb50a5266ad401f9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 608,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "9a2920e2470e3c937de11640d97f89e43fedc268",
+    "file": "README.md",
+    "format": "md",
+    "words": 682,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "8b8aba420cfe75ad22fa0300a30751722d22a0e7",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 402,
+    "blob_verified": true
+  }
+}

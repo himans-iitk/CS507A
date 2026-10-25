@@ -1,0 +1,35 @@
+{
+  "repo": "nrwl/nx-console",
+  "tool": "claude",
+  "rank": 66,
+  "stars": 1382.0,
+  "snapshot_commit": "6bdb7768ea381e8e80d1f1670a88a71a044defbd",
+  "snapshot_date": "2025-10-30T13:15:20Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "84db3c23d0ece6b30de2498d000e319c07210e3b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 382,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "96f3fce2cac73f462d7bb4fb53624fad3a574bf6",
+    "file": "README.md",
+    "format": "md",
+    "words": 959,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "3f7bfc21bd967765e7b589aafabb889ee263f398",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 526,
+    "blob_verified": true
+  }
+}

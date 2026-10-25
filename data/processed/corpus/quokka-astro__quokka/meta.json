@@ -1,0 +1,35 @@
+{
+  "repo": "quokka-astro/quokka",
+  "tool": "agents",
+  "rank": 64,
+  "stars": 59.0,
+  "snapshot_commit": "345bd12208d1ba3cc30f1a3946dab09a9b7be466",
+  "snapshot_date": "2025-10-24T00:44:38Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "45f8d6dd658b8c358660a1c6efc1fb28fb7b515d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 315,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e68d1cc9a2f92e566e09f792839ccaa535f30de5",
+    "file": "README.md",
+    "format": "md",
+    "words": 232,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0589c2c5f6404fd27106b16b9bdcbb989965b985",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 54,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "igraph/igraph",
+  "tool": "copilot-instructions",
+  "rank": 28,
+  "stars": 1883.0,
+  "snapshot_commit": "f0149d3e4a09c0b94ccbe2e80c6eda7c4ed732ba",
+  "snapshot_date": "2025-08-31T12:07:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 11,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "6c58101fd06fad9ec3b7784aba0ca56c70d43fd9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1523,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "185df33b5b0643ffaa1d15b7939c44cdec8fdc01",
+    "file": "README.md",
+    "format": "md",
+    "words": 127,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7894b2f954990f26b95fab0c0f05836c8895421c",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1676,
+    "blob_verified": true
+  }
+}

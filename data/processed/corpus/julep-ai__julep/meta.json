@@ -1,0 +1,35 @@
+{
+  "repo": "julep-ai/julep",
+  "tool": "agents",
+  "rank": 39,
+  "stars": 6603.0,
+  "snapshot_commit": "b603b9e89c94b658ea22b1c9f7e24c678722c92a",
+  "snapshot_date": "2025-06-24T07:04:02Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "df7e739ca50aff1d25da6588310edbb3cf4fb9ee",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2452,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "abe379fb229bb5e0da860d349cde74ab1c89269d",
+    "file": "README.md",
+    "format": "md",
+    "words": 1032,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "d697fba4afba77256ca55a8cc85608af3f089af3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1153,
+    "blob_verified": true
+  }
+}

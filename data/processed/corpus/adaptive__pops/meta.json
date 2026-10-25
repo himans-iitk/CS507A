@@ -1,0 +1,35 @@
+{
+  "repo": "adaptive/pops",
+  "tool": "agents",
+  "rank": 40,
+  "stars": 25.0,
+  "snapshot_commit": "766181594eb003f4b1cbcc8cb982b737323eb425",
+  "snapshot_date": "2025-09-16T23:04:40Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "b46f9056bf3365911c43d37a81ed2e028d09b9e1",
+    "file": "agent.md",
+    "format": "md",
+    "words": 344,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "622ff48b00cd98a86ffd22d0abd2c850e756b07c",
+    "file": "README.md",
+    "format": "md",
+    "words": 409,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "a3df0353174378dfefc8e514444f3ac75e417618",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 394,
+    "blob_verified": true
+  }
+}

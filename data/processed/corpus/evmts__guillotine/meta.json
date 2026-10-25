@@ -1,0 +1,35 @@
+{
+  "repo": "evmts/guillotine",
+  "tool": "claude",
+  "rank": 3,
+  "stars": 139.0,
+  "snapshot_commit": "a89452545c01eac22bbf3504d1446acac1ba1904",
+  "snapshot_date": "2025-10-25T18:49:29Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 58,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "f75d1a719c2435512b7d7151d8da43104e220675",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2025,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d301bd0e9b57eb0690524af2c8fa36d118a1e5e3",
+    "file": "README.md",
+    "format": "md",
+    "words": 1956,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "889e1775b735ece528c370e2a4619d9e4fb45351",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1142,
+    "blob_verified": true
+  }
+}

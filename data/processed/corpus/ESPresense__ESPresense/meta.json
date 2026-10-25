@@ -1,0 +1,35 @@
+{
+  "repo": "ESPresense/ESPresense",
+  "tool": "agents",
+  "rank": 65,
+  "stars": 1291.0,
+  "snapshot_commit": "947b279d659b5243535e4eef6ff101626158b41a",
+  "snapshot_date": "2025-06-30T23:13:37Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "635edaed59e69952ae04c4032b5a9ae0ae809d9c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 46,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4fdfce6bfe53caf71f5694e4f0c4eb68c69f2da0",
+    "file": "README.md",
+    "format": "md",
+    "words": 37,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d0979ee9ad9d502b979a22338f4c0bfd967b0e24",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 51,
+    "blob_verified": true
+  }
+}

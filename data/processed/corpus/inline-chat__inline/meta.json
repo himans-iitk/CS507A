@@ -1,0 +1,35 @@
+{
+  "repo": "inline-chat/inline",
+  "tool": "claude",
+  "rank": 30,
+  "stars": 609.0,
+  "snapshot_commit": "28ca31e145407513dd08d48384e03d0fd5483524",
+  "snapshot_date": "2025-09-02T11:15:03Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 13,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "89cd1c2717c1dc0f088c9be2b6bc7dffb8feb74f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1843,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "630e343f74d78b529e099b5932bb41650dc10a8f",
+    "file": "README.md",
+    "format": "md",
+    "words": 432,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "6028e358c94347050d7a65f07edf201745dd6fd2",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 466,
+    "blob_verified": true
+  }
+}

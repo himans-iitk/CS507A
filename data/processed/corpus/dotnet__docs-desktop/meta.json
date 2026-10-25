@@ -1,0 +1,35 @@
+{
+  "repo": "dotnet/docs-desktop",
+  "tool": "copilot-instructions",
+  "rank": 50,
+  "stars": 221.0,
+  "snapshot_commit": "59c95eabfa3a504f8c29155655b5a5a421e1021d",
+  "snapshot_date": "2025-08-25T17:46:46Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "7b29b751402a82a9d15a377eebf0a8e4140d155c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 542,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b08a2b7df505ffc170f71bec3151052439062aca",
+    "file": "README.md",
+    "format": "md",
+    "words": 215,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "48e744fe25b791af9b3381b78cea8f511089b184",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 33,
+    "blob_verified": true
+  }
+}

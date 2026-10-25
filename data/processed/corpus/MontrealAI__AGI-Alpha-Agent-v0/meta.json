@@ -1,0 +1,35 @@
+{
+  "repo": "MontrealAI/AGI-Alpha-Agent-v0",
+  "tool": "agents",
+  "rank": 62,
+  "stars": 263.0,
+  "snapshot_commit": "9015c926a1882e4ae9db667ae21616b29b57ae2f",
+  "snapshot_date": "2025-07-30T16:45:21Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 193,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "b2350564f7d9d3d6c0e0deaae6a1ccf821f4bdc4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3291,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "284f6c3a25c388f5c732c8e1d5b7b82a443b72c1",
+    "file": "README.md",
+    "format": "md",
+    "words": 8949,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "14367772c6ef110a767b2a0674c295b612e372c5",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 978,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "AustinKelsay/snstr",
+  "tool": "agents",
+  "rank": 16,
+  "stars": 12.0,
+  "snapshot_commit": "f2ddc29cba5e23d2c9c5b1d5431ac809fe3b6c11",
+  "snapshot_date": "2025-09-19T17:04:18Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "ade17f693f33d7050871b081f1c3a9b1db29772d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 380,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "dfe543f4c65e44c5e3a8089aecd1f6b0fbb4f4e2",
+    "file": "README.md",
+    "format": "md",
+    "words": 3107,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5b07538fb23a9ca73cc3cc981f9e3c231e576c86",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 462,
+    "blob_verified": true
+  }
+}

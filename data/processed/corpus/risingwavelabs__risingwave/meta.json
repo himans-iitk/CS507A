@@ -1,0 +1,35 @@
+{
+  "repo": "risingwavelabs/risingwave",
+  "tool": "copilot-instructions",
+  "rank": 48,
+  "stars": 8441.0,
+  "snapshot_commit": "89b6f978db53bb06249de2cab927de2ad258f729",
+  "snapshot_date": "2025-07-18T08:55:31Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "e18dede6822c28f4e9e6f2355afa2594f85abfe8",
+    "file": "agent.md",
+    "format": "md",
+    "words": 643,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "117e8fe105191c3b5bf0cf39893b52d228776e9d",
+    "file": "README.md",
+    "format": "md",
+    "words": 820,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5f305d85d07fb6249aad7d2e3a726c2940f3eace",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 73,
+    "blob_verified": true
+  }
+}

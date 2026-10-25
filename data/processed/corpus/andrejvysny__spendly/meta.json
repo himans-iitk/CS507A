@@ -1,0 +1,35 @@
+{
+  "repo": "andrejvysny/spendly",
+  "tool": "copilot-instructions",
+  "rank": 12,
+  "stars": 8.0,
+  "snapshot_commit": "46bbc13d793cea4bb541b2568edd1f611e8674c4",
+  "snapshot_date": "2025-08-11T16:20:16Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "7f6cc6425a63e6a7945f39a3e34ab5a63a4d8269",
+    "file": "agent.md",
+    "format": "md",
+    "words": 638,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "323f01fef92e44d6a758209a35922613c156a48b",
+    "file": "README.md",
+    "format": "md",
+    "words": 698,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "206cfa7e3409a37f58a77bcd38e59048ee87023f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 965,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "stanford-crfm/haliax",
+  "tool": "agents",
+  "rank": 14,
+  "stars": 209.0,
+  "snapshot_commit": "ade2739a5db4964d97772031f81826b2b148ba4a",
+  "snapshot_date": "2025-07-28T04:20:14Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "b3f3560c9522ca7e639715b54b9f6d16705c871f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 751,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8eb9bb1c0653e7dc66682895d0cb25e4f1f2186d",
+    "file": "README.md",
+    "format": "md",
+    "words": 645,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7188235f6a62d58425013ec64a2cbb05d4fb82c3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 604,
+    "blob_verified": true
+  }
+}

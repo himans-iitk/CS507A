@@ -1,0 +1,35 @@
+{
+  "repo": "zauberzeug/nicegui",
+  "tool": "agents",
+  "rank": 59,
+  "stars": 14237.0,
+  "snapshot_commit": "20aae5b8466f0287625e749f7bfb06a4b7158f84",
+  "snapshot_date": "2025-10-28T08:58:10Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "2cf5582eb4b9a056a2cabb6965a09e219c4c40d5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1073,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "803016c741584593821f0819eab3aab94616803d",
+    "file": "README.md",
+    "format": "md",
+    "words": 956,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "56b9c47701d2a19d63b59ab5009614120a520b3d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2851,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/dalec",
+  "tool": "copilot-instructions",
+  "rank": 2,
+  "stars": 235.0,
+  "snapshot_commit": "8133b0b84cf706282659dad7f30bdf38de92ca49",
+  "snapshot_date": "2025-10-17T23:05:54Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c4e47eec623d0b90443c891d3dd7fc2cd7c87002",
+    "file": "agent.md",
+    "format": "md",
+    "words": 780,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b368a2bebbd3d201baae035b5af674c2dd6d9c46",
+    "file": "README.md",
+    "format": "md",
+    "words": 339,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7ccc92ad35e727adac3952eeb20ed45c9fad8ffa",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 259,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "ydb-platform/ydb-embedded-ui",
+  "tool": "copilot-instructions",
+  "rank": 46,
+  "stars": 29.0,
+  "snapshot_commit": "a4b737bc82927a2d47bba1c804931b8a66c0a885",
+  "snapshot_date": "2025-08-14T11:34:50Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "158dbb29b7b3b8b768d4df1dbd2edf37f71f02d7",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1001,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "37f785998ffb91f2fcdfd3dd2c8d002074a3ce99",
+    "file": "README.md",
+    "format": "md",
+    "words": 737,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e00cdb5be2806cd899a8fd7d7966f1d506d4a1e2",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 226,
+    "blob_verified": true
+  }
+}

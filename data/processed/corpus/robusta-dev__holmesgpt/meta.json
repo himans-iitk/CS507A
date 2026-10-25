@@ -1,0 +1,35 @@
+{
+  "repo": "robusta-dev/holmesgpt",
+  "tool": "claude",
+  "rank": 64,
+  "stars": 1411.0,
+  "snapshot_commit": "6dbb99368a3d2789b450f33f0cb48a3e07901042",
+  "snapshot_date": "2025-10-05T12:59:36Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 20,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "dfb3b5e85159f8a30c7eafd757adbcce57c23411",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2251,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "5bbcaa39d558a29c10c7f4d2aa399c2e89218e5b",
+    "file": "README.md",
+    "format": "md",
+    "words": 1362,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d8e1e3fd0579648973adf19c863992cdfb82759e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 205,
+    "blob_verified": true
+  }
+}

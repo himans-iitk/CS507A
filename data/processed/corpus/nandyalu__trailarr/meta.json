@@ -1,0 +1,35 @@
+{
+  "repo": "nandyalu/trailarr",
+  "tool": "copilot-instructions",
+  "rank": 27,
+  "stars": 267.0,
+  "snapshot_commit": "5e0e4f23adb66e6bc206dd3d2c163b8505764ab8",
+  "snapshot_date": "2025-08-12T14:14:52Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "49030fb6cef6439ee33ecd7c38e22b9a1c26f9a4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1096,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "637689e055d92122c43ed57020d73f30ad1be4d1",
+    "file": "README.md",
+    "format": "md",
+    "words": 626,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "226275a590593b72f300c2dca372df29c3aee810",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1111,
+    "blob_verified": true
+  }
+}

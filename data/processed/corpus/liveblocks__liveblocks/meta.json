@@ -1,0 +1,35 @@
+{
+  "repo": "liveblocks/liveblocks",
+  "tool": "claude",
+  "rank": 32,
+  "stars": 4224.0,
+  "snapshot_commit": "ed489e5bcf0c85ed5802dab982476f09c9611a12",
+  "snapshot_date": "2025-08-15T11:53:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "a040503421b4d9189719e1d790d099df5f3b3beb",
+    "file": "agent.md",
+    "format": "md",
+    "words": 235,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "61b87946b23132279c869b142cb0b0e7b241f0b1",
+    "file": "README.md",
+    "format": "md",
+    "words": 288,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.MD",
+    "blob_sha": "44926e30f00e99912de61a4b050995d9bb4f3bbe",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 454,
+    "blob_verified": true
+  }
+}

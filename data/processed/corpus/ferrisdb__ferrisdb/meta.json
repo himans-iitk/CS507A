@@ -1,0 +1,35 @@
+{
+  "repo": "ferrisdb/ferrisdb",
+  "tool": "claude",
+  "rank": 50,
+  "stars": 7.0,
+  "snapshot_commit": "62bce4f14a7f33716dca5e6aa0e9fbb45fca095d",
+  "snapshot_date": "2025-06-03T20:48:25Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 38,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "417d73eb3f798640e5f598a93636a7bac526b3ad",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1492,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b64857ffd4e070569e84f780eb08c586257846f8",
+    "file": "README.md",
+    "format": "md",
+    "words": 982,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "514ade65cbbc16f107e87ea62d7f5c9c962778a4",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 445,
+    "blob_verified": true
+  }
+}

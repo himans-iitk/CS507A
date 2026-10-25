@@ -1,0 +1,35 @@
+{
+  "repo": "Teri-anric/AnimeStarsExtensions",
+  "tool": "agents",
+  "rank": 37,
+  "stars": 5.0,
+  "snapshot_commit": "21e526a1c7870f524a65455f352bd84562b3d371",
+  "snapshot_date": "2025-07-11T18:09:28Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "a0f279ec3f2dc8c316ff450dc1552592266a4069",
+    "file": "agent.md",
+    "format": "md",
+    "words": 185,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "ecdbad2d0a65353f2868c352bca8cae8dfae722b",
+    "file": "README.md",
+    "format": "md",
+    "words": 275,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ffe3f2cc80a91ca994c0e24cc6430ba96203fd06",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 277,
+    "blob_verified": true
+  }
+}

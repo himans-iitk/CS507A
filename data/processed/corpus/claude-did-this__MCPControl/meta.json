@@ -1,0 +1,35 @@
+{
+  "repo": "claude-did-this/MCPControl",
+  "tool": "claude",
+  "rank": 24,
+  "stars": 247.0,
+  "snapshot_commit": "6427c69d16eb13de15fc3ddc718f1b6baecf9513",
+  "snapshot_date": "2025-05-17T23:21:27Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "d63f622dbba21fe0bfab5b4d5ef3caaa69518c97",
+    "file": "agent.md",
+    "format": "md",
+    "words": 330,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "fb09d232fc90f32eb1bfdcd7ec823f3bf37c9690",
+    "file": "README.md",
+    "format": "md",
+    "words": 975,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "280d712e6b88367d5aed1ae8be5cfa3c1753e8bb",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 706,
+    "blob_verified": true
+  }
+}

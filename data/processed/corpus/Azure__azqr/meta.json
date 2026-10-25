@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/azqr",
+  "tool": "copilot-instructions",
+  "rank": 4,
+  "stars": 686.0,
+  "snapshot_commit": "abb67c32c618e5d52fb71f4b90861a54e8e2e742",
+  "snapshot_date": "2025-09-21T21:23:07Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "33086c75aba97a5ecb35e2b1d8fedbf8c4cd887e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1041,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8ebf52346f895cd04c9d98212f0d4dd9bc5aca2f",
+    "file": "README.md",
+    "format": "md",
+    "words": 1588,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "c282e9a1adacca696a4fcb7396cb6f872710fefd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 119,
+    "blob_verified": true
+  }
+}

@@ -41,7 +41,7 @@ class CachedResponse:
         return 200 <= self.status < 300
 
     def json(self) -> Any:
-        return json.loads(self.body)
+        return json.loads(self.body) if self.body.strip() else None
 
 
 class GitHubError(RuntimeError):
@@ -76,14 +76,18 @@ class GitHubClient:
         return self.cache_dir / digest[:2] / f"{digest}.json"
 
     def _read_cache(self, path: Path) -> CachedResponse | None:
-        if not path.exists():
+        try:
+            data = json.loads(path.read_text())
+        except FileNotFoundError:
             return None
-        data = json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError):
+            log.warning("Unreadable cache entry %s; refetching.", path.name)
+            return None
         return CachedResponse(data["status"], data["body"], data.get("etag"))
 
     def _write_cache(self, path: Path, url: str, params: dict | None, resp: CachedResponse) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = path.with_suffix(".tmp")
+        tmp = path.with_suffix(f".{os.getpid()}.{time.monotonic_ns()}.tmp")  # unique per writer
         tmp.write_text(json.dumps({
             "url": url,
             "params": params,

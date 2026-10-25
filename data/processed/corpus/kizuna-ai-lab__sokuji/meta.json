@@ -1,0 +1,35 @@
+{
+  "repo": "kizuna-ai-lab/sokuji",
+  "tool": "claude",
+  "rank": 51,
+  "stars": 290.0,
+  "snapshot_commit": "06dc0555ab8550b29cc1aa22ddac548dd0f7dd00",
+  "snapshot_date": "2025-10-12T08:01:10Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 11,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "28d359fdbdc367e5045de6b28d02bbefea5e29ec",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1614,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4293f517c42ebe25e09d8e694f1648d9c65f1bc5",
+    "file": "README.md",
+    "format": "md",
+    "words": 1824,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "03c26b65ea35526c9b197fbe3cabd0ffc36d04a5",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 579,
+    "blob_verified": true
+  }
+}

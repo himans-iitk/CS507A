@@ -1,0 +1,35 @@
+{
+  "repo": "AzureAD/microsoft-authentication-library-for-js",
+  "tool": "copilot-instructions",
+  "rank": 49,
+  "stars": 3959.0,
+  "snapshot_commit": "2e533d593544f82bbb01457cf1bda403e6d7f708",
+  "snapshot_date": "2025-08-21T21:02:00Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "5d932950e9f7e0bde9162938e62b6d4bba727b83",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1971,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c76fe21168448d551b1414e524b7bebb83737486",
+    "file": "README.md",
+    "format": "md",
+    "words": 752,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "contributing.md",
+    "blob_sha": "7177dd2d64700f328a24f0202ed68f9efaac69a9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1695,
+    "blob_verified": true
+  }
+}

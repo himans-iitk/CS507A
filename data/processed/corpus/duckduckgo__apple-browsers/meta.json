@@ -1,0 +1,35 @@
+{
+  "repo": "duckduckgo/apple-browsers",
+  "tool": "claude",
+  "rank": 42,
+  "stars": 120.0,
+  "snapshot_commit": "376afa9392ccb547a140e64df7ea00b9f149bfdb",
+  "snapshot_date": "2025-07-17T14:10:05Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "66955ba95485f23b985846dfe50cd249feae5083",
+    "file": "agent.md",
+    "format": "md",
+    "words": 303,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "6edd275aa92d8886cd18328b0f586ab3a2401bad",
+    "file": "README.md",
+    "format": "md",
+    "words": 262,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "eb6df962c966a46f808a9047135777b085e69723",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 280,
+    "blob_verified": true
+  }
+}

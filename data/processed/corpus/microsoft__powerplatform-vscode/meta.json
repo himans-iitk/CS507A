@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/powerplatform-vscode",
+  "tool": "copilot-instructions",
+  "rank": 52,
+  "stars": 249.0,
+  "snapshot_commit": "adcf03487db399546fcd968d87affc661e033eff",
+  "snapshot_date": "2025-10-09T09:48:38Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "cec158aa4e59514e9c2f7b26826cd584f669bfe3",
+    "file": "agent.md",
+    "format": "md",
+    "words": 558,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c5a46e60fe79c16555790c221407c43d810485e4",
+    "file": "README.md",
+    "format": "md",
+    "words": 627,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "f51a97bdad472f6235ce434724d72ad4a8f694f6",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 233,
+    "blob_verified": true
+  }
+}

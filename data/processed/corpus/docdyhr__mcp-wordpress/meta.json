@@ -1,0 +1,35 @@
+{
+  "repo": "docdyhr/mcp-wordpress",
+  "tool": "claude",
+  "rank": 8,
+  "stars": 53.0,
+  "snapshot_commit": "42fd6a88301b7ab7e0cae8310d743cc0c7b5ae16",
+  "snapshot_date": "2025-10-19T16:04:54Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 43,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "377fe9e37a6713aff65806f7e008525a8fb9ad3c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 425,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8d426faeb8a102727fb5eac458d419ae4c87af98",
+    "file": "README.md",
+    "format": "md",
+    "words": 4132,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "8cc01e8d8f164218cdd2ff744823f98bc418d7e7",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 801,
+    "blob_verified": true
+  }
+}

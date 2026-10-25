@@ -1,0 +1,35 @@
+{
+  "repo": "binbashar/le-ref-architecture-doc",
+  "tool": "claude",
+  "rank": 65,
+  "stars": 44.0,
+  "snapshot_commit": "7d84d3bfff785cd70556ac1307810ab43e0c8e49",
+  "snapshot_date": "2025-08-27T17:02:18Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "1b10303519b0e99a0fa0fd7a6f49d7a2eb61179e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 634,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "ef1eb70de3506aa6e9bbc3dc1a5f77b43d60ef46",
+    "file": "README.md",
+    "format": "md",
+    "words": 465,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "68fec891807f5163100d5b48356357f38fc4f08d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1034,
+    "blob_verified": true
+  }
+}

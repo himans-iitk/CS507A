@@ -1,0 +1,35 @@
+{
+  "repo": "zwave-js/zwave-js",
+  "tool": "copilot-instructions",
+  "rank": 43,
+  "stars": 835.0,
+  "snapshot_commit": "40585e7d1f40302102e57a894972ee8ef52310db",
+  "snapshot_date": "2025-06-27T09:38:50Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "1ac6a31bcc64b4a6ced5bd6a4a872d6fb4382b1d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 391,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "498547aa95411a68a1e061125ea8c066b584a91f",
+    "file": "README.md",
+    "format": "md",
+    "words": 289,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "f59be8d5e4fa89a7c2b68c250a34a4cd377f5234",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 425,
+    "blob_verified": true
+  }
+}

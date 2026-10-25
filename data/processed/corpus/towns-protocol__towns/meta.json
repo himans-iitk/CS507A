@@ -1,0 +1,35 @@
+{
+  "repo": "towns-protocol/towns",
+  "tool": "agents",
+  "rank": 9,
+  "stars": 62.0,
+  "snapshot_commit": "de59e5d9f00327f381553968b8e41fe04639addc",
+  "snapshot_date": "2025-09-10T01:02:43Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "8e5c01a9c419191f7d15ba1e0f5e5d3c9539593d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1128,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4db0c9c1475fdf10c81acc33197142facd81030e",
+    "file": "README.md",
+    "format": "md",
+    "words": 158,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e450d3b3fd4f5cd00863d1271cb9b8c7f113605a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 636,
+    "blob_verified": true
+  }
+}

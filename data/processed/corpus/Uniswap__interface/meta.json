@@ -1,0 +1,35 @@
+{
+  "repo": "Uniswap/interface",
+  "tool": "claude",
+  "rank": 18,
+  "stars": 5382.0,
+  "snapshot_commit": "b76593f7c2f9618e4dd789561b411684c9388ed1",
+  "snapshot_date": "2025-10-24T14:49:46Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "00a8280afa05f4205731b14049c596fae6b7827b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 833,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "12d848074db385b467866d52e5ccdde70fd1b646",
+    "file": "README.md",
+    "format": "md",
+    "words": 230,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "feaefae11acdde0176fea885e1c07e95acf75532",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 194,
+    "blob_verified": true
+  }
+}

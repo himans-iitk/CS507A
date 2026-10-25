@@ -1,0 +1,35 @@
+{
+  "repo": "pulsemcp/mcp-servers",
+  "tool": "claude",
+  "rank": 56,
+  "stars": 48.0,
+  "snapshot_commit": "6e6ee361655498a2c2958bdfbd6fd83dc2752a2f",
+  "snapshot_date": "2025-07-27T15:32:45Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 31,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "1d7d3ed1752b86a82377b0bfb5c5b62559ba604b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3328,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "948bbce6f228557e4f37ff9f9a68672d76e6b921",
+    "file": "README.md",
+    "format": "md",
+    "words": 510,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "3d5781617efa34e3ca21b2a83b3ab0e13c9c789f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 283,
+    "blob_verified": true
+  }
+}

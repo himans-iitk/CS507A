@@ -1,0 +1,35 @@
+{
+  "repo": "567-labs/kura",
+  "tool": "claude",
+  "rank": 23,
+  "stars": 337.0,
+  "snapshot_commit": "70ea46a581a7540c4222bf77227e8a431631aabc",
+  "snapshot_date": "2025-06-13T20:51:24Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "5a7cb5aeb8ee90b8adc9ec0bced091c6490595f7",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1067,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "bf5d2d2e8c3446bd4ab9a41df403313798d74cba",
+    "file": "README.md",
+    "format": "md",
+    "words": 2578,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "2bca12ef459f89e2b6b6cfe6199cbd6b4808ee38",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 977,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "mafzaal/lets-talk",
+  "tool": "copilot-instructions",
+  "rank": 31,
+  "stars": 7.0,
+  "snapshot_commit": "64c36aee3cb53dc501c9b3cccffe2ac3377ed07b",
+  "snapshot_date": "2025-08-09T14:03:03Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "a0baca62908fc3520a451c1128af1e3fb6895804",
+    "file": "agent.md",
+    "format": "md",
+    "words": 500,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "45ef92fd29a4f1f8e7ed6ef7e2e72715a6849435",
+    "file": "README.md",
+    "format": "md",
+    "words": 792,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "3a439003a30eaba377a2a1610bf84a311a52b442",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 854,
+    "blob_verified": true
+  }
+}

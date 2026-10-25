@@ -1,0 +1,35 @@
+{
+  "repo": "rjmurillo/moq.analyzers",
+  "tool": "copilot-instructions",
+  "rank": 47,
+  "stars": 23.0,
+  "snapshot_commit": "be939c8e239aab0cda14cf0c25715f019fa3514c",
+  "snapshot_date": "2025-07-28T02:05:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 28,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "3a71a57e98dc574a597e759084a70b409a3db68b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3720,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "feffd1e3ebe5b1a0de73bbd27ed76886dbd572c3",
+    "file": "README.md",
+    "format": "md",
+    "words": 443,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0540e02f9c3e9db5b7c596645b55a6449ea478f9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 5243,
+    "blob_verified": true
+  }
+}

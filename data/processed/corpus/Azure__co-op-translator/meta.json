@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/co-op-translator",
+  "tool": "agents",
+  "rank": 2,
+  "stars": 529.0,
+  "snapshot_commit": "1f14d136b136ba2309085162dea32344676a6982",
+  "snapshot_date": "2025-10-13T07:05:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "82a42db7c58a7197493fec0bed588c5bfbf1049f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1291,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4861d899ff46bc1bc1cd13edfe64a153ff6d0614",
+    "file": "README.md",
+    "format": "md",
+    "words": 2125,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4caa1f665e79a0e9c8c7de01fccfc8cedaca68dd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1353,
+    "blob_verified": true
+  }
+}

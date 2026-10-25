@@ -1,0 +1,35 @@
+{
+  "repo": "stellar/stellar-cli",
+  "tool": "copilot-instructions",
+  "rank": 30,
+  "stars": 96.0,
+  "snapshot_commit": "859fe0b83c33fe17350b202ac0e13a53b2452696",
+  "snapshot_date": "2025-10-16T14:53:02Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "dea1ea48301ee569a0aab26294ce15236e4253b8",
+    "file": "agent.md",
+    "format": "md",
+    "words": 793,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "30fd35b0ea39300728c6f8a34844dd09abd27e74",
+    "file": "README.md",
+    "format": "md",
+    "words": 331,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "2744fc43a7d5a1bc09bcd185e5e3741310559210",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 774,
+    "blob_verified": true
+  }
+}

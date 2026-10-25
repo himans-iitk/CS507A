@@ -1,0 +1,35 @@
+{
+  "repo": "typedef-ai/fenic",
+  "tool": "claude",
+  "rank": 35,
+  "stars": 363.0,
+  "snapshot_commit": "1169d7dbf5199e29e6b2667607e9efe96ff680a0",
+  "snapshot_date": "2025-08-12T23:49:14Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e3228bc39aaecac27239332d3a2e35c8a21f1e38",
+    "file": "agent.md",
+    "format": "md",
+    "words": 557,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "824d4d7997efba85bc0925150b2d1b5541403286",
+    "file": "README.md",
+    "format": "md",
+    "words": 973,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "6eb78246ab23f78616ef14769e17c5545f285d3e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 636,
+    "blob_verified": true
+  }
+}

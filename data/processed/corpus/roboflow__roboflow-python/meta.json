@@ -1,0 +1,35 @@
+{
+  "repo": "roboflow/roboflow-python",
+  "tool": "claude",
+  "rank": 60,
+  "stars": 488.0,
+  "snapshot_commit": "6177ea400713363bbb95a5f447e25c824b8140df",
+  "snapshot_date": "2025-05-28T18:48:03Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "ad14adb00264bbd7a7a02c6203e26837fd493efa",
+    "file": "agent.md",
+    "format": "md",
+    "words": 465,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "31518ca9663790a9f0a5a8346be9b0ac9ebc9465",
+    "file": "README.md",
+    "format": "md",
+    "words": 700,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "da367956875c5daf7f0d72eff86d202dee3307ab",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 364,
+    "blob_verified": true
+  }
+}

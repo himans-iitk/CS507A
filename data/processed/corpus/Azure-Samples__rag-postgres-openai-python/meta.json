@@ -1,0 +1,35 @@
+{
+  "repo": "Azure-Samples/rag-postgres-openai-python",
+  "tool": "agents",
+  "rank": 53,
+  "stars": 445.0,
+  "snapshot_commit": "a7e6cde8e34535ce859f09c0bee57cf6572154af",
+  "snapshot_date": "2025-10-03T21:16:36Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "ae38cbf54b3f236b69bfe83d9408a4d3fba70e9a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 109,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "0415ca58f3f9e15152b58638cbcbc6d90a62d1e5",
+    "file": "README.md",
+    "format": "md",
+    "words": 1235,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5528a7b40b1ef94e365a3af395d9f2a1aac7f532",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 728,
+    "blob_verified": true
+  }
+}

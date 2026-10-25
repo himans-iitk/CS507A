@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/qsharp",
+  "tool": "copilot-instructions",
+  "rank": 11,
+  "stars": 783.0,
+  "snapshot_commit": "9da4acf2648f6fb495789c4e47c517ee78c39a44",
+  "snapshot_date": "2025-06-17T18:51:43Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "3f557ce03ded12968316c754f0fdf6e70c35d743",
+    "file": "agent.md",
+    "format": "md",
+    "words": 737,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a83ccf1cd77c36b06e6550a1f290b0e7fbc5faf3",
+    "file": "README.md",
+    "format": "md",
+    "words": 1126,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "a86def25320c74bd570a7c16b1858092e06ca164",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 523,
+    "blob_verified": true
+  }
+}

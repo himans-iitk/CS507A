@@ -1,0 +1,35 @@
+{
+  "repo": "mikedemarais/granola-ts-client",
+  "tool": "agents",
+  "rank": 20,
+  "stars": 13.0,
+  "snapshot_commit": "31b8ac569a8bde5df48b094d3d7579869beb285b",
+  "snapshot_date": "2025-08-16T01:31:32Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 18,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "4e02d54c24aea53d184c4cfbbadf432dd25fa6ff",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1529,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e7681fab7eb0b143d995d3f811bd0846b12384ce",
+    "file": "README.md",
+    "format": "md",
+    "words": 451,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e09a3d36c291c498fea84c32eaa26d8c3a3ae6ff",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 201,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "serverpod/serverpod",
+  "tool": "copilot-instructions",
+  "rank": 51,
+  "stars": 2908.0,
+  "snapshot_commit": "eb072797467f0c736de79a0e22a4bc430b1d5d5d",
+  "snapshot_date": "2025-10-15T11:43:12Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "b3ce7313edd5fb398821778a8361a3080d5ccd50",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2132,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e354ea840814703ddff3053faa1bbefa70b67869",
+    "file": "README.md",
+    "format": "md",
+    "words": 612,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "80448ca69f870b7a76a9444799e27ef2235903e7",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1995,
+    "blob_verified": true
+  }
+}

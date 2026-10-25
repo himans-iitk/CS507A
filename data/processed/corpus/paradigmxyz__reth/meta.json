@@ -1,0 +1,35 @@
+{
+  "repo": "paradigmxyz/reth",
+  "tool": "claude",
+  "rank": 63,
+  "stars": 5055.0,
+  "snapshot_commit": "928d91dbf9bf4aeb460ac62af8dcbaaca65fbc48",
+  "snapshot_date": "2025-10-17T14:45:24Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "c7a709c6713df3fdab4255b1b5e4b0b4b1ff5ed6",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1714,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4f9f63c2d04ce8158994522ab862b4d7ea1e1d27",
+    "file": "README.md",
+    "format": "md",
+    "words": 1358,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "8c51b03d19ab1fbfd774f204532360b572628998",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1911,
+    "blob_verified": true
+  }
+}

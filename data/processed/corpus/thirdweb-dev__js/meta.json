@@ -1,0 +1,35 @@
+{
+  "repo": "thirdweb-dev/js",
+  "tool": "claude",
+  "rank": 15,
+  "stars": 569.0,
+  "snapshot_commit": "830125c920abbf9e338c7ca109d0e37beee07347",
+  "snapshot_date": "2025-06-25T02:11:06Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "8f832d18f9c501f64e513c32217d8694c0926697",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1398,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d183cf02544da4116b015102d476e3d4b9f67b5f",
+    "file": "README.md",
+    "format": "md",
+    "words": 420,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/contributing.md",
+    "blob_sha": "ccc3935f6d92f9bf6b75cd825bfd01cad609eb8d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1406,
+    "blob_verified": true
+  }
+}

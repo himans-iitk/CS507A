@@ -1,0 +1,35 @@
+{
+  "repo": "Agoric/agoric-sdk",
+  "tool": "agents",
+  "rank": 22,
+  "stars": 353.0,
+  "snapshot_commit": "fe97b4acc325aeedfc2b37ae9fe7b670bae4d78c",
+  "snapshot_date": "2025-08-18T17:30:01Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "56460a4d4a8bab3300da903486b562edad3716f3",
+    "file": "agent.md",
+    "format": "md",
+    "words": 313,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "dc0d5e2b233f7362469f07a58e73a964cba61046",
+    "file": "README.md",
+    "format": "md",
+    "words": 728,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "763024c9711bed5a3fc391c8f3a0749c934ef648",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 611,
+    "blob_verified": true
+  }
+}

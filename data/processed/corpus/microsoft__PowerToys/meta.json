@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/PowerToys",
+  "tool": "copilot-instructions",
+  "rank": 65,
+  "stars": 124789.0,
+  "snapshot_commit": "fc1307418ee752f6037ba74f9bf656f8ea7e18a0",
+  "snapshot_date": "2025-10-21T08:05:16Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "bb24140592498d37529bc5285660672c5eec99b1",
+    "file": "agent.md",
+    "format": "md",
+    "words": 473,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "85fad26e1f6301e9c0aab5fcd1302c3ba20cb155",
+    "file": "README.md",
+    "format": "md",
+    "words": 2381,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "02f8746a780e0f3dcfb69309e69773292750bdcd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 671,
+    "blob_verified": true
+  }
+}

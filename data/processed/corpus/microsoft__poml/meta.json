@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/poml",
+  "tool": "claude",
+  "rank": 13,
+  "stars": 4661.0,
+  "snapshot_commit": "7f4d608f3e85f1616712f7347aff684787fffe9c",
+  "snapshot_date": "2025-08-26T06:43:44Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "ccebf451fce6f820992e576155955fa1ba270725",
+    "file": "agent.md",
+    "format": "md",
+    "words": 931,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "875da136c6c1bbc4b2fc79fe8f91dff18238f51c",
+    "file": "README.md",
+    "format": "md",
+    "words": 992,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/contributing.md",
+    "blob_sha": "79df7adc41715df4ed3f86d2ed56a5bb42cdbea9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 315,
+    "blob_verified": true
+  }
+}

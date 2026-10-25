@@ -1,0 +1,35 @@
+{
+  "repo": "tech-systems/panes",
+  "tool": "claude",
+  "rank": 49,
+  "stars": 722.0,
+  "snapshot_commit": "b4fbd918fdf510cd0eef2caceb0ee93ad914a8c3",
+  "snapshot_date": "2025-07-05T20:57:41Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "ff7f19d1f399d5771b6cddf08cb64ecfb5e2780f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 412,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "5caf608fd63ddbf988e1f183502160b88513f22f",
+    "file": "README.md",
+    "format": "md",
+    "words": 384,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "257deb7b71fcdd66ef464f8525b67f449edbd20f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 167,
+    "blob_verified": true
+  }
+}

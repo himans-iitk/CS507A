@@ -1,0 +1,35 @@
+{
+  "repo": "blokadaorg/blokada",
+  "tool": "claude",
+  "rank": 1,
+  "stars": 3151.0,
+  "snapshot_commit": "515c51ef515639f280e80e23516147235f8a37f5",
+  "snapshot_date": "2025-08-26T10:56:52Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e1d86cd565c9ee66f2b9bc0813949047b2de7156",
+    "file": "agent.md",
+    "format": "md",
+    "words": 908,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e3034b611ee109d9ed759eef37571a320f0c7c10",
+    "file": "README.md",
+    "format": "md",
+    "words": 306,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b7581ee90f8bedbb996a1c5be51a9ab83e423da7",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 215,
+    "blob_verified": true
+  }
+}

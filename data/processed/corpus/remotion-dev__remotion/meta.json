@@ -1,0 +1,35 @@
+{
+  "repo": "remotion-dev/remotion",
+  "tool": "copilot-instructions",
+  "rank": 55,
+  "stars": 24286.0,
+  "snapshot_commit": "5181fcee8a49c41faebcd184d814f6ff180cce93",
+  "snapshot_date": "2025-10-10T21:27:59Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 14,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "f35295d9d1fa6d1308ff73aefa61ab08092bc46d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 248,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "478452f56417b4e89097365c87b7e4e1ea7e718b",
+    "file": "README.md",
+    "format": "md",
+    "words": 212,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ad29531fd4cde82236128f79929dc68ec38401b8",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 44,
+    "blob_verified": true
+  }
+}

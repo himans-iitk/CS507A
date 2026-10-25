@@ -1,0 +1,35 @@
+{
+  "repo": "nibzard/lmdb-tui",
+  "tool": "claude",
+  "rank": 57,
+  "stars": 6.0,
+  "snapshot_commit": "48896b8ce3c0e6fdb193c7bb163a2fe1a1742d04",
+  "snapshot_date": "2025-06-09T08:53:18Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e4bba5cf9552714da25b16cd7cc495b4fbdcab8b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 530,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e90aaa1b1b9bd4a84de1e02f54409cc3a83288b3",
+    "file": "README.md",
+    "format": "md",
+    "words": 833,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "cf764ac8becf6bff5f8d5cd44aafd02587471b49",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 117,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "serverpod/relic",
+  "tool": "copilot-instructions",
+  "rank": 14,
+  "stars": 63.0,
+  "snapshot_commit": "3dbfe3669f3141fffa0a762d603959b34143d8ea",
+  "snapshot_date": "2025-10-08T07:26:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c5685daf7af5545aea8064313f253ca914e439c7",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1232,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "29df9c4b8886129fe473e47f41a7943cd8a0f201",
+    "file": "README.md",
+    "format": "md",
+    "words": 1420,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4d7cfa909356c7b5d2d3cb594c0440cea257645a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1308,
+    "blob_verified": true
+  }
+}

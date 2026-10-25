@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/Generative-AI-for-beginners-dotnet",
+  "tool": "copilot-instructions",
+  "rank": 32,
+  "stars": 1958.0,
+  "snapshot_commit": "42940f2d18f21fa6c04ecf8ad28d64bf29d1e15b",
+  "snapshot_date": "2025-10-29T18:31:23Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "82287793c089ec02a81db8f580b37fcf29993b7f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 737,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2c99edb61057efe9277b1b99e81e307af567a593",
+    "file": "README.md",
+    "format": "md",
+    "words": 1172,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.MD",
+    "blob_sha": "6bf3a344a57e203ec377f69e714758b2e987bb77",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 549,
+    "blob_verified": true
+  }
+}

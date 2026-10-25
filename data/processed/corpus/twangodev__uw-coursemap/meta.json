@@ -1,0 +1,35 @@
+{
+  "repo": "twangodev/uw-coursemap",
+  "tool": "claude",
+  "rank": 34,
+  "stars": 23.0,
+  "snapshot_commit": "a23aaab9f626df853cc874a568a607dd7d1e30fb",
+  "snapshot_date": "2025-07-16T22:40:26Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "45c43e27dba4c982b4811a47ba06c7c6567f81ec",
+    "file": "agent.md",
+    "format": "md",
+    "words": 896,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "829cb1f4dbb10382cfb4a919d74eb71441358fc5",
+    "file": "README.md",
+    "format": "md",
+    "words": 226,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "8098356e63abf471a27bd826a395c1c0d7b694a9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1698,
+    "blob_verified": true
+  }
+}

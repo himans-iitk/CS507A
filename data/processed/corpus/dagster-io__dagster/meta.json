@@ -1,0 +1,35 @@
+{
+  "repo": "dagster-io/dagster",
+  "tool": "claude",
+  "rank": 48,
+  "stars": 14238.0,
+  "snapshot_commit": "a192bda5e755778a0a821892e5b3cfa6b1df143b",
+  "snapshot_date": "2025-08-16T21:27:45Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 17,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "ead953d1477b7f36d5cbe61990601a3e4a6e3e35",
+    "file": "agent.md",
+    "format": "md",
+    "words": 636,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "cfde4bc11893d8569289ea95da725b27b804ae7e",
+    "file": "README.md",
+    "format": "md",
+    "words": 1,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "acaaab08879f793d34ce7c09f0ba18a0fb5ddf64",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 27,
+    "blob_verified": true
+  }
+}

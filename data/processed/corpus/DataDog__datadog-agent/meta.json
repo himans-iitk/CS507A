@@ -1,0 +1,35 @@
+{
+  "repo": "DataDog/datadog-agent",
+  "tool": "agents",
+  "rank": 17,
+  "stars": 3354.0,
+  "snapshot_commit": "b1b320d2a718703ac94974c335c90daaece14047",
+  "snapshot_date": "2025-09-18T21:12:47Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "9f6fce30a3cb72e8b62d53231bf819faea391d64",
+    "file": "agent.md",
+    "format": "md",
+    "words": 801,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d61aa847e5c8d960d38266faf050b4f32e2127e5",
+    "file": "README.md",
+    "format": "md",
+    "words": 144,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0f29bc7f57a1533cda5f9e5ed3e70bab4bd69cf6",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 24,
+    "blob_verified": true
+  }
+}

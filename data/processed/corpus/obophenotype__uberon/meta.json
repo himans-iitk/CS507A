@@ -1,0 +1,35 @@
+{
+  "repo": "obophenotype/uberon",
+  "tool": "claude",
+  "rank": 26,
+  "stars": 142.0,
+  "snapshot_commit": "c7cbbd829b96e2911f961a15a17559be886a13ae",
+  "snapshot_date": "2025-09-15T15:39:31Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "0105880f242ded21c5ad274caec30d822057c68b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1018,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "783cbb6a2f71749f6387bf77a58a0079104a7660",
+    "file": "README.md",
+    "format": "md",
+    "words": 207,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/contributing.md",
+    "blob_sha": "d94dd77dd82a0ff2b53b78436c654513944fa490",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 67,
+    "blob_verified": true
+  }
+}

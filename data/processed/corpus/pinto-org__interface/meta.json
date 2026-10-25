@@ -1,0 +1,35 @@
+{
+  "repo": "pinto-org/interface",
+  "tool": "claude",
+  "rank": 54,
+  "stars": 6.0,
+  "snapshot_commit": "30b51c7821ba95fc0a71c8ae8c76f406f17af454",
+  "snapshot_date": "2025-07-27T20:54:07Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 8,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "304bcf8f48f4624232e29983b624853a913551b6",
+    "file": "agent.md",
+    "format": "md",
+    "words": 2080,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4249653725c53a6c783ad73fc3e2318bfcbc2164",
+    "file": "README.md",
+    "format": "md",
+    "words": 604,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1cc428633cc7b1388ab04419297a9eae7454a810",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 351,
+    "blob_verified": true
+  }
+}

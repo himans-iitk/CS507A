@@ -1,0 +1,35 @@
+{
+  "repo": "krissen/polleninformation",
+  "tool": "copilot-instructions",
+  "rank": 41,
+  "stars": 23.0,
+  "snapshot_commit": "b08360f41b993e45806d5a44394f421a7bfde56b",
+  "snapshot_date": "2025-09-06T13:33:47Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "b359945b4173b808572314aa9b85f1c1024b2918",
+    "file": "agent.md",
+    "format": "md",
+    "words": 837,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "1f51f8439af6f1db54a994d4dbd7c0bc54af8c74",
+    "file": "README.md",
+    "format": "md",
+    "words": 553,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0a58f777c1e8a8e3ab364818bf79b4f97130ee30",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 281,
+    "blob_verified": true
+  }
+}

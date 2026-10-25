@@ -1,0 +1,35 @@
+{
+  "repo": "basicmachines-co/basic-memory",
+  "tool": "claude",
+  "rank": 33,
+  "stars": 1949.0,
+  "snapshot_commit": "c0538ad2dd3272a0584531fdbba17b330b83d772",
+  "snapshot_date": "2025-10-12T19:41:44Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 20,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "a23b60a54b5a9e3ad67ae517f67ac808b6f8525a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1643,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d6caec7ea8b03fa625a4c37465428c3879936bac",
+    "file": "README.md",
+    "format": "md",
+    "words": 1810,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "f4ba19fc041b6f3f96cac2eed129407641e5a58d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1351,
+    "blob_verified": true
+  }
+}

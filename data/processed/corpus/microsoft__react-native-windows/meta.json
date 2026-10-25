@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/react-native-windows",
+  "tool": "copilot-instructions",
+  "rank": 38,
+  "stars": 17034.0,
+  "snapshot_commit": "ddeea38a5cca590d5cc26a6f0b99cdce16bd934c",
+  "snapshot_date": "2025-08-08T08:18:25Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "2705126e5a1dca1d1630cbff1e5476d646d44424",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1085,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a6c8454a18c14950d1116e81274b227ef6c6d3fb",
+    "file": "README.md",
+    "format": "md",
+    "words": 618,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d55544888b9a2f456b704edd86eed89554d76031",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1635,
+    "blob_verified": true
+  }
+}

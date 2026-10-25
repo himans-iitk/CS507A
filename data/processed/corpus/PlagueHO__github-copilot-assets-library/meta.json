@@ -1,0 +1,35 @@
+{
+  "repo": "PlagueHO/github-copilot-assets-library",
+  "tool": "copilot-instructions",
+  "rank": 17,
+  "stars": 54.0,
+  "snapshot_commit": "c2aa57e6881a51abcc19164ab9886dd6c53211ea",
+  "snapshot_date": "2025-07-05T22:45:37Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c8bebd021ca5182a8ce40aa8801cc88fe10f65be",
+    "file": "agent.md",
+    "format": "md",
+    "words": 553,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "7035911f78892f269b21132a05f1b182b47d7e5a",
+    "file": "README.md",
+    "format": "md",
+    "words": 2506,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "dd7674eb13839a47ef69762b6ef0e1a62d5ddabd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 984,
+    "blob_verified": true
+  }
+}

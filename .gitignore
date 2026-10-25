@@ -8,3 +8,6 @@ __pycache__/
 data/cache/
 data/raw/*
 !data/raw/.gitkeep
+
+# regenerable logs
+data/processed/*.log

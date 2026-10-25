@@ -1,0 +1,35 @@
+{
+  "repo": "zenml-io/zenml",
+  "tool": "claude",
+  "rank": 7,
+  "stars": 4952.0,
+  "snapshot_commit": "07c82ef3ce752c77142dd9945570a953b49f68ed",
+  "snapshot_date": "2025-10-23T12:12:20Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "04dfa55797c7f977f2b97ae5f11c1a535188013f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1876,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c735911a3d160882fe91adc2dad97f83df5788d2",
+    "file": "README.md",
+    "format": "md",
+    "words": 1086,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "790a65b41a4bd5a0e0eff15e81d6eecc7f085424",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1653,
+    "blob_verified": true
+  }
+}

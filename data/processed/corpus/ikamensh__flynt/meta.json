@@ -1,0 +1,35 @@
+{
+  "repo": "ikamensh/flynt",
+  "tool": "agents",
+  "rank": 1,
+  "stars": 725.0,
+  "snapshot_commit": "88585f75ea61c80a565b0527deb6e26c28a96171",
+  "snapshot_date": "2025-07-27T13:55:14Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "89601e90769c11184610e4e3e0fed0f6861317af",
+    "file": "agent.md",
+    "format": "md",
+    "words": 239,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e3e456a38f1b79b9b5de28f12e80eb57d72be146",
+    "file": "README.md",
+    "format": "md",
+    "words": 908,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e325b1c048259c072ad820b42223007322d15893",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 193,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "etchdroid/etchdroid",
+  "tool": "agents",
+  "rank": 67,
+  "stars": 2570.0,
+  "snapshot_commit": "12f137d26e21781f731b9a380ae9826960730ed7",
+  "snapshot_date": "2025-06-07T00:04:14Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "89b3558349095cbb4369acb0db4794a6f937ce92",
+    "file": "agent.md",
+    "format": "md",
+    "words": 273,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a92657e3af98fbcda9ca2adf5a2d70c6321908cb",
+    "file": "README.md",
+    "format": "md",
+    "words": 449,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "3c9453f85ef1bcef57e22a42b86c885c800d3303",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 645,
+    "blob_verified": true
+  }
+}

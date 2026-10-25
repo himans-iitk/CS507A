@@ -61,6 +61,14 @@ def test_refresh_uses_etag_and_keeps_cache_on_304(tmp_path):
     assert session.get.call_args.kwargs["headers"]["If-None-Match"] == '"e1"'
 
 
+def test_corrupt_cache_entry_is_refetched(tmp_path):
+    gh, session = client(tmp_path, [make_response(200, "x"), make_response(200, "y")])
+    gh.get_file("o/r", "a.md", "abc")
+    next(tmp_path.rglob("*.json")).write_text("{truncated")
+    assert gh.get_file("o/r", "a.md", "abc") == "y"
+    assert session.get.call_count == 2
+
+
 def test_directory_listing_is_not_a_file(tmp_path):
     gh, _ = client(tmp_path, [make_response(200, '[{"name": "a.md"}]')])
     assert gh.get_file("o/r", "docs", "abc") is None

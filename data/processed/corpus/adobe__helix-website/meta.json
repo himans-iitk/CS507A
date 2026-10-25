@@ -1,0 +1,35 @@
+{
+  "repo": "adobe/helix-website",
+  "tool": "agents",
+  "rank": 35,
+  "stars": 32.0,
+  "snapshot_commit": "16b534d683dd19c0bb2da246eee7cecc9812503a",
+  "snapshot_date": "2025-10-24T20:55:34Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 11,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "fa080ffcae821a98a6284242988bde3fae417d01",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1908,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "0d6baaf876413dfe4bca2792c5291e190f773b8e",
+    "file": "README.md",
+    "format": "md",
+    "words": 82,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "06526357adf1f3f1039129a1a6550a0f9f0ffcb0",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 557,
+    "blob_verified": true
+  }
+}

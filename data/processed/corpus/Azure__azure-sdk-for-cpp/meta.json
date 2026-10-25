@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/azure-sdk-for-cpp",
+  "tool": "copilot-instructions",
+  "rank": 58,
+  "stars": 188.0,
+  "snapshot_commit": "7a5f1a869e7302a28da973b60e9cb66adebca589",
+  "snapshot_date": "2025-08-22T16:32:55Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "e7ac30ac020b985d9623d10814091507957e7850",
+    "file": "agent.md",
+    "format": "md",
+    "words": 44,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "15e6bb0e5d246502a1a2c1ccf1001e2b47d281cb",
+    "file": "README.md",
+    "format": "md",
+    "words": 3120,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "96a92a9cba63075ed27470c769921c18b48bd177",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2610,
+    "blob_verified": true
+  }
+}

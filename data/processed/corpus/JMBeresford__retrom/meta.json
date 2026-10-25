@@ -1,0 +1,35 @@
+{
+  "repo": "JMBeresford/retrom",
+  "tool": "copilot-instructions",
+  "rank": 36,
+  "stars": 1402.0,
+  "snapshot_commit": "f05d7353c734a3bc0454589d279078bd3e2a5636",
+  "snapshot_date": "2025-07-09T01:13:58Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "e8ad62ca8efd02130538a51d0d75311ce1194cca",
+    "file": "agent.md",
+    "format": "md",
+    "words": 736,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "53cb53baac174377a08918a775714650c1c55621",
+    "file": "README.md",
+    "format": "md",
+    "words": 528,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "58ae0b2059ffddea9b01fdc199d30cdc08b8dd96",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 612,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "clafollett/agenterra",
+  "tool": "claude",
+  "rank": 38,
+  "stars": 51.0,
+  "snapshot_commit": "8e8654addd6f7307b160e9492e4e06b693b70f79",
+  "snapshot_date": "2025-06-13T15:32:07Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 14,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "f254b1a41d1d1618cf564cb31a727038d0b2dc27",
+    "file": "agent.md",
+    "format": "md",
+    "words": 70,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "bdc862c3e8f0af3a5210a5c4bef9a3de66c2f4cf",
+    "file": "README.md",
+    "format": "md",
+    "words": 1710,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4f353fc743839da96ff08b1aa924ca7a3fac849a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 369,
+    "blob_verified": true
+  }
+}

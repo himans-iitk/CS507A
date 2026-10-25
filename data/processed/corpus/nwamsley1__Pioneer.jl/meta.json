@@ -1,0 +1,35 @@
+{
+  "repo": "nwamsley1/Pioneer.jl",
+  "tool": "agents",
+  "rank": 57,
+  "stars": 19.0,
+  "snapshot_commit": "493271e3d32e3df7830e2606268f49fae124f136",
+  "snapshot_date": "2025-09-05T15:44:46Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "88c6e5284fc3711da7d24e8478637b88d847a1fc",
+    "file": "agent.md",
+    "format": "md",
+    "words": 304,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "9c4d560867ff10cc8fad34a7d5180ffe54e9be04",
+    "file": "README.md",
+    "format": "md",
+    "words": 430,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1bcfe36d10310c1d20601368dda0d1b0f002f08e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 538,
+    "blob_verified": true
+  }
+}

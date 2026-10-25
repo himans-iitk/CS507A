@@ -1,0 +1,35 @@
+{
+  "repo": "bennypowers/cem",
+  "tool": "agents",
+  "rank": 54,
+  "stars": 27.0,
+  "snapshot_commit": "300e636d92084494f883503b04eccca274e1ec41",
+  "snapshot_date": "2025-09-03T20:03:38Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "8ddaa5602e1b995fadf112271f3b8ef873222f0c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 17,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "85cc17a08bc7a40c7669f806f9a7b53ed216eb25",
+    "file": "README.md",
+    "format": "md",
+    "words": 527,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1626791ba6846fd11fb858236546eef1b4c2c05f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 587,
+    "blob_verified": true
+  }
+}

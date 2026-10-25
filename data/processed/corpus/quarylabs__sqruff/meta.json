@@ -1,0 +1,35 @@
+{
+  "repo": "quarylabs/sqruff",
+  "tool": "claude",
+  "rank": 12,
+  "stars": 1088.0,
+  "snapshot_commit": "cd90addb051319ce9202e705ea3be5972298ed85",
+  "snapshot_date": "2025-07-03T09:38:01Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "6c982512a7959b6a7d6a1efd3fcbc74bdb134eaa",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1033,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e64ba7b50ddd51a7211b7acba6a3eaacc2dbf903",
+    "file": "README.md",
+    "format": "md",
+    "words": 884,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "877e2e2050a36ded5e2f550442d1d87685b1adc9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 294,
+    "blob_verified": true
+  }
+}

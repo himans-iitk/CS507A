@@ -1,0 +1,35 @@
+{
+  "repo": "luccahuguet/yazelix",
+  "tool": "agents",
+  "rank": 34,
+  "stars": 609.0,
+  "snapshot_commit": "555ece9a65221444aa0f33c5c6546ce3b5e8f8bf",
+  "snapshot_date": "2025-09-04T16:29:08Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "784e7982d5e9aa0602231a992a74f8d98282995f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 40,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f4d719fcbb88f07db0d00419c80d02b6a8498f5f",
+    "file": "README.md",
+    "format": "md",
+    "words": 2355,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/contributing.md",
+    "blob_sha": "af25a0e4190a0759925f7df146f8c4b3b559eee4",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 206,
+    "blob_verified": true
+  }
+}

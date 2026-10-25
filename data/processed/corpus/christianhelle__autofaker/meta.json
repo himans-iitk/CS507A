@@ -1,0 +1,35 @@
+{
+  "repo": "christianhelle/autofaker",
+  "tool": "copilot-instructions",
+  "rank": 54,
+  "stars": 7.0,
+  "snapshot_commit": "e36106e3f4779467067ba828d071480d768e4ec9",
+  "snapshot_date": "2025-08-12T07:17:44Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "fd6a0f1bca149ac238b99bafe567e4bf5626bf2b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1167,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "abc8ba9ddfb78b6ab8d721b05046611f3ecc640a",
+    "file": "README.md",
+    "format": "md",
+    "words": 1311,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "096bf75858bdefb8d51f2c36e3cf78cc58bd8701",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1206,
+    "blob_verified": true
+  }
+}

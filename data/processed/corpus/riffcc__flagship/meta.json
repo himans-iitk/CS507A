@@ -1,0 +1,35 @@
+{
+  "repo": "riffcc/flagship",
+  "tool": "claude",
+  "rank": 20,
+  "stars": 10.0,
+  "snapshot_commit": "e9ec85555f49f4a685ab69792b6d7cb59033cd99",
+  "snapshot_date": "2025-05-27T10:16:15Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "7859ec5e4f43e853f64e5a7d5b881895eb2299c4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 516,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f9e9ae958d21cdee10494fa50c9bbef27d34c5cc",
+    "file": "README.md",
+    "format": "md",
+    "words": 507,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "contributing.md",
+    "blob_sha": "2e5835f70ebbe353a540ad86f865ae21715e7b09",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 263,
+    "blob_verified": true
+  }
+}

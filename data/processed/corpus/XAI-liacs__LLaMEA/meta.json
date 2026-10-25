@@ -1,0 +1,35 @@
+{
+  "repo": "XAI-liacs/LLaMEA",
+  "tool": "agents",
+  "rank": 45,
+  "stars": 70.0,
+  "snapshot_commit": "809ec4fdb9a667469e146e36754ee5603fd2c100",
+  "snapshot_date": "2025-08-28T09:02:46Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "739934b4e651f98fcc47d04046da98e964ed3222",
+    "file": "agent.md",
+    "format": "md",
+    "words": 186,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "00d6de9314a1c575db5bbe06debcf1d23cda1b50",
+    "file": "README.md",
+    "format": "md",
+    "words": 2002,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0afec875c631ba8c860ec6b33a42b36eaba5d819",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 356,
+    "blob_verified": true
+  }
+}

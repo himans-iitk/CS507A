@@ -1,0 +1,35 @@
+{
+  "repo": "operaton/operaton",
+  "tool": "copilot-instructions",
+  "rank": 23,
+  "stars": 236.0,
+  "snapshot_commit": "41929dc1eeb4219121b16aa696f0e3935b7bcc2f",
+  "snapshot_date": "2025-09-07T10:05:35Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "6a18f5aa014319a06567639d81c560ce673c5ca5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1304,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "95049b6e0fc1eab1519a36c2eb4f3eff0b9d2d41",
+    "file": "README.md",
+    "format": "md",
+    "words": 723,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "81c7d3a2b0eb6c4f8f195ad87a3a9a2ec9358970",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1601,
+    "blob_verified": true
+  }
+}

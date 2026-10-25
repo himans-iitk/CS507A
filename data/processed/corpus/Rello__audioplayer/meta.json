@@ -1,0 +1,35 @@
+{
+  "repo": "Rello/audioplayer",
+  "tool": "agents",
+  "rank": 6,
+  "stars": 232.0,
+  "snapshot_commit": "0fc453b41e7173af99bed9b74d016e22e0216d55",
+  "snapshot_date": "2025-07-12T15:33:17Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "744bbcd0fc2365b41192fc36c7be10318cd7677e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 156,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "58bf7287b08bb86cc62f37bddb420cc3b0bc6139",
+    "file": "README.md",
+    "format": "md",
+    "words": 277,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0ad3963c476acc8e84ce127c844efd5d4dcd4c30",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 88,
+    "blob_verified": true
+  }
+}

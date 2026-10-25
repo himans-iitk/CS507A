@@ -1,0 +1,35 @@
+{
+  "repo": "estruyf/vscode-demo-time",
+  "tool": "copilot-instructions",
+  "rank": 44,
+  "stars": 176.0,
+  "snapshot_commit": "763d034097ba16a931d34850c2c9ac4acc13643f",
+  "snapshot_date": "2025-08-20T11:18:36Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "e78e6058902cf7cd165e0564e9516de98804a952",
+    "file": "agent.md",
+    "format": "md",
+    "words": 407,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b87d7f78c2e4168b114df537ee4363f6799c3a7f",
+    "file": "README.md",
+    "format": "md",
+    "words": 519,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "2a60b388c59e9b1f89b7b374d49b1b1216192fcf",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 254,
+    "blob_verified": true
+  }
+}

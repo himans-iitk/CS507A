@@ -1,0 +1,35 @@
+{
+  "repo": "boykush/scraps",
+  "tool": "claude",
+  "rank": 58,
+  "stars": 33.0,
+  "snapshot_commit": "a79f45d69e61451e0a5fb0d59f70a21d1a56b77f",
+  "snapshot_date": "2025-07-10T14:57:51Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "600cfadc0644d5e17ab8c95301fdbcffdd481174",
+    "file": "agent.md",
+    "format": "md",
+    "words": 308,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e17902c52373a3e5cbc750a3af03bbaf4515fdcb",
+    "file": "README.md",
+    "format": "md",
+    "words": 164,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "28844e43f13e2bdaba42a77d079be8ec620751e0",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 511,
+    "blob_verified": true
+  }
+}

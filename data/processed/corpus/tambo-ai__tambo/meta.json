@@ -1,0 +1,35 @@
+{
+  "repo": "tambo-ai/tambo",
+  "tool": "claude",
+  "rank": 44,
+  "stars": 781.0,
+  "snapshot_commit": "22d6ea28fd18c073b3f739d901121bb1e1e59e31",
+  "snapshot_date": "2025-10-29T19:21:50Z",
+  "snapshot_source": "api_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "1c0dc00ff7fe5f2585b3453f27b95ece30b893b8",
+    "file": "agent.md",
+    "format": "md",
+    "words": 128,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "eedc1599e531011baa668459fe424975bfa42016",
+    "file": "README.md",
+    "format": "md",
+    "words": 791,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "002dacdf7980b1850a01ab68f279439beba00900",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 820,
+    "blob_verified": true
+  }
+}

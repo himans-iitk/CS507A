@@ -1,0 +1,35 @@
+{
+  "repo": "xability/maidr",
+  "tool": "copilot-instructions",
+  "rank": 5,
+  "stars": 15.0,
+  "snapshot_commit": "bf05938e07b50404ed702b101b5856d8730c88f4",
+  "snapshot_date": "2025-07-22T17:17:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "a6b1fd10e2bc266e5c097d9c528ed4eb60ccb5c6",
+    "file": "agent.md",
+    "format": "md",
+    "words": 949,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "cfdd6ca562b4cf5f5ee2d66d7262d0204a2c73a6",
+    "file": "README.md",
+    "format": "md",
+    "words": 3256,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e576397a781283fe8ca4fc1ba0b03df24385b539",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1365,
+    "blob_verified": true
+  }
+}

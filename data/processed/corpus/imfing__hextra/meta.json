@@ -1,0 +1,35 @@
+{
+  "repo": "imfing/hextra",
+  "tool": "claude",
+  "rank": 39,
+  "stars": 1659.0,
+  "snapshot_commit": "83f3b5052e935fc750a712502c39006b7024c2ec",
+  "snapshot_date": "2025-09-06T11:06:26Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "03487d51d16147f3f52f8306fb3c6a2d92894667",
+    "file": "agent.md",
+    "format": "md",
+    "words": 714,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2b2f98ce20aac9796f1a4277844c9b87a466c168",
+    "file": "README.md",
+    "format": "md",
+    "words": 291,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "825bb0600f9f53424b93a6c2bce22dc21ca6fc5f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 492,
+    "blob_verified": true
+  }
+}

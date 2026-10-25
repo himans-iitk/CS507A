@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/azure-sdk-for-python",
+  "tool": "copilot-instructions",
+  "rank": 18,
+  "stars": 5362.0,
+  "snapshot_commit": "bd5f2b616773949d467aef2cd5ceb194d45bed9a",
+  "snapshot_date": "2025-10-30T17:01:35Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 9,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "8baa747243fdb8cfb59f6bd1fc0f8fe9f42ddc6e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 452,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "015f0f32728a643868599a8da931cf47f7988ec5",
+    "file": "README.md",
+    "format": "md",
+    "words": 1034,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e17a4a5472eef390d9342de017a596a4e3747601",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1927,
+    "blob_verified": true
+  }
+}

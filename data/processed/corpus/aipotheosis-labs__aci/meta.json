@@ -1,0 +1,35 @@
+{
+  "repo": "aipotheosis-labs/aci",
+  "tool": "claude",
+  "rank": 25,
+  "stars": 4658.0,
+  "snapshot_commit": "04c74fbb916f0ef8a49d4c522c61ff660d0dbec9",
+  "snapshot_date": "2025-07-31T07:51:17Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "1cddd7549c9844c71ee0bffe4509e700016c8837",
+    "file": "agent.md",
+    "format": "md",
+    "words": 713,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "01907839343cc7c93b1f0f8413b394cc9c75027b",
+    "file": "README.md",
+    "format": "md",
+    "words": 671,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0e1a2798c0c00be366c2dfaf5f1dcd3e915a8e3b",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 514,
+    "blob_verified": true
+  }
+}

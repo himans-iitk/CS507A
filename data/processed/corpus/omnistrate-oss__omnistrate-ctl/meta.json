@@ -1,0 +1,35 @@
+{
+  "repo": "omnistrate-oss/omnistrate-ctl",
+  "tool": "copilot-instructions",
+  "rank": 26,
+  "stars": 10.0,
+  "snapshot_commit": "024a6d4ea2300786ed83752cbfc00460482c4c2c",
+  "snapshot_date": "2025-07-19T00:14:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "6568930cba0d1e88bc58a08769bd31ad21f56e75",
+    "file": "agent.md",
+    "format": "md",
+    "words": 263,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4a3578c7edb765ea3bf7efedb907439f59292ab5",
+    "file": "README.md",
+    "format": "md",
+    "words": 137,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "58fd5c2a6f98fa0fb4948b904afb7752fc4c1111",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 381,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "zeroc-ice/ice-demos",
+  "tool": "copilot-instructions",
+  "rank": 8,
+  "stars": 332.0,
+  "snapshot_commit": "ca5277dfcf1f9841f8976ce62be3c2dbe5406eed",
+  "snapshot_date": "2025-06-30T15:55:29Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "7b59a0375a3514b499158666ee9334b241a24bbe",
+    "file": "agent.md",
+    "format": "md",
+    "words": 97,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2af51cce9b0248d4b58a0891e8e6ece8863c03a6",
+    "file": "README.md",
+    "format": "md",
+    "words": 133,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5ce88e553f0a9aab42c635f5d7ce83c9d4e59ba6",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 172,
+    "blob_verified": true
+  }
+}

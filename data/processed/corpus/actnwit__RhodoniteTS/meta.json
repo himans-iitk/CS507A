@@ -1,0 +1,35 @@
+{
+  "repo": "actnwit/RhodoniteTS",
+  "tool": "claude",
+  "rank": 52,
+  "stars": 158.0,
+  "snapshot_commit": "58ad217541af06407fc43e60f6f946f062f9af9f",
+  "snapshot_date": "2025-06-27T06:37:17Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "8821a43026998d61b2f807f86ad75362feeca098",
+    "file": "agent.md",
+    "format": "md",
+    "words": 892,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "ef8f4e6fdb1ee96420e9c7e5a23477b750a6a7ea",
+    "file": "README.md",
+    "format": "md",
+    "words": 888,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "54b7c65f39518a09910b2abb43b2c8becae6758e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 191,
+    "blob_verified": true
+  }
+}

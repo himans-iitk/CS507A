@@ -1,0 +1,35 @@
+{
+  "repo": "metabase/metabase",
+  "tool": "copilot-instructions",
+  "rank": 22,
+  "stars": 44163.0,
+  "snapshot_commit": "afabd18f5674df9f3241b7e02ea98d08797ea897",
+  "snapshot_date": "2025-07-23T22:32:08Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "4d7a610d79401325c2b766f0094182c885f8db19",
+    "file": "agent.md",
+    "format": "md",
+    "words": 257,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c0570f0fd1852ef1d25dcc86cc7d445186d3d3e1",
+    "file": "README.md",
+    "format": "md",
+    "words": 514,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/CONTRIBUTING.md",
+    "blob_sha": "4d056cb202b34005ab9085589925da9f422351a3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1529,
+    "blob_verified": true
+  }
+}

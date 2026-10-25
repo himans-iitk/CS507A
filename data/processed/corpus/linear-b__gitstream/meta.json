@@ -1,0 +1,35 @@
+{
+  "repo": "linear-b/gitstream",
+  "tool": "agents",
+  "rank": 23,
+  "stars": 317.0,
+  "snapshot_commit": "db81bb122452f6456cc9d1a61122f5f46e5cb3ea",
+  "snapshot_date": "2025-09-11T06:56:54Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "84c06bd27bd2d51ec6cc37dad8f9d31ca4cc35d4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 316,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "628cb90e04cf342239475bfafa855a261d0b949d",
+    "file": "README.md",
+    "format": "md",
+    "words": 433,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d0979ee9ad9d502b979a22338f4c0bfd967b0e24",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 51,
+    "blob_verified": true
+  }
+}

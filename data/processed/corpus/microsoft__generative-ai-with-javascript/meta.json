@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/generative-ai-with-javascript",
+  "tool": "agents",
+  "rank": 66,
+  "stars": 995.0,
+  "snapshot_commit": "2e36ef333d21b1842aa34872d04ea234501d9484",
+  "snapshot_date": "2025-10-03T11:09:56Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "3f1639c602a1540f528d322976436f7dd7403900",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1475,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "1fee04a386729aebd8a57b4eb8b158609d81fa46",
+    "file": "README.md",
+    "format": "md",
+    "words": 1307,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "a37358a8319e4af3bf8cd38d96d47a57f57e89dc",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 592,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "eyaltoledano/claude-task-master",
+  "tool": "claude",
+  "rank": 29,
+  "stars": 23008.0,
+  "snapshot_commit": "819d5e1bc5fb81be4b25f1823988a8e20abe8440",
+  "snapshot_date": "2025-10-31T22:47:39Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "0fe7d6e4879d6db3ea6dd80d94985f1bc7e789e9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 697,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "55502bc291cdaeb1fec1b32c7498eca4c4d3f33c",
+    "file": "README.md",
+    "format": "md",
+    "words": 1818,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "02b0ec2fcd5e4c38be9a17e0755736a32fb2bf40",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1125,
+    "blob_verified": true
+  }
+}

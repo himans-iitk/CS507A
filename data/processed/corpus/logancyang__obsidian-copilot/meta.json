@@ -1,0 +1,35 @@
+{
+  "repo": "logancyang/obsidian-copilot",
+  "tool": "agents",
+  "rank": 27,
+  "stars": 5477.0,
+  "snapshot_commit": "92d6f98af29b647eb5f49ba84d9d93ad564f7fd0",
+  "snapshot_date": "2025-09-22T03:03:09Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "04103e5cc1d893cceb14064abf394bd949a77c5a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1586,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "1dff3729dd98ae26cb98e8328899d29c8a200aca",
+    "file": "README.md",
+    "format": "md",
+    "words": 2117,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "6cee639ef8fcd48eb684272cd478a6e3e16b3642",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1160,
+    "blob_verified": true
+  }
+}

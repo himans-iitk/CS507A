@@ -1,0 +1,35 @@
+{
+  "repo": "netz98/n98-magerun2",
+  "tool": "agents",
+  "rank": 15,
+  "stars": 917.0,
+  "snapshot_commit": "541c1c0a4d289983ecfeb4a1a52572527fd0e774",
+  "snapshot_date": "2025-07-03T15:07:45Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "ac65fd79b10b27e2fdb65f37552d5695889d05c5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1170,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "6dfc492da72eaab25893f28625c5f51779282425",
+    "file": "README.md",
+    "format": "md",
+    "words": 419,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "3ad69ffdfda2b3ab71aff86b88aa21787b03e943",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 13,
+    "blob_verified": true
+  }
+}

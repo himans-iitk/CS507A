@@ -1,0 +1,35 @@
+{
+  "repo": "IntelliTect/Coalesce",
+  "tool": "agents",
+  "rank": 41,
+  "stars": 72.0,
+  "snapshot_commit": "31669e1a12fbe5230bf31684c5e8bc4578aaa7ce",
+  "snapshot_date": "2025-09-22T19:49:29Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "1a8152bbefd884e6da95c62f05065687cb73a416",
+    "file": "agent.md",
+    "format": "md",
+    "words": 368,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "fccbf0d4e841847176d16e42e02472873882803d",
+    "file": "README.md",
+    "format": "md",
+    "words": 512,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ae4efd545b63582fa03973ee60db608cf0a17125",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 347,
+    "blob_verified": true
+  }
+}

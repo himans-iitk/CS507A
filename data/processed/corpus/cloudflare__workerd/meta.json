@@ -1,0 +1,35 @@
+{
+  "repo": "cloudflare/workerd",
+  "tool": "claude",
+  "rank": 31,
+  "stars": 7142.0,
+  "snapshot_commit": "9b9ed386aead8f2032d4450f805ac84b60606a22",
+  "snapshot_date": "2025-06-12T17:11:01Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "157069ac35540f283647616f83b33b756006530a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 641,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "cc2421421ee54115fc9a1d0f604ace6142e74d4f",
+    "file": "README.md",
+    "format": "md",
+    "words": 1738,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b40bc45df22fe7a1a74a26a6a78bcab727fda822",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1177,
+    "blob_verified": true
+  }
+}

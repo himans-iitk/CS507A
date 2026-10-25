@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/terraform-azurerm-avm-res-keyvault-vault",
+  "tool": "agents",
+  "rank": 56,
+  "stars": 45.0,
+  "snapshot_commit": "ea506a79166e3b2d4dc679585b840f55ebad912b",
+  "snapshot_date": "2025-09-22T17:48:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "830d09e98ac220b86c3be62d1ebbf0e681f032b4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 865,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f81defeead1cd094c958f000b5999d46141f22c9",
+    "file": "README.md",
+    "format": "md",
+    "words": 3087,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ebf23acad114c34fc4a21ab27c127fccf8f08004",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 119,
+    "blob_verified": true
+  }
+}

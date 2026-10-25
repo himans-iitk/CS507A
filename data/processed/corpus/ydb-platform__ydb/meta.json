@@ -1,0 +1,35 @@
+{
+  "repo": "ydb-platform/ydb",
+  "tool": "agents",
+  "rank": 4,
+  "stars": 4602.0,
+  "snapshot_commit": "f1d6ea669e83f150c3471af562b41b084623026c",
+  "snapshot_date": "2025-06-18T05:03:30Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "9a3f902f52d54052f15baa1c490202285ec1999f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 250,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b7637c6c423ad52e0b241a2d8c6cc04cd3319d3a",
+    "file": "README.md",
+    "format": "md",
+    "words": 638,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "a9dc15990b205202b2e7a5f503a4f3992bd3f287",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 184,
+    "blob_verified": true
+  }
+}

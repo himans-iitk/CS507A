@@ -1,0 +1,35 @@
+{
+  "repo": "Nugine/const-str",
+  "tool": "copilot-instructions",
+  "rank": 24,
+  "stars": 106.0,
+  "snapshot_commit": "e545249afc3691db8812c6821837cc55f5f4d0f9",
+  "snapshot_date": "2025-08-03T17:21:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "b7c22ff6d6ff06b767dd0ff02e227db8f55974f4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 453,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "7cd15b580c7b47578f17fb88b70eb130d016855e",
+    "file": "README.md",
+    "format": "md",
+    "words": 51,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "18e95f172cc4d3a9962108b257f898541c3998ee",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 132,
+    "blob_verified": true
+  }
+}

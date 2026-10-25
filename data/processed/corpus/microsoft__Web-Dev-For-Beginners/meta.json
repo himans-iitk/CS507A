@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/Web-Dev-For-Beginners",
+  "tool": "agents",
+  "rank": 46,
+  "stars": 92337.0,
+  "snapshot_commit": "d1028e5ad09139341ed01d01a636e34f62538680",
+  "snapshot_date": "2025-10-03T08:13:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "45dde22b6d5b0e863c63430a406f85e210b47a20",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1626,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "7d32da00a44c7c01137c45ed301984853a29650d",
+    "file": "README.md",
+    "format": "md",
+    "words": 2283,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "33d950f6aed3ec4f48abc0d1423313bcc0e07da7",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 138,
+    "blob_verified": true
+  }
+}

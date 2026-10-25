@@ -1,0 +1,35 @@
+{
+  "repo": "culstrup/fireflies-raycast",
+  "tool": "claude",
+  "rank": 2,
+  "stars": 7.0,
+  "snapshot_commit": "83106f295a8cc09eaf401672bbd7f326f1b7c747",
+  "snapshot_date": "2025-05-25T00:17:31Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "60ce93cb0be492263142ae831205020297cacaab",
+    "file": "agent.md",
+    "format": "md",
+    "words": 393,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "faf6998467425491b39ae4b394a72a8f520ad583",
+    "file": "README.md",
+    "format": "md",
+    "words": 1050,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "04a51095f81112295a2c22d002782ef35dc0229a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 284,
+    "blob_verified": true
+  }
+}

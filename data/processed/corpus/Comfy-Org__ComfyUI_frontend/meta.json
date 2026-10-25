@@ -1,0 +1,35 @@
+{
+  "repo": "Comfy-Org/ComfyUI_frontend",
+  "tool": "copilot-instructions",
+  "rank": 29,
+  "stars": 1411.0,
+  "snapshot_commit": "c42c9315f47c24a28f6fff552b57b6f12e473308",
+  "snapshot_date": "2025-08-12T19:22:09Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "551b037212d2d643380e25d7b7657544c7e9155f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 151,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2b9228633ed752b8f52cfa978e0b9965c3c907b8",
+    "file": "README.md",
+    "format": "md",
+    "words": 1339,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ac7164d7b9ad1d6d78f22fb154da4f06a6c58b05",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1715,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "gacela-project/gacela",
+  "tool": "agents",
+  "rank": 25,
+  "stars": 133.0,
+  "snapshot_commit": "d4eae3a0a49388ce2bc4855a99fddb8215f00b42",
+  "snapshot_date": "2025-10-11T13:15:09Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "ebc10082c018723f4834cbac7f801e3200db8a74",
+    "file": "agent.md",
+    "format": "md",
+    "words": 342,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "00e7a634837552a0391dc5e958bfd5a8cd3e2570",
+    "file": "README.md",
+    "format": "md",
+    "words": 361,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "07c91ab10056114a55c3abe268926f2bd6568263",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 477,
+    "blob_verified": true
+  }
+}

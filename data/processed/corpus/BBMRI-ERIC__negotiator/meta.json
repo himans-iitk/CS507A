@@ -1,0 +1,35 @@
+{
+  "repo": "BBMRI-ERIC/negotiator",
+  "tool": "copilot-instructions",
+  "rank": 57,
+  "stars": 27.0,
+  "snapshot_commit": "2fabced5400c3bdfeb3c864d0c414174ad1486b9",
+  "snapshot_date": "2025-08-13T09:15:16Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "76e6ba3cf38022c348d5f2742d55e13689cdba32",
+    "file": "agent.md",
+    "format": "md",
+    "words": 252,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e0a8f220e1d2a64cb1780f04bbcb56c6cbad3327",
+    "file": "README.md",
+    "format": "md",
+    "words": 286,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "docs/contributing.md",
+    "blob_sha": "5d7dc36a31170a444cc945809ed402baae8e80d5",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 426,
+    "blob_verified": true
+  }
+}

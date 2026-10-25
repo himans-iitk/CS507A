@@ -1,0 +1,35 @@
+{
+  "repo": "lumen-notes/lumen",
+  "tool": "claude",
+  "rank": 21,
+  "stars": 572.0,
+  "snapshot_commit": "19ce6912110ec029e345abca928ade85c47b6c4c",
+  "snapshot_date": "2025-09-13T13:50:14Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "bfe2de5a950e962b9eca68e415a38ca7c63ccb00",
+    "file": "agent.md",
+    "format": "md",
+    "words": 556,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "568999613fee9b53c7d1c50cf31fa3bd9c8dd1ed",
+    "file": "README.md",
+    "format": "md",
+    "words": 28,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "330f9ab9b02ff9778cf9d002ca809d5f932df05a",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 154,
+    "blob_verified": true
+  }
+}

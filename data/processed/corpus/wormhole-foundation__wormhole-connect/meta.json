@@ -1,0 +1,35 @@
+{
+  "repo": "wormhole-foundation/wormhole-connect",
+  "tool": "claude",
+  "rank": 41,
+  "stars": 113.0,
+  "snapshot_commit": "3e0a674e7014f281cc8eae4fafb0412c3d038c57",
+  "snapshot_date": "2025-06-11T15:16:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "8f265d4f8619d57dbf24e962fbb3b26de0740252",
+    "file": "agent.md",
+    "format": "md",
+    "words": 193,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2adc957734ebbc3da54a14cd91df7da542d6fd6b",
+    "file": "README.md",
+    "format": "md",
+    "words": 1205,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e2b691059072ed9a3f7787814761a3d0a43969df",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 324,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "J-Tech-Japan/Sekiban",
+  "tool": "claude",
+  "rank": 5,
+  "stars": 210.0,
+  "snapshot_commit": "2f25f9f375ad3a72491f492912aff2867a0b81e6",
+  "snapshot_date": "2025-08-26T03:20:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 7,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "74bc68e04387ff921c85760c59cfe9140ccb7011",
+    "file": "agent.md",
+    "format": "md",
+    "words": 466,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "83d37f8f76c9601390d3b3dc9735fcfa8f2664b8",
+    "file": "README.md",
+    "format": "md",
+    "words": 1546,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ebdcc46eb614effcc289d1d36c1e93de3330bf42",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 413,
+    "blob_verified": true
+  }
+}

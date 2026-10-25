@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/FluidFramework",
+  "tool": "copilot-instructions",
+  "rank": 40,
+  "stars": 4874.0,
+  "snapshot_commit": "646251b70d0d08f6c4f55c4b11194090e08f6639",
+  "snapshot_date": "2025-06-18T23:34:43Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "a8ba225da80ed099b94c1121a01269ac6d3bcd19",
+    "file": "agent.md",
+    "format": "md",
+    "words": 33,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a2283a59ba8469fa308d8a3e7bef28d335989680",
+    "file": "README.md",
+    "format": "md",
+    "words": 2459,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "6e240e212030c5d35c1dde53de1519911103c2f9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 132,
+    "blob_verified": true
+  }
+}

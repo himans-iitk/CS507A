@@ -1,0 +1,35 @@
+{
+  "repo": "kanisterio/kanister",
+  "tool": "copilot-instructions",
+  "rank": 42,
+  "stars": 844.0,
+  "snapshot_commit": "781389ff047113386d1e80ab08dcfd15816d801d",
+  "snapshot_date": "2025-06-19T05:13:10Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "f44199500eac0fd3e32e0e02260a9486c8bd678e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 43,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d0eb256a65948dc95d084ce037430b352e161112",
+    "file": "README.md",
+    "format": "md",
+    "words": 713,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b8174ec628616ee44eae98d5a429521383a57a9c",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1198,
+    "blob_verified": true
+  }
+}

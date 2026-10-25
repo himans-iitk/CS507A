@@ -1,0 +1,35 @@
+{
+  "repo": "valkey-io/valkey-glide",
+  "tool": "agents",
+  "rank": 49,
+  "stars": 602.0,
+  "snapshot_commit": "7664ec08ab718b541d8c6590eeadc75d28282231",
+  "snapshot_date": "2025-10-03T16:19:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "392b52ca972802405f5768a6a7a8957dd5d614c8",
+    "file": "agent.md",
+    "format": "md",
+    "words": 990,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e0191e8e0940f3bef016d44419ae970386757c84",
+    "file": "README.md",
+    "format": "md",
+    "words": 1133,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "017c4153e0f6a92abd72a709a0a78ae8b6a8c586",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 448,
+    "blob_verified": true
+  }
+}

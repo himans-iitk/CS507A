@@ -1,0 +1,35 @@
+{
+  "repo": "karakeep-app/karakeep",
+  "tool": "agents",
+  "rank": 48,
+  "stars": 20377.0,
+  "snapshot_commit": "8e95dae31a2c88d931917129b690698e0490bb04",
+  "snapshot_date": "2025-09-07T15:36:52Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "d8f6d862252bf90aa30b364882db582b24197a99",
+    "file": "agent.md",
+    "format": "md",
+    "words": 398,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "17297c36d9d2d80e8d7e7e6baf57c5a210c32613",
+    "file": "README.md",
+    "format": "md",
+    "words": 1057,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "ed667566b6a7abe9c6c90f09c1dddcca92b085af",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 342,
+    "blob_verified": true
+  }
+}

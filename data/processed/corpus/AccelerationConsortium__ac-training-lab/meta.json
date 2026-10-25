@@ -1,0 +1,35 @@
+{
+  "repo": "AccelerationConsortium/ac-training-lab",
+  "tool": "copilot-instructions",
+  "rank": 10,
+  "stars": 12.0,
+  "snapshot_commit": "2b6ef3082764ecd8ae90747df9c7e90c60a331a7",
+  "snapshot_date": "2025-10-15T02:11:57Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "fe5a208fba6caad285a27500bf251d9fb6da4315",
+    "file": "agent.md",
+    "format": "md",
+    "words": 373,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a96f67dc922ad4903b4b6594c0fc2c4643f72659",
+    "file": "README.md",
+    "format": "md",
+    "words": 217,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "18bf8682a92fcf15d3f3308058ed8daa761dd831",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2012,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "pardeike/Harmony",
+  "tool": "agents",
+  "rank": 42,
+  "stars": 6039.0,
+  "snapshot_commit": "a7a44be2dbc2fa3d1532c1b2f5031c7797a0f436",
+  "snapshot_date": "2025-09-05T14:06:40Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "d2946fcc0f2c15224299d499601937e78a2737d4",
+    "file": "agent.md",
+    "format": "md",
+    "words": 80,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "9a92f438e8aa20923f465c6c5f50120beef58ae7",
+    "file": "README.md",
+    "format": "md",
+    "words": 459,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "bf6310b8ddfb07279c7303cf0572c2bb8b0304a8",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 406,
+    "blob_verified": true
+  }
+}

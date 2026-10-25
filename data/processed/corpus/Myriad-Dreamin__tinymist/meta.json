@@ -1,0 +1,35 @@
+{
+  "repo": "Myriad-Dreamin/tinymist",
+  "tool": "copilot-instructions",
+  "rank": 19,
+  "stars": 2226.0,
+  "snapshot_commit": "fee9b27e002898b0cda48a43ca36c6e447914988",
+  "snapshot_date": "2025-08-25T03:48:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c1992a912f6db997ba7227291d85e4a817974c5f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 603,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b5934ab109bf6f092898975aa69311cb93016c19",
+    "file": "README.md",
+    "format": "md",
+    "words": 1372,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7cf8ad52d8097e10c37a64292c4aed3127340416",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 280,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "jdx/mise",
+  "tool": "claude",
+  "rank": 28,
+  "stars": 20588.0,
+  "snapshot_commit": "0f287149d81f709d04874e89091ebd613ca00a94",
+  "snapshot_date": "2025-10-08T10:43:23Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "2077f2de0f7bfb730ae8970f3679ab20bf1e832d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 935,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "252a47500b1c292f6237d77214e10bbf23b77a2c",
+    "file": "README.md",
+    "format": "md",
+    "words": 588,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "38c6ee7fb87acf312c9a2c487505055adc1edf57",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "TanStack/router",
+  "tool": "agents",
+  "rank": 5,
+  "stars": 11776.0,
+  "snapshot_commit": "32faee22da8f2766f38ded64896f1717190f4a6e",
+  "snapshot_date": "2025-09-23T17:34:54Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "8f4e24c72a0137f9cebb49e356a07acedf387506",
+    "file": "agent.md",
+    "format": "md",
+    "words": 941,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f78ef4184a1630b346c2a18f4d9746ba126c230a",
+    "file": "README.md",
+    "format": "md",
+    "words": 445,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "c28d01241bf7c865ebe7fdeba3fe0ad40f112d6d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 449,
+    "blob_verified": true
+  }
+}

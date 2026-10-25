@@ -1,0 +1,35 @@
+{
+  "repo": "rainbow-me/rainbowkit",
+  "tool": "agents",
+  "rank": 63,
+  "stars": 2697.0,
+  "snapshot_commit": "a8edb090c20cc66500b4dfcd8c78f7054256518d",
+  "snapshot_date": "2025-06-11T19:20:18Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "37d81d6f20e7c1d54be766c3853f22d694c7c12b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 214,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4b9fc3decc845e7d0d520db85465418cae42825e",
+    "file": "README.md",
+    "format": "md",
+    "words": 234,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "da0357e17d34ce5af99cc65e538bf4e21ab062b3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1168,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "openai/openai-agents-js",
+  "tool": "agents",
+  "rank": 51,
+  "stars": 1725.0,
+  "snapshot_commit": "f1e2f60cdd8e7a1f23932d6848ea42cdc41c0597",
+  "snapshot_date": "2025-08-28T17:14:19Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "ca170676ef29b5c44397f6928e1adf5909f5f62e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 932,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b22c58c42253f011b8e1be1e593a3e0024a44abb",
+    "file": "README.md",
+    "format": "md",
+    "words": 1273,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1ff6376f3ed9a4f5efad28da91f0c19ba5a310af",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 638,
+    "blob_verified": true
+  }
+}

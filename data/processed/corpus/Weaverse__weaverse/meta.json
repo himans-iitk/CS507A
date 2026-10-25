@@ -1,0 +1,35 @@
+{
+  "repo": "Weaverse/weaverse",
+  "tool": "agents",
+  "rank": 60,
+  "stars": 78.0,
+  "snapshot_commit": "6129fd55e46249d4c6d038aad68ba95e9916b0a1",
+  "snapshot_date": "2025-09-22T09:15:04Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "7c4429e61dc40148b568c6c5e41a3c063d2f3747",
+    "file": "agent.md",
+    "format": "md",
+    "words": 196,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "9e1c623a2c6fce3d8f292cac40c743b94db3f42a",
+    "file": "README.md",
+    "format": "md",
+    "words": 527,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b0be71fcbb9a4648a2832258ba6fd44285bf1554",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 250,
+    "blob_verified": true
+  }
+}

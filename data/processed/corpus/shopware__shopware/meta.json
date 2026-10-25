@@ -1,0 +1,35 @@
+{
+  "repo": "shopware/shopware",
+  "tool": "agents",
+  "rank": 44,
+  "stars": 3208.0,
+  "snapshot_commit": "4a96c479fe725973e59de0017489137c5a951e44",
+  "snapshot_date": "2025-09-30T12:48:35Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "db29bc525c742734a62fc06542b92be62c4d19fd",
+    "file": "agent.md",
+    "format": "md",
+    "words": 368,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "65a9ac39234d37b69364fcb68abcf9a88a357be8",
+    "file": "README.md",
+    "format": "md",
+    "words": 851,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "c6d6beffe89b5036b5bb0086cbaad4c4abc7c6fa",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 771,
+    "blob_verified": true
+  }
+}

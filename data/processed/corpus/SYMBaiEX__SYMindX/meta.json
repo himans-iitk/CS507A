@@ -1,0 +1,35 @@
+{
+  "repo": "SYMBaiEX/SYMindX",
+  "tool": "agents",
+  "rank": 55,
+  "stars": 9.0,
+  "snapshot_commit": "b5df8fdff6debadfe2f868bacbc06136de34e970",
+  "snapshot_date": "2025-07-24T04:14:56Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "6b8240251f1b1bad6da490db4f0420fe9adcbbc1",
+    "file": "agent.md",
+    "format": "md",
+    "words": 381,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d5aa65ae75dfcef92edbe6736f446dfd7e4bc46c",
+    "file": "README.md",
+    "format": "md",
+    "words": 2994,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4c6c8c28e6d5edf7c29af22d2f6ba64c59d3a470",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 113,
+    "blob_verified": true
+  }
+}

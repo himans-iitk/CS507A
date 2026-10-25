@@ -1,0 +1,35 @@
+{
+  "repo": "nrwl/nx",
+  "tool": "agents",
+  "rank": 52,
+  "stars": 27265.0,
+  "snapshot_commit": "823758f22ed0490117f4b46f4df18e100482c618",
+  "snapshot_date": "2025-10-21T01:38:08Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "4f37b21d4c0ed7cf69b1ea198fd677d483bbc9cd",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1277,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d72808d3c90d3171d6c2975c8623dd98c0bb3c84",
+    "file": "README.md",
+    "format": "md",
+    "words": 515,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5713e2a7586c6e7ec11662b75454b07fe5718df2",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2761,
+    "blob_verified": true
+  }
+}

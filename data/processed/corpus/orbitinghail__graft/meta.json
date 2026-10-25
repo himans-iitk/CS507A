@@ -1,0 +1,35 @@
+{
+  "repo": "orbitinghail/graft",
+  "tool": "copilot-instructions",
+  "rank": 66,
+  "stars": 1311.0,
+  "snapshot_commit": "c69efe30a68614db79c2d9390e375a8fa2bf279e",
+  "snapshot_date": "2025-10-28T16:39:13Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "42cda0703060f143b34c79dcaf433c1fb5f9bc0f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 816,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "3a177f77874173077a7e4ae3749d470bbf46c1b4",
+    "file": "README.md",
+    "format": "md",
+    "words": 376,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "fb5b301b8f5d439514e29add1fd87948e3df954f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1093,
+    "blob_verified": true
+  }
+}

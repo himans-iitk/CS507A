@@ -1,0 +1,35 @@
+{
+  "repo": "hahwul/dalfox",
+  "tool": "copilot-instructions",
+  "rank": 59,
+  "stars": 4606.0,
+  "snapshot_commit": "9b4d30596eb566dfb683fdd6518f840dc83ccaae",
+  "snapshot_date": "2025-08-10T02:25:05Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "8f999c44d04e5a9d40ac53e21b2894da823330ea",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1328,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "aae8a5b92fd9c2e1f44e874650fc5b61f30a7756",
+    "file": "README.md",
+    "format": "md",
+    "words": 284,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "16c3613ac238f9d2e723e9c1029fc38276150c4d",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 344,
+    "blob_verified": true
+  }
+}

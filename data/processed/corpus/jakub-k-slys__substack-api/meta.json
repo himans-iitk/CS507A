@@ -1,0 +1,35 @@
+{
+  "repo": "jakub-k-slys/substack-api",
+  "tool": "claude",
+  "rank": 40,
+  "stars": 22.0,
+  "snapshot_commit": "f34d4eaf95088a101f078e52d15033274ddda7d8",
+  "snapshot_date": "2025-08-06T19:17:31Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "6f25adaa99701ede9e7262805344aa6856c1ac12",
+    "file": "agent.md",
+    "format": "md",
+    "words": 430,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "48f588792e49e11fc08d4db8f58553a10ce92aaa",
+    "file": "README.md",
+    "format": "md",
+    "words": 142,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "19516ea7b5020152a46bc1c3a3aedc0ff74493ad",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 983,
+    "blob_verified": true
+  }
+}

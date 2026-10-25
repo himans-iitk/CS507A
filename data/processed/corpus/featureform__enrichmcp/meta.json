@@ -1,0 +1,35 @@
+{
+  "repo": "featureform/enrichmcp",
+  "tool": "agents",
+  "rank": 21,
+  "stars": 615.0,
+  "snapshot_commit": "b918eca698210b8ff1d9830c67bf26952ce66d21",
+  "snapshot_date": "2025-08-07T04:07:37Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "67ee5864082171e7ff450f85af62af229edf1545",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1022,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4d6e8eae51db99dba3005c9b2a60d540b1fec712",
+    "file": "README.md",
+    "format": "md",
+    "words": 1642,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b35e897209054f8d82ecfc97d40e44c439deaacd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 250,
+    "blob_verified": true
+  }
+}

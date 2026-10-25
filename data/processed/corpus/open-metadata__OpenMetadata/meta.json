@@ -1,0 +1,35 @@
+{
+  "repo": "open-metadata/OpenMetadata",
+  "tool": "claude",
+  "rank": 55,
+  "stars": 7758.0,
+  "snapshot_commit": "20486c23c5a19b24c38a4e18130483f49b2e907b",
+  "snapshot_date": "2025-08-21T11:53:45Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "9582302e8aeccaf09c170799b07098fd6f571dd5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1191,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "56c4002bc449afefb76faf4bb70911bf860152db",
+    "file": "README.md",
+    "format": "md",
+    "words": 848,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "39ed42284880a5a41772f51bd00b9cc0d6f0bd12",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 164,
+    "blob_verified": true
+  }
+}

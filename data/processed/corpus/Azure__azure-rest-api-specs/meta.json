@@ -1,0 +1,35 @@
+{
+  "repo": "Azure/azure-rest-api-specs",
+  "tool": "copilot-instructions",
+  "rank": 9,
+  "stars": 2946.0,
+  "snapshot_commit": "74cb95034790113bdd2d4a078da9c38f50238844",
+  "snapshot_date": "2025-10-31T18:55:29Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 24,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "b155b194ff3c8e3eac5875a68ee9c8134cfc308b",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3137,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "67fa7fb451b4a21440aefcd74d45196aedb58850",
+    "file": "README.md",
+    "format": "md",
+    "words": 244,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "e435be2e0d768e95f362c8d2807b77f2d2dea146",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 26,
+    "blob_verified": true
+  }
+}

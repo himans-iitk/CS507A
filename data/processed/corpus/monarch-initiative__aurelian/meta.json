@@ -1,0 +1,35 @@
+{
+  "repo": "monarch-initiative/aurelian",
+  "tool": "claude",
+  "rank": 16,
+  "stars": 20.0,
+  "snapshot_commit": "f7fa963954cf5acba7ee51c46e4ea6f69bed5d2a",
+  "snapshot_date": "2025-10-31T21:49:01Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "25f027caa41576c9872db60d2507bf58e9cec6fe",
+    "file": "agent.md",
+    "format": "md",
+    "words": 784,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "72387cac987294e3485cb8adaff3ba17393efac3",
+    "file": "README.md",
+    "format": "md",
+    "words": 315,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "151f3ed2e8113904e72b516222eebf5c3af5a6c6",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 855,
+    "blob_verified": true
+  }
+}

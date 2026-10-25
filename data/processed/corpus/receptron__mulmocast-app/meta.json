@@ -1,0 +1,35 @@
+{
+  "repo": "receptron/mulmocast-app",
+  "tool": "claude",
+  "rank": 6,
+  "stars": 17.0,
+  "snapshot_commit": "566a2191d55b05f950176131a9b0773b01a5ecfe",
+  "snapshot_date": "2025-07-28T06:19:50Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "40ee69050e151007626fc819470ebd866c84e094",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1486,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "2a35f5a7e692eec4ad6652e39ae1acdd42752f0a",
+    "file": "README.md",
+    "format": "md",
+    "words": 190,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "a003596536e42b98123cd031de31b0354afe4bbd",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 195,
+    "blob_verified": true
+  }
+}

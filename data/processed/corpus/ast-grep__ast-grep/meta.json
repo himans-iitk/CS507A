@@ -1,0 +1,35 @@
+{
+  "repo": "ast-grep/ast-grep",
+  "tool": "copilot-instructions",
+  "rank": 61,
+  "stars": 10854.0,
+  "snapshot_commit": "d541f8f61584597a23e096e2276d7a93f14ce52d",
+  "snapshot_date": "2025-08-06T20:09:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "fd96d6a0ddb89c76fc855126374b9b1271edc0ba",
+    "file": "agent.md",
+    "format": "md",
+    "words": 854,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "522b3b67481f18b2934d6dbf4c3d15745651e8ba",
+    "file": "README.md",
+    "format": "md",
+    "words": 534,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "324ee35e6338cdbd7d72bc057cbdd0f8497f9e4f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 44,
+    "blob_verified": true
+  }
+}

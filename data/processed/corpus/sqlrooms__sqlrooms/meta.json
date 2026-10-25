@@ -1,0 +1,35 @@
+{
+  "repo": "sqlrooms/sqlrooms",
+  "tool": "agents",
+  "rank": 12,
+  "stars": 272.0,
+  "snapshot_commit": "75ca42dc7f8297a1e82f55c07933fd406041c141",
+  "snapshot_date": "2025-06-14T08:37:13Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "46de8d7f0c9bc01d185b5911b47678274245b581",
+    "file": "agent.md",
+    "format": "md",
+    "words": 201,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "3503f8a7d167f7c09755e49eba58f134967e695e",
+    "file": "README.md",
+    "format": "md",
+    "words": 604,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "4d43df9e28a342ac7dff4c91958291aa08154da9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 230,
+    "blob_verified": true
+  }
+}

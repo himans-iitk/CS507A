@@ -1,0 +1,35 @@
+{
+  "repo": "kannon-email/kannon",
+  "tool": "claude",
+  "rank": 47,
+  "stars": 72.0,
+  "snapshot_commit": "50f2b1051ffbb61fe39fe7950142cb265dd3aac2",
+  "snapshot_date": "2025-09-06T08:31:20Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "7e4e9cc443c172e720075c4af1e2d432f509886e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 541,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b9e8b0027980d270a235c43a6299dd382ce24536",
+    "file": "README.md",
+    "format": "md",
+    "words": 1449,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "7d54a23a7bc5cc14a0fc76dff78450435b8a1757",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 419,
+    "blob_verified": true
+  }
+}

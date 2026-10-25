@@ -1,0 +1,35 @@
+{
+  "repo": "calcom/cal.com",
+  "tool": "agents",
+  "rank": 33,
+  "stars": 38458.0,
+  "snapshot_commit": "36618604339167261ad8368e3d5d9c2bee0c95e3",
+  "snapshot_date": "2025-09-15T12:57:25Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "22c747352a0be93a7bcff2ebbca87a9e00c37565",
+    "file": "agent.md",
+    "format": "md",
+    "words": 136,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "75ba34a148f87b159103bf206758bc41679c155e",
+    "file": "README.md",
+    "format": "md",
+    "words": 3799,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b274ae5775a9810408db3af7ad055ed1c88da9ba",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 980,
+    "blob_verified": true
+  }
+}

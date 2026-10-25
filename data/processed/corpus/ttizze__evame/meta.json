@@ -1,0 +1,35 @@
+{
+  "repo": "ttizze/evame",
+  "tool": "claude",
+  "rank": 62,
+  "stars": 13.0,
+  "snapshot_commit": "e4b1fda738ce1c1e8451f764f47c981283d06cf7",
+  "snapshot_date": "2025-06-10T11:51:02Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "5d45c96374d414332e695f5456771e95dce1a53c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 489,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c1b4f5ce1fd6e3a38ee0496d3e2188722a73a065",
+    "file": "README.md",
+    "format": "md",
+    "words": 326,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "eb225a8237c7e2c9d40aa706a83b7d366c186362",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 94,
+    "blob_verified": true
+  }
+}

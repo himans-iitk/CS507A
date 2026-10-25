@@ -1,0 +1,35 @@
+{
+  "repo": "sooperset/mcp-atlassian",
+  "tool": "agents",
+  "rank": 10,
+  "stars": 3363.0,
+  "snapshot_commit": "c3f7987db48df159aa7665d5b4c3d4e4ddbab0f0",
+  "snapshot_date": "2025-06-07T02:29:16Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "88c18b70dbe80b552eb2414fe3a5ba32b7dbb545",
+    "file": "agent.md",
+    "format": "md",
+    "words": 402,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "738363d95038f443bb99a7e7f1bf2a5c61305196",
+    "file": "README.md",
+    "format": "md",
+    "words": 2139,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0f906d9c43ebcbcb333471ff12c10a1b2097e71f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 428,
+    "blob_verified": true
+  }
+}

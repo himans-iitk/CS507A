@@ -1,0 +1,35 @@
+{
+  "repo": "wieslawsoltes/Dock",
+  "tool": "agents",
+  "rank": 43,
+  "stars": 1243.0,
+  "snapshot_commit": "d1629e07001c8545f83a57d211dc08944f9a2127",
+  "snapshot_date": "2025-07-18T12:12:11Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "859937be092de4be10b8dc1450faed4570acab54",
+    "file": "agent.md",
+    "format": "md",
+    "words": 203,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c1b1a954aa45b1680c067df0acb2f8a2f396d562",
+    "file": "README.md",
+    "format": "md",
+    "words": 217,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "0faad42618eaabcd1692d906450442cce2423c93",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 243,
+    "blob_verified": true
+  }
+}

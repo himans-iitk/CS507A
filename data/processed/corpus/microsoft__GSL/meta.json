@@ -1,0 +1,35 @@
+{
+  "repo": "microsoft/GSL",
+  "tool": "copilot-instructions",
+  "rank": 13,
+  "stars": 6536.0,
+  "snapshot_commit": "c21970972b14beb8a269c6198b97cbc82ddb3063",
+  "snapshot_date": "2025-05-22T16:32:01Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "c8624ad0c4f9fa08d1c33d153fec11e2d2965f5a",
+    "file": "agent.md",
+    "format": "md",
+    "words": 491,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d6b251c84bb188254e29459403571f90f803e6c5",
+    "file": "README.md",
+    "format": "md",
+    "words": 1518,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "e28f534e31b73b6ce1ac658944887015907c37d1",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 317,
+    "blob_verified": true
+  }
+}

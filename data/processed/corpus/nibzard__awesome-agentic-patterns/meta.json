@@ -1,0 +1,35 @@
+{
+  "repo": "nibzard/awesome-agentic-patterns",
+  "tool": "claude",
+  "rank": 4,
+  "stars": 25.0,
+  "snapshot_commit": "ee3b001bcb46b1a7377bc70dd0f74946ec4a6309",
+  "snapshot_date": "2025-10-31T08:41:57Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "8faaaf4701dcc66f28bb7fd40579d85aff41fb12",
+    "file": "agent.md",
+    "format": "md",
+    "words": 803,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "11e93f0d101e76d46e415249c4d1302e6283d6a8",
+    "file": "README.md",
+    "format": "md",
+    "words": 790,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "88cd87fab6767dc373ab1efe249dbd4a43009104",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 208,
+    "blob_verified": true
+  }
+}

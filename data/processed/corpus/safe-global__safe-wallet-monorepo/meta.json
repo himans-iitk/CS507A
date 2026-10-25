@@ -1,0 +1,35 @@
+{
+  "repo": "safe-global/safe-wallet-monorepo",
+  "tool": "agents",
+  "rank": 19,
+  "stars": 504.0,
+  "snapshot_commit": "31ae7e861e76d7836be80d39c58c1aa44e7f5be6",
+  "snapshot_date": "2025-09-11T13:16:50Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "13adf2800f73fa18c6af892d5de1d7a3a97b2503",
+    "file": "agent.md",
+    "format": "md",
+    "words": 630,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f80781b6fb770c532a7f9a8c658ab67b31d0b0c1",
+    "file": "README.md",
+    "format": "md",
+    "words": 545,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "9ca670613d9e17dcbb82d46ed74492fe0b8cd8cb",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 550,
+    "blob_verified": true
+  }
+}

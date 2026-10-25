@@ -1,0 +1,35 @@
+{
+  "repo": "stellar/rs-soroban-sdk",
+  "tool": "copilot-instructions",
+  "rank": 62,
+  "stars": 165.0,
+  "snapshot_commit": "8da5d62973c8be27a86b99bcb3cdb134d9699cce",
+  "snapshot_date": "2025-08-20T03:00:19Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "3783ab85f2867b0a98a1b694b8edf9688fa4cca0",
+    "file": "agent.md",
+    "format": "md",
+    "words": 964,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "3f6e49610aa57eecf6b11019aeba729ebf5b78c6",
+    "file": "README.md",
+    "format": "md",
+    "words": 23,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "1ec1fbf56860083984aca792a12e02e2a1ab3cdc",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 124,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "PrefectHQ/prefect",
+  "tool": "agents",
+  "rank": 18,
+  "stars": 20596.0,
+  "snapshot_commit": "ccc1ce6eb14f7d175293405f011aa5ddb8b28014",
+  "snapshot_date": "2025-10-27T22:27:35Z",
+  "snapshot_source": "api_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "c3f005b5a4f2f1ccfeef2aab64ff41ded5f97718",
+    "file": "agent.md",
+    "format": "md",
+    "words": 390,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "c57708d276caf6ef2c4572ff2099413b501ff46a",
+    "file": "README.md",
+    "format": "md",
+    "words": 722,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": ".github/CONTRIBUTING.md",
+    "blob_sha": "61b9fcd300f1550b047f391028cb20ecb26a0251",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 18,
+    "blob_verified": true
+  }
+}

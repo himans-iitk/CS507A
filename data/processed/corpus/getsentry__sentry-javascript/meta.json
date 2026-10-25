@@ -1,0 +1,35 @@
+{
+  "repo": "getsentry/sentry-javascript",
+  "tool": "claude",
+  "rank": 36,
+  "stars": 8443.0,
+  "snapshot_commit": "c8ee1e44495524143324aa9bd465c4294a6e89be",
+  "snapshot_date": "2025-07-16T09:17:02Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "e515c171303e07896670b1b36d270143f61fa9c5",
+    "file": "agent.md",
+    "format": "md",
+    "words": 834,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8b22dafb0c63a4cffd6fcded9d388e60c83b2c20",
+    "file": "README.md",
+    "format": "md",
+    "words": 569,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "8d486d6718c12e1cea0333e8afc9e9e49bf6eedb",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 861,
+    "blob_verified": true
+  }
+}

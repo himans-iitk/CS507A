@@ -1,0 +1,35 @@
+{
+  "repo": "sbalci/ClinicoPathJamoviModule",
+  "tool": "claude",
+  "rank": 59,
+  "stars": 20.0,
+  "snapshot_commit": "df21f83aa437e396fe79b075449d507d31cb28a6",
+  "snapshot_date": "2025-09-13T08:57:28Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 32,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "1c6a105a7fc03e962a1e5d65561c41bc2910d6bf",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1176,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4de42f8c837ed52d1e961f457a9380c34d974098",
+    "file": "README.md",
+    "format": "md",
+    "words": 2403,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b0ffd5303b41e0b80f039ddbd82c35d309b653a2",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 235,
+    "blob_verified": true
+  }
+}

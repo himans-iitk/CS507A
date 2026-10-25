@@ -1,0 +1,35 @@
+{
+  "repo": "nais/unleasherator",
+  "tool": "copilot-instructions",
+  "rank": 16,
+  "stars": 10.0,
+  "snapshot_commit": "dff1be433ec746a7439dbabfa50b7cc29c173c1f",
+  "snapshot_date": "2025-03-22T21:09:39Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "f2ca81675bb8263f714ac28ba3543f500168b215",
+    "file": "agent.md",
+    "format": "md",
+    "words": 107,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8bbf67a7ee5df5d962b3eed8d2d13859bf55d712",
+    "file": "README.md",
+    "format": "md",
+    "words": 826,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "102761b058c3f2cc0b94a129304d1f9c899f476e",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 189,
+    "blob_verified": true
+  }
+}

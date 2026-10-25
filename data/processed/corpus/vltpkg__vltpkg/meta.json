@@ -1,0 +1,35 @@
+{
+  "repo": "vltpkg/vltpkg",
+  "tool": "copilot-instructions",
+  "rank": 39,
+  "stars": 441.0,
+  "snapshot_commit": "793670dcf960949877172f99d07dcc47c31f8580",
+  "snapshot_date": "2025-10-11T02:50:13Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "efb2a0812298fe748224e91dc6467af4c2e2460f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1122,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "9cdd14037e976f27696bf36fdc13af9e99048fb7",
+    "file": "README.md",
+    "format": "md",
+    "words": 583,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5b039a5e849b9f8195019995bcbc3cd881ed26e9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1583,
+    "blob_verified": true
+  }
+}

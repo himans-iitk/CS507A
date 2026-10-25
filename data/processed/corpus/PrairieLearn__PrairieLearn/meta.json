@@ -1,0 +1,35 @@
+{
+  "repo": "PrairieLearn/PrairieLearn",
+  "tool": "agents",
+  "rank": 58,
+  "stars": 407.0,
+  "snapshot_commit": "9508c99aa2b4dd0554e882d32adf90a997a6b78a",
+  "snapshot_date": "2025-09-22T18:24:53Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "954470f8d2e2c18f190b992147cb987b0b6361fc",
+    "file": "agent.md",
+    "format": "md",
+    "words": 474,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "4686dc0cd035a651b726938791615056e89b2be6",
+    "file": "README.md",
+    "format": "md",
+    "words": 72,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "78a6b0b861b15a0f322520d7a21b177166c49bb3",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 820,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "miurla/morphic",
+  "tool": "claude",
+  "rank": 61,
+  "stars": 8271.0,
+  "snapshot_commit": "ed6f3bb36fe5906740ed7457894e888a1ed2fbe1",
+  "snapshot_date": "2025-07-22T02:23:51Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "387d12a104d47217b4a23c881585bf8416b4494f",
+    "file": "agent.md",
+    "format": "md",
+    "words": 670,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8c86ed4bfc8b96ff5140e4d4c6df67fd7bec8b75",
+    "file": "README.md",
+    "format": "md",
+    "words": 766,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "c70c87a7e3d567b9be04ff1e09a9f10d8a44948f",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 188,
+    "blob_verified": true
+  }
+}

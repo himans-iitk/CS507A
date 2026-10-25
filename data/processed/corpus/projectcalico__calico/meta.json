@@ -1,0 +1,35 @@
+{
+  "repo": "projectcalico/calico",
+  "tool": "copilot-instructions",
+  "rank": 7,
+  "stars": 6834.0,
+  "snapshot_commit": "332447003bfde245a2072efb67a57bc40b39a0f2",
+  "snapshot_date": "2025-08-21T10:01:38Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "9563dd989bf52f8c0026a61c1aa6c41809b0867d",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1372,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "edd77da73e33412b525fc31adc59eb0e4dff932c",
+    "file": "README.md",
+    "format": "md",
+    "words": 356,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "b11359890cb063578f1c00856e0c0e314cb59358",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 933,
+    "blob_verified": true
+  }
+}

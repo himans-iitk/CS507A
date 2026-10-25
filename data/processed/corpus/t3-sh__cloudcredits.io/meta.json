@@ -1,0 +1,35 @@
+{
+  "repo": "t3-sh/cloudcredits.io",
+  "tool": "agents",
+  "rank": 11,
+  "stars": 30.0,
+  "snapshot_commit": "7945293158baa60f2d0b3e82cac6494551342e1b",
+  "snapshot_date": "2025-07-16T13:44:42Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "e813db452d68ab7062a310f12db5268c4ac02720",
+    "file": "agent.md",
+    "format": "md",
+    "words": 3926,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "d230a9fa5f3c315424b994d4c3c823255095d6d8",
+    "file": "README.md",
+    "format": "md",
+    "words": 413,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "88571a7f8c55b5774303ad330016f96a1e7b00b1",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 597,
+    "blob_verified": true
+  }
+}

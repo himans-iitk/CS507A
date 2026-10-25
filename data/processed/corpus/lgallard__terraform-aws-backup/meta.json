@@ -1,0 +1,35 @@
+{
+  "repo": "lgallard/terraform-aws-backup",
+  "tool": "claude",
+  "rank": 46,
+  "stars": 152.0,
+  "snapshot_commit": "bf4e4322239bb334c25712e6880283e858477e4d",
+  "snapshot_date": "2025-08-12T00:15:58Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 6,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "4b34cf42647c73ab1c1a06b1834c31f0e709bc82",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1638,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "227c0c8d859a66d33b5d6cd1b22e9a02cc2db7cb",
+    "file": "README.md",
+    "format": "md",
+    "words": 2813,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "2db3376bc522f65c979a21dc71137b171f12c1ea",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1110,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "bdougie/contributor.info",
+  "tool": "agents",
+  "rank": 31,
+  "stars": 18.0,
+  "snapshot_commit": "ea19ffc5cee07e6520d52486d018585c1fb05563",
+  "snapshot_date": "2025-09-05T10:33:29Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 4,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "7372d4b1bb87d8050a583c13b2a167d2a3958324",
+    "file": "agent.md",
+    "format": "md",
+    "words": 336,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "8d7c871ef9fc1dab04539dc50453621a829d50a3",
+    "file": "README.md",
+    "format": "md",
+    "words": 719,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d33b8090c90cb0ab1f4e363e1f1074db15a56da2",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 2131,
+    "blob_verified": true
+  }
+}

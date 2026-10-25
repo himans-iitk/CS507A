@@ -1,0 +1,35 @@
+{
+  "repo": "bruin-data/bruin",
+  "tool": "agents",
+  "rank": 29,
+  "stars": 1136.0,
+  "snapshot_commit": "feeb44b8e02611959fb8095703e04be6a1ef9156",
+  "snapshot_date": "2025-08-04T20:24:03Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "dbc2de2695aca83e7d21c17c7b9da312b7940d5e",
+    "file": "agent.md",
+    "format": "md",
+    "words": 1408,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "a8f6685a990810e408e273b6eedaecd1c0d7d9f9",
+    "file": "README.md",
+    "format": "md",
+    "words": 197,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "dfb7fc73337e7e30e5ddbc8d65eccfba843635a6",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 245,
+    "blob_verified": true
+  }
+}

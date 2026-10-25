@@ -1,0 +1,35 @@
+{
+  "repo": "rsyslog/rsyslog",
+  "tool": "copilot-instructions",
+  "rank": 1,
+  "stars": 2201.0,
+  "snapshot_commit": "a29cbd6d09d6eb8d36758c1eae1600e150f0e27d",
+  "snapshot_date": "2025-08-20T08:20:21Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "bac5d78956f2dda589da9dbc6bfcfd3f4062c169",
+    "file": "agent.md",
+    "format": "md",
+    "words": 124,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README",
+    "blob_sha": "3a5ec954bbdec0ddc80e4807d80a98e55cb8de16",
+    "file": "README.txt",
+    "format": "txt",
+    "words": 11,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "53823536c1d2a117bef0b99656ed5230ef08d676",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 710,
+    "blob_verified": true
+  }
+}

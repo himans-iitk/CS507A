@@ -1,0 +1,35 @@
+{
+  "repo": "ssilve1989/ulti-project",
+  "tool": "claude",
+  "rank": 53,
+  "stars": 5.0,
+  "snapshot_commit": "02aa798dc619f1b9b7665675ff528bdb2cdb3276",
+  "snapshot_date": "2025-06-30T01:20:58Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 2,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "558b048d75b9bcfcebc82e21b28fe174f113bf6c",
+    "file": "agent.md",
+    "format": "md",
+    "words": 473,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+    "file": "README.md",
+    "format": "md",
+    "words": 0,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5232f48aa682b176141ce870017416023c2b5e88",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 329,
+    "blob_verified": true
+  }
+}

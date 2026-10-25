@@ -1,0 +1,35 @@
+{
+  "repo": "baynezy/Html2Markdown",
+  "tool": "copilot-instructions",
+  "rank": 67,
+  "stars": 308.0,
+  "snapshot_commit": "85068ccab00b0e6d531a4777a4f4274d54eb6ad9",
+  "snapshot_date": "2025-05-28T15:33:39Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "40856c464f48c31471d4e7ce295fc61bd2d06987",
+    "file": "agent.md",
+    "format": "md",
+    "words": 403,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "34e6f994203aa3b9589fd925b1868082ec49e01c",
+    "file": "README.md",
+    "format": "md",
+    "words": 200,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "8e2896721f1e94c3678e89e3313553b1a8bf79b9",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 170,
+    "blob_verified": true
+  }
+}

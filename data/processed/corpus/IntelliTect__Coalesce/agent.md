@@ -1,0 +1,50 @@
+# Coalesce Framework Development Instructions
+
+Always follow these instructions first and fallback to additional search and context gathering only when the information here is incomplete or found to be in error.
+
+## Project Overview
+
+Coalesce is a framework for rapid development of ASP.NET Core + Vue.js web applications. It generates DTOs, API controllers, and TypeScript from Entity Framework Core models and other C# code.
+
+## Prerequisites & Dependencies
+
+The required tools and dependencies are automatically installed via the GitHub Actions workflow at `.github/workflows/copilot-setup-steps.yml`.
+
+## Instructions
+
+- YOU MUST Format PR titles with Semantic Commits. The work item number should follow the colon after the commit type like `feat: #12345 added ...`
+- YOU MUST update the documentation when making changes or adding features that will affect developers who use Coalesce.
+- YOU MUST add an entry to CHANGELOG.md when adding new features or fixing non-trivial bugs. Be concise and factual. The changelog is not a marketing document - you don't have to convince users of the value of the feature, or explain how to use it or configure it.
+- YOU MUST Avoid making breaking changes if not necessary. A less obvious example of a breaking change would be changing an existing CSS class name.
+- Consider adding or updating example files in `playground\Coalesce.Web.Vue3\src\examples` when making changes to coalesce-vue-vuetify.
+
+## Validation Checklist
+
+After making changes, use these to validate changes:
+
+### Run builds
+
+```bash
+npm ci
+dotnet build
+cd src/coalesce-vue && npm run build
+cd ../coalesce-vue-vuetify3 && npm run build
+cd ../coalesce-mcp && npm run build
+```
+
+### Run tests
+
+```bash
+dotnet test
+cd src/coalesce-vue && npm test run
+cd ../coalesce-vue-vuetify3 && npm test run
+cd ../coalesce-mcp && npm test run
+```
+
+### Template tests
+
+If you make changes to the template in the `templates` directory, validate the changes by running `TestLocal.ps1 -- "--FeatureOne --FeatureTwo"` where the FeatureOne, FeatureTwo parameters are replaced with each flag that might affect the changes you made. Run it multiple times if there are different combinations of feature flags that might interact in different ways. The flags are the variables checked by the `#if` in the template code.
+
+### Documentation
+
+If the documentation was updated, run `npm run build` in the docs folder.

@@ -1,0 +1,35 @@
+{
+  "repo": "mark3labs/mcp-go",
+  "tool": "agents",
+  "rank": 47,
+  "stars": 7425.0,
+  "snapshot_commit": "74a600ba2c430bf0c9ff8486720445d38156c317",
+  "snapshot_date": "2025-10-13T09:18:49Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "148452b6f6080b8c9bac8720a384922a1516ff30",
+    "file": "agent.md",
+    "format": "md",
+    "words": 310,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f047c3f477cf9a06855607a2ee2f89f1a24f88b2",
+    "file": "README.md",
+    "format": "md",
+    "words": 2438,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "d980370e0dfa6a49bb4eedff87be8171425ecb3c",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 167,
+    "blob_verified": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "repo": "pytorch/pytorch",
+  "tool": "claude",
+  "rank": 37,
+  "stars": 94035.0,
+  "snapshot_commit": "2dd529df0092799f68ee7afcf52338276906706a",
+  "snapshot_date": "2025-09-04T13:26:32Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "dcdf409e73146554198f858a8865711ad4696552",
+    "file": "agent.md",
+    "format": "md",
+    "words": 30,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "92c6c92fc1ede44e699e0953d35f1cfdd4566993",
+    "file": "README.md",
+    "format": "md",
+    "words": 3252,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "88815efb3586d3e7e12216a456f3c5cdf0b8f950",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 8019,
+    "blob_verified": true
+  }
+}

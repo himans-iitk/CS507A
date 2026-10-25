@@ -1,0 +1,35 @@
+{
+  "repo": "luno/luno-mcp",
+  "tool": "claude",
+  "rank": 45,
+  "stars": 11.0,
+  "snapshot_commit": "2a875466a1991b1e22826e970c07caca487e25d1",
+  "snapshot_date": "2025-09-02T10:18:53Z",
+  "snapshot_source": "package_history",
+  "init_unedited": true,
+  "n_commits": 1,
+  "agent": {
+    "path": "CLAUDE.md",
+    "blob_sha": "60a548c1e96f7932fbbd2e434390d91f74d345a9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 623,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "f7b7d71f5ecd915cb24782c05422a70c12f66470",
+    "file": "README.md",
+    "format": "md",
+    "words": 1019,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "974ed8fd00b4839130ac77dee61a5e776a21a773",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 544,
+    "blob_verified": true
+  }
+}

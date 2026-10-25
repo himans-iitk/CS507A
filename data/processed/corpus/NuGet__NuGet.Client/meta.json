@@ -1,0 +1,35 @@
+{
+  "repo": "NuGet/NuGet.Client",
+  "tool": "copilot-instructions",
+  "rank": 6,
+  "stars": 798.0,
+  "snapshot_commit": "a429665cb6d6869daae7586d713eabeaa0010e50",
+  "snapshot_date": "2025-09-22T16:28:46Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 3,
+  "agent": {
+    "path": ".github/copilot-instructions.md",
+    "blob_sha": "eb3fd8073eeb06310f037f739084dd57af87c426",
+    "file": "agent.md",
+    "format": "md",
+    "words": 27,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "14425d4bada8bf1ec1e8cf6d12c79d1f155854c4",
+    "file": "README.md",
+    "format": "md",
+    "words": 172,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "60b4f14c73d0011d71f3faf57357ecb1d5571927",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 829,
+    "blob_verified": true
+  }
+}

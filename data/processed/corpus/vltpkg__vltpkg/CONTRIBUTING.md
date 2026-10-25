@@ -1,0 +1,334 @@
+# Contributing Guide
+
+## Workspace Structure
+
+The workspaces are divided among a few top-level directories.
+
+Be sure to check out the `CONTRIBUTING.md` file in the workspace where
+changes are being made, as this may provide contribution guidance
+specific to that component.
+
+### [`src`](./src/)
+
+These workspaces are all are direct dependencies of the `vlt` CLI.
+
+The actual CLI is also a workspace in [`src/cli-sdk`](./src/cli-sdk/).
+
+Most of these are also published separately under the `@vltpkg` scope.
+
+### [`infra`](./infra/)
+
+These workspaces are internal tools that we use for tasks like
+building, bundling, and benchmarking the other workspaces.
+
+These are internal and highly coupled to our monorepo setup, so they
+are not published to any registry.
+
+This directory also contains all the `cli-*` variants.
+
+### [`www`](./www/)
+
+These are websites that get deployed. Currently only
+[docs.vlt.sh](https://docs.vlt.sh).
+
+## Linting / Formatting
+
+Run `pnpm -w fix` to report any formatting or linting issues with your
+code, and to attempt to fix them.
+
+## Running TypeScript Directly
+
+If you are on the latest version of Node, you can run TypeScript files
+directly using `node ./path/to/file.ts`.
+
+If you are on Node 22, you can use `node --experimental-strip-types`.
+
+For both of those options you will see a warning. If that bothers you
+then you can run with `--no-warnings` as well.
+
+In order to make this work for all places where we might spawn a node
+process, run
+`export NODE_OPTIONS=--experimental-strip-types --no-warnings` to set
+this in the environment, rather than on each command.
+
+## Using `nave`
+
+If you use [nave](https://npm.im/nave) then you can enable `nave auto`
+behavior in your bash profile by adding something like this:
+
+```bash
+# .bashrc or .bash_profile or wherever you put these things
+
+__nave_prompt_command () {
+  if nave should-auto; then
+    exec nave auto
+  fi
+}
+
+export PROMPT_COMMAND="__nave_prompt_command || true; ${PROMPT_COMMAND}"
+```
+
+Then, the appropriate node version and `NODE_OPTIONS` flags will be
+set to be able to always run TypeScript files directly in the context
+of this project.
+
+## Using NVM
+
+If you use [`nvm`](https://github.com/nvm-sh/nvm), a compatible
+version of `node` should be automatically installed & used as defined
+in our project's root `.nvmrc` file. Notably, there are known issues
+in `node` versions `<22.14` and unknown compatibility for `>=23`. If
+you are using a version outside of the known-good range set you are
+likely to experience errors when developing and should install an
+in-range version.
+
+## Using `setup-node` in CI
+
+Our CI uses the `setup-node` action and is explictely configured to
+use the "latest", known-good version of `node` (`^22.14.0`) available.
+You can find this configuration in `.github/workflows/*.yml`.
+
+## Root Level Scripts
+
+This root of this repo has scripts for each named bin that can be run
+via `pnpm` for testing locally.
+
+These scripts set the correct `NODE_OPTIONS` to run the TypeScript
+source directly.
+
+In order to silence all the output from `pnpm` and only see the `vlt`
+output, it is helpful to pass the `-s` flag to `pnpm`.
+
+```bash
+$ pnpm -s vlt --version
+0.0.0-0
+```
+
+## Running the CLI from Other Directories
+
+A directory of `sh` and `ps1` executables is located at
+`./scripts/bins`. These call the TypeScript source bin files with the
+correct `NODE_OPTIONS`. This directory is designed to be put at the
+beginning of your path temporarily to make running of `vlt` and its
+related CLIs run directly from source.
+
+```bash
+export PATH=~/projects/vltpkg/vltpkg/scripts/bins:$PATH
+vlt --version
+```
+
+There are also directories in `./scripts/bins` for each variant of the
+CLI. These directories can be used the same way to manually run the
+following:
+
+- `./scripts/bins/bundle`: The `esbuild` bundled JavaScript with
+  `node`
+- `./scripts/bins/compile`: The compiled variant for the current
+  platform
+
+## Publishing
+
+All workspace directories are designed so `pnpm publish` can be run
+from that directory.
+
+On all pushes to `main` a GitHub Actions workflow will run to create a
+release PR. That PR will be updated for all subsequent pushes. The PR
+will contain any release related commits, usually just the bumping of
+`package.json` version numbers.
+
+When that PR is merged the same workflow will then publish the bumped
+packages.
+
+### Release Manager
+
+The weekly release manager's role is to merge the release PR. Pretty
+simple :smile:
+
+The release PR will be created as a `draft`. When it is time to
+release, merging other PRs should be temporarily paused and the
+release PR should be:
+
+1. Marked as ready for review
+1. Approved
+1. Merged (Make sure to use "Rebase and merge")
+
+#### Release PR
+
+The release PR will run additional checks not run on normal PRs. Those
+include:
+
+- Running all workspace tests
+- Running workspace tests in additional environments
+- Running the smoke-tests
+
+If these status checks fail unexpectedly, it could be because its
+flaky or its a real bug. You should check the workflow logs to
+determine which case it is.
+
+**View the latest release run**
+
+```sh
+gh run view $(gh run list -w "ci.yml" -b release -L 1 --json databaseId -q ".[].databaseId") -w
+```
+
+**Rerun the failed jobs**
+
+```sh
+gh run rerun $(gh run list -w "ci.yml" -b release -L 1 --json databaseId -q ".[].databaseId") --failed
+```
+
+#### Publish Workflow
+
+Once the release PR is merged, a publish will be triggered from CI. If
+this workflow fails (due to network, auth, etc issues) it can be
+safely rerun. It will only attempt to publish workspaces which have
+not had their current version published.
+
+**Rerun the publish job**
+
+```sh
+gh workflow run release.yml --ref=main -f action=publish
+```
+
+### Published CLI Packages
+
+The following packages can be published as part of the CLI. Which
+packages are published is dependent on the value of
+`PUBLISHED_VARIANT` in
+[`@vltpkg/infra-build`](./infra/build/src/variants.ts).
+
+- `vlt` This will either be the JS or compiled variant of the CLI.
+- `@vltpkg/cli-js` The JS variant of the CLI. This is always published
+  and is helpful for testing/debugging vs the compiled variant.
+- `@vltpkg/cli-compiled` The is the compiled variant of the CLI. This
+  package only has placeholder bins that are swapped out in a
+  postinstall for one of the platform variants below.
+- `@vltpkg/cli-darmin-arm64`
+- `@vltpkg/cli-darmin-x64`
+- `@vltpkg/cli-linux-arm64`
+- `@vltpkg/cli-linux-x64`
+- `@vltpkg/cli-win32-x64`
+
+Note that the platform specific variants do not have any
+`package.json#bin` entries because that is incompatible with the
+postinstall strategy of the parent package. If you need to install one
+of those directly, you will need to move/run/link the included `vlt`
+executable manually.
+
+The bundled JS variant of the CLI exists in the `infra/cli-js`
+directory, because it is still published for manual testing and
+comparisons and it is an intermediary of the compiled CLI, so it gets
+tested in `smoke-tests` to help debug the build pipeline of
+`TS source` -> `esbuild bundled JS` -> `compiled`.
+
+The compiled variant of the CLI exists in the `infra/cli-compiled`
+directory, because the end goal is to publish this as the default
+`vlt` package. For now it is published under a scoped name for manual
+testing.
+
+## GUI Live Reload
+
+When run locally the GUI can be set to use live reload so that any
+changes to GUI source code will cause the browser to reload. To enable
+this set `__VLT_INTERNAL_LIVE_RELOAD=1` when running the GUI:
+
+```bash
+__VLT_INTERNAL_LIVE_RELOAD=1 ./scripts/bins/vlt gui
+```
+
+## Bundling Caveats
+
+When publishing, all of the source code is first bundled and
+code-split with esbuild.
+
+There are some values in the source code that aren't statically
+analyzed by esbuild, and instead are read from environment variables.
+This is to make it explicit and because previous attempts to parse the
+AST and detect those values were slow and brittle.
+
+All the environment variables follow the pattern `__VLT_INTERNAL_*` in
+order to distinguish them from the `VLT_*` environment variables that
+are set by the CLI's config system.
+
+## Testing Builds
+
+Building for publishing is handled by the
+[`infra/build`](./infra/build) workspace.
+
+There are some root level scripts that can be run to generate these
+builds for testing locally.
+
+```bash
+# creates a directory with all the bundled JS
+pnpm build:bundle
+# creates a directory with the compiled binaries
+# for the current os and cpu
+pnpm build:compile
+```
+
+To generate compiled builds for other platforms use the `--platform`
+and `--arch` flags.
+
+```bash
+pnpm build:compile --platform=win32 --arch=x64
+```
+
+You can also run `pnpm pack` in any of the `./infra/cli-*` directories
+to generate a tarball of the build.
+
+## Finding Unused Code and Deps with Knip
+
+`knip` is installed and configured in the root of the monorepo and can
+be run with:
+
+```sh
+pnpm knip
+```
+
+It is not currently turned on in CI but can be helpful to run locally
+after a refactor or moving/creating/deleting workspaces.
+
+False positives can be ignored in the `knip.ts` config file.
+
+## FAQ
+
+### Test coverage is failing but it shouldn't be
+
+If you are testing a file that has side effects when imported, such as
+reading from `process.platform` to run different code, then this file
+can't be imported with a static import and instead must use
+`t.mockImport` for all instances.
+
+Even though this code is valid and the tests will pass, coverage will
+most likely fail depending on the implementation.
+
+```ts
+// ❌ dont do this
+import { getEnvValue } from '../src/index.ts'
+
+t.test('default', async t => {
+  t.equal(getEnvValue(), 'DEFAULT_VALUE')
+})
+
+t.test('other case', async t => {
+  t.intercept(process, 'env', { value: { MY_VALUE: 'MY_VALUE' } })
+  const { getEnvValue } = await t.mockImport('../src/index.ts')
+  t.equal(getEnvValue(), 'MY_VALUE')
+})
+```
+
+Instead, all instances of the import must come from `t.mockImport`:
+
+```ts
+// ✅ Do this
+t.test('default', async t => {
+  const { getEnvValue } = await t.mockImport('../src/index.ts')
+  t.equal(getEnvValue(), 'DEFAULT_VALUE')
+})
+
+t.test('other case', async t => {
+  t.intercept(process, 'env', { value: { MY_VALUE: 'MY_VALUE' } })
+  const { getEnvValue } = await t.mockImport('../src/index.ts')
+  t.equal(getEnvValue(), 'MY_VALUE')
+})
+```

@@ -1,0 +1,35 @@
+{
+  "repo": "obi1kenobi/cargo-semver-checks",
+  "tool": "agents",
+  "rank": 26,
+  "stars": 1505.0,
+  "snapshot_commit": "845da77a02176dabfb52c78c8fc65934d4232619",
+  "snapshot_date": "2025-10-04T05:19:54Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 1,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "4007904d15dad3af6f7ecd75fb26504ecf540f78",
+    "file": "agent.md",
+    "format": "md",
+    "words": 648,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "b060f974f2319c55f29bb7a2609293ad7c198a06",
+    "file": "README.md",
+    "format": "md",
+    "words": 3726,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "74f3f5f76317421a1d94672b8a1c669b8b890353",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 3263,
+    "blob_verified": true
+  }
+}

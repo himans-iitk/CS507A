@@ -1,0 +1,35 @@
+{
+  "repo": "swarmauri/swarmauri-sdk",
+  "tool": "agents",
+  "rank": 32,
+  "stars": 101.0,
+  "snapshot_commit": "ef06bb9c5f55afa9cdf54c4eac04aa3e633c4af0",
+  "snapshot_date": "2025-10-04T16:39:49Z",
+  "snapshot_source": "package_history",
+  "init_unedited": false,
+  "n_commits": 5,
+  "agent": {
+    "path": "AGENTS.md",
+    "blob_sha": "41d02c1c863a59e7277815f27f1090db75e3ecc9",
+    "file": "agent.md",
+    "format": "md",
+    "words": 270,
+    "blob_verified": true
+  },
+  "README": {
+    "path": "README.md",
+    "blob_sha": "09bbf373c7331c7cc99ba2a4ed082f9c694deac5",
+    "file": "README.md",
+    "format": "md",
+    "words": 535,
+    "blob_verified": true
+  },
+  "CONTRIBUTING": {
+    "path": "CONTRIBUTING.md",
+    "blob_sha": "5e1a3877d2ad88562685a26a262396e8cdfb9244",
+    "file": "CONTRIBUTING.md",
+    "format": "md",
+    "words": 1185,
+    "blob_verified": true
+  }
+}
