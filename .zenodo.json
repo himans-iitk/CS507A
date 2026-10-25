@@ -1,0 +1,13 @@
+{
+  "title": "What We Tell the Agent but Not the Newcomer: dataset, codebook and gap detector",
+  "upload_type": "software",
+  "description": "Replication package: sample of 201 repositories with their agent context file, README and CONTRIBUTING at the same commit; knowledge units; manual coverage, category, newcomer-need and barrier labels; codebook; coding tool; gap detector (gapcheck) and analysis code.",
+  "creators": [
+    {"name": "Mishra, Himanshu", "affiliation": "University of British Columbia"}
+  ],
+  "license": "MIT",
+  "keywords": ["agent context files", "CLAUDE.md", "AGENTS.md", "onboarding", "documentation", "mining software repositories"],
+  "related_identifiers": [
+    {"identifier": "10.1145/3840295", "relation": "isDerivedFrom", "scheme": "doi"}
+  ]
+}

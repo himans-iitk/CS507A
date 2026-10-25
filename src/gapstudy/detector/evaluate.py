@@ -256,6 +256,7 @@ def main() -> None:
             lines.append(f"| {r['matcher']} | {r['mode']} | {r['llm_share']:.0%} | {r['precision']:.2f} | "
                          f"{r['recall']:.2f} | {r['f1']:.2f}{fmt_ci(r['f1_ci'])} | {r['macro_f1']:.2f} |")
     (RESULTS / "detector_results.md").write_text("\n".join(lines) + "\n")
+    pd.DataFrame(rows + llm_rows).assign(provisional=provisional).to_csv(RESULTS / "detector_results.csv", index=False)
 
     name, res, df = best
     (RESULTS / "errors.md").write_text(errors_md(df, units, name))

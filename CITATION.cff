@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this dataset or the gapcheck tool, please cite it as below."
+title: "What We Tell the Agent but Not the Newcomer: Mining Agent Context Files for Gaps in Human Onboarding Documentation"
+authors:
+  - family-names: Mishra
+    given-names: Himanshu
+    affiliation: University of British Columbia
+    email: himishra@student.ubc.ca
+type: software
+license: MIT
+repository-code: "https://github.com/himans-iitk/CS507A"
+keywords:
+  - agent context files
+  - CLAUDE.md
+  - AGENTS.md
+  - onboarding
+  - documentation
+  - mining software repositories
+references:
+  - type: article
+    title: "Agent READMEs: An Empirical Study of Context Files for Agentic Coding"
+    authors:
+      - family-names: Chatlatanagulchai
+        given-names: Worawalan
+    journal: "ACM Transactions on Software Engineering and Methodology"
+    year: 2026
+    doi: 10.1145/3840295
