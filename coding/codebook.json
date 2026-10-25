@@ -1,0 +1,67 @@
+{
+  "version": "0.1-pilot",
+  "categories": {
+    "_source": "Chatlatanagulchai et al. 2026 (Agent READMEs), Table 3 and replication package labels.py",
+    "system_overview": {"name": "System Overview", "definition": "Overview of the system or its key features."},
+    "ai_integration": {"name": "AI Integration", "definition": "Instructions on the agent's desired behaviour or role, or on integrating/interacting with other AI tools."},
+    "documentation_references": {"name": "Documentation and References", "definition": "Points to supplementary documents, links or references for more context; documentation artifacts (e.g. JSDoc, usage examples)."},
+    "architecture": {"name": "Architecture", "definition": "High-level structure, organisation and design principles; project structure or key components."},
+    "implementation_details": {"name": "Implementation Details", "definition": "How to implement parts of the code or system, including coding style and conventions and code snippets."},
+    "build_run": {"name": "Build and Run", "definition": "Compiling the code; commands to build and run the system."},
+    "test": {"name": "Testing", "definition": "Running, adding or writing tests, including test commands."},
+    "config_environment": {"name": "Configuration and Environment", "definition": "Settings, parameters and environment needed to make the system work."},
+    "deployment_operations": {"name": "DevOps", "definition": "Releasing software and running it in production; CI/CD."},
+    "project_management": {"name": "Project Management", "definition": "Planning and organisation of the project."},
+    "development_process": {"name": "Development Process", "definition": "How to use Git properly in development and how review works (branches, commits, PRs)."},
+    "performance": {"name": "Performance", "definition": "Performance of the system and how to improve it."},
+    "security": {"name": "Security", "definition": "Security aspects of the system."},
+    "ui_ux": {"name": "UI/UX", "definition": "User interface and user experience."},
+    "maintainability": {"name": "Maintainability", "definition": "Ease of modifying, correcting or extending the system over time."},
+    "debugging": {"name": "Debugging", "definition": "Error handling and ways to debug errors and problems."}
+  },
+  "coverage": {
+    "agent_only": {"name": "Agent-only", "key": "1", "definition": "None of the unit's knowledge is stated in the README or CONTRIBUTING at the snapshot commit."},
+    "partial": {"name": "Partially covered", "key": "2", "definition": "Some of the unit's knowledge is stated, or the topic is covered but less specifically (e.g. 'run the tests' vs the exact command)."},
+    "shared": {"name": "Shared", "key": "3", "definition": "All of the unit's actionable knowledge is stated in the human docs, possibly in other words."},
+    "agent_directed": {"name": "Agent-directed (n/a)", "key": "4", "definition": "The unit only makes sense for an AI agent (persona, response style, tool or prompt mechanics) and carries no project knowledge a human contributor would need."}
+  },
+  "needs": {
+    "_source": "Dagenais et al. 2010, Table 2 (project landscape features)",
+    "software_architecture": {"group": "Product", "name": "Software Architecture"},
+    "low_level_design": {"group": "Product", "name": "Low-level Design & Runtime Behavior"},
+    "design_rationale": {"group": "Product", "name": "Design & Implementation Rationale"},
+    "product_domain": {"group": "Product", "name": "Product/Domain"},
+    "technologies_used": {"group": "Product", "name": "Technologies Used"},
+    "development_process": {"group": "Processes and Practices", "name": "Development Process"},
+    "task_process": {"group": "Processes and Practices", "name": "Task Process"},
+    "dev_environment_tools": {"group": "Processes and Practices", "name": "Development Environment and Tools"},
+    "configuration_management": {"group": "Processes and Practices", "name": "Software Configuration Management"},
+    "roles_expertise": {"group": "Team", "name": "Roles and Expertise"},
+    "formal_meetings": {"group": "Team", "name": "Formal Meetings"},
+    "communication_strategies": {"group": "Team", "name": "Communication Strategies"},
+    "mentoring_culture": {"group": "Team", "name": "Assistance/Mentoring Culture"},
+    "developer_documentation": {"group": "Documentation", "name": "Developer-Oriented Documentation"},
+    "learning_material": {"group": "Documentation", "name": "Learning Material"},
+    "repository_search": {"group": "Documentation", "name": "Repository, Indexes, and Search"},
+    "organization": {"group": "Context", "name": "Organization"},
+    "inter_team_organization": {"group": "Context", "name": "Inter-Team Organization"}
+  },
+  "barriers": {
+    "_source": "Steinmacher et al. barrier model (58 barriers), category and barrier names as reproduced in Santos et al. 2024 (arXiv:2408.15989), Table 10; only barriers that documentation can address",
+    "finding_task": {"group": "Newcomers' orientation", "name": "Finding a task to start with"},
+    "finding_artifacts": {"group": "Newcomers' orientation", "name": "Finding the correct artifacts to fix an issue"},
+    "poor_how_to_contribute": {"group": "Newcomers' orientation", "name": "Poor “How to Contribute” available"},
+    "contribution_flow": {"group": "Newcomers' orientation", "name": "Newcomers don't know what is the contribution flow"},
+    "domain_expertise": {"group": "Newcomers' characteristics", "name": "Lack of domain expertise"},
+    "process_practices": {"group": "Newcomers' characteristics", "name": "Lack of knowledge in project process and practices"},
+    "technical_background": {"group": "Newcomers' characteristics", "name": "Lack of technical background"},
+    "environment_setup": {"group": "Technical hurdles", "name": "Local environment setup hurdles"},
+    "code_architecture": {"group": "Technical hurdles", "name": "Code/architecture hurdles"},
+    "information_flow": {"group": "Technical hurdles", "name": "Understanding flow of information"}
+  },
+  "flags": {
+    "conflict": "The human docs state something that contradicts this unit (e.g. a different command or rule).",
+    "links_out": "The human docs only point elsewhere for this topic (website, wiki, other file).",
+    "unclear": "Unit is hard to judge; revisit after the pilot."
+  }
+}

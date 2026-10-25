@@ -1,0 +1,162 @@
+# OpenAI
+
+Configure HolmesGPT to use OpenAI's GPT models.
+
+## Setup
+
+Get a paid [OpenAI API key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key){:target="_blank"}.
+
+!!! note
+    Requires a paid OpenAI API key, not a ChatGPT Plus subscription.
+
+## Configuration
+
+=== "Holmes CLI"
+
+    ```bash
+    export OPENAI_API_KEY="your-openai-api-key"
+    holmes ask "what pods are failing?"
+    ```
+
+=== "Holmes Helm Chart"
+
+    **Create Kubernetes Secret:**
+    ```bash
+    kubectl create secret generic holmes-secrets \
+      --from-literal=openai-api-key="sk-..." \
+      -n <namespace>
+    ```
+
+    **Configure Helm Values:**
+    ```yaml
+    # values.yaml
+    additionalEnvVars:
+      - name: OPENAI_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: holmes-secrets
+            key: openai-api-key
+
+    # Configure at least one model using modelList
+    modelList:
+      gpt-4o:
+        api_key: "{{ env.OPENAI_API_KEY }}"
+        model: openai/gpt-4o
+        temperature: 0
+
+      gpt-4o-mini:
+        api_key: "{{ env.OPENAI_API_KEY }}"
+        model: openai/gpt-4o-mini
+        temperature: 0
+
+      gpt-5:
+        api_key: "{{ env.OPENAI_API_KEY }}"
+        model: openai/gpt-5
+        temperature: 1
+        reasoning_effort: medium
+
+    # Optional: Set default model (use modelList key name, not the model path)
+    config:
+      model: "gpt-4o"  # This refers to the key name in modelList above
+    ```
+
+=== "Robusta Helm Chart"
+
+    **Create Kubernetes Secret:**
+    ```bash
+    kubectl create secret generic robusta-holmes-secret \
+      --from-literal=openai-api-key="sk-..." \
+      -n <namespace>
+    ```
+
+    **Configure Helm Values:**
+    ```yaml
+    # values.yaml
+    holmes:
+      additionalEnvVars:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: robusta-holmes-secret
+              key: openai-api-key
+
+      # Configure at least one model using modelList
+      modelList:
+        gpt-4.1:
+          api_key: "{{ env.OPENAI_API_KEY }}"
+          model: openai/gpt-4.1
+          temperature: 0
+
+        gpt-4o-mini:
+          api_key: "{{ env.OPENAI_API_KEY }}"
+          model: openai/gpt-4o-mini
+          temperature: 0
+
+        gpt-5:
+          api_key: "{{ env.OPENAI_API_KEY }}"
+          model: openai/gpt-5
+          temperature: 1
+          reasoning_effort: medium
+
+      # Optional: Set default model (use modelList key name, not the model path)
+      config:
+        model: "gpt-4.1"  # This refers to the key name in modelList above
+
+## Using CLI Parameters
+
+You can also pass the API key directly as a command-line parameter:
+
+```bash
+holmes ask "what pods are failing?" --api-key="your-api-key"
+```
+
+## Available Models
+
+```bash
+# GPT-4.1 (default) - fast and capable
+holmes ask "what pods are failing?"
+
+# GPT-5 (more accurate but much slower)
+holmes ask "what pods are failing?" --model="gpt-5"
+```
+
+!!! tip "Best Results"
+    For optimal investigation quality, consider using Anthropic's Claude models:
+
+    - **Claude Opus 4.1**: Most powerful for complex investigations
+    - **Claude Sonnet 4.5 or 4**: Best balance of speed and quality
+
+    GPT-4.1 provides a good alternative with faster response times.
+
+    See [benchmark results](../development/evaluations/latest-results.md) for detailed model performance comparisons.
+
+## GPT-5 Reasoning Effort
+
+When using GPT-5 models, you can control the reasoning effort level by setting the `REASONING_EFFORT` environment variable. This allows you to balance between response quality and processing time/cost.
+
+```bash
+# Use minimal reasoning effort for faster responses
+export REASONING_EFFORT="minimal"
+holmes ask "what pods are failing?" --model="gpt-5"
+
+# Use default reasoning effort
+export REASONING_EFFORT="medium"
+holmes ask "what pods are failing?" --model="gpt-5"
+
+# Use high reasoning effort for complex investigations
+export REASONING_EFFORT="high"
+holmes ask "what pods are failing?" --model="gpt-5"
+```
+
+Available reasoning effort levels:
+
+- `minimal` - Fastest responses, suitable for simple queries
+- `low` - Balance between speed and quality
+- `medium` - Standard reasoning depth (default)
+- `high` - Deeper reasoning for complex problems
+
+For more details on reasoning effort levels, refer to the [OpenAI documentation](https://platform.openai.com/docs/).
+
+## Additional Resources
+
+HolmesGPT uses the LiteLLM API to support OpenAI provider. Refer to [LiteLLM OpenAI docs](https://litellm.vercel.app/docs/providers/openai){:target="_blank"} for more details.

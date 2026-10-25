@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit Coding</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<style>
+  :root {
+    --bg: #fafaf9; --panel: #ffffff; --text: #1c1917; --muted: #78716c; --line: #e7e5e4;
+    --accent: #2563eb; --accent-soft: #dbeafe; --mark: #fde68a; --ok: #15803d; --warn: #b45309;
+    --code: #f5f5f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917; --panel: #292524; --text: #f5f5f4; --muted: #a8a29e; --line: #44403c;
+      --accent: #60a5fa; --accent-soft: #1e3a5f; --mark: #854d0e; --ok: #4ade80; --warn: #fbbf24;
+      --code: #1c1917;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; background: var(--panel); border-bottom: 1px solid var(--line);
+           padding: 8px 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  header .meta { color: var(--muted); }
+  header .progress { flex: 1; min-width: 160px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  header .progress div { height: 100%; background: var(--accent); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  section.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+  .right { max-height: calc(100vh - 80px); overflow: auto; position: sticky; top: 64px; }
+  h2 { font-size: 15px; margin: 0 0 8px; }
+  h3 { font-size: 13px; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .path { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+  .md { overflow-wrap: anywhere; }
+  .md pre, pre.raw { background: var(--code); padding: 8px; border-radius: 6px; overflow-x: auto; white-space: pre-wrap; }
+  .md code { background: var(--code); padding: 0 3px; border-radius: 3px; }
+  .md :is(h1,h2,h3,h4,h5,h6) { font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 2px 12px; }
+  label { cursor: pointer; }
+  .pre { font-weight: 600; }
+  .pre::after { content: " ★"; color: var(--warn); }
+  .coverage label { display: block; padding: 3px 0; }
+  .hint { color: var(--muted); font-size: 12px; }
+  textarea, select, input[type=search], input[type=text] { width: 100%; background: var(--bg); color: var(--text);
+           border: 1px solid var(--line); border-radius: 6px; padding: 6px; font: inherit; }
+  button { background: var(--accent); color: white; border: 0; border-radius: 6px; padding: 6px 14px; font: inherit; cursor: pointer; }
+  button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .hdoc { border-top: 1px solid var(--line); padding: 8px 0; }
+  .hdoc.hidden { display: none; }
+  .hdoc.selected { background: var(--accent-soft); margin: 0 -8px; padding: 8px; border-radius: 6px; }
+  .hdoc .head { display: flex; gap: 8px; align-items: baseline; }
+  mark { background: var(--mark); color: inherit; }
+  .status { color: var(--ok); }
+  .needs-d { display: none; }
+  .needs-d.show { display: block; }
+  .banner { padding: 8px 12px; border-radius: 6px; background: var(--accent-soft); margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <strong id="title">Unit coding</strong>
+  <span class="meta" id="where"></span>
+  <div class="progress"><div id="bar" style="width:0"></div></div>
+  <span class="meta" id="count"></span>
+  <button class="secondary" id="prev">← Prev</button>
+  <button class="secondary" id="nextBtn">Next →</button>
+  <button class="secondary" id="todo">Next uncoded</button>
+</header>
+<main>
+  <div>
+    <div id="banner"></div>
+    <section class="panel">
+      <h2 id="unitTitle">Agent-file unit</h2>
+      <div class="path" id="unitPath"></div>
+      <div class="md" id="unitText"></div>
+    </section>
+    <section class="panel" style="margin-top:16px">
+      <h3>C. Coverage in README / CONTRIBUTING <span class="hint">(keys 1–4)</span></h3>
+      <div class="coverage" id="coverage"></div>
+      <div id="flags" class="grid" style="margin-top:8px"></div>
+      <div class="hint" id="evidenceCount" style="margin-top:6px"></div>
+
+      <h3>A. Categories <span class="hint" id="preHint"></span></h3>
+      <div class="grid" id="categories"></div>
+
+      <div class="needs-d" id="dBlock">
+        <h3>D1. Newcomer need (Dagenais et al.)</h3>
+        <select id="need"></select>
+        <h3>D2. Barriers mitigated (Steinmacher et al.)</h3>
+        <div id="barriers"></div>
+      </div>
+
+      <h3>Notes</h3>
+      <textarea id="notes" rows="2" placeholder="Hard case? Write why (e.g. 'generic', 'checklist half covered')."></textarea>
+      <div style="display:flex; gap:12px; align-items:center; margin-top:10px">
+        <button id="save">Save &amp; next <span class="hint" style="color:inherit">(Ctrl+Enter)</span></button>
+        <span class="status" id="status"></span>
+      </div>
+    </section>
+  </div>
+  <section class="panel right">
+    <h2>Human documentation at the snapshot</h2>
+    <input type="search" id="search" placeholder="Search README and CONTRIBUTING (press /)">
+    <label class="hint"><input type="checkbox" id="filter"> show only sections that match</label>
+    <div id="human"></div>
+  </section>
+</main>
+<script>
+const params = new URLSearchParams(location.search);
+const PASS = params.get("pass") === "2" ? 2 : 1;
+const TOKEN = params.get("token") || "";
+let state = null, current = null, startedAt = 0, evidence = new Set();
+
+const api = (path, opts = {}) => fetch(`${path}${path.includes("?") ? "&" : "?"}pass=${PASS}`,
+  { ...opts, headers: { "X-Token": TOKEN, "Content-Type": "application/json", ...(opts.headers || {}) } })
+  .then(r => { if (!r.ok) throw new Error(r.status + " " + r.statusText); return r.json(); });
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function render(md) {
+  if (window.marked && window.DOMPurify) return DOMPurify.sanitize(marked.parse(md || ""));
+  return `<pre class="raw">${esc(md)}</pre>`;
+}
+const entries = obj => Object.entries(obj).filter(([k]) => !k.startsWith("_"));
+
+function buildForm(cb) {
+  document.getElementById("coverage").innerHTML = entries(cb.coverage).map(([k, v]) =>
+    `<label title="${esc(v.definition)}"><input type="radio" name="coverage" value="${k}"> <b>${v.key}</b> ${esc(v.name)} — <span class="hint">${esc(v.definition)}</span></label>`).join("");
+  document.getElementById("flags").innerHTML = Object.entries(cb.flags).map(([k, d]) =>
+    `<label title="${esc(d)}"><input type="checkbox" name="flag" value="${k}"> ${k}</label>`).join("");
+  document.getElementById("categories").innerHTML = entries(cb.categories).map(([k, v]) =>
+    `<label title="${esc(v.definition)}" data-cat="${k}"><input type="checkbox" name="cat" value="${k}"> ${esc(v.name)}</label>`).join("");
+  let groups = {};
+  entries(cb.needs).forEach(([k, v]) => (groups[v.group] ??= []).push([k, v]));
+  document.getElementById("need").innerHTML = `<option value="">— choose —</option>` + Object.entries(groups).map(([g, items]) =>
+    `<optgroup label="${esc(g)}">${items.map(([k, v]) => `<option value="${k}">${esc(v.name)}</option>`).join("")}</optgroup>`).join("");
+  groups = {};
+  entries(cb.barriers).forEach(([k, v]) => (groups[v.group] ??= []).push([k, v]));
+  document.getElementById("barriers").innerHTML = Object.entries(groups).map(([g, items]) =>
+    `<div class="hint" style="margin-top:6px">${esc(g)}</div><div class="grid">` +
+    items.map(([k, v]) => `<label><input type="checkbox" name="barrier" value="${k}"> ${esc(v.name)}</label>`).join("") + `</div>`).join("");
+  document.querySelectorAll("input[name=coverage]").forEach(r => r.addEventListener("change", toggleD));
+}
+
+function toggleD() {
+  const v = document.querySelector("input[name=coverage]:checked")?.value;
+  document.getElementById("dBlock").classList.toggle("show", v === "agent_only" || v === "partial");
+}
+const checked = name => [...document.querySelectorAll(`input[name=${name}]:checked`)].map(i => i.value);
+function setChecked(name, values) {
+  document.querySelectorAll(`input[name=${name}]`).forEach(i => i.checked = (values || []).includes(i.value));
+}
+
+async function loadState() {
+  state = await api("/api/state");
+  document.getElementById("title").textContent = PASS === 2 ? "Re-code (pass 2, blind)" : "Unit coding (pass 1)";
+  document.getElementById("count").textContent = `${state.done} / ${state.total}`;
+  document.getElementById("bar").style.width = state.total ? `${100 * state.done / state.total}%` : "0";
+  const b = document.getElementById("banner");
+  b.innerHTML = PASS === 2 && state.recode_waiting
+    ? `<div class="banner">${state.recode_waiting} reliability units are not yet 14 days old; the next becomes available on ${state.recode_next_date}.</div>` : "";
+}
+
+async function loadUnit(id) {
+  if (!id) {
+    document.getElementById("unitText").innerHTML = "<p>Nothing left to code in this pass.</p>";
+    return;
+  }
+  const data = await api(`/api/unit/${encodeURIComponent(id)}`);
+  current = data; startedAt = Date.now();
+  const u = data.unit;
+  document.getElementById("where").textContent = `${u.repo} · ${u.tool} · ${u.set} set`;
+  document.getElementById("unitTitle").textContent = u.kind === "section" ? "Agent-file section" : `Agent-file ${u.kind}`;
+  document.getElementById("unitPath").textContent = u.heading_path || "(no heading)";
+  document.getElementById("unitText").innerHTML = render(u.text);
+
+  const lab = data.label || {};
+  document.querySelectorAll("input[name=coverage]").forEach(r => r.checked = r.value === lab.coverage);
+  setChecked("flag", lab.flags); setChecked("barrier", lab.barriers);
+  const pre = data.prelabel || [];
+  setChecked("cat", lab.categories ?? pre);
+  document.querySelectorAll("[data-cat]").forEach(l => l.classList.toggle("pre", pre.includes(l.dataset.cat)));
+  document.getElementById("preHint").textContent = pre.length ? "(★ = LLM suggestion, pre-ticked: correct as needed)" : "";
+  document.getElementById("need").value = lab.need || "";
+  document.getElementById("notes").value = lab.notes || "";
+  evidence = new Set(lab.evidence || []);
+  document.getElementById("status").textContent = lab.saved_at ? `saved ${lab.saved_at}` : "";
+  toggleD();
+  renderHuman();
+}
+
+function renderHuman() {
+  const q = document.getElementById("search").value.trim();
+  const onlyMatches = document.getElementById("filter").checked;
+  const re = q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi") : null;
+  let html = "", lastDoc = "";
+  for (const h of current.human) {
+    if (h.doc !== lastDoc) { html += `<h3>${h.doc}</h3>`; lastDoc = h.doc; }
+    const hit = re ? (re.test(h.text) || re.test(h.heading_path)) : true;
+    if (re) re.lastIndex = 0;
+    let body = render(h.text);
+    if (re && hit) body = highlight(body, re);
+    html += `<div class="hdoc ${onlyMatches && !hit ? "hidden" : ""} ${evidence.has(h.unit_id) ? "selected" : ""}">
+      <div class="head"><label><input type="checkbox" data-ev="${esc(h.unit_id)}" ${evidence.has(h.unit_id) ? "checked" : ""}> evidence</label>
+      <span class="path">${esc(h.heading_path || "(no heading)")}${h.toc ? " · table of contents" : ""}</span></div>
+      <div class="md">${body}</div></div>`;
+  }
+  document.getElementById("human").innerHTML = html || "<p class='hint'>No README/CONTRIBUTING content.</p>";
+  document.querySelectorAll("[data-ev]").forEach(cb => cb.addEventListener("change", () => {
+    cb.checked ? evidence.add(cb.dataset.ev) : evidence.delete(cb.dataset.ev);
+    cb.closest(".hdoc").classList.toggle("selected", cb.checked);
+    updateEvidence();
+  }));
+  updateEvidence();
+}
+function highlight(html, re) {
+  const tmp = document.createElement("div"); tmp.innerHTML = html;
+  const walker = document.createTreeWalker(tmp, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const n of nodes) {
+    if (!re.test(n.nodeValue)) { re.lastIndex = 0; continue; }
+    re.lastIndex = 0;
+    const span = document.createElement("span");
+    span.innerHTML = esc(n.nodeValue).replace(re, m => `<mark>${m}</mark>`);
+    n.replaceWith(span);
+  }
+  return tmp.innerHTML;
+}
+function updateEvidence() {
+  document.getElementById("evidenceCount").textContent =
+    evidence.size ? `${evidence.size} human section(s) ticked as evidence` : "Tick the covering human sections on the right (needed for partial/shared).";
+}
+
+async function save() {
+  const coverage = document.querySelector("input[name=coverage]:checked")?.value;
+  if (!coverage) { alert("Choose a coverage label (1–4)."); return; }
+  if ((coverage === "partial" || coverage === "shared") && !evidence.size &&
+      !confirm("No evidence section ticked. Save anyway?")) return;
+  const dNeeded = coverage === "agent_only" || coverage === "partial";
+  await api("/api/label", { method: "POST", body: JSON.stringify({
+    unit_id: current.unit.unit_id, coverage, categories: checked("cat"), flags: checked("flag"),
+    evidence: [...evidence], need: dNeeded ? (document.getElementById("need").value || null) : null,
+    barriers: dNeeded ? checked("barrier") : [], notes: document.getElementById("notes").value.trim(),
+    seconds: Math.round((Date.now() - startedAt) / 1000),
+  })});
+  await loadState();
+  const i = state.queue.indexOf(current.unit.unit_id);
+  await loadUnit(state.queue[i + 1] ?? state.next);
+  window.scrollTo(0, 0);
+}
+
+function step(d) {
+  const i = state.queue.indexOf(current?.unit.unit_id);
+  const id = state.queue[Math.min(Math.max(i + d, 0), state.queue.length - 1)];
+  if (id) loadUnit(id);
+}
+
+document.getElementById("save").addEventListener("click", save);
+document.getElementById("prev").addEventListener("click", () => step(-1));
+document.getElementById("nextBtn").addEventListener("click", () => step(1));
+document.getElementById("todo").addEventListener("click", async () => { await loadState(); loadUnit(state.next); });
+document.getElementById("search").addEventListener("input", renderHuman);
+document.getElementById("filter").addEventListener("change", renderHuman);
+document.addEventListener("keydown", e => {
+  const typing = ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName) && e.target.type !== "checkbox" && e.target.type !== "radio";
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); save(); return; }
+  if (typing) return;
+  if (e.key === "/") { e.preventDefault(); document.getElementById("search").focus(); return; }
+  const cov = Object.values(state?.codebook.coverage || {}).find(v => v.key === e.key);
+  if (cov) {
+    const k = Object.keys(state.codebook.coverage).find(k => state.codebook.coverage[k] === cov);
+    document.querySelector(`input[name=coverage][value=${k}]`).checked = true; toggleD();
+  }
+});
+
+(async () => {
+  await loadState();
+  buildForm(state.codebook);
+  loadUnit(state.next ?? state.queue[0]);
+})().catch(err => { document.body.innerHTML = `<p style="padding:16px">Could not load: ${esc(err.message)}. Is the token in the URL?</p>`; });
+</script>
+</body>
+</html>
