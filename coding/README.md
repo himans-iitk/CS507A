@@ -74,6 +74,18 @@ Suggestions appear in the tool as pre-ticked ★ categories. Only categories are
 coverage is always yours, because it is the ground truth for the RQ3 detector. The pilot report
 shows how well the suggestions agree with your choices.
 
+## Phase 5: full coding, reliability, freeze
+
+```bash
+.venv/bin/python -m gapstudy.progress       # done vs schedule, units/day needed per set
+.venv/bin/python -m gapstudy.reliability    # after the re-code: κ with repo-bootstrap CIs → analysis/phase5/reliability.md
+.venv/bin/python -m gapstudy.freeze         # checks + writes coding/labels_v1.csv and its sha256
+```
+
+`freeze` refuses while units are unlabelled, labelled under an older codebook, or inconsistent
+(e.g. *shared* with no evidence ticked), and says which. All later analyses read only
+`labels_v1.csv`, so the numbers in the paper trace back to one checksummed file.
+
 ## Regenerating the inputs
 
 ```bash
