@@ -8,6 +8,9 @@ version = "0.1.0"
 description = "Mining agent context files for gaps in human onboarding documentation"
 requires-python = ">=3.10"
 
+[project.scripts]
+gapcheck = "gapstudy.detector.gapcheck:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
