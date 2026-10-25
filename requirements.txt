@@ -12,3 +12,4 @@ pytest>=8.0
 langdetect>=1.0.9
 flask>=3.0
 tabulate>=0.9
+textstat>=0.7
