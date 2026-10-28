@@ -43,6 +43,7 @@ def persistent_token(coding_dir: Path) -> str:
 
 def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token: str | None = None) -> Flask:
     app = Flask(__name__)
+    app.json.sort_keys = False  # keep the codebook's order (coverage 1-4) in the page
     store = LabelStore(coding_dir)
     codebook = json.loads((coding_dir / "codebook.json").read_text())
     queue = pd.read_csv(coding_dir / "queue.csv")
