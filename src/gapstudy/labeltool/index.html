@@ -378,7 +378,8 @@ document.getElementById("changeCoder").addEventListener("click", async () => {
   if (!CODER) await askName();
   await loadState();
   buildForm(state.codebook);
-  loadUnit(state.next ?? state.queue[0]);
+  const linked = params.get("unit");  // a direct link to one unit, e.g. from coding/pilot_links.md
+  loadUnit(linked && state.queue.includes(linked) ? linked : state.next ?? state.queue[0]);
 })().catch(err => { document.body.innerHTML = `<p style="padding:16px">Could not load: ${esc(err.message)}. Is the token in the URL?</p>`; });
 </script>
 </body>

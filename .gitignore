@@ -31,3 +31,6 @@ paper/*.fls
 paper/*.log
 paper/*.out
 paper/main.pdf
+
+# per-user unit links (contain the access token)
+coding/*_links.md
