@@ -56,6 +56,16 @@
   .needs-d { display: none; }
   .needs-d.show { display: block; }
   .banner { padding: 8px 12px; border-radius: 6px; background: var(--accent-soft); margin-bottom: 12px; }
+  .draft { border-left: 4px solid var(--warn); }
+  .draft dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; margin: 8px 0; }
+  .draft dt { color: var(--muted); }
+  .draft dd { margin: 0; }
+  .draft .why { font-style: italic; margin: 8px 0; }
+  .blind { border-left: 4px solid var(--accent); color: var(--muted); }
+  .who { display: inline-flex; gap: 6px; align-items: center; }
+  .who button { padding: 2px 8px; font-size: 12px; }
+  #whoami { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 85%, transparent); display: grid; place-items: center; z-index: 5; }
+  #whoami form { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px; width: min(420px, calc(100vw - 32px)); display: grid; gap: 10px; }
 </style>
 </head>
 <body>
@@ -64,6 +74,7 @@
   <span class="meta" id="where"></span>
   <div class="progress"><div id="bar" style="width:0"></div></div>
   <span class="meta" id="count"></span>
+  <span class="meta who">Verifier: <b id="coderName"></b><button class="secondary" id="changeCoder" type="button">change</button></span>
   <button class="secondary" id="prev">← Prev</button>
   <button class="secondary" id="nextBtn">Next →</button>
   <button class="secondary" id="todo">Next uncoded</button>
@@ -76,6 +87,7 @@
       <div class="path" id="unitPath"></div>
       <div class="md" id="unitText"></div>
     </section>
+    <section class="panel" id="draftCard" style="margin-top:16px" hidden></section>
     <section class="panel" style="margin-top:16px">
       <h3>C. Coverage in README / CONTRIBUTING <span class="hint">(keys 1–4)</span></h3>
       <div class="coverage" id="coverage"></div>
@@ -107,15 +119,25 @@
     <div id="human"></div>
   </section>
 </main>
+<div id="whoami" hidden>
+  <form id="whoForm">
+    <h2>Who is verifying?</h2>
+    <p class="hint">Your name is saved with every label, so each person's checks can be told apart. Use the same name every time.</p>
+    <input type="text" id="whoInput" required maxlength="40" placeholder="e.g. Himanshu" autocomplete="name">
+    <button type="submit">Start</button>
+  </form>
+</div>
 <script>
 const params = new URLSearchParams(location.search);
 const PASS = params.get("pass") === "2" ? 2 : 1;
 const TOKEN = params.get("token") || "";
 const RECHECK = params.get("recheck") === "1";
 let state = null, current = null, startedAt = 0, evidence = new Set();
+let CODER = "";
+try { CODER = localStorage.getItem("coder") || ""; } catch (e) { /* storage blocked: ask each time */ }
 
 const api = (path, opts = {}) => fetch(`${path}${path.includes("?") ? "&" : "?"}pass=${PASS}${RECHECK ? "&recheck=1" : ""}`,
-  { ...opts, headers: { "X-Token": TOKEN, "Content-Type": "application/json", ...(opts.headers || {}) } })
+  { ...opts, headers: { "X-Token": TOKEN, "X-Coder": CODER, "Content-Type": "application/json", ...(opts.headers || {}) } })
   .then(r => { if (!r.ok) throw new Error(r.status + " " + r.statusText); return r.json(); });
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -155,13 +177,62 @@ function setChecked(name, values) {
 
 async function loadState() {
   state = await api("/api/state");
-  document.getElementById("title").textContent = PASS === 2 ? "Re-code (pass 2, blind)"
-    : RECHECK ? `Re-check pilot (codebook ${state.codebook.version})` : "Unit coding (pass 1)";
+  document.getElementById("title").textContent = PASS === 2 ? "Second blind labelling (pass 2)"
+    : RECHECK ? `Re-check pilot (codebook ${state.codebook.version})` : "Verify and label (pass 1)";
   document.getElementById("count").textContent = `${state.done} / ${state.total}`;
   document.getElementById("bar").style.width = state.total ? `${100 * state.done / state.total}%` : "0";
-  const b = document.getElementById("banner");
-  b.innerHTML = PASS === 2 && state.recode_waiting
-    ? `<div class="banner">${state.recode_waiting} reliability units are not yet 14 days old; the next becomes available on ${state.recode_next_date}.</div>` : "";
+  document.getElementById("coderName").textContent = CODER;
+  const b = document.getElementById("banner"), sc = state.second_coder;
+  b.innerHTML = PASS === 2 && sc && (sc.no_first_label || sc.own_first_label)
+    ? `<div class="banner">Pass 2 shows reliability units that someone else labelled first. Not shown: ${sc.no_first_label} with no first label yet, ${sc.own_first_label} that you labelled yourself.</div>` : "";
+}
+
+const nameOf = (section, key) => state.codebook[section]?.[key]?.name ?? key;
+function renderDraft(data) {
+  const card = document.getElementById("draftCard");
+  if (data.blind) {
+    card.hidden = false;
+    card.className = "panel blind";
+    card.innerHTML = PASS === 2
+      ? "<b>Blind labelling.</b> Label this unit yourself; no AI draft and no earlier label are shown."
+      : "<b>Blind labelling (reliability set).</b> No AI draft is shown for these units, so your labels can be compared with the drafts and with a second person.";
+    return;
+  }
+  const d = data.draft;
+  card.hidden = !d;
+  if (!d) return;
+  card.className = "panel draft";
+  const list = (section, keys) => (keys || []).map(k => esc(nameOf(section, k))).join(", ") || "—";
+  card.innerHTML = `<h3 style="margin-top:0">AI draft <span class="hint">(${esc(d.drafter || "AI")}): check it against the human docs</span></h3>
+    <dl>
+      <dt>Coverage</dt><dd><b>${esc(nameOf("coverage", d.coverage))}</b></dd>
+      <dt>Evidence</dt><dd>${d.evidence?.length ? d.evidence.length + " section(s), highlighted on the right" : "—"}</dd>
+      <dt>Categories</dt><dd>${list("categories", d.categories)}</dd>
+      <dt>Need</dt><dd>${d.need ? esc(nameOf("needs", d.need)) : "—"}</dd>
+      <dt>Barriers</dt><dd>${list("barriers", d.barriers)}</dd>
+      <dt>Flags</dt><dd>${(d.flags || []).map(esc).join(", ") || "—"}</dd>
+    </dl>
+    <p class="why">${esc(d.rationale || "")}</p>
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+      <button type="button" id="acceptDraft">Accept draft as is <span class="hint" style="color:inherit">(A)</span></button>
+      <span class="hint">Or correct the form below and save. Every change from the draft is recorded.</span>
+    </div>`;
+  document.getElementById("acceptDraft").addEventListener("click", acceptDraft);
+}
+
+function fillForm(l) {
+  document.querySelectorAll("input[name=coverage]").forEach(r => r.checked = r.value === l.coverage);
+  setChecked("flag", l.flags); setChecked("barrier", l.barriers); setChecked("cat", l.categories);
+  document.getElementById("need").value = l.need || "";
+  evidence = new Set(l.evidence || []);
+}
+
+async function acceptDraft() {
+  if (!current?.draft) return;
+  fillForm(current.draft);
+  toggleD();
+  renderHuman();
+  await save();
 }
 
 async function loadUnit(id) {
@@ -177,17 +248,17 @@ async function loadUnit(id) {
   document.getElementById("unitPath").textContent = u.heading_path || "(no heading)";
   document.getElementById("unitText").innerHTML = render(u.text);
 
+  // The form starts from: your saved label, else the AI draft, else empty (with LLM category hints).
   const lab = data.label || {};
-  document.querySelectorAll("input[name=coverage]").forEach(r => r.checked = r.value === lab.coverage);
-  setChecked("flag", lab.flags); setChecked("barrier", lab.barriers);
   const pre = data.prelabel || [];
-  setChecked("cat", lab.categories ?? pre);
+  fillForm(data.label ? lab : data.draft ? data.draft : { categories: pre });
   document.querySelectorAll("[data-cat]").forEach(l => l.classList.toggle("pre", pre.includes(l.dataset.cat)));
   document.getElementById("preHint").textContent = pre.length ? "(★ = LLM suggestion, pre-ticked: correct as needed)" : "";
-  document.getElementById("need").value = lab.need || "";
   document.getElementById("notes").value = lab.notes || "";
-  evidence = new Set(lab.evidence || []);
-  document.getElementById("status").textContent = lab.saved_at ? `saved ${lab.saved_at}` : "";
+  const saved = lab.saved_at ? `saved ${lab.saved_at}${lab.coder ? " by " + lab.coder : ""}` : "";
+  const how = lab.draft_shown ? (lab.accepted_draft ? " · draft accepted" : ` · changed: ${(lab.changed_fields || []).join(", ")}`) : "";
+  document.getElementById("status").textContent = saved + how;
+  renderDraft(data);
   toggleD();
   renderHuman();
 }
@@ -267,8 +338,9 @@ document.getElementById("filter").addEventListener("change", renderHuman);
 document.addEventListener("keydown", e => {
   const typing = ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName) && e.target.type !== "checkbox" && e.target.type !== "radio";
   if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); save(); return; }
-  if (typing) return;
+  if (typing || !document.getElementById("whoami").hidden) return;
   if (e.key === "/") { e.preventDefault(); document.getElementById("search").focus(); return; }
+  if ((e.key === "a" || e.key === "A") && current?.draft) { e.preventDefault(); acceptDraft(); return; }
   const cov = Object.values(state?.codebook.coverage || {}).find(v => v.key === e.key);
   if (cov) {
     const k = Object.keys(state.codebook.coverage).find(k => state.codebook.coverage[k] === cov);
@@ -276,7 +348,32 @@ document.addEventListener("keydown", e => {
   }
 });
 
+function askName() {
+  const box = document.getElementById("whoami");
+  box.hidden = false;
+  const input = document.getElementById("whoInput");
+  input.value = CODER;
+  input.focus();
+  return new Promise(resolve => {
+    document.getElementById("whoForm").onsubmit = e => {
+      e.preventDefault();
+      CODER = input.value.trim();
+      if (!CODER) return;
+      try { localStorage.setItem("coder", CODER); } catch (err) { /* kept for this session only */ }
+      box.hidden = true;
+      resolve();
+    };
+  });
+}
+
+document.getElementById("changeCoder").addEventListener("click", async () => {
+  await askName();
+  await loadState();
+  loadUnit(state.next ?? state.queue[0]);
+});
+
 (async () => {
+  if (!CODER) await askName();
   await loadState();
   buildForm(state.codebook);
   loadUnit(state.next ?? state.queue[0]);

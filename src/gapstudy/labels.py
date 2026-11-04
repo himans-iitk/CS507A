@@ -1,15 +1,17 @@
 """Append-only label store for manual coding.
 
 Every save appends one JSON line to coding/labels/pass{1,2}.jsonl, so the full
-history is kept; the latest record per unit wins. Pass 2 is the blind re-code
-of the reliability set and only offers units whose pass-1 label is old enough.
+history is kept; the latest record per unit wins. Pass 1 is the verification of
+AI drafts (pilot and main sets) and the first blind labelling of the reliability
+set. Pass 2 is the second blind labelling of the reliability set by a different
+person, for inter-rater agreement.
 """
 
 from __future__ import annotations
 
 import json
 import random
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -17,8 +19,7 @@ import pandas as pd
 from gapstudy.github_client import PROJECT_ROOT
 
 CODING = PROJECT_ROOT / "coding"
-RECODE_DELAY = timedelta(days=14)
-RECODE_SEED = 507
+SECOND_CODER_SEED = 507
 
 
 class LabelStore:
@@ -48,25 +49,25 @@ class LabelStore:
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
         return record
 
-    def queue(self, coding_pass: int, queue: pd.DataFrame, now: datetime | None = None) -> list[str]:
-        """Unit ids to code in this pass, in order."""
+    def queue(self, coding_pass: int, queue: pd.DataFrame, coder: str | None = None) -> list[str]:
+        """Unit ids to code in this pass, in order.
+
+        Pass 2 offers reliability units that someone other than ``coder`` labelled in
+        pass 1, in a fixed shuffled order, so no one labels the same unit twice."""
         if coding_pass == 1:
             return list(queue.unit_id)
-        now = now or datetime.now(timezone.utc)
         first = self.latest(1)
         ids = [u for u in queue[queue.set == "reliability"].unit_id
-               if u in first and now - datetime.fromisoformat(first[u]["saved_at"]) >= RECODE_DELAY]
-        random.Random(RECODE_SEED).shuffle(ids)
+               if u in first and first[u].get("coder") != coder]
+        random.Random(SECOND_CODER_SEED).shuffle(ids)
         return ids
 
-    def recode_pending(self, queue: pd.DataFrame, now: datetime | None = None) -> tuple[int, str | None]:
-        """Reliability units labelled in pass 1 but not yet old enough, and when the next becomes eligible."""
-        now = now or datetime.now(timezone.utc)
+    def second_coder_status(self, queue: pd.DataFrame, coder: str | None) -> dict[str, int]:
+        """Reliability units not yet available to ``coder`` in pass 2, and why."""
         first = self.latest(1)
-        waiting = [datetime.fromisoformat(first[u]["saved_at"]) + RECODE_DELAY
-                   for u in queue[queue.set == "reliability"].unit_id
-                   if u in first and datetime.fromisoformat(first[u]["saved_at"]) + RECODE_DELAY > now]
-        return len(waiting), (min(waiting).date().isoformat() if waiting else None)
+        rel = queue[queue.set == "reliability"].unit_id
+        return {"no_first_label": int(sum(u not in first for u in rel)),
+                "own_first_label": int(sum(u in first and first[u].get("coder") == coder for u in rel))}
 
     def to_frame(self, coding_pass: int) -> pd.DataFrame:
         return pd.DataFrame(self.latest(coding_pass).values())

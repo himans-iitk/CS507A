@@ -18,12 +18,28 @@ from pathlib import Path
 import pandas as pd
 from flask import Flask, abort, jsonify, request, send_file
 
+from gapstudy.drafting import load_drafts
 from gapstudy.github_client import PROJECT_ROOT
 from gapstudy.labels import CODING, LabelStore
 
 PROCESSED = PROJECT_ROOT / "data" / "processed"
 HERE = Path(__file__).resolve().parent
 LABEL_FIELDS = ("categories", "coverage", "evidence", "need", "barriers", "flags", "notes", "seconds")
+DRAFT_FIELDS = ("coverage", "categories", "evidence", "need", "barriers", "flags")
+
+
+def changed_fields(draft: dict, label: dict) -> list[str]:
+    """Draft fields the verifier changed (list fields compared as sets)."""
+    out = []
+    for f in DRAFT_FIELDS:
+        a, b = draft.get(f), label.get(f)
+        if isinstance(a, list) or isinstance(b, list):
+            a, b = set(a or []), set(b or [])
+        elif not a and not b:
+            continue
+        if a != b:
+            out.append(f)
+    return out
 FORBIDDEN = """<!doctype html><title>Token needed</title>
 <body style="font:15px/1.5 system-ui;max-width:640px;margin:40px auto;padding:0 16px">
 <h2>Access token missing or wrong</h2>
@@ -52,6 +68,7 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
     prelabels = (pd.read_csv(prelabel_path).set_index("unit_id").categories.map(json.loads).to_dict()
                  if prelabel_path.exists() else {})
     meta = queue.drop_duplicates("unit_id").set_index("unit_id")
+    drafts = load_drafts(coding_dir)
     token = token or persistent_token(coding_dir)
     app.config["TOKEN"] = token
 
@@ -73,6 +90,16 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
             abort(400)
         return p
 
+    def coder() -> str | None:
+        name = (request.headers.get("X-Coder") or "").strip()
+        return name[:40] or None
+
+    def draft_for(unit_id: str, p: int) -> dict | None:
+        """The AI draft a verifier may see: never in pass 2 or for the blind reliability set."""
+        if p != 1 or meta.loc[unit_id, "set"] == "reliability":
+            return None
+        return drafts.get(unit_id)
+
     @app.get("/")
     def index():
         return send_file(HERE / "index.html")
@@ -80,7 +107,7 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
     @app.get("/api/state")
     def state():
         p = coding_pass()
-        ids = store.queue(p, queue)
+        ids = store.queue(p, queue, coder())
         done = store.latest(p)
         if request.args.get("recheck") and p == 1:
             # after a codebook revision: pilot units labelled under an older version
@@ -88,13 +115,12 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
                    if u in done and done[u].get("codebook_version") != codebook["version"]]
             done = {u: r for u, r in done.items() if r.get("codebook_version") == codebook["version"]}
         todo = [u for u in ids if u not in done]
-        pending, next_date = store.recode_pending(queue)
         by_set = {s: {"total": int(n), "done": int(sum(u in done for u in g.unit_id))}
                   for s, g in queue.groupby("set") for n in [len(g)]}
         return jsonify({
             "pass": p, "codebook": codebook, "queue": ids, "next": todo[0] if todo else None,
             "done": len([u for u in ids if u in done]), "total": len(ids), "by_set": by_set,
-            "recode_waiting": pending, "recode_next_date": next_date,
+            "second_coder": store.second_coder_status(queue, coder()) if p == 2 else None,
         })
 
     @app.get("/api/unit/<path:unit_id>")
@@ -111,6 +137,8 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
             "human": [{"unit_id": h.unit_id, "doc": h.doc, "heading_path": h.heading_path if isinstance(h.heading_path, str) else "",
                        "text": h.text, "toc": bool(h.toc)} for h in human.itertuples()],
             "prelabel": prelabels.get(unit_id),
+            "draft": draft_for(unit_id, p),
+            "blind": p == 2 or m.set == "reliability",
             "label": store.latest(p).get(unit_id),  # pass 2 never sees pass-1 labels
         })
 
@@ -118,12 +146,22 @@ def create_app(coding_dir: Path = CODING, processed_dir: Path = PROCESSED, token
     def save():
         p = coding_pass()
         body = request.get_json(force=True)
-        if body.get("unit_id") not in meta.index:
+        unit_id = body.get("unit_id")
+        if unit_id not in meta.index:
             abort(404)
         if body.get("coverage") not in codebook["coverage"]:
             abort(400, "coverage required")
-        record = {"unit_id": body["unit_id"], "codebook_version": codebook["version"],
+        if not coder():
+            abort(400, "verifier name required")
+        record = {"unit_id": unit_id, "codebook_version": codebook["version"], "coder": coder(),
                   **{k: body.get(k) for k in LABEL_FIELDS}}
+        draft = draft_for(unit_id, p)
+        if draft:  # log how the verifier treated the AI draft
+            changes = changed_fields(draft, record)
+            record.update(draft_shown=True, drafter=draft.get("drafter"),
+                          changed_fields=changes, accepted_draft=not changes)
+        else:
+            record["draft_shown"] = False
         return jsonify(store.save(p, record))
 
     return app
@@ -136,7 +174,7 @@ def main() -> None:
     app = create_app()
     print(f"\n  Open this link (it stays the same across restarts):\n"
           f"    http://localhost:{args.port}/?token={app.config['TOKEN']}\n"
-          f"  Re-code pass (from mid-November):\n"
+          f"  Second blind labelling of the reliability set (a different person):\n"
           f"    http://localhost:{args.port}/?pass=2&token={app.config['TOKEN']}\n")
     app.run(host="127.0.0.1", port=args.port, debug=False)
 

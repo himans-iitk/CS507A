@@ -31,7 +31,20 @@ without it, e.g. via the Ports tab's globe button; print the full link with:
 echo "http://localhost:8507/?token=$(cat coding/.labeltool_token)"
 ```
 
-Keys: `1`–`4` coverage · `Ctrl+Enter` save and next · `/` search the human docs.
+Keys: `1`–`4` coverage · `A` accept the AI draft · `Ctrl+Enter` save and next · `/` search the human docs.
+
+## Verify mode (AI drafts)
+
+Labels for the pilot and main sets are first drafted by Claude (`coding/drafts.jsonl`, one
+rationale per unit). Each verifier enters their name once (saved in the browser). For every unit
+the form starts pre-filled with the draft, and its covering human sections are ticked on the
+right. Check the draft against the human docs, then either press **Accept draft** (`A`) or
+correct the form and save. Each save records the verifier, whether a draft was shown, and which
+fields (coverage, categories, evidence, need, barriers, flags) were changed.
+
+**Reliability set: blind.** Its 338 units never show a draft. Pass 1 is the first person's blind
+label; pass 2 (`?pass=2` in the link) is a **different** person's blind label of the same units,
+for inter-rater agreement. Pass 2 only offers units someone else labelled first.
 
 ## Order and schedule (deadline: end of November)
 

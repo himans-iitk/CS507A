@@ -1,6 +1,5 @@
 import json
 import shutil
-from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 import pytest
@@ -8,9 +7,6 @@ import pytest
 from gapstudy.github_client import PROJECT_ROOT
 from gapstudy.labels import LabelStore
 from gapstudy.labeltool.app import create_app
-
-NOW = datetime(2026, 11, 1, tzinfo=timezone.utc)
-
 
 @pytest.fixture
 def dirs(tmp_path):
@@ -41,46 +37,11 @@ def test_store_latest_wins_and_history_kept(tmp_path):
     assert len(s.records(1)) == 2
 
 
-def test_recode_queue_only_old_reliability_units_and_shuffled_deterministically(tmp_path):
-    s = LabelStore(tmp_path)
-    q = pd.DataFrame({"unit_id": [f"u{i}" for i in range(10)] + ["p"], "set": ["reliability"] * 10 + ["pilot"]})
-    for i in range(10):
-        s.save(1, {"unit_id": f"u{i}"}, now=NOW - timedelta(days=20 if i < 8 else 3))
-    s.save(1, {"unit_id": "p"}, now=NOW - timedelta(days=30))
-    ids = s.queue(2, q, now=NOW)
-    assert sorted(ids) == [f"u{i}" for i in range(8)]
-    assert ids == s.queue(2, q, now=NOW) and ids != sorted(ids)
-    assert s.recode_pending(q, now=NOW) == (2, (NOW + timedelta(days=11)).date().isoformat())
-
-
 def test_app_requires_token(dirs):
     app = create_app(*dirs, token="t")
     c = app.test_client()
     assert c.get("/api/state").status_code == 403
     assert c.get("/api/state?token=t").status_code == 200
-
-
-def test_app_unit_save_and_blind_second_pass(dirs):
-    coding, processed = dirs
-    app = create_app(coding, processed, token="t")
-    c = app.test_client()
-    h = {"X-Token": "t"}
-    state = c.get("/api/state?pass=1", headers=h).get_json()
-    assert state["next"] == "o/r::agent::0" and state["total"] == 3
-
-    unit = c.get("/api/unit/o/r::agent::1?pass=1", headers=h).get_json()
-    assert [x["doc"] for x in unit["human"]] == ["README", "CONTRIBUTING"]
-
-    r = c.post("/api/label?pass=1", headers=h, json={"unit_id": "o/r::agent::1", "coverage": "agent_only",
-                                                    "categories": ["test"], "need": "dev_environment_tools"})
-    assert r.status_code == 200 and r.get_json()["codebook_version"] == json.loads(
-        (coding / "codebook.json").read_text())["version"]
-    assert c.post("/api/label?pass=1", headers=h, json={"unit_id": "o/r::agent::1"}).status_code == 400
-
-    # pass 2 never exposes the pass-1 label, and the unit is not yet eligible (< 14 days)
-    assert c.get("/api/unit/o/r::agent::1?pass=2", headers=h).get_json()["label"] is None
-    s2 = c.get("/api/state?pass=2", headers=h).get_json()
-    assert s2["total"] == 0 and s2["recode_waiting"] == 1
 
 
 def test_prelabels_are_served(dirs):
@@ -89,3 +50,63 @@ def test_prelabels_are_served(dirs):
         coding / "prelabels.csv", index=False)
     c = create_app(coding, processed, token="t").test_client()
     assert c.get("/api/unit/o/r::agent::0", headers={"X-Token": "t"}).get_json()["prelabel"] == ["build_run"]
+
+
+def add_draft(coding, unit_id, **kw):
+    draft = {"unit_id": unit_id, "coverage": "partial", "categories": ["build_run"],
+             "evidence": ["o/r::README::0"], "need": "dev_environment_tools", "barriers": ["environment_setup"],
+             "flags": [], "rationale": "make is in README", "drafter": "claude-opus-5.5", **kw}
+    with (coding / "drafts.jsonl").open("a") as f:
+        f.write(json.dumps(draft) + "\n")
+    return draft
+
+
+def test_saving_requires_a_verifier_name(dirs):
+    c = create_app(*dirs, token="t").test_client()
+    body = {"unit_id": "o/r::agent::0", "coverage": "shared"}
+    assert c.post("/api/label", headers={"X-Token": "t"}, json=body).status_code == 400
+    r = c.post("/api/label", headers={"X-Token": "t", "X-Coder": "Ana"}, json=body)
+    assert r.status_code == 200 and r.get_json()["coder"] == "Ana"
+
+
+def test_verify_mode_shows_draft_and_logs_accept_or_change(dirs):
+    coding, processed = dirs
+    draft = add_draft(coding, "o/r::agent::0")
+    c = create_app(coding, processed, token="t").test_client()
+    h = {"X-Token": "t", "X-Coder": "Ana"}
+    u = c.get("/api/unit/o/r::agent::0", headers=h).get_json()
+    assert u["draft"]["coverage"] == "partial" and u["draft"]["rationale"] and not u["blind"]
+
+    same = {k: draft[k] for k in ("coverage", "categories", "evidence", "need", "barriers", "flags")}
+    rec = c.post("/api/label", headers=h, json={"unit_id": "o/r::agent::0", **same}).get_json()
+    assert rec["draft_shown"] and rec["accepted_draft"] and rec["changed_fields"] == []
+
+    rec = c.post("/api/label", headers=h, json={"unit_id": "o/r::agent::0", **same, "coverage": "agent_only",
+                                                "evidence": [], "flags": ["unclear"]}).get_json()
+    assert not rec["accepted_draft"] and rec["changed_fields"] == ["coverage", "evidence", "flags"]
+    assert len(LabelStore(coding).records(1)) == 2  # both decisions kept
+
+
+def test_reliability_units_are_blind_and_pass2_needs_a_different_person(dirs):
+    coding, processed = dirs
+    add_draft(coding, "o/r::agent::1")
+    c = create_app(coding, processed, token="t").test_client()
+    ana, ben = {"X-Token": "t", "X-Coder": "Ana"}, {"X-Token": "t", "X-Coder": "Ben"}
+    u = c.get("/api/unit/o/r::agent::1", headers=ana).get_json()
+    assert u["draft"] is None and u["blind"]
+    rec = c.post("/api/label", headers=ana, json={"unit_id": "o/r::agent::1", "coverage": "agent_only"}).get_json()
+    assert rec["draft_shown"] is False
+
+    s_ana = c.get("/api/state?pass=2", headers=ana).get_json()
+    assert s_ana["total"] == 0 and s_ana["second_coder"] == {"no_first_label": 1, "own_first_label": 1}
+    s_ben = c.get("/api/state?pass=2", headers=ben).get_json()
+    assert s_ben["queue"] == ["o/r::agent::1"]
+    u2 = c.get("/api/unit/o/r::agent::1?pass=2", headers=ben).get_json()
+    assert u2["label"] is None and u2["draft"] is None and u2["blind"]  # never sees Ana's label or the draft
+
+
+def test_changed_fields_treats_lists_as_sets_and_empty_as_equal():
+    from gapstudy.labeltool.app import changed_fields
+    d = {"coverage": "shared", "categories": ["a", "b"], "evidence": ["x"], "need": None, "barriers": [], "flags": []}
+    assert changed_fields(d, {**d, "categories": ["b", "a"], "need": ""}) == []
+    assert changed_fields(d, {**d, "need": "task_process"}) == ["need"]
