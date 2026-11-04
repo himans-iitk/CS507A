@@ -20,6 +20,7 @@
     }
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }  /* the hidden attribute must win over display rules below */
   body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, sans-serif; }
   header { position: sticky; top: 0; z-index: 2; background: var(--panel); border-bottom: 1px solid var(--line);
            padding: 8px 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
@@ -123,7 +124,8 @@
   <form id="whoForm">
     <h2>Who is verifying?</h2>
     <p class="hint">Your name is saved with every label, so each person's checks can be told apart. Use the same name every time.</p>
-    <input type="text" id="whoInput" required maxlength="40" placeholder="e.g. Himanshu" autocomplete="name">
+    <input type="text" id="whoInput" required maxlength="40" placeholder="e.g. Himanshu"
+           autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore>
     <button type="submit">Start</button>
   </form>
 </div>
