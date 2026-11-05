@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check Claude's Answers</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2330;--muted:#5d6675;--line:#dfe3e9;--accent:#2f6fed;
+--good:#1f8a4c;--goodbg:#e6f5ec;--bad:#c03a2b;--badbg:#fbeae8;--warn:#a46a00;--warnbg:#fff4dc;--gray:#eef0f3;--mark:#ffe58a}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1d2128;--ink:#e6e9ee;--muted:#9aa3b2;--line:#323844;
+--accent:#6f9bff;--good:#5cc98a;--goodbg:#173325;--bad:#ff7d6e;--badbg:#3a1d1a;--warn:#f2b84b;--warnbg:#3a2d12;--gray:#2a2f38;--mark:#6b5a12}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;
+display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+header h1{font-size:17px;margin:0}
+.tabs button{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:5px 12px;border-radius:20px;cursor:pointer;font:inherit}
+.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.who{margin-left:auto;color:var(--muted)}
+.who input{font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:140px}
+main{max-width:860px;margin:0 auto;padding:16px}
+.bar{height:6px;background:var(--gray);border-radius:4px;overflow:hidden;margin:4px 0 14px}
+.bar div{height:100%;background:var(--good)}
+.meta{color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+.step{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+pre.txt{white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0;
+background:var(--bg);border-radius:8px;padding:12px;max-height:420px;overflow:auto}
+.q{font-size:16px;font-weight:600;margin:0 0 10px}
+.ans{display:inline-block;padding:6px 12px;border-radius:8px;font-weight:600;font-size:15px}
+.c-agent_only{background:var(--badbg);color:var(--bad)}
+.c-partial{background:var(--warnbg);color:var(--warn)}
+.c-shared{background:var(--goodbg);color:var(--good)}
+.c-agent_directed{background:var(--gray);color:var(--muted)}
+.why{margin:10px 0 0}
+.ev{border-left:3px solid var(--accent);padding:6px 10px;margin:10px 0;background:var(--bg);border-radius:0 6px 6px 0}
+.ev b{font-size:13px}
+.ev pre{white-space:pre-wrap;margin:6px 0 0;font:13px/1.45 ui-monospace,Menlo,monospace;max-height:220px;overflow:auto}
+.flag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;background:var(--gray);color:var(--muted);margin-left:6px}
+.flag.conflict{background:var(--badbg);color:var(--bad)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.big{flex:1 1 200px;font:inherit;font-size:16px;font-weight:600;padding:14px;border-radius:10px;cursor:pointer;border:2px solid transparent}
+.yes{background:var(--goodbg);color:var(--good);border-color:var(--good)}
+.no{background:var(--badbg);color:var(--bad);border-color:var(--bad)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:12px}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt small{display:block;color:var(--muted);font-weight:400}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.opt[disabled]{opacity:.4;cursor:not-allowed}
+textarea{width:100%;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-top:10px;min-height:56px}
+.save{font:inherit;font-weight:600;padding:9px 18px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;margin-top:8px}
+.save[disabled]{opacity:.45;cursor:not-allowed}
+.nav{display:flex;justify-content:space-between;margin-top:12px}
+.link{background:none;border:0;color:var(--accent);font:inherit;cursor:pointer;padding:4px 0}
+.prev{background:var(--warnbg);color:var(--warn);padding:8px 12px;border-radius:8px;margin-bottom:12px;font-size:14px}
+.search input{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+details{border-bottom:1px solid var(--line);padding:6px 0}
+details summary{cursor:pointer;font-size:14px}
+details pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;margin:6px 0;max-height:300px;overflow:auto}
+mark{background:var(--mark);color:inherit}
+.hit{color:var(--accent);font-size:12px;margin-left:6px}
+.help{color:var(--muted);font-size:13px}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--bg)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:20px;opacity:0;transition:opacity .2s}
+.toast.show{opacity:.92}
+.done{text-align:center;padding:40px 16px}
+@media (max-width:600px){.who{margin-left:0}.big{font-size:15px;padding:12px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Check Claude's answers</h1>
+  <div class="tabs"><button data-set="pilot">Pilot</button> <button data-set="main">Main</button></div>
+  <label class="help"><input type="checkbox" id="onlyTodo" checked> only unchecked</label>
+  <div class="who">Your name: <input id="name" placeholder="e.g. Himanshu"></div>
+</header>
+<main id="app"><p class="help">Loading…</p></main>
+<div class="toast" id="toast"></div>
+
+<script>
+const ANSWERS = {
+  agent_only:     {label:"No — it is only in the AI file", short:"Only in AI file", hint:"Humans can't find this in README/CONTRIBUTING"},
+  partial:        {label:"Partly — humans get some of it", short:"Partly", hint:"Topic is there, but less detail"},
+  shared:         {label:"Yes — humans already have it", short:"Humans have it", hint:"Same information is in the human docs"},
+  agent_directed: {label:"Not relevant — it only talks to the AI", short:"Only for the AI", hint:"Persona, tone, tool use; nothing a human needs"},
+};
+const S = {set:localStorage.getItem("vset")||"pilot", list:null, pos:0, unit:null, wrongOpen:false, pick:null, t0:0, history:[]};
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nameBox = $("#name");
+try { nameBox.value = localStorage.getItem("vname") || ""; } catch(e) {}
+nameBox.addEventListener("input", () => { try { localStorage.setItem("vname", nameBox.value.trim()); } catch(e) {} });
+
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1400); }
+async function api(path, opts){ const r = await fetch(path, opts); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+
+async function loadList(){
+  try { localStorage.setItem("vset", S.set); } catch(e) {}
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.set===S.set));
+  S.list = await api(`api/list?set=${S.set}`);
+  for (const [k,v] of Object.entries(S.list.counts)) {
+    const b = document.querySelector(`.tabs button[data-set="${k}"]`);
+    if (b) b.textContent = `${k[0].toUpperCase()+k.slice(1)} (${v.done}/${v.total})`;
+  }
+  S.done = new Set(S.list.done);
+  S.order = $("#onlyTodo").checked ? S.list.ids.filter(u => !S.done.has(u)) : S.list.ids;
+  S.pos = 0; S.history = [];
+  if (!S.order.length) return renderDone();
+  await show(S.order[0]);
+}
+
+async function show(id){
+  S.unit = await api(`api/unit/${encodeURIComponent(id)}`);
+  S.wrongOpen = false; S.pick = null; S.t0 = Date.now();
+  render(); window.scrollTo(0,0);
+}
+
+function evidenceHTML(u){
+  const byId = Object.fromEntries(u.human.map(h => [h.id, h]));
+  if (!u.draft.evidence.length) return `<p class="help">Claude did not find a matching passage in the README or CONTRIBUTING.</p>`;
+  return `<div class="step" style="margin-top:12px">Where Claude found it in the human docs</div>` +
+    u.draft.evidence.map(id => { const h = byId[id]; if (!h) return "";
+      return `<div class="ev"><b>${esc(h.doc)} › ${esc(h.heading || "(top of file)")}</b><pre>${esc(h.text)}</pre></div>`; }).join("");
+}
+
+function render(){
+  const u = S.unit, d = u.draft, a = ANSWERS[d.coverage];
+  const total = S.list.ids.length, doneN = S.done.size;
+  const flags = d.flags.map(f => `<span class="flag ${f==="conflict"?"conflict":""}">${f==="conflict"?"⚠ docs disagree":f==="links_out"?"points to other docs":f}</span>`).join("");
+  $("#app").innerHTML = `
+  <div class="meta"><span><b>${esc(u.repo)}</b> · ${esc(u.tool)} file</span>
+    <span>${doneN} of ${total} checked${$("#onlyTodo").checked ? ` · ${S.order.length - S.pos} left in this list` : ""}</span></div>
+  <div class="bar"><div style="width:${total ? 100*doneN/total : 0}%"></div></div>
+  ${u.previous ? `<div class="prev">Already checked by <b>${esc(u.previous.coder||"someone")}</b>: ${u.previous.verdict==="wrong" ? "marked wrong → "+esc(ANSWERS[u.previous.coverage]?.short) : u.previous.verdict==="correct" ? "marked right" : "labelled in the full tool"}. Saving again replaces it.</div>` : ""}
+  <div class="card">
+    <div class="step">1 · What the AI instruction file says</div>
+    ${u.heading ? `<p style="margin:0 0 8px;font-weight:600">${esc(u.heading)}</p>` : ""}
+    <pre class="txt">${esc(u.text)}</pre>
+  </div>
+  <div class="card">
+    <div class="step">2 · Claude's answer</div>
+    <p class="q">Could a new human contributor learn this from the project's README or CONTRIBUTING?</p>
+    <span class="ans c-${d.coverage}">${a.label}</span>${flags}
+    <p class="why"><b>Why:</b> ${esc(d.rationale)}</p>
+    ${d.coverage === "agent_directed" ? "" : evidenceHTML(u)}
+  </div>
+  <div class="card">
+    <div class="step">3 · Is Claude right?</div>
+    <div class="btns">
+      <button class="big yes" id="bYes">✅ Yes, right <kbd>1</kbd></button>
+      <button class="big no" id="bNo">❌ No, wrong <kbd>2</kbd></button>
+    </div>
+    <div id="wrongBox" ${S.wrongOpen ? "" : "hidden"}>
+      <p style="margin:14px 0 0;font-weight:600">What is the correct answer?</p>
+      <div class="opts">${Object.entries(ANSWERS).map(([k,v],i) =>
+        `<button class="opt ${S.pick===k?"sel":""}" data-k="${k}" ${k===d.coverage?"disabled":""}>
+          <span class="ans c-${k}" style="font-size:13px;padding:2px 8px">${v.short}</span> <kbd>${"abcd"[i]}</kbd><small>${v.hint}</small></button>`).join("")}</div>
+      <textarea id="note" placeholder="Optional: one line on why (e.g. 'README Setup section has the same command')"></textarea>
+      <button class="save" id="bSave" ${S.pick ? "" : "disabled"}>Save as wrong <kbd>Enter</kbd></button>
+    </div>
+    <div class="nav">
+      <button class="link" id="bBack" ${S.history.length ? "" : "disabled"}>← Back</button>
+      <button class="link" id="bSkip">Skip for now →</button>
+    </div>
+  </div>
+  <div class="card search">
+    <div class="step">Check it yourself · README / CONTRIBUTING of ${esc(u.repo)} (${u.human.length} sections)</div>
+    <input id="q" placeholder="Search the human docs, e.g. a command or file name">
+    <div id="sections" style="margin-top:8px"></div>
+  </div>
+  <p class="help">Keys: <kbd>1</kbd> right · <kbd>2</kbd> wrong · <kbd>a</kbd>–<kbd>d</kbd> pick answer · <kbd>Enter</kbd> save · <kbd>→</kbd> skip · <kbd>←</kbd> back · <kbd>/</kbd> search</p>`;
+  $("#bYes").onclick = () => save("correct");
+  $("#bNo").onclick = () => { S.wrongOpen = true; $("#wrongBox").hidden = false; };
+  document.querySelectorAll(".opt").forEach(b => b.onclick = () => choose(b.dataset.k));
+  $("#bSave").onclick = () => save("wrong");
+  $("#bSkip").onclick = next;
+  $("#bBack").onclick = back;
+  $("#q").oninput = renderSections;
+  renderSections();
+}
+
+function choose(k){
+  if (k === S.unit.draft.coverage) return;
+  S.pick = k; S.wrongOpen = true; $("#wrongBox").hidden = false;
+  document.querySelectorAll(".opt").forEach(b => b.classList.toggle("sel", b.dataset.k===k));
+  $("#bSave").disabled = false;
+}
+
+function renderSections(){
+  const q = ($("#q")?.value || "").trim().toLowerCase();
+  const re = q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi") : null;
+  const hl = s => re ? esc(s).replace(new RegExp(esc(q).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"), m => `<mark>${m}</mark>`) : esc(s);
+  const items = S.unit.human.map(h => {
+    const hits = re ? ((h.heading + " " + h.text).match(re) || []).length : 0;
+    if (re && !hits) return "";
+    return `<details ${re ? "open" : ""}><summary>${esc(h.doc)} › ${hl(h.heading || "(top of file)")}${hits ? `<span class="hit">${hits} match${hits>1?"es":""}</span>` : ""}</summary><pre>${hl(h.text)}</pre></details>`;
+  }).join("");
+  $("#sections").innerHTML = items || `<p class="help">No section mentions “${esc(q)}”.</p>`;
+}
+
+async function save(verdict){
+  const name = nameBox.value.trim();
+  if (!name) { nameBox.focus(); toast("Please type your name first (top right)"); return; }
+  if (verdict === "wrong" && !S.pick) { toast("Pick the correct answer first"); return; }
+  try {
+    await api("api/verify", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({
+      unit_id: S.unit.unit_id, name, verdict, coverage: verdict==="wrong" ? S.pick : null,
+      note: $("#note")?.value || "", seconds: Math.round((Date.now()-S.t0)/1000)})});
+  } catch(e) { toast("Not saved: " + e.message.slice(0,80)); return; }
+  S.done.add(S.unit.unit_id);
+  toast(verdict === "correct" ? "Saved ✓ right" : "Saved ✗ wrong");
+  next();
+}
+
+async function next(){
+  S.history.push(S.pos);
+  S.pos++;
+  if (S.pos >= S.order.length) return renderDone();
+  await show(S.order[S.pos]);
+}
+async function back(){
+  if (!S.history.length) return;
+  S.pos = S.history.pop();
+  await show(S.order[S.pos]);
+}
+function renderDone(){
+  $("#app").innerHTML = `<div class="card done"><h2>🎉 Nothing left in this list</h2>
+    <p>${S.done.size} of ${S.list.ids.length} ${S.set} units have been checked.</p>
+    <p class="help">Untick “only unchecked” to review earlier answers, or switch sets at the top.</p></div>`;
+}
+
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { S.set = b.dataset.set; loadList(); });
+$("#onlyTodo").onchange = loadList;
+document.addEventListener("keydown", e => {
+  if (!S.unit) return;
+  const typing = ["INPUT","TEXTAREA"].includes(document.activeElement.tagName);
+  if (typing) { if (e.key === "Escape") document.activeElement.blur(); return; }
+  if (e.key === "1") save("correct");
+  else if (e.key === "2") { S.wrongOpen = true; $("#wrongBox").hidden = false; }
+  else if ("abcd".includes(e.key) && e.key.length === 1) choose(Object.keys(ANSWERS)["abcd".indexOf(e.key)]);
+  else if (e.key === "Enter" && S.wrongOpen && S.pick) save("wrong");
+  else if (e.key === "ArrowRight") next();
+  else if (e.key === "ArrowLeft") back();
+  else if (e.key === "/") { e.preventDefault(); $("#q").focus(); }
+});
+loadList().catch(e => $("#app").innerHTML = `<div class="card">Could not load: ${esc(e.message)}</div>`);
+</script>
+</body>
+</html>
