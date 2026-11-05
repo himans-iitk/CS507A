@@ -34,3 +34,4 @@ paper/main.pdf
 
 # per-user unit links (contain the access token)
 coding/*_links.md
+coding/verify_offline_*.html

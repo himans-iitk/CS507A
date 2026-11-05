@@ -73,6 +73,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
   <div class="tabs"><button data-set="pilot">Pilot</button> <button data-set="main">Main</button></div>
   <label class="help"><input type="checkbox" id="onlyTodo" checked> only unchecked</label>
   <div class="who">Your name: <input id="name" placeholder="e.g. Himanshu"></div>
+  <button id="dl" class="save" style="margin:0" hidden>⬇ Download my marks</button>
 </header>
 <main id="app"><p class="help">Loading…</p></main>
 <div class="toast" id="toast"></div>
@@ -92,7 +93,10 @@ try { nameBox.value = localStorage.getItem("vname") || ""; } catch(e) {}
 nameBox.addEventListener("input", () => { try { localStorage.setItem("vname", nameBox.value.trim()); } catch(e) {} });
 
 function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1400); }
-async function api(path, opts){ const r = await fetch(path, opts); if(!r.ok) throw new Error(await r.text()); return r.json(); }
+async function api(path, opts){
+  if (window.OFFLINE) return window.OFFLINE.api(path, opts);
+  const r = await fetch(path, opts); if(!r.ok) throw new Error(await r.text()); return r.json();
+}
 
 async function loadList(){
   try { localStorage.setItem("vset", S.set); } catch(e) {}
@@ -229,6 +233,14 @@ function renderDone(){
     <p class="help">Untick “only unchecked” to review earlier answers, or switch sets at the top.</p></div>`;
 }
 
+if (window.OFFLINE) {
+  const dl = $("#dl"); dl.hidden = false;
+  const label = () => dl.textContent = `⬇ Download my marks (${window.OFFLINE.count()})`;
+  label(); window.OFFLINE.onChange = label;
+  dl.onclick = () => window.OFFLINE.download(nameBox.value.trim());
+  document.querySelectorAll(".tabs button").forEach(b => { if (!window.OFFLINE.sets.includes(b.dataset.set)) b.hidden = true; });
+  if (!window.OFFLINE.sets.includes(S.set)) S.set = window.OFFLINE.sets[0];
+}
 document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { S.set = b.dataset.set; loadList(); });
 $("#onlyTodo").onchange = loadList;
 document.addEventListener("keydown", e => {

@@ -53,3 +53,27 @@ def test_app_roundtrip(tmp_path):
     assert c.get("/api/list?set=pilot&token=t").get_json()["done"] == [uid]
     rel = c.get("/api/list?set=reliability&token=t")
     assert rel.status_code == 400  # the blind set is never served here
+
+
+@pytest.mark.skipif(not (CODING / "drafts.jsonl").exists(), reason="needs real coding data")
+def test_offline_export_and_merge(tmp_path):
+    from gapstudy.verify.offline import export, merge
+    coding = tmp_path / "coding"
+    shutil.copytree(CODING, coding, ignore=shutil.ignore_patterns("labels"))
+    (coding / "labels").mkdir()
+    out = export(["pilot"], tmp_path / "v.html", coding, PROCESSED)
+    html = out.read_text()
+    assert 'id="vdata"' in html and "window.OFFLINE" in html and "reliability" not in html.split('id="vdata"')[1][:200]
+    data = json.loads(html.split('id="vdata">')[1].split("</script>")[0].replace("<\\/", "</"))
+    uid = data["sets"]["pilot"][0]
+    other = next(k for k in ("agent_only", "shared") if k != data["units"][uid]["draft"]["coverage"])
+    marks = tmp_path / "m.jsonl"
+    marks.write_text("\n".join(json.dumps(m) for m in [
+        {"unit_id": uid, "name": "B", "verdict": "wrong", "coverage": other, "marked_at": "t1"},
+        {"unit_id": data["sets"]["pilot"][1], "name": "B", "verdict": "correct", "marked_at": "t2"},
+        {"unit_id": "nope::agent::0", "name": "B", "verdict": "correct", "marked_at": "t3"},
+    ]))
+    assert merge([marks], coding) == {"added": 2, "already": 0, "rejected": 1}
+    assert merge([marks], coding) == {"added": 0, "already": 2, "rejected": 1}
+    saved = [json.loads(l) for l in (coding / "labels" / "pass1.jsonl").read_text().splitlines()]
+    assert saved[0]["coverage"] == other and saved[0]["tool"] == "verify-offline"
