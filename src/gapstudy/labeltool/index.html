@@ -72,6 +72,7 @@
 <body>
 <header>
   <strong id="title">Unit coding</strong>
+  <button class="secondary" id="passSwitch" type="button"></button>
   <span class="meta" id="where"></span>
   <div class="progress"><div id="bar" style="width:0"></div></div>
   <span class="meta" id="count"></span>
@@ -136,6 +137,17 @@ const TOKEN = params.get("token") || "";
 const RECHECK = params.get("recheck") === "1";
 let state = null, current = null, startedAt = 0, evidence = new Set();
 let CODER = "";
+document.addEventListener("DOMContentLoaded", () => {
+  const sw = document.getElementById("passSwitch");
+  if (!sw) return;
+  sw.textContent = PASS === 2 ? "Switch to pass 1" : "Switch to pass 2 (second coder)";
+  sw.onclick = () => {
+    const p = new URLSearchParams(location.search);
+    if (PASS === 2) p.delete("pass"); else p.set("pass", "2");
+    p.delete("recheck");
+    location.search = p.toString();
+  };
+});
 try { CODER = localStorage.getItem("coder") || ""; } catch (e) { /* storage blocked: ask each time */ }
 
 const api = (path, opts = {}) => fetch(`${path}${path.includes("?") ? "&" : "?"}pass=${PASS}${RECHECK ? "&recheck=1" : ""}`,
@@ -239,7 +251,11 @@ async function acceptDraft() {
 
 async function loadUnit(id) {
   if (!id) {
-    document.getElementById("unitText").innerHTML = "<p>Nothing left to code in this pass.</p>";
+    const sc = state && state.second_coder;
+    document.getElementById("unitText").innerHTML = PASS === 2 && state.total === 0 && sc && sc.own_first_label
+      ? `<p><b>No units for “${esc(CODER)}” in pass 2.</b> You labelled all ${sc.own_first_label} reliability units in pass 1, and nobody may label the same unit twice.</p>
+         <p>Pass 2 must be done by a <b>different person</b>: click <b>change</b> next to the verifier name and enter their own name.</p>`
+      : "<p>Nothing left to code in this pass.</p>";
     return;
   }
   const data = await api(`/api/unit/${encodeURIComponent(id)}`);
