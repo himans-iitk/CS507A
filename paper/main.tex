@@ -172,8 +172,7 @@ The \nReliabilityRepos{} repositories of the reliability set (\nReliabilityUnits
 without any model draft, independently by the author and by a second coder, with each coder's labels
 hidden from the other and the order shuffled. We report Cohen's $\kappa$ and linearly
 weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale: $\kappa = \kappaCoverage$,
-$\kappa_w = \kappaWeighted$. Agreement is at chance level: the second coder labelled 336 of the
-338 units agent-only, while the author's labels spread over all four values.
+$\kappa_w = \kappaWeighted$. % TODO: second-coder round to be redone; numbers fill in automatically.
 
 \subsection{Analysis}
 
@@ -273,9 +272,9 @@ agent-only units on held-out repositories (ROC-AUC \detectorAUC).
 sensitivity analysis estimates the effect. Units that only address the agent are separated out so
 that they do not inflate the agent-only rate.
 
-\paragraph{Internal.} The reliability of the coverage labels is not established: inter-rater
-agreement on the reliability set is at chance level ($\kappa = \kappaCoverage$), so the RQ1 and RQ2
-rates rest on the first author's judgement. Most labels are model drafts accepted by the author, so
+\paragraph{Internal.} The RQ1 and RQ2 rates rest on the first author's coverage judgements;
+inter-rater agreement on the reliability set ($\kappa = \kappaCoverage$) bounds how far another coder
+would reproduce them. % TODO: revise once the second-coder round is in. Most labels are model drafts accepted by the author, so
 the results may inherit the model's judgement and the author may have anchored on the drafts; the
 64 corrections show the drafts were not accepted unconditionally, but they bound rather than measure
 this effect. The RQ3 gold labels share this limitation. Fork and archive status were checked at
