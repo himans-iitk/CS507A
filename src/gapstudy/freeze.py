@@ -48,6 +48,8 @@ def check(coding_dir: Path) -> tuple[pd.DataFrame, list[str]]:
     if len(bad):
         kinds = bad.problems.explode().value_counts().to_dict()
         issues.append(f"{len(bad)} units with consistency problems {kinds} (see gapstudy.pilot_report)")
+    # a label's "tool" field records which page saved it; "tool" in the dataset means the agent-file type
+    labels = labels.rename(columns={"tool": "label_tool"})
     return labels.merge(queue[["unit_id", "repo", "tool", "set", "weight"]], on="unit_id"), issues
 
 

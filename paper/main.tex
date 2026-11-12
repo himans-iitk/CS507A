@@ -162,13 +162,18 @@ for which the human documentation only links elsewhere.
 
 Coding used a purpose-built tool that shows the agent unit beside the full README and CONTRIBUTING
 with keyword search. It deliberately shows no similarity ranking, so the gold labels are not
-anchored on any matcher evaluated in RQ3. An open-source LLM could pre-fill categories (A) only;
-coverage was always judged by the author. The codebook was refined on \nPilotRepos{} pilot repositories
-(\nPilotUnits{} units). Reliability is intra-rater: the \nReliabilityRepos{} repositories of the
-reliability set (\nReliabilityUnits{} units) were re-coded blind at least 14 days after the first pass,
-with first-pass labels hidden and the order shuffled. We report Cohen's $\kappa$ and linearly
+anchored on any matcher evaluated in RQ3. For the pilot and main sets, a large language model
+(Claude) drafted every label, citing the human sections it relied on; the author reviewed each
+draft and either accepted it or corrected the coverage with a written note. Of the
+1,223 drafts reviewed this way, 1,159 were accepted and 64 corrected; for 51 corrected labels the
+model then filled in the missing evidence or newcomer need, and these fills are marked in the data.
+The codebook was refined on \nPilotRepos{} pilot repositories (\nPilotUnits{} units).
+The \nReliabilityRepos{} repositories of the reliability set (\nReliabilityUnits{} units) were coded
+without any model draft, independently by the author and by a second coder, with each coder's labels
+hidden from the other and the order shuffled. We report Cohen's $\kappa$ and linearly
 weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale: $\kappa = \kappaCoverage$,
-$\kappa_w = \kappaWeighted$.
+$\kappa_w = \kappaWeighted$. Agreement is at chance level: the second coder labelled 336 of the
+338 units agent-only, while the author's labels spread over all four values.
 
 \subsection{Analysis}
 
@@ -268,9 +273,12 @@ agent-only units on held-out repositories (ROC-AUC \detectorAUC).
 sensitivity analysis estimates the effect. Units that only address the agent are separated out so
 that they do not inflate the agent-only rate.
 
-\paragraph{Internal.} One person coded all units; reliability is intra-rater (blind re-code after 14
-days), which is weaker evidence than agreement between coders. LLM category suggestions, if used,
-may anchor the coder on categories, but never on coverage. Fork and archive status were checked at
+\paragraph{Internal.} The reliability of the coverage labels is not established: inter-rater
+agreement on the reliability set is at chance level ($\kappa = \kappaCoverage$), so the RQ1 and RQ2
+rates rest on the first author's judgement. Most labels are model drafts accepted by the author, so
+the results may inherit the model's judgement and the author may have anchored on the drafts; the
+64 corrections show the drafts were not accepted unconditionally, but they bound rather than measure
+this effect. The RQ3 gold labels share this limitation. Fork and archive status were checked at
 collection time, not at the snapshot.
 
 \paragraph{External.} Requiring a CONTRIBUTING file selects larger, more established projects: the

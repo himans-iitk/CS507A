@@ -1,0 +1,16 @@
+group,need,units,repos,share,agent_only_units
+Processes and Practices,Development Process,278,120,0.27202875201388027,163
+Processes and Practices,Development Environment and Tools,237,117,0.2659561283926137,95
+Product,Software Architecture,121,89,0.12027512702937168,57
+Processes and Practices,Task Process,67,48,0.07342917337960095,41
+Product,Low-level Design & Runtime Behavior,62,45,0.06902961953154046,39
+Product,Technologies Used,47,36,0.047527574668484306,25
+Product,Product/Domain,29,23,0.03600198289750899,14
+Documentation,"Repository, Indexes, and Search",31,27,0.029805428181930854,17
+Processes and Practices,Software Configuration Management,25,19,0.028132358408724748,10
+Product,Design & Implementation Rationale,14,12,0.021192217127277233,3
+Documentation,Developer-Oriented Documentation,21,20,0.01741231875077457,10
+Documentation,Learning Material,8,8,0.014437972487297066,4
+Context,Organization,1,1,0.0027884496220101623,0
+Team,Communication Strategies,1,1,0.0009914487544925024,1
+Team,Roles and Expertise,1,1,0.0009914487544925024,1
