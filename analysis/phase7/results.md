@@ -137,9 +137,48 @@ By group: Processes and Practices 64.0%; Product 29.4%; Documentation 6.2%; Cont
 | without stub CONTRIBUTING | 184 | 39.2% |
 | without links_out units | 191 | 38.8% |
 
-docs/ check: needs the tuned detector (detector/config.json from gapstudy.detector.evaluate).
+docs/ check (detector estimate, 24 repos): 52 of 87 agent-only units (59.8%) match a docs/ section.
 
 Flags: conflict (human docs contradict the agent file) on 38 units; links_out on 180.
+
+## Label provenance
+
+How each frozen label was produced (single annotator: Himanshu Mishra).
+
+| Origin | Units |
+|---|---|
+| AI draft accepted unchanged | 1161 |
+| AI draft, coverage kept, other fields edited | 1 |
+| AI draft, coverage corrected by the annotator | 64 |
+| Coded without an AI draft (blind) | 338 |
+
+Of 1226 AI drafts reviewed, 94.8% kept the drafted coverage. After a coverage correction, 51 labels had missing evidence or newcomer-need fields completed by the model (marked `filled_by` in the data).
+
+### By coding set
+
+| set         |   draft_accepted |   draft_details_edited |   draft_corrected |   blind |
+|:------------|-----------------:|-----------------------:|------------------:|--------:|
+| main        |             1001 |                      0 |                64 |       0 |
+| pilot       |              160 |                      1 |                 0 |       0 |
+| reliability |                0 |                      0 |                 0 |     338 |
+
+### Correction rate by drafted coverage
+
+| draft_coverage   |   drafts |   corrected | correction_rate   |
+|:-----------------|---------:|------------:|:------------------|
+| agent_directed   |      127 |          10 | 7.9%              |
+| agent_only       |      501 |          37 | 7.4%              |
+| partial          |      432 |          13 | 3.0%              |
+| shared           |      166 |           4 | 2.4%              |
+
+### Corrected drafts (rows: draft, columns: final)
+
+| draft_coverage   |   agent_only |   partial |   shared |
+|:-----------------|-------------:|----------:|---------:|
+| agent_directed   |            6 |         3 |        1 |
+| agent_only       |            0 |        37 |        0 |
+| partial          |           10 |         0 |        3 |
+| shared           |            0 |         4 |        0 |
 
 ## Corpus: length and readability (all 201 repos, no labels needed)
 

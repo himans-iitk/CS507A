@@ -14,8 +14,9 @@ import json
 
 import pandas as pd
 
-from gapstudy.analysis import corpus, rq1, rq2, sensitivity
+from gapstudy.analysis import corpus, provenance, rq1, rq2, sensitivity
 from gapstudy.analysis.data import PROCESSED, TOOL_NAMES, frame_shares, load
+from gapstudy.drafting import load_drafts
 from gapstudy.github_client import PROJECT_ROOT
 from gapstudy.labels import CODING
 
@@ -47,7 +48,8 @@ def headline_md(h: pd.DataFrame) -> list[str]:
 
 
 def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, units: pd.DataFrame,
-          n_boot: int, docs: pd.DataFrame | None = None) -> tuple[str, dict[str, pd.DataFrame]]:
+          n_boot: int, docs: pd.DataFrame | None = None,
+          drafts: dict | None = None) -> tuple[str, dict[str, pd.DataFrame]]:
     cats = {k: v["name"] for k, v in codebook["categories"].items() if not k.startswith("_")}
     tables: dict[str, pd.DataFrame] = {}
     L = ["# Phase 7 results", ""]
@@ -125,6 +127,7 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
         d = sensitivity.docs_check(df)
         L += [""]
         if d:
+            tables["docs_check"] = pd.DataFrame([d])
             L += [f"docs/ check (detector estimate, {d['repos']} repos): {d['covered_by_docs']} of "
                   f"{d['agent_only_units']} agent-only units ({pct(d['share'])}) match a docs/ section."
                   + (" Detector thresholds are provisional." if d.get("provisional_detector") else ""), ""]
@@ -132,6 +135,11 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
             L += ["docs/ check: needs the tuned detector (detector/config.json from gapstudy.detector.evaluate).", ""]
         L += [f"Flags: conflict (human docs contradict the agent file) on {int(flags.get('conflict', 0))} units; "
               f"links_out on {int(flags.get('links_out', 0))}.", ""]
+        if drafts is not None and "draft_shown" in df:
+            prov = provenance.summary(df, drafts)
+            tables["provenance_by_set"] = prov["by_set"]
+            tables["provenance_by_draft"] = prov["by_draft"]
+            L += provenance.markdown(prov)
     else:
         L += ["No labels yet: RQ1, RQ2 and the sensitivity checks run once coding has started.", ""]
 
@@ -156,11 +164,12 @@ def main() -> None:
     df, provisional = load()
     codebook = json.loads((CODING / "codebook.json").read_text())
     units = pd.read_csv(PROCESSED / "units.csv")
-    text, tables = build(df, provisional, frame_shares(), codebook, units, args.boot, corpus.documents())
+    text, tables = build(df, provisional, frame_shares(), codebook, units, args.boot, corpus.documents(),
+                         load_drafts(CODING))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "results.md").write_text(text + "\n")
     for name, t in tables.items():
-        t.to_csv(OUT / f"{name}.csv", index=name in ("rq1_gee",))
+        t.to_csv(OUT / f"{name}.csv", index=name in ("rq1_gee", "provenance_by_set", "provenance_by_draft"))
     print(text)
 
 

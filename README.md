@@ -8,9 +8,11 @@ Course project for CS507A, University of British Columbia.
 - **RQ2** Which newcomer needs and barriers does this agent-only knowledge address?
 - **RQ3** How reliably can agent-only knowledge be identified automatically?
 
-**Status.** Data collection, unit splitting, the coding tool, the gap detector and all analyses are
-implemented and tested. Manual coding is in progress. RQ1–RQ3 results will appear once the labels
-are frozen. The paper draft is in [`paper/`](paper/); results print as **[TBD]** until then.
+**Status.** Data collection, coding (single annotator), the gap detector, all analyses and the
+paper are complete and generated end to end by one command (below). Results:
+[`analysis/FINAL_RESULTS.md`](analysis/FINAL_RESULTS.md); paper: [`paper/main.pdf`](paper/main.pdf).
+A second, independent coding of the reliability set is pending; once its labels exist, rerunning
+the pipeline adds inter-rater agreement and switches the paper to its two-annotator text.
 
 ## What is in this repository
 
@@ -24,7 +26,29 @@ are frozen. The paper draft is in [`paper/`](paper/); results print as **[TBD]**
 | `scripts/` | Slurm jobs for embeddings and the open-source LLM |
 | `tests/` | `pytest` suite |
 
-## Pipeline
+## Results in one command
+
+From the coded labels to the final results and the paper:
+
+```bash
+.venv/bin/python -m gapstudy.pipeline            # check → freeze → reliability → detector → analysis → paper → summary
+.venv/bin/python -m gapstudy.pipeline --from analysis --boot 200   # rerun part of it, fewer bootstrap draws
+```
+
+| Stage | Does | Writes |
+|---|---|---|
+| check | inputs present and consistent; blind set never shown a draft; detector scores complete | — |
+| freeze | analysis dataset from pass-1 labels | `coding/labels_v1.csv` (+ sha256) |
+| reliability | pass 1 vs pass 2 if a second coder's labels exist, else "pending" | `analysis/phase5/reliability.{md,json}` |
+| detector | RQ3: tune on pilot repos, test on the rest (+ LLM judge if its outputs exist) | `analysis/phase6/`, `detector/config.json` |
+| analysis | RQ1, RQ2, sensitivity, readability, label provenance | `analysis/phase7/` |
+| paper | every number and table generated, PDF built | `paper/numbers.tex`, `paper/tables/`, `paper/main.pdf` |
+| summary | headline findings and a run record (inputs/outputs SHA-256, git commit) | `analysis/FINAL_RESULTS.md`, `analysis/pipeline_manifest.json` |
+
+The annotation mode is detected from the labels, not configured. Embedding and LLM scores need a
+GPU and come from the Slurm jobs in `scripts/`; the pipeline reuses them.
+
+## Pipeline, step by step
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && .venv/bin/pip install -e .

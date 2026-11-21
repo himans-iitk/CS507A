@@ -1,9 +1,12 @@
-"""Phase 5: intra-rater reliability from the blind re-code of the reliability set.
+"""Phase 5: reliability from the blind second coding of the reliability set.
 
     python -m gapstudy.reliability [--boot 1000]
 
 Compares pass 1 and pass 2 on units coded in both passes and writes
-analysis/phase5/reliability.md:
+analysis/phase5/reliability.md and reliability.json (status and point estimates, read
+by the pipeline and the paper). Agreement is inter-rater when the passes were coded by
+different people and intra-rater when one person re-coded; with no pass-2 labels the
+status is "pending" and the single-annotator results stand alone. Measures:
   - coverage: Cohen's kappa over all four labels, and linearly weighted kappa on the
     ordinal agent-only < partial < shared scale (units neither pass called agent-directed);
   - categories: per-category kappa (present/absent) and mean Jaccard per unit;
@@ -25,6 +28,7 @@ from gapstudy.github_client import PROJECT_ROOT
 from gapstudy.labels import CODING, LabelStore
 
 OUT = PROJECT_ROOT / "analysis" / "phase5" / "reliability.md"
+OUT_JSON = OUT.with_suffix(".json")
 ORDINAL = {"agent_only": 0, "partial": 1, "shared": 2}
 
 
@@ -70,15 +74,26 @@ def bootstrap(p: pd.DataFrame, category_keys: list[str], n: int, seed: int = 507
     return pd.DataFrame(draws)
 
 
-def report(coding_dir: Path, n_boot: int) -> str:
+def coders(store: LabelStore, unit_ids: set[str]) -> tuple[set, set]:
+    pick = lambda p: {r.get("coder") for u, r in store.latest(p).items() if u in unit_ids}
+    return pick(1), pick(2)
+
+
+def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
     codebook = json.loads((coding_dir / "codebook.json").read_text())
     keys = [k for k in codebook["categories"] if not k.startswith("_")]
     queue = pd.read_csv(coding_dir / "queue.csv")
-    p = paired(LabelStore(coding_dir), queue[queue.set == "reliability"])
-    total = (queue.set == "reliability").sum()
-    lines = ["# Intra-rater reliability (pass 1 vs blind pass 2)", ""]
+    store = LabelStore(coding_dir)
+    p = paired(store, queue[queue.set == "reliability"])
+    total = int((queue.set == "reliability").sum())
     if p.empty:
-        return "\n".join(lines + [f"No units re-coded yet (0 / {total})."]) + "\n"
+        status = {"status": "pending", "units": 0, "total": total}
+        text = ("# Reliability (pass 1 vs blind pass 2)\n\n"
+                f"No second-coder labels yet (0 / {total} units). Results use a single annotator.\n")
+        return text, status
+    c1, c2 = coders(store, set(p.unit_id))
+    kind = "intra-rater" if c1 == c2 else "inter-rater"
+    lines = [f"# {kind.capitalize()} reliability (pass 1 vs blind pass 2)", ""]
 
     point = metrics(p, keys)
     boot = bootstrap(p, keys, n_boot) if n_boot else pd.DataFrame(columns=point)
@@ -99,17 +114,27 @@ def report(coding_dir: Path, n_boot: int) -> str:
         support = p.categories_1.map(lambda c: k in (c or [])).sum()
         lines.append(f"| {codebook['categories'][k]['name']} | {point['cat:' + k]:.2f} | {support} |")
     lines += ["", "Interpretation (Landis & Koch): 0.61–0.80 substantial, > 0.80 almost perfect. "
-              "This is intra-rater agreement; report it as such."]
-    return "\n".join(lines) + "\n"
+              f"Pass 1 coder(s): {', '.join(sorted(map(str, c1)))}; pass 2 coder(s): "
+              f"{', '.join(sorted(map(str, c2)))}, so this is {kind} agreement."]
+    status = {"status": "complete" if len(p) == total else "partial", "kind": kind, "units": int(len(p)),
+              "total": total, "repos": int(p.repo.nunique()),
+              **{k: (None if pd.isna(point[k]) else round(float(point[k]), 4))
+                 for k in ("coverage_agreement", "coverage_kappa", "coverage_weighted_kappa", "category_jaccard",
+                           "need_kappa")}}
+    if n_boot:
+        for k in ("coverage_kappa", "coverage_weighted_kappa"):
+            status[f"{k}_ci"] = [round(float(boot[k].quantile(.025)), 4), round(float(boot[k].quantile(.975)), 4)]
+    return "\n".join(lines) + "\n", status
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--boot", type=int, default=1000)
     args = ap.parse_args()
-    text = report(CODING, args.boot)
+    text, status = report(CODING, args.boot)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(text)
+    OUT_JSON.write_text(json.dumps(status, indent=2) + "\n")
     print(text)
 
 

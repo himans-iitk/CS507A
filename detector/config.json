@@ -1,0 +1,8 @@
+{
+  "matcher": "tfidf",
+  "variant": "item_mean",
+  "threshold": 0.08355089649558059,
+  "t1": 0.09661054387688636,
+  "t2": 0.3223325982689858,
+  "provisional": false
+}

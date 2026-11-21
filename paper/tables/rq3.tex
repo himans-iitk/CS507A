@@ -1,0 +1,19 @@
+\begin{table}[t]
+\caption{RQ3: gap detector on held-out repositories (n = 1284 units; score variant, in italics, and thresholds tuned on 139 pilot units). P, R and F1 for agent-only; macro-F1 over agent-only/partial/shared; @1/@5: the gold covering section ranked first / in the top five. Bold: chosen on the pilot repositories. Brackets: 95\% repository-bootstrap CI.}
+\label{tab:rq3}
+\small\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Matcher & P & R & F1 & AUC & Mac.-F1 & @1/@5 \\
+\midrule
+\textbf{TF-IDF} & 0.69 & 0.85 & 0.76 & 0.88 & 0.60 & 0.66/0.95 \\
+\quad{\scriptsize\itshape item\_mean} & & & {\scriptsize[0.72, 0.79]} & {\scriptsize[0.86, 0.90]} & & \\
+MiniLM-L6 & 0.62 & 0.90 & 0.73 & 0.83 & 0.63 & 0.69/0.94 \\
+\quad{\scriptsize\itshape item\_cov@0.55} & & & {\scriptsize[0.69, 0.76]} & {\scriptsize[0.80, 0.85]} & & \\
+Qwen3-Emb-0.6B & 0.67 & 0.83 & 0.74 & 0.84 & 0.62 & 0.69/0.95 \\
+\quad{\scriptsize\itshape item\_cov@0.65} & & & {\scriptsize[0.70, 0.78]} & {\scriptsize[0.82, 0.87]} & & \\
+bge-base & 0.68 & 0.84 & 0.75 & 0.87 & 0.59 & 0.71/0.96 \\
+\quad{\scriptsize\itshape item\_mean} & & & {\scriptsize[0.71, 0.79]} & {\scriptsize[0.85, 0.89]} & & \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,54 @@
+{
+  "run_at": "2026-11-21T01:58:32+00:00",
+  "git_commit": "2c9ade06af4cf950155677201cfe044d443c9030",
+  "git_dirty": true,
+  "bootstrap_draws": 1000,
+  "stages": {
+    "check": {
+      "mode": "single annotator",
+      "notes": [
+        "pass 2: none yet; results are single-annotator and reliability is pending",
+        "scores BAAI__bge-base-en-v1.5: complete",
+        "scores Qwen__Qwen3-Embedding-0.6B: complete",
+        "scores sentence-transformers__all-MiniLM-L6-v2: complete",
+        "scores tfidf: complete",
+        "LLM judge outputs: 0 file(s) -> RQ3 runs without the LLM stage"
+      ],
+      "warnings": [],
+      "status": "ok",
+      "seconds": 0.1
+    },
+    "paper": {
+      "notes": [
+        "wrote 119 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; single annotator (reliability pending))",
+        "wrote 7 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance",
+        "paper/main.pdf built"
+      ],
+      "status": "ok",
+      "seconds": 2.8
+    }
+  },
+  "inputs": {
+    "data/processed/units.csv": "570c2105b94cbec19cc48dd5c3e76bfdb2d7c2178be0370aa777fd7c8b37c28d",
+    "coding/queue.csv": "1aa9b22df703033d25998a3f3101e850e13e714df795f2424466394de73b531a",
+    "coding/codebook.json": "104394970921ab0dc83ce470b3ea7e64f22d4425c6a18ed46c033bd0d1b17a12",
+    "coding/labels/pass1.jsonl": "a6a9aad36c9a7d9a1c1cf05ef3cc9e878c232200a8e3fb00ba99ae577bcbf9dd",
+    "coding/labels/pass2.jsonl": null,
+    "coding/drafts.jsonl": "e16d3bd7e6eb6f854edc21c313993a246b729def75aca254152c07f677c7da82",
+    "coding/coder_aliases.json": "6120f25a8f392f1eef3ae4f389d8d3ed4b225e86c2cb8fabf7fc42d9d7b64384",
+    "data/processed/scores/BAAI__bge-base-en-v1.5.csv": "5d4ddec91ebc06ce2f9734f73cc20f904cb506292547ce2a9d5feba2c711fae1",
+    "data/processed/scores/Qwen__Qwen3-Embedding-0.6B.csv": "5e859e50222909c453169b6fddb07212c01184b436d849380a483ce703f08c62",
+    "data/processed/scores/sentence-transformers__all-MiniLM-L6-v2.csv": "869f1fff7b8587c48ba2830686c983483fe39bcda031785f2cd518b13a880cd7",
+    "data/processed/scores/tfidf.csv": "3c77c83e8707ed3f45d8b0ae41364b1e4c75882bc1442b0619a1fd575755432d"
+  },
+  "outputs": {
+    "coding/labels_v1.csv": "8616d03b875b9f691ee364ec381d00efd74660becdffa46de1603e3ece7277a4",
+    "analysis/phase5/reliability.json": "16e42789663638e32904b1c00709dff0c5d834edfafb9aab477a9034fc321653",
+    "analysis/phase6/detector_results.csv": "9fd968f25ec3af4b4071cef818c246643e22f4451893ba3d6e461a1a9aefd16d",
+    "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
+    "analysis/phase7/results.md": "914a2b219b2a01bd737a790f0130c87ddc57b17aff3e5f106b0c234feb555ed2",
+    "paper/numbers.tex": "9e5fe08f6ec6414215507bd03d3f6f5dc2140e64f9221c108da6e9a1b746401d",
+    "paper/main.pdf": "812909af381574a37b106743c3b307b944a6eaed0660587f8c5f59232f525c7a",
+    "analysis/FINAL_RESULTS.md": "c117b4e6ea1887a4ed512c97ee0ed4fadd11f997845cb326d9bcf8c49a904d3e"
+  }
+}

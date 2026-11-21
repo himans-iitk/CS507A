@@ -55,11 +55,14 @@ def test_weighted_kappa_penalises_adjacent_disagreement_less(coding):
 
 
 def test_report_with_bootstrap(coding):
-    assert "No units re-coded yet (0 / 8)" in report(coding, 0)
+    text, status = report(coding, 0)
+    assert "0 / 8 units" in text and status == {"status": "pending", "units": 0, "total": 8}
     save_all(coding, 1, COVS)
     save_all(coding, 2, COVS)
-    text = report(coding, 50)
+    text, status = report(coding, 50)
     assert "**8 / 8** in 4 repos" in text and "[1.00, 1.00]" in text
+    assert status["status"] == "complete" and status["coverage_kappa"] == 1 and status["coverage_kappa_ci"] == [1, 1]
+    assert status["kind"] == "intra-rater"  # save_all records no coder, so both passes look like one person
 
 
 def test_freeze_refuses_incomplete_then_writes_with_checksum(coding):

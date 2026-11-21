@@ -117,27 +117,103 @@ def results() -> dict[str, str]:
             r = r[~r.provisional.astype(bool) & r.variant.notna()]
         if "variant" in r.columns and len(r):
             best = r.sort_values("dev_f1", ascending=False).iloc[0]
-            m |= {"detectorBestMatcher": best.matcher.replace("_", r"\_"), "detectorFOne": num(best.f1, 2),
+            m |= {"detectorBestMatcher": {"tfidf": "TF-IDF"}.get(best.matcher, best.matcher.replace("_", r"\_")), "detectorFOne": num(best.f1, 2),
                   "detectorAUC": num(best.auc, 2)}
-    rel = PROJECT_ROOT / "analysis" / "phase5" / "reliability.md"
-    if rel.exists():
-        text = rel.read_text()
-        for key, label in (("kappaCoverage", "Cohen's κ (4 labels)"), ("kappaWeighted", "linearly weighted κ")):
-            hit = re.search(re.escape(label) + r"[^|]*\| ([0-9.]+)", text)
-            if hit:
-                m[key] = hit.group(1)
+    rel = reliability_status()
+    if rel.get("status") in ("complete", "partial"):
+        for key, field in (("kappaCoverage", "coverage_kappa"), ("kappaWeighted", "coverage_weighted_kappa")):
+            if rel.get(field) is not None:
+                m[key] = num(rel[field], 2)
+        m["nSecondCodedUnits"] = num(rel["units"])
+    m |= provenance_numbers(labels)
+    return m
+
+
+def reliability_status() -> dict:
+    path = PROJECT_ROOT / "analysis" / "phase5" / "reliability.json"
+    return json.loads(path.read_text()) if path.exists() else {"status": "pending"}
+
+
+def provenance_numbers(labels: pd.DataFrame) -> dict[str, str]:
+    """Counts behind the methods text on how the labels were produced."""
+    from gapstudy.analysis import provenance
+    from gapstudy.drafting import load_drafts
+    if "draft_shown" not in labels:
+        return {}
+    s = provenance.summary(labels, load_drafts(PROJECT_ROOT / "coding"))
+    c = s["counts"]
+    return {"nDraftsReviewed": num(s["n_reviewed"]), "nDraftsKept": num(s["n_reviewed"] - c["draft_corrected"]),
+            "nDraftsCorrected": num(c["draft_corrected"]), "draftKeepRate": pct(s["accept_rate"]),
+            "nAiFilled": num(s["n_ai_filled"]), "nBlindCoded": num(c["blind"])}
+
+
+def findings() -> dict[str, str]:
+    """Numbers and names behind the results prose (from gapstudy.summary.facts)."""
+    try:
+        from gapstudy.summary import facts
+        f = facts()
+    except FileNotFoundError:
+        return {}
+    tex = lambda s: str(s).replace("&", r"\&").replace("_", r"\_")  # noqa: E731
+    m: dict[str, str] = {}
+    for i, c in enumerate(f["cat_highest"], 1):
+        word = ("One", "Two", "Three")[i - 1]
+        m[f"catHigh{word}"] = tex(c["category"])
+        m[f"catHigh{word}Share"] = pct(c["agent_only"])
+    m |= {"catLow": tex(f["cat_lowest"]["category"]), "catLowShare": pct(f["cat_lowest"]["agent_only"])}
+    sig = f["gee_sig_cats"]
+    m["geeSigCats"] = ", ".join(f"{tex(r.term)} (OR {r.odds_ratio:.2f})" for r in sig.itertuples()) or "none"
+    m["geeAgentMinP"] = num(f["gee_agent_min_p"], 2)
+    m["geeAgentsDiffer"] = "no" if f["gee_agent_min_p"] >= 0.05 else "yes"
+    groups = f["need_groups"]
+    m["needGroupTop"], m["needGroupTopShare"] = tex(groups.index[0]), pct(groups.iloc[0])
+    m["needGroupProduct"] = pct(groups.get("Product", 0))
+    m["needGroupDocs"] = pct(groups.get("Documentation", 0))
+    m["needGroupTeamContext"] = pct(groups.get("Team", 0) + groups.get("Context", 0))
+    for i, n in enumerate(f["needs_top"], 1):
+        word = ("One", "Two", "Three")[i - 1]
+        m[f"needTop{word}"], m[f"needTop{word}Share"] = tex(n["need"]), pct(n["share"])
+    for i, b in enumerate(f["barriers_top"], 1):
+        word = ("One", "Two", "Three")[i - 1]
+        m[f"barrierTop{word}"], m[f"barrierTop{word}Share"] = tex(b["barrier"]), pct(b["share_of_gap_units"])
+    m["noBarrierShare"] = pct(f["no_barrier_share"])
+    m["sensLow"], m["sensHigh"] = pct(f["sens_range"][0]), pct(f["sens_range"][1])
+    m["nConflictUnits"] = num(f["flags"].get("conflict", 0))
+    m["nLinksOutUnits"] = num(f["flags"].get("links_out", 0))
+    b, d = f["detector_best"], f["detector"]
+    m |= {"detectorPrecision": num(b["precision"], 2), "detectorRecall": num(b["recall"], 2),
+          "detectorMacroFOne": num(b["macro_f1"], 2), "detectorHitOne": pct(b["retrieval_hit@1"], 0),
+          "detectorHitFive": pct(b["retrieval_hit@5"], 0), "detectorNTest": num(b["n_test"]),
+          "detectorNDev": num(b["n_dev"]), "detectorFOneMin": num(d.f1.min(), 2), "detectorFOneMax": num(d.f1.max(), 2),
+          "detectorAUCMin": num(d.auc.min(), 2), "detectorAUCMax": num(d.auc.max(), 2),
+          "detectorLLM": "yes" if len(f["detector_llm"]) else "no"}
+    if f["errors_false_agent_only"] is not None:
+        m["detectorFalseAgentOnly"] = num(f["errors_false_agent_only"])
+        m["detectorMissedAgentOnly"] = num(f["errors_missed_agent_only"])
+    if f.get("docs_check"):
+        d = f["docs_check"]
+        m |= {"docsCheckRepos": num(d["repos"]), "docsCheckCovered": num(d["covered_by_docs"]),
+              "docsCheckUnits": num(d["agent_only_units"]), "docsCheckShare": pct(d["share"])}
     return m
 
 
 def main() -> None:
-    macros = {**sampling(), **corpus(), **results()}
+    macros = {**sampling(), **corpus(), **results(), **findings()}
+    switches = {"agentsdiffer": macros.pop("geeAgentsDiffer", "no") == "yes",
+                "llmjudge": macros.pop("detectorLLM", "no") == "yes"}
     lines = ["% Generated by `python -m gapstudy.paper_numbers`. Do not edit by hand.",
              r"\providecommand{\TBD}{\textcolor{red}{\textbf{[TBD]}}}"]
     lines += [rf"\newcommand{{\{k}}}{{{v}}}" for k, v in sorted(macros.items())]
+    second = reliability_status().get("status") in ("complete", "partial")
+    lines += [r"\newif\ifsecondcoder", r"\secondcodertrue" if second else r"\secondcoderfalse"]
+    for name, on in switches.items():
+        lines += [rf"\newif\if{name}", rf"\{name}{'true' if on else 'false'}"]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text("\n".join(lines) + "\n")
-    tbd = sum(v == TBD for v in macros.values())
-    print(f"wrote {len(macros)} macros to {OUT} ({tbd} still TBD)")
+    waiting = set() if second else {"kappaCoverage", "kappaWeighted"}  # only printed once a second coder exists
+    tbd = sum(v == TBD and k not in waiting for k, v in macros.items())
+    mode = "two annotators" if second else "single annotator (reliability pending)"
+    print(f"wrote {len(macros)} macros to {OUT} ({tbd} still TBD; {mode})")
 
 
 if __name__ == "__main__":
