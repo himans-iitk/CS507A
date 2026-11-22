@@ -1,18 +1,12 @@
 {
-  "run_at": "2026-11-22T09:50:27+00:00",
-  "git_commit": "f3e52469d695ff22c87c058a6ff385a7587e4bc7",
+  "run_at": "2026-11-22T10:24:27+00:00",
+  "git_commit": "66f8fcae20d7b4a70229a0d84e8bffae1f77ba4e",
   "git_dirty": [
+    "paper/figures/rq1_coverage.tex",
+    "paper/figures/rq1_repos.tex",
     "paper/main.tex",
-    "paper/refs.bib",
-    "src/gapstudy/analysis/report.py",
-    "src/gapstudy/analysis/sensitivity.py",
     "src/gapstudy/paper_figures.py",
-    "src/gapstudy/paper_numbers.py",
-    "src/gapstudy/paper_tables.py",
-    "src/gapstudy/reliability.py",
-    "src/gapstudy/summary.py",
-    "tests/test_pipeline.py",
-    "paper/figures/rq1_repos.tex"
+    "src/gapstudy/paper_tables.py"
   ],
   "bootstrap_draws": 1000,
   "stages": {
@@ -29,7 +23,7 @@
       "warnings": [],
       "status": "ok",
       "seconds": 0.9,
-      "run_at": "2026-11-22T09:50:27+00:00"
+      "run_at": "2026-11-22T10:24:27+00:00"
     },
     "freeze": {
       "notes": [
@@ -71,8 +65,8 @@
         "paper/main.pdf built"
       ],
       "status": "ok",
-      "seconds": 6.8,
-      "run_at": "2026-11-22T09:50:27+00:00"
+      "seconds": 7.2,
+      "run_at": "2026-11-22T10:24:27+00:00"
     }
   },
   "inputs": {
@@ -95,7 +89,7 @@
     "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
     "analysis/phase7/results.md": "447b92aa5625fb2f7d69181283607db7a263087061151e1847373c0fd235a01d",
     "paper/numbers.tex": "bdcd3f7b3b46f72dd0eaa6b4d3ed003fc41eab72832fb14b68dfca2d9fd64570",
-    "paper/main.pdf": "893fdb0096839933097864487c9df14ee473fd48a8270fe7ad965cd6872168a0",
-    "analysis/FINAL_RESULTS.md": "395685632f5a10e727e04e01117645f10620b45f00b5e3098796a0e797275ee8"
+    "paper/main.pdf": "a8d18efd81bb15ad1e618c0c8eb335cf567a71279ac7c045d786d63061568255",
+    "analysis/FINAL_RESULTS.md": "e2e30b3fa0b41e795ff54db85c047684ffa8e0b9888b9442bec234aef2542213"
   }
 }

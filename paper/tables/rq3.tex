@@ -1,10 +1,10 @@
 \begin{table}[t]
-\caption{RQ3: gap detector on held-out repositories (n = 1284 units; score variant, in italics, and thresholds tuned on 139 pilot units). P, R and F1 for agent-only; macro-F1 over agent-only/partial/shared; @1/@5: the gold covering section ranked first / in the top five. Bold: chosen on the pilot repositories. Brackets: 95\% repository-bootstrap CI.}
+\caption{RQ3: How well each matcher finds agent-only sections in repositories not used for tuning (1284 sections). P, R and F1: precision, recall and F1 for agent-only. Mac.\,F1: average F1 over agent-only, partial and shared. @1/@5: share of covered sections whose matching human section is ranked first, or in the top five. The score (italics) and thresholds were chosen on 139 pilot sections; bold marks the matcher chosen there. Brackets: 95\% confidence intervals.}
 \label{tab:rq3}
 \small\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Matcher & P & R & F1 & AUC & Mac.-F1 & @1/@5 \\
+Matcher & P & R & F1 & AUC & Mac.\,F1 & @1/@5 \\
 \midrule
 \textbf{TF-IDF} & 0.69 & 0.85 & 0.76 & 0.88 & 0.60 & 0.66/0.95 \\
 \quad{\scriptsize\itshape item\_mean} & & & {\scriptsize[0.72, 0.79]} & {\scriptsize[0.86, 0.90]} & & \\

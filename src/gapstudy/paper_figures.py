@@ -86,7 +86,7 @@ def figure(f: dict) -> str:
     # (b) by category
     y -= 0.55
     L.append(rf"\node[font=\scriptsize\sffamily\bfseries,text=ink,anchor=west,inner sep=0] at (-3.3,{y:.2f}) "
-             r"{(b) By instruction category (units)};")
+             r"{(b) By instruction category (sections)};")
     y -= 0.32
     for r in cats.itertuples():
         shares = [r.agent_only, r.any_gap - r.agent_only, 1 - r.any_gap]
@@ -97,10 +97,10 @@ def figure(f: dict) -> str:
     L += axis(y + ROW_CM - THICK_CM / 2 - 0.08)
 
     L += [r"\end{tikzpicture}",
-          r"\caption{RQ1: coverage of agent-file knowledge in README and CONTRIBUTING. (a)~Mean share per "
-          r"repository; $^{*}$post-stratified to the eligible population (95\% CIs in Table~\ref{tab:rq1}). "
-          r"(b)~Share of knowledge units per instruction category (a unit can have several), sorted by the "
-          r"agent-only share, which is printed on the bars (\%).}",
+          r"\caption{RQ1: How much agent-file knowledge is also in README and CONTRIBUTING. (a)~Average share "
+          r"per repository; $^{*}$file types weighted by how common they are (confidence intervals in "
+          r"Table~\ref{tab:rq1}). (b)~Share of sections in each instruction category (a section can have "
+          r"several), sorted by the agent-only share printed on the bars (\%).}",
           r"\label{fig:rq1}", r"\end{figure}", ""]
     return "\n".join(L)
 
@@ -112,8 +112,8 @@ def repo_histogram(f: dict) -> str:
     if per is None:
         return "% not available\n"
     counts = [int(((per.agent_only > lo) & (per.agent_only <= hi)).sum()) for lo, hi, _ in BINS]
-    labels = [lab.replace("%", r"\%").replace("–", "--") for _, _, lab in BINS]
-    W, GAP, H = 1.05, 0.18, 2.2  # bar slot width, gap, plot height (cm)
+    labels = [lab.replace("%", r"\%").replace("–", " to ") for _, _, lab in BINS]
+    W, GAP, H = 1.12, 0.14, 2.2  # bar slot width, gap, plot height (cm)
     top = max(counts)
     L = [r"\begin{figure}[t]", r"\centering", r"\begin{tikzpicture}[x=1cm,y=1cm]"]
     L += [rf"\definecolor{{{k}}}{{HTML}}{{{v}}}" for k, v in COLORS.items()]
@@ -134,9 +134,9 @@ def repo_histogram(f: dict) -> str:
              r"{Share of the repository's agent-file knowledge that is agent-only};")
     L.append(rf"\node[font=\scriptsize\sffamily,text=ink,rotate=90,anchor=south] at (-0.45,{H / 2:.3f}) {{Repositories}};")
     L += [r"\end{tikzpicture}",
-          rf"\caption{{Repositories by their share of agent-only knowledge ({len(per)} repositories with at "
-          r"least one knowledge unit; unweighted). In the 0\% bin every unit is covered at least partly by README "
-          r"or CONTRIBUTING; in the 100\% bin none is.}",
+          rf"\caption{{How many repositories have how much agent-only knowledge ({len(per)} repositories, each "
+          r"counted once). In the 0\% bar, every coded section is at least partly in README or CONTRIBUTING; "
+          r"in the 100\% bar, none is.}",
           r"\label{fig:repos}", r"\end{figure}", ""]
     return "\n".join(L)
 

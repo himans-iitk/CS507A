@@ -1,5 +1,5 @@
 \begin{table}[t]
-\caption{Sampling flow: agent files remaining after each exclusion, applied in order (each file counted at its first failing rule).}
+\caption{How we built the sample. Each row gives the number of agent files left after a filtering step; the steps are applied in this order.}
 \label{tab:flow}
 \small\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrr@{}}
@@ -7,16 +7,16 @@
 Step & \texttt{CLAUDE} & \texttt{AGENTS} & Copilot & All \\
 \midrule
 Agent files in the dataset & 922 & 694 & 687 & 2{,}303 \\
-$-$ repository deleted & 891 & 672 & 675 & 2{,}238 \\
-$-$ fork & 878 & 656 & 666 & 2{,}200 \\
-$-$ archived & 846 & 638 & 639 & 2{,}123 \\
-$-$ snapshot commit not found & 816 & 603 & 629 & 2{,}048 \\
-$-$ agent file is a symlink & 761 & 588 & 616 & 1{,}965 \\
-$-$ agent file only links elsewhere & 738 & 583 & 604 & 1{,}925 \\
-$-$ not in English & 714 & 567 & 588 & 1{,}869 \\
-$-$ copy of another repository's file & 710 & 555 & 570 & 1{,}835 \\
-$-$ no README at snapshot & 705 & 551 & 568 & 1{,}824 \\
-$-$ no CONTRIBUTING at snapshot & 252 & 214 & 289 & 755 \\
+Remove deleted repositories & 891 & 672 & 675 & 2{,}238 \\
+Remove forks & 878 & 656 & 666 & 2{,}200 \\
+Remove archived repositories & 846 & 638 & 639 & 2{,}123 \\
+Remove if snapshot commit not found & 816 & 603 & 629 & 2{,}048 \\
+Remove symbolic links & 761 & 588 & 616 & 1{,}965 \\
+Remove files that only link & 738 & 583 & 604 & 1{,}925 \\
+Remove files not in English & 714 & 567 & 588 & 1{,}869 \\
+Remove copied files & 710 & 555 & 570 & 1{,}835 \\
+Remove if no README & 705 & 551 & 568 & 1{,}824 \\
+Remove if no CONTRIBUTING & 252 & 214 & 289 & 755 \\
 \midrule
 \textbf{Sampled} (one per repository) & 67 & 67 & 67 & 201 \\
 \bottomrule
