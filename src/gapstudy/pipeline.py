@@ -176,19 +176,27 @@ def stage_paper(args) -> dict:
 def stage_summary(args, results: dict) -> dict:
     from gapstudy.summary import write_final_results
     path = write_final_results(results.get("check", {}).get("mode", "unknown"))
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    path_m = ANALYSIS / "pipeline_manifest.json"
+    previous = json.loads(path_m.read_text()).get("stages", {}) if path_m.exists() else {}
+    stages = {k: v | {"run_at": now} for k, v in results.items()}
+    stages = {k: stages.get(k, previous.get(k)) for k in STAGES if k in stages or k in previous}
+    changed = subprocess.run(["git", "status", "--porcelain"], cwd=PROJECT_ROOT, capture_output=True,
+                             text=True).stdout.splitlines()
+    generated = ("analysis/", "paper/numbers.tex", "paper/tables/", "coding/labels_v1.", "detector/config.json")
     manifest = {
-        "run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "run_at": now,
         "git_commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=PROJECT_ROOT, capture_output=True,
                                      text=True).stdout.strip(),
-        "git_dirty": bool(subprocess.run(["git", "status", "--porcelain"], cwd=PROJECT_ROOT, capture_output=True,
-                                         text=True).stdout.strip()),
+        # uncommitted changes to inputs or code (outputs written by this run do not count)
+        "git_dirty": [line[3:] for line in changed if not line[3:].startswith(generated)],
         "bootstrap_draws": args.boot,
-        "stages": {k: {kk: vv for kk, vv in v.items() if kk != "reliability"} for k, v in results.items()},
+        "stages": {k: {kk: vv for kk, vv in v.items() if kk != "reliability"} for k, v in stages.items()},
         "inputs": {p: sha256(PROJECT_ROOT / p) for p in INPUTS}
                   | {f"data/processed/scores/{p.name}": sha256(p) for p in sorted((PROCESSED / "scores").glob("*.csv"))},
         "outputs": {p: sha256(PROJECT_ROOT / p) for p in OUTPUTS},
     }
-    (ANALYSIS / "pipeline_manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    path_m.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     return {"notes": [f"wrote {path.relative_to(PROJECT_ROOT)} and analysis/pipeline_manifest.json"]}
 
 

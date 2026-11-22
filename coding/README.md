@@ -8,7 +8,11 @@ Files in this folder:
 | `assignments.csv` | One row per repo: set (pilot / reliability / main), coding order, unit weight, sensitivity flags. |
 | `queue.csv` | The 1,564 agent units to code, in order (≤ 10 per repo). |
 | `labels/pass1.jsonl` | Your labels, append-only (every save is kept; the latest per unit wins). |
-| `labels/pass2.jsonl` | Blind re-code of the reliability set. |
+| `labels/pass2.jsonl` | Blind second coding of the reliability set (a different annotator). |
+| `labels/pass2_discarded_*.jsonl` | Earlier pass-2 attempts set aside (kept for the record, never analysed). |
+| `annotators.json` | Who each coder is: `human` or `llm` (+ model). The reliability report and the paper's wording follow it. |
+| `coder_aliases.json` | Maps alternative spellings of one coder's name together. |
+| `fill_v1.py`, `fill_v2.py` | Model fills of missing evidence/need fields, marked `filled_by` in the labels. |
 | `prelabels.csv` | Optional LLM category suggestions (created by `gapstudy.prelabel`). |
 
 ## Start the tool
@@ -46,14 +50,20 @@ fields (coverage, categories, evidence, need, barriers, flags) were changed.
 label; pass 2 (`?pass=2` in the link) is a **different** person's blind label of the same units,
 for inter-rater agreement. Pass 2 only offers units someone else labelled first.
 
-## Order and schedule (deadline: end of November)
+## What was done (record)
 
-| Dates | Step | Units |
-|---|---|---|
-| Oct 27 – Nov 1 | **Pilot** (20 repos). Note every hard case. Then update the codebook to v1.0 and re-check the pilot units. | 161 |
-| Nov 2 – Nov 4 | **Reliability set** (40 repos) — first, so the 14-day clock starts early. | 338 |
-| Nov 4 – Nov 14 | **Main set** (141 repos), ~100 units/day. | 1,065 |
-| Nov 16 – Nov 19 | **Re-code**: open `…/?pass=2&token=…`. Only reliability units whose first label is ≥ 14 days old appear, shuffled, with your first labels hidden. | 338 |
+| Set | Repos | Units | How it was coded |
+|---|---|---|---|
+| Pilot | 20 | 161 | Claude draft → reviewed by the annotator (kept or corrected) |
+| Main | 141 | 1,065 | Claude draft → reviewed by the annotator (64 coverage corrections overall) |
+| Reliability | 40 | 338 | Pass 1: annotator, blind (no draft). Pass 2: independent second annotator, blind — currently an LLM (OpenAI Codex), see `annotators.json` |
+
+Two earlier pass-2 attempts (κ ≈ 0, nearly every unit labelled agent-only within minutes) were
+set aside as `labels/pass2_discarded_*.jsonl`. Final labels are pass 1's; where pass 1 left the
+newcomer need/barriers empty on a gap unit, `gapstudy.freeze` takes them from pass 2 when both
+coders judged a gap (`need_source` column). To add a **human** second coder later: they label via
+`…/?pass=2&token=…` under their own name, you add them to `annotators.json` as `human`, and rerun
+`python -m gapstudy.pipeline`.
 
 ## After the pilot: report and codebook v1.0
 
@@ -91,12 +101,13 @@ shows how well the suggestions agree with your choices.
 
 ```bash
 .venv/bin/python -m gapstudy.progress       # done vs schedule, units/day needed per set
-.venv/bin/python -m gapstudy.reliability    # after the re-code: κ with repo-bootstrap CIs → analysis/phase5/reliability.md
+.venv/bin/python -m gapstudy.reliability    # pass 1 vs pass 2: κ with repo-bootstrap CIs → analysis/phase5/reliability.md
 .venv/bin/python -m gapstudy.freeze         # checks + writes coding/labels_v1.csv and its sha256
 ```
 
 `freeze` refuses while units are unlabelled, labelled under an older codebook, or inconsistent
-(e.g. *shared* with no evidence ticked), and says which. All later analyses read only
+(e.g. *shared* with no evidence ticked, or a gap unit with no newcomer need), and says which.
+In practice, run everything with `python -m gapstudy.pipeline` (see the main README). All later analyses read only
 `labels_v1.csv`, so the numbers in the paper trace back to one checksummed file.
 
 ## Regenerating the inputs

@@ -13,6 +13,10 @@ Tests: `tests/test_labeltool.py`, `tests/test_prelabel.py`. How to code: `coding
 - **Reliability: intra-rater.** No second coder; the reliability set is re-coded blind ≥ 14 days
   after the first pass (the tool enforces the delay, shuffles the order with a fixed seed, and
   never shows pass-1 labels in pass 2). Report as a limitation.
+  *Update 2026-11-22:* superseded. Pilot/main labels were drafted by Claude and reviewed by the
+  annotator; the reliability set was coded blind in pass 1 and, in pass 2, by an independent LLM
+  annotator (OpenAI Codex), reported as human–LLM agreement (see `analysis/phase5/reliability.md`
+  and `coding/annotators.json`). No 14-day delay is enforced by the tool.
 - **LLM: open-source, model not yet chosen.** Used only for category suggestions (dimension A),
   through any OpenAI-compatible endpoint; never for coverage (the RQ3 gold standard).
 - **No similarity-ranked suggestions in the tool.** The human docs are shown in document order with

@@ -80,9 +80,9 @@ descriptive table it can be LLM-labelled and spot-checked later.
 
 1. **Pilot (20 repos, 161 units):** code, write down every hard case in the notes field, refine
    these rules, bump the version to 1.0, then **re-check the pilot units against v1.0**.
-2. **Reliability set (40 repos, 338 units):** code right after the pilot so the 14-day clock for
-   the blind re-code starts early.
+2. **Reliability set (40 repos, 338 units):** coded blind (no AI draft shown).
 3. **Main set (141 repos, 1,065 units).**
-4. **Re-code (pass 2):** the tool shows only reliability units whose pass-1 label is ≥ 14 days
-   old, in shuffled order, with pass-1 labels hidden. Report Cohen's κ (coverage, weighted for the
-   ordinal 1–3 scale) and per-category κ.
+4. **Second coding (pass 2):** a different annotator codes the reliability units blind, in
+   shuffled order, with pass-1 labels hidden. Record whether they are a person or an LLM in
+   `coding/annotators.json`. Report Cohen's κ (coverage, weighted for the ordinal 1–3 scale) and
+   per-category κ, named inter-rater or human–LLM agreement accordingly.
