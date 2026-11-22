@@ -1,5 +1,31 @@
 {
-  "status": "pending",
-  "units": 0,
-  "total": 338
+  "status": "complete",
+  "kind": "human-llm",
+  "units": 338,
+  "second_coders": [
+    "Codex (AI reviewer)"
+  ],
+  "second_coder_types": [
+    "llm"
+  ],
+  "second_coder_models": [
+    "OpenAI Codex"
+  ],
+  "repo_agreement_median": 0.9,
+  "repos_full_agreement": 15,
+  "total": 338,
+  "repos": 40,
+  "coverage_agreement": 0.8609,
+  "coverage_kappa": 0.7825,
+  "coverage_weighted_kappa": 0.7973,
+  "category_jaccard": 0.5328,
+  "need_kappa": null,
+  "coverage_kappa_ci": [
+    0.7064,
+    0.8474
+  ],
+  "coverage_weighted_kappa_ci": [
+    0.7267,
+    0.8587
+  ]
 }

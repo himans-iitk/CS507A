@@ -71,6 +71,20 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
         L += [f"Pooled over units (cap-weighted): agent-only {pct(u['agent_only'])}, partial "
               f"{pct(u['partial'])}, shared {pct(u['shared'])}.", ""]
 
+        per, spread, rf = rq1.repo_distribution(df)
+        tables["rq1_repo_shares"] = per
+        tables["rq1_repo_spread"] = spread
+        L += ["### Repository level (unweighted, knowledge units)", "",
+              "| Share per repository | Mean | Median | Q1 | Q3 |", "|---|---|---|---|---|"]
+        names = {"agent_only": "Agent-only", "partial": "Partially covered", "shared": "Shared",
+                 "any_gap": "Agent-only or partial"}
+        L += [f"| {names[c]} | {pct(r['mean'])} | {pct(r['median'])} | {pct(r['q1'])} | {pct(r['q3'])} |"
+              for c, r in spread.iterrows()]
+        L += ["", "Repositories by agent-only share: " + ", ".join(f"{k}: {v}" for k, v in rf["hist"].items())
+              + f". {rf['any_agent_only']} of {rf['repos']} repositories have at least one agent-only unit; "
+              f"{rf['no_shared']} share no unit fully with their human docs. Median agent-only share by agent: "
+              + ", ".join(f"{TOOL_NAMES[t]} {pct(v)}" for t, v in rf["median_by_tool"].items()) + ".", ""]
+
         bc = rq1.by_category(df, cats)
         tables["rq1_by_category"] = bc
         L += ["### By instruction category", "", "| Category | Units | Repos | Agent-only | Agent-only or partial |",
@@ -139,6 +153,7 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
             prov = provenance.summary(df, drafts)
             tables["provenance_by_set"] = prov["by_set"]
             tables["provenance_by_draft"] = prov["by_draft"]
+            tables["provenance_need_source"] = prov["need_source"].rename("units").to_frame()
             L += provenance.markdown(prov)
     else:
         L += ["No labels yet: RQ1, RQ2 and the sensitivity checks run once coding has started.", ""]
@@ -169,7 +184,8 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "results.md").write_text(text + "\n")
     for name, t in tables.items():
-        t.to_csv(OUT / f"{name}.csv", index=name in ("rq1_gee", "provenance_by_set", "provenance_by_draft"))
+        t.to_csv(OUT / f"{name}.csv", index=name in ("rq1_gee", "provenance_by_set", "provenance_by_draft", "rq1_repo_shares", "rq1_repo_spread",
+                                     "provenance_need_source"))
     print(text)
 
 

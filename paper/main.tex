@@ -175,10 +175,23 @@ The codebook was refined on \nPilotRepos{} pilot repositories (\nPilotUnits{} un
 The \nReliabilityRepos{} repositories of the reliability set (\nReliabilityUnits{} units,
 \nBlindCoded{} labels) were coded blind, without any model draft.
 \ifsecondcoder
+\ifsecondcoderllm
+As an independent second annotator, an LLM (\secondCoderModel) labelled \nSecondCodedUnits{} of
+these units blind, with the author's labels hidden and the same codebook and tool. We report Cohen's
+$\kappa$ and linearly weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale:
+$\kappa = \kappaCoverage$ \kappaCoverageCI, $\kappa_w = \kappaWeighted$; the two assign the same
+coverage to \relAgreement{} of units (median per repository \relRepoMedian; \relReposFull{} of
+\nReliabilityRepos{} repositories agree on every unit). This is agreement between a human and an
+LLM, not between two human coders.
+\else
 A second coder labelled \nSecondCodedUnits{} of these units independently, with each coder's labels
 hidden from the other and the order shuffled. We report Cohen's $\kappa$ and linearly
-weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale: $\kappa = \kappaCoverage$,
-$\kappa_w = \kappaWeighted$.
+weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale: $\kappa = \kappaCoverage$
+\kappaCoverageCI, $\kappa_w = \kappaWeighted$.
+\fi
+The final labels are the author's; where the author's labels on this set lacked the newcomer need
+and barriers, they are taken from the second annotator when both judged the unit a gap
+(\nNeedFromSecond{} units) and otherwise filled by the drafting model (\nNeedFilled{} units in all).
 \else
 The results reported here rest on a single annotator; agreement with an independent second coder
 on the reliability set has not been measured yet (Section~\ref{sec:threats}).
@@ -259,6 +272,12 @@ and the agent type remains a significant predictor after adjusting for instructi
 but after adjusting for instruction category the agent type has no significant effect (GEE,
 smallest $p = \geeAgentMinP$).
 \fi
+
+Per repository the picture varies widely: the median repository has \repoAgentOnlyMedian{} of its
+agent-file knowledge agent-only (middle half of repositories \repoAgentOnlyQOne--\repoAgentOnlyQThree),
+\repoAnyAgentOnly{} of \nRepoKnowledge{} repositories (\repoAnyAgentOnlyShare) have at least one
+agent-only unit, and \repoNoShared{} (\repoNoSharedShare) share no unit fully with their human
+documentation.
 
 \input{tables/rq1_headline}
 
@@ -346,8 +365,8 @@ of them is stale, and a newcomer following CONTRIBUTING may build or test differ
 agent; a detector run in CI could flag such drift as well as gaps.
 
 \paragraph{Labels.} Most labels started as model drafts that the author reviewed\ifsecondcoder; the
-agreement with a second coder (Section~\ref{sec:coding}) indicates how far the coverage judgements
-generalise\else; until a second coder's labels are in, the rates should be read as one careful
+agreement with an independent second \ifsecondcoderllm LLM \fi annotator ($\kappa = \kappaCoverage$,
+Section~\ref{sec:coding}) indicates that the coverage judgements are not idiosyncratic\else; until a second coder's labels are in, the rates should be read as one careful
 annotator's judgement\fi.
 
 \section{Threats to Validity}\label{sec:threats}
@@ -363,8 +382,15 @@ draft that the author reviewed, so the results may inherit the model's judgement
 have anchored on the drafts; the \nDraftsCorrected{} corrections show the drafts were not accepted
 unconditionally, but they bound rather than measure this effect.
 \ifsecondcoder
+\ifsecondcoderllm
+On the blind reliability set the author agrees substantially with an independent LLM annotator
+($\kappa = \kappaCoverage$, $\kappa_w = \kappaWeighted$), but agreement between two human coders has
+not been measured, and an LLM annotator may share blind spots with the model that drafted most
+labels. The newcomer needs of \nNeedFromSecond{} reliability units come from the LLM annotator.
+\else
 Agreement between two independent coders on the blind reliability set ($\kappa = \kappaCoverage$,
 $\kappa_w = \kappaWeighted$) indicates how far another coder would reproduce the coverage labels.
+\fi
 \else
 All labels come from a single annotator, and agreement with an independent second coder has not
 been measured yet, so the reproducibility of the coverage labels is not established.
@@ -389,7 +415,8 @@ documentation and \anyGapOverall{} is not fully available to people. The gap con
 \emph{\needGroupTop{}} knowledge (\needGroupTopShare{} of gap units), the kind of knowledge
 newcomers often struggle to find. A \detectorBestMatcher{} detector finds agent-only knowledge with F1 \detectorFOne{}, enough
 to point maintainers at sections worth adding to their contributor documentation.
-\ifsecondcoder\else Measuring agreement with an independent second coder is the next step.\fi
+\ifsecondcoder\ifsecondcoderllm Measuring agreement with a second human coder is the next step.\fi
+\else Measuring agreement with an independent second coder is the next step.\fi
 
 \section*{Data Availability}
 Code, codebook, coding tool, labels and the \texttt{gapcheck} detector:
@@ -402,7 +429,9 @@ with the help of an AI coding assistant (Claude); the author reviewed and is res
 of it. The same assistant drafted the category, coverage, need and barrier labels of the pilot and
 main sets, which the author reviewed and kept or corrected, and completed missing fields of
 \nAiFilled{} corrected labels (Section~\ref{sec:coding}); the reliability set was coded without
-drafts. \ifllmjudge An open-source LLM is one component of the evaluated gap detector.\fi
+drafts. \ifsecondcoderllm An LLM (\secondCoderModel) served as the independent second annotator of
+the reliability set, and its newcomer-need codes fill gaps in the author's labels on that set. \fi
+\ifllmjudge An open-source LLM is one component of the evaluated gap detector.\fi
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}

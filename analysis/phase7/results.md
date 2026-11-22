@@ -15,6 +15,17 @@ Coded units: 1564 in 201 repos; knowledge units (excluding agent-directed): 1423
 
 Pooled over units (cap-weighted): agent-only 41.7%, partial 43.9%, shared 14.4%.
 
+### Repository level (unweighted, knowledge units)
+
+| Share per repository | Mean | Median | Q1 | Q3 |
+|---|---|---|---|---|
+| Agent-only | 40.9% | 37.5% | 16.7% | 66.7% |
+| Partially covered | 44.4% | 50.0% | 25.0% | 60.0% |
+| Shared | 14.7% | 10.0% | 0.0% | 22.2% |
+| Agent-only or partial | 85.3% | 90.0% | 77.8% | 100.0% |
+
+Repositories by agent-only share: 0%: 33, 1–25%: 41, 26–50%: 56, 51–75%: 38, 76–99%: 14, 100%: 15. 164 of 197 repositories have at least one agent-only unit; 97 share no unit fully with their human docs. Median agent-only share by agent: AGENTS.md 33.3%, CLAUDE.md 33.3%, copilot-instructions.md 50.0%.
+
 ### By instruction category
 
 | Category | Units | Repos | Agent-only | Agent-only or partial |
@@ -71,62 +82,62 @@ Units coded agent-only or partially covered.
 
 | Group | Need | Units | Repos | Share |
 |---|---|---|---|---|
-| Processes and Practices | Development Process | 278 | 120 | 27.2% |
-| Processes and Practices | Development Environment and Tools | 237 | 117 | 26.6% |
-| Product | Software Architecture | 121 | 89 | 12.0% |
-| Processes and Practices | Task Process | 67 | 48 | 7.3% |
-| Product | Low-level Design & Runtime Behavior | 62 | 45 | 6.9% |
-| Product | Technologies Used | 47 | 36 | 4.8% |
-| Product | Product/Domain | 29 | 23 | 3.6% |
-| Documentation | Repository, Indexes, and Search | 31 | 27 | 3.0% |
-| Processes and Practices | Software Configuration Management | 25 | 19 | 2.8% |
-| Product | Design & Implementation Rationale | 14 | 12 | 2.1% |
-| Documentation | Developer-Oriented Documentation | 21 | 20 | 1.7% |
-| Documentation | Learning Material | 8 | 8 | 1.4% |
-| Context | Organization | 1 | 1 | 0.3% |
+| Processes and Practices | Development Process | 362 | 153 | 28.1% |
+| Processes and Practices | Development Environment and Tools | 313 | 147 | 26.3% |
+| Product | Software Architecture | 148 | 105 | 11.4% |
+| Product | Low-level Design & Runtime Behavior | 103 | 62 | 9.3% |
+| Processes and Practices | Task Process | 67 | 48 | 5.6% |
+| Product | Technologies Used | 52 | 41 | 4.1% |
+| Product | Product/Domain | 38 | 32 | 3.5% |
+| Documentation | Repository, Indexes, and Search | 44 | 38 | 3.3% |
+| Documentation | Developer-Oriented Documentation | 36 | 27 | 2.9% |
+| Processes and Practices | Software Configuration Management | 27 | 21 | 2.3% |
+| Product | Design & Implementation Rationale | 15 | 13 | 1.7% |
+| Documentation | Learning Material | 8 | 8 | 1.1% |
+| Context | Organization | 1 | 1 | 0.2% |
 | Team | Communication Strategies | 1 | 1 | 0.1% |
 | Team | Roles and Expertise | 1 | 1 | 0.1% |
 
-By group: Processes and Practices 64.0%; Product 29.4%; Documentation 6.2%; Context 0.3%; Team 0.2%
+By group: Processes and Practices 62.4%; Product 29.9%; Documentation 7.3%; Context 0.2%; Team 0.2%
 
 ### Barriers mitigated (Steinmacher et al.; multi-label)
 
 | Group | Barrier | Units | Repos | Share of gap units |
 |---|---|---|---|---|
-| Newcomers' characteristics | Lack of knowledge in project process and practices | 325 | 133 | 25.0% |
-| — | (no barrier coded) | 273 | 39 | 23.1% |
-| Technical hurdles | Local environment setup hurdles | 232 | 114 | 19.7% |
-| Technical hurdles | Code/architecture hurdles | 176 | 96 | 14.0% |
-| Newcomers' orientation | Finding the correct artifacts to fix an issue | 151 | 99 | 11.6% |
-| Newcomers' characteristics | Lack of technical background | 72 | 49 | 6.1% |
-| Newcomers' characteristics | Lack of domain expertise | 44 | 28 | 4.8% |
-| Newcomers' orientation | Newcomers don't know what is the contribution flow | 61 | 49 | 4.6% |
+| Newcomers' characteristics | Lack of knowledge in project process and practices | 453 | 170 | 35.8% |
+| Technical hurdles | Local environment setup hurdles | 317 | 143 | 26.0% |
+| Technical hurdles | Code/architecture hurdles | 269 | 128 | 22.1% |
+| Newcomers' orientation | Finding the correct artifacts to fix an issue | 206 | 126 | 16.3% |
+| Newcomers' characteristics | Lack of technical background | 125 | 74 | 11.3% |
+| Newcomers' orientation | Newcomers don't know what is the contribution flow | 87 | 67 | 7.1% |
+| Newcomers' characteristics | Lack of domain expertise | 56 | 40 | 5.8% |
+| Technical hurdles | Understanding flow of information | 20 | 11 | 1.7% |
 | Newcomers' orientation | Poor “How to Contribute” available | 3 | 2 | 0.2% |
 | Newcomers' orientation | Finding a task to start with | 4 | 3 | 0.2% |
-| Technical hurdles | Understanding flow of information | 2 | 1 | 0.2% |
+| — | (no barrier coded) | 0 | 0 | 0.0% |
 
 ### Example agent-only knowledge (seeded sample, ≤ 60 words)
 
-- **Development Process** — bancolombia/bc_golden_plugin (copilot-instructions.md), *🔧 Critical CI/CD Considerations > Device Consistency*:
-  > ALWAYS use the same device configuration between local and CI: ```dart // Consistent device across environments device: GoldenDeviceData.galaxyS25  // Same locally and in CI ```
-- **Development Process** — shopware/shopware (AGENTS.md), *Coding Guidelines*:
-  > **MANDATORY**: All code must follow the guidelines in `coding-guidelines/`.
-- **Development Environment and Tools** — netz98/n98-magerun2 (AGENTS.md), *Testing Information > Test Environment Setup*:
-  > The tests require a Magento 2 installation to run properly. The test suite is configured to use the Magento installation specified by the `N98_MAGERUN2_TEST_MAGENTO_ROOT` environment variable.  1. **Set Up Magento**:    - Install a compatible version of Magento 2 (see README.md for supported versions)    - Configure the database and other required services  2. **Configure Test Environment**:    ``
-- **Development Environment and Tools** — dagster-io/dagster (CLAUDE.md), *Make Command Guidelines*:
-  > - Whenever there is an instruction to run a make command, ALWAYS cd to $DAGSTER_GIT_REPO_DIR, as the Makefile is at the root of the repository
+- **Development Process** — paradigmxyz/reth (CLAUDE.md), *Development Workflow > Common Pitfalls*:
+  > 1. **Don't Block Async Tasks**: Use `spawn_blocking` for CPU-intensive work or work with lots of blocking I/O 2. **Handle Errors Properly**: Use `?` operator and proper error types
+- **Development Process** — dotnet/docs-desktop (copilot-instructions.md), *Writing Style > Formatting Conventions*:
+  > - **Bold** for UI elements. - `Code style` for file names, folders, custom types, non-localizable text. - Raw URLs in angle brackets. - Use relative links for files in this repo. - Remove `https://learn.microsoft.com/en-us` from learn.microsoft.com links.
+- **Development Environment and Tools** — microsoft/generative-ai-with-javascript (AGENTS.md), *Development Workflow > Local Development*:
+  > 1. Ensure Node.js 20+ is installed 2. Set `GITHUB_TOKEN` environment variable 3. Navigate to the directory you want to work with 4. Run `npm install` followed by `npm start`
+- **Development Environment and Tools** — stellar/stellar-cli (copilot-instructions.md), *Common Tasks > Known Issues*:
+  > - **Network timeouts**: `make install` frequently encounters network timeouts with crates.io. This is normal in CI environments. - **Memory constraints**: Full workspace build and test may fail with OOM or "No space left on device" errors in constrained environments. - **Documentation generation**: `make docs` may fail due to disk space constraints.
+- **Low-level Design & Runtime Behavior** — mkwatson/ai-fastify-template (AGENTS.md), *🚨 MANDATORY Architecture Rules > Error Handling: Fastify Patterns Only*:
+  > ```typescript // ✅ Good: Fastify error handling if (!user) {   throw fastify.httpErrors.notFound('User not found'); }  // ❌ Bad: Generic error throwing throw new Error('Something went wrong'); // Too generic! ```
+- **Low-level Design & Runtime Behavior** — logancyang/obsidian-copilot (AGENTS.md), *Important Notes > Obsidian Plugin Environment*:
+  > - **Global `app` variable**: In Obsidian plugins, `app` is a globally available variable that provides access to the Obsidian API. It's automatically available in all files without needing to import or declare it.
 - **Software Architecture** — netz98/n98-magerun2 (AGENTS.md), *Additional Development Information > Project Structure*:
   > - `src/N98/Magento/Command/`: Contains all the commands - `src/N98/Util/`: More general utility classes - `src/N98/Magento/Application.php`: Main application class - `config.yaml`: Configuration for commands and other settings - `tests/N98`: Unit Test classes to cover src/N98 classes - `tests/bats`: Functional tests using BATS (Bash Automated Testing System) - `res/`: Resources like autocompletion
-- **Software Architecture** — remotion-dev/remotion (copilot-instructions.md), *Monorepo setup*:
-  > There are multiple folders in the `packages` folder, which correspond to the packages in the monorepo.  The **package name** for each folder is `@remotion/[folder-name]`, except for the `core` package, which has the package name `remotion`, and for `create-video`, which has the package name `create-video`.
+- **Software Architecture** — tech-systems/panes (CLAUDE.md), *Code Architecture > Core Structure*:
+  > - **Main Class**: `CupertinoPane` in `/src/cupertino-pane.ts` - Primary API class - **Settings**: Configuration managed through `/src/settings.ts` with TypeScript interfaces in `/src/models.ts` - **Module System**: Modular architecture with feature modules in `/src/modules/`
 - **Task Process** — microsoft/poml (CLAUDE.md), *Common Development Tasks > Updating Language Grammar*:
   > 1. Modify `poml.tmLanguage.json` 2. Test in VS Code with sample files 3. Update syntax test cases
 - **Task Process** — microsoft/azure-devops-mcp (copilot-instructions.md), *Adding new prompts*:
   > Ensure the instructions for the language model are clear and concise so that the language model can follow them reliably. The prompts are located in the `src/prompts.ts` file.
-- **Low-level Design & Runtime Behavior** — sbalci/ClinicoPathJamoviModule (CLAUDE.md), *CLAUDE.md > Core Architecture > Key Backend Pattern*:
-  > All analysis classes inherit from auto-generated base classes and use R6 class system:  ```r crosstableClass <- R6::R6Class(     "crosstableClass",      inherit = crosstableBase,  # Auto-generated from .yaml files     private = list(         .init = function() { ... },         .run = function() { ... }     ) ) ```
-- **Low-level Design & Runtime Behavior** — paradigmxyz/reth (CLAUDE.md), *Development Workflow > Debugging Tips*:
-  > 1. **Logging**: Use `tracing` crate with appropriate levels    ```rust    tracing::debug!(target: "reth::component", ?value, "description");    ```  2. **Metrics**: Add metrics for monitoring    ```rust    metrics::counter!("reth_component_operations").increment(1);    ```  3. **Test Isolation**: Use separate test databases/directories
 
 ## Sensitivity
 
@@ -152,7 +163,7 @@ How each frozen label was produced (single annotator: Himanshu Mishra).
 | AI draft, coverage corrected by the annotator | 64 |
 | Coded without an AI draft (blind) | 338 |
 
-Of 1226 AI drafts reviewed, 94.8% kept the drafted coverage. After a coverage correction, 51 labels had missing evidence or newcomer-need fields completed by the model (marked `filled_by` in the data).
+Of 1226 AI drafts reviewed, 94.8% kept the drafted coverage. After a coverage correction, 58 labels had missing evidence or newcomer-need fields completed by the model (marked `filled_by` in the data).
 
 ### By coding set
 
@@ -170,6 +181,14 @@ Of 1226 AI drafts reviewed, 94.8% kept the drafted coverage. After a coverage co
 | agent_only       |      501 |          37 | 7.4%              |
 | partial          |      432 |          13 | 3.0%              |
 | shared           |      166 |           4 | 2.4%              |
+
+### Source of the newcomer need (D1/D2) for gap units
+
+| need_source                          |   units |
+|:-------------------------------------|--------:|
+| first annotator                      |     930 |
+| second annotator (both coded a gap)  |     266 |
+| model fill after a correction or gap |      20 |
 
 ### Corrected drafts (rows: draft, columns: final)
 

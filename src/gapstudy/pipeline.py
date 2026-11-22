@@ -97,13 +97,22 @@ def stage_check(args) -> dict:
     if shown:
         raise StageError(f"{len(shown)} reliability units were labelled with an AI draft visible; the blind set is compromised")
 
-    aliases = json.loads((CODING / "coder_aliases.json").read_text()) if (CODING / "coder_aliases.json").exists() else {}
-    norm = lambda c: aliases.get(c, c)  # noqa: E731
+    from gapstudy.labels import aliases, annotator_type
+    from gapstudy.reliability import agreement_kind
+    alias = aliases(CODING)
     second = store.latest(2)
     if second:
-        overlap = [u for u, r in second.items() if norm(r.get("coder")) == norm(first.get(u, {}).get("coder"))]
-        mode = "two annotators" if not overlap else "re-code by the same annotator (intra-rater)"
-        notes.append(f"pass 2: {len(second)} / {len(rel)} reliability units ({mode})")
+        if any(r.get("draft_shown") for r in second.values()):
+            raise StageError("pass-2 labels were made with an AI draft visible; the second coding is not blind")
+        c1 = {alias.get(first[u].get("coder"), first[u].get("coder")) for u in second if u in first}
+        c2 = {alias.get(r.get("coder"), r.get("coder")) for r in second.values()}
+        kind = agreement_kind(c1, c2, CODING)
+        mode = {"human-llm": "human annotator + LLM second annotator", "inter-rater": "two human annotators",
+                "intra-rater": "one annotator, re-coded"}[kind]
+        notes.append(f"pass 2: {len(second)} / {len(rel)} reliability units by {', '.join(sorted(c2))} ({mode})")
+        unknown = sorted(c for c in c1 | c2 if annotator_type(c, CODING) == "unknown")
+        if unknown:
+            warnings.append(f"annotators not in coding/annotators.json (type unknown): {unknown}")
     else:
         mode = "single annotator"
         notes.append("pass 2: none yet; results are single-annotator and reliability is pending")

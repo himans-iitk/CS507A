@@ -54,6 +54,18 @@ def facts() -> dict:
     none = bars[bars.group == "—"]
     f["no_barrier_share"] = float(none.share_of_gap_units.iloc[0]) if len(none) else 0.0
 
+    if (P7 / "rq1_repo_shares.csv").exists():
+        per = pd.read_csv(P7 / "rq1_repo_shares.csv", index_col=0)
+        f["repo_shares"] = per
+        f["repo_spread"] = pd.read_csv(P7 / "rq1_repo_spread.csv", index_col=0)
+        f["repo_facts"] = {"repos": len(per), "any_agent_only": int((per.agent_only > 0).sum()),
+                           "all_agent_only": int((per.agent_only == 1).sum()), "no_shared": int((per.shared == 0).sum()),
+                           "median_by_tool": per.groupby("tool").agent_only.median().to_dict()}
+    if (P7 / "provenance_need_source.csv").exists():
+        f["need_source"] = pd.read_csv(P7 / "provenance_need_source.csv", index_col=0).units.to_dict()
+    if (P5 / "reliability_by_repo.csv").exists():
+        f["rel_by_repo"] = pd.read_csv(P5 / "reliability_by_repo.csv", index_col=0)
+
     s = pd.read_csv(P7 / "sensitivity.csv")
     f["sensitivity"] = s
     f["sens_range"] = (float(s.agent_only.min()), float(s.agent_only.max()))
@@ -101,6 +113,17 @@ def gee_sentence(f: dict) -> str:
     return f"- Clustered logistic model (GEE, vs. other categories): {sig} differ significantly (p < 0.05); {agents}."
 
 
+def repo_sentence(f: dict) -> str:
+    if "repo_facts" not in f:
+        return ""
+    rf, sp = f["repo_facts"], f["repo_spread"]
+    return (f"- Per repository (unweighted): median agent-only share {pct(sp.loc['agent_only', 'median'])} "
+            f"(middle half {pct(sp.loc['agent_only', 'q1'])}–{pct(sp.loc['agent_only', 'q3'])}); "
+            f"{rf['any_agent_only']} of {rf['repos']} repositories have at least one agent-only unit, "
+            f"{rf['all_agent_only']} only agent-only units, and {rf['no_shared']} share no unit fully with their "
+            "human docs (`analysis/phase7/rq1_repo_shares.csv`).")
+
+
 def render(mode: str, f: dict | None = None) -> str:
     f = f or facts()
     hl = f["headline"]
@@ -124,11 +147,21 @@ def render(mode: str, f: dict | None = None) -> str:
         L += [f"- {reviewed:,} labels started from an AI draft that the annotator reviewed "
               f"({int(p.get('draft_corrected', 0))} coverage corrections); {int(p.get('blind', 0))} were coded blind, "
               "without any draft."]
+    if "need_source" in f:
+        L += ["- Newcomer need (D1/D2) of gap units: " + "; ".join(f"{k} {v}" for k, v in f["need_source"].items()) + "."]
     if rel["status"] == "pending":
         L += ["- Reliability: pending (second coder)."]
     else:
-        L += [f"- Reliability ({rel['kind']}, {rel['units']} units): Cohen's κ = {rel['coverage_kappa']:.2f}, "
-              f"weighted κ = {rel['coverage_weighted_kappa']:.2f}, agreement {pct(rel['coverage_agreement'])}."]
+        who = {"human-llm": f"first annotator vs. an independent LLM annotator ({', '.join(rel.get('second_coder_models', []))})",
+               "inter-rater": "two human annotators", "intra-rater": "one annotator re-coding"}[rel["kind"]]
+        lo, hi = rel.get("coverage_kappa_ci", [float("nan")] * 2)
+        L += [f"- Agreement on the blind reliability set ({who}; {rel['units']} units, {rel['repos']} repos): "
+              f"Cohen's κ = **{rel['coverage_kappa']:.2f}** [{lo:.2f}, {hi:.2f}], weighted κ = "
+              f"{rel['coverage_weighted_kappa']:.2f}, same label on {pct(rel['coverage_agreement'])} of units; "
+              f"per repository median {pct(rel['repo_agreement_median'])}, {rel['repos_full_agreement']} repos in full agreement."]
+        if rel["kind"] == "human-llm":
+            L += ["- Note: the second annotator is an LLM, so this is human–LLM agreement, not agreement between "
+                  "two human coders."]
 
     L += ["", "## RQ1 — How much agent-file knowledge is absent from README and CONTRIBUTING?", "",
           "Mean share per repository, post-stratified to the eligible population; 95% repository-bootstrap CIs.", "",
@@ -141,6 +174,7 @@ def render(mode: str, f: dict | None = None) -> str:
               f"{c['category']} ({pct(c['agent_only'])})" for c in f["cat_highest"])
           + f"; least: {f['cat_lowest']['category']} ({pct(f['cat_lowest']['agent_only'])}).",
           gee_sentence(f),
+          repo_sentence(f),
           f"- Sensitivity: agent-only stays between {pct(f['sens_range'][0])} and {pct(f['sens_range'][1])} "
           "across the robustness variants.",
           f"- {f['flags'].get('conflict', 0)} units contradict the human docs; {f['flags'].get('links_out', 0)} "

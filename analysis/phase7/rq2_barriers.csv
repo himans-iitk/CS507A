@@ -1,12 +1,12 @@
 group,barrier,units,repos,share_of_gap_units
-Newcomers' characteristics,Lack of knowledge in project process and practices,325,133,0.25047664442326023
-—,(no barrier coded),273,39,0.23079122974261201
-Technical hurdles,Local environment setup hurdles,232,114,0.1965681601525262
-Technical hurdles,Code/architecture hurdles,176,96,0.1402287893231649
-Newcomers' orientation,Finding the correct artifacts to fix an issue,151,99,0.1161105815061964
-Newcomers' characteristics,Lack of technical background,72,49,0.06143946615824595
-Newcomers' characteristics,Lack of domain expertise,44,28,0.04847473784556721
-Newcomers' orientation,Newcomers don't know what is the contribution flow,61,49,0.046472831267874166
+Newcomers' characteristics,Lack of knowledge in project process and practices,453,170,0.35824594852240227
+Technical hurdles,Local environment setup hurdles,317,143,0.26015252621544327
+Technical hurdles,Code/architecture hurdles,269,128,0.22135367016205912
+Newcomers' orientation,Finding the correct artifacts to fix an issue,206,126,0.16258341277407054
+Newcomers' characteristics,Lack of technical background,125,74,0.11263107721639658
+Newcomers' orientation,Newcomers don't know what is the contribution flow,87,67,0.07140133460438514
+Newcomers' characteristics,Lack of domain expertise,56,40,0.058007626310772165
+Technical hurdles,Understanding flow of information,20,11,0.017254528122020975
 Newcomers' orientation,Poor “How to Contribute” available,3,2,0.0023832221163012394
 Newcomers' orientation,Finding a task to start with,4,3,0.002335557673975215
-Technical hurdles,Understanding flow of information,2,1,0.0015252621544327933
+—,(no barrier coded),0,0,0.0

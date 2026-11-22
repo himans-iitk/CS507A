@@ -8,11 +8,10 @@ draft-to-final confusion shows which kinds of drafts the annotator changed.
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import pandas as pd
 
-from gapstudy.labels import CODING
+from gapstudy.labels import aliases
 
 ORIGINS = {
     "draft_accepted": "AI draft accepted unchanged",
@@ -20,12 +19,6 @@ ORIGINS = {
     "draft_corrected": "AI draft, coverage corrected by the annotator",
     "blind": "Coded without an AI draft (blind)",
 }
-
-
-def aliases(coding_dir: Path = CODING) -> dict[str, str]:
-    """One person may have typed their name two ways; coding/coder_aliases.json maps them together."""
-    path = coding_dir / "coder_aliases.json"
-    return json.loads(path.read_text()) if path.exists() else {}
 
 
 def _truthy(v) -> bool:
@@ -71,7 +64,19 @@ def summary(labels: pd.DataFrame, drafts: dict[str, dict]) -> dict:
         "by_set": by_set,
         "by_draft": by_draft,
         "confusion": confusion,
+        "need_source": need_sources(df),
     }
+
+
+def need_sources(df: pd.DataFrame) -> pd.Series:
+    """Where the newcomer need (D1/D2) of each gap unit came from (see gapstudy.freeze.combine)."""
+    if "need_source" not in df:
+        return pd.Series(dtype=int)
+    src = df.need_source.dropna().astype(str)
+    src = src[src != "nan"]
+    kind = src.map(lambda v: {"pass1": "first annotator", "pass2": "second annotator (both coded a gap)",
+                              "fill": "model fill after a correction or gap"}.get(v.split(":")[0], v))
+    return kind.value_counts()
 
 
 def markdown(s: dict) -> list[str]:
@@ -85,6 +90,9 @@ def markdown(s: dict) -> list[str]:
           "### By coding set", "", s["by_set"].to_markdown(), "",
           "### Correction rate by drafted coverage", "",
           s["by_draft"].assign(correction_rate=lambda t: t.correction_rate.map("{:.1%}".format)).to_markdown(), ""]
+    if len(s["need_source"]):
+        L += ["### Source of the newcomer need (D1/D2) for gap units", "",
+              s["need_source"].rename("units").to_frame().to_markdown(), ""]
     if not s["confusion"].empty:
         L += ["### Corrected drafts (rows: draft, columns: final)", "", s["confusion"].to_markdown(), ""]
     return L

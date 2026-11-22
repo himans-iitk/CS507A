@@ -71,3 +71,23 @@ class LabelStore:
 
     def to_frame(self, coding_pass: int) -> pd.DataFrame:
         return pd.DataFrame(self.latest(coding_pass).values())
+
+
+def aliases(coding_dir: Path = CODING) -> dict[str, str]:
+    """One person may have typed their name two ways; coding/coder_aliases.json maps them together."""
+    path = Path(coding_dir) / "coder_aliases.json"
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+def annotators(coding_dir: Path = CODING) -> dict[str, dict]:
+    """coding/annotators.json: name -> {type: human|llm, model?, role?}."""
+    path = Path(coding_dir) / "annotators.json"
+    data = json.loads(path.read_text()) if path.exists() else {}
+    return {k: v for k, v in data.items() if not k.startswith("_")}
+
+
+def annotator_type(name, coding_dir: Path = CODING) -> str:
+    """'human', 'llm' or 'unknown' for a coder name (aliases resolved)."""
+    name = aliases(coding_dir).get(name, name)
+    return annotators(coding_dir).get(name, {}).get("type", "unknown")
+

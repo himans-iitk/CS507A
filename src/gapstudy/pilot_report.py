@@ -22,17 +22,27 @@ PROCESSED = PROJECT_ROOT / "data" / "processed"
 OUT = PROJECT_ROOT / "analysis" / "phase4" / "pilot_report.md"
 
 
+def blank(v) -> bool:
+    """Empty, None or NaN (a missing field becomes NaN in a DataFrame, and NaN is truthy)."""
+    if v is None:
+        return True
+    if isinstance(v, float):
+        return pd.isna(v)
+    return len(v) == 0 if hasattr(v, "__len__") else False
+
+
 def problems(row: pd.Series) -> list[str]:
     """Internal inconsistencies of one label record."""
     out = []
-    evidence = row.evidence or []
-    if row.coverage in ("partial", "shared") and not evidence:
+    get = lambda k: row.get(k) if hasattr(row, "get") else getattr(row, k, None)  # noqa: E731
+    evidence, need, cats = get("evidence"), get("need"), get("categories")
+    if row.coverage in ("partial", "shared") and blank(evidence):
         out.append("partial/shared without evidence")
-    if row.coverage == "agent_only" and evidence:
+    if row.coverage == "agent_only" and not blank(evidence):
         out.append("agent-only but evidence ticked")
-    if row.coverage in ("agent_only", "partial") and not row.need:
+    if row.coverage in ("agent_only", "partial") and blank(need):
         out.append("no newcomer need (D1)")
-    if not (row.categories or []) and row.coverage != "agent_directed":
+    if blank(cats) and row.coverage != "agent_directed":
         out.append("no category")
     return out
 

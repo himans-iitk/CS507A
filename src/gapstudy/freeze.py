@@ -18,9 +18,31 @@ from pathlib import Path
 import pandas as pd
 
 from gapstudy.labels import CODING, LabelStore
-from gapstudy.pilot_report import problems
+from gapstudy.pilot_report import blank, problems
 
 LIST_FIELDS = ("categories", "evidence", "barriers", "flags")
+
+
+GAP = ("agent_only", "partial")
+
+
+def combine(labels: pd.DataFrame, second: dict[str, dict]) -> pd.DataFrame:
+    """Final labels = pass 1, with newcomer need/barriers (D1/D2) taken from pass 2 where pass 1
+    left them empty and both coders judged the unit a gap. Coverage, categories and evidence
+    always stay pass 1's. need_source records where D1/D2 came from."""
+    labels = labels.copy()
+    labels["need_source"] = labels.apply(
+        lambda r: (f"fill:{r['filled_by']}" if "need" in str(r.get("filled_fields")) else "pass1")
+        if r.coverage in GAP and not blank(r.get("need")) else None, axis=1)
+    for i, r in labels.iterrows():
+        if r.coverage not in GAP or not blank(r.get("need")):
+            continue
+        s = second.get(r.unit_id)
+        if s and s.get("coverage") in GAP and s.get("need"):
+            labels.at[i, "need"] = s["need"]
+            labels.at[i, "barriers"] = s.get("barriers") or []
+            labels.at[i, "need_source"] = f"pass2:{s.get('coder')}"
+    return labels
 
 
 def check(coding_dir: Path) -> tuple[pd.DataFrame, list[str]]:
@@ -43,6 +65,7 @@ def check(coding_dir: Path) -> tuple[pd.DataFrame, list[str]]:
     for field in ("evidence", "need", "categories", "flags", "notes"):
         if field not in labels:
             labels[field] = None
+    labels = combine(labels, LabelStore(coding_dir).latest(2))
     labels["problems"] = labels.apply(problems, axis=1)
     bad = labels[labels.problems.str.len() > 0]
     if len(bad):

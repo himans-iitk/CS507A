@@ -25,7 +25,7 @@ import pandas as pd
 from sklearn.metrics import cohen_kappa_score
 
 from gapstudy.github_client import PROJECT_ROOT
-from gapstudy.labels import CODING, LabelStore
+from gapstudy.labels import CODING, LabelStore, aliases, annotator_type, annotators
 
 OUT = PROJECT_ROOT / "analysis" / "phase5" / "reliability.md"
 OUT_JSON = OUT.with_suffix(".json")
@@ -74,9 +74,24 @@ def bootstrap(p: pd.DataFrame, category_keys: list[str], n: int, seed: int = 507
     return pd.DataFrame(draws)
 
 
-def coders(store: LabelStore, unit_ids: set[str]) -> tuple[set, set]:
-    pick = lambda p: {r.get("coder") for u, r in store.latest(p).items() if u in unit_ids}
+def coders(store: LabelStore, unit_ids: set[str], coding_dir: Path = CODING) -> tuple[set, set]:
+    alias = aliases(coding_dir)
+    pick = lambda p: {alias.get(r.get("coder"), r.get("coder")) for u, r in store.latest(p).items() if u in unit_ids}
     return pick(1), pick(2)
+
+
+def agreement_kind(c1: set, c2: set, coding_dir: Path = CODING) -> str:
+    """intra-rater (same person twice), human-llm (an LLM coded one pass) or inter-rater (two people)."""
+    if c1 == c2:
+        return "intra-rater"
+    types = {annotator_type(c, coding_dir) for c in c1 | c2}
+    return "human-llm" if "llm" in types else "inter-rater"
+
+
+def by_repo(p: pd.DataFrame, queue: pd.DataFrame) -> pd.DataFrame:
+    tools = queue.drop_duplicates("unit_id").set_index("unit_id").tool
+    d = p.assign(agree=p.coverage_1 == p.coverage_2, tool=p.unit_id.map(tools))
+    return d.groupby("repo").agg(tool=("tool", "first"), units=("agree", "size"), agreement=("agree", "mean"))
 
 
 def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
@@ -91,9 +106,10 @@ def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
         text = ("# Reliability (pass 1 vs blind pass 2)\n\n"
                 f"No second-coder labels yet (0 / {total} units). Results use a single annotator.\n")
         return text, status
-    c1, c2 = coders(store, set(p.unit_id))
-    kind = "intra-rater" if c1 == c2 else "inter-rater"
-    lines = [f"# {kind.capitalize()} reliability (pass 1 vs blind pass 2)", ""]
+    c1, c2 = coders(store, set(p.unit_id), coding_dir)
+    kind = agreement_kind(c1, c2, coding_dir)
+    title = {"intra-rater": "Intra-rater", "inter-rater": "Inter-rater", "human-llm": "Human–LLM"}[kind]
+    lines = [f"# {title} agreement (pass 1 vs blind pass 2)", ""]
 
     point = metrics(p, keys)
     boot = bootstrap(p, keys, n_boot) if n_boot else pd.DataFrame(columns=point)
@@ -106,17 +122,38 @@ def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
               f"| Coverage, Cohen's κ (4 labels) | {point['coverage_kappa']:.2f}{ci('coverage_kappa')} |",
               f"| Coverage, linearly weighted κ (agent-only < partial < shared) | {point['coverage_weighted_kappa']:.2f}{ci('coverage_weighted_kappa')} |",
               f"| Categories, mean Jaccard per unit | {point['category_jaccard']:.2f}{ci('category_jaccard')} |",
-              f"| D1 newcomer need, κ | {point['need_kappa']:.2f}{ci('need_kappa')} |", "",
+              ("| D1 newcomer need, κ | n/a (pass 1 coded no needs on this set) |" if pd.isna(point["need_kappa"])
+               else f"| D1 newcomer need, κ | {point['need_kappa']:.2f}{ci('need_kappa')} |"), "",
               "## Coverage confusion (rows: pass 1, columns: pass 2)", "",
               pd.crosstab(p.coverage_1, p.coverage_2).to_markdown(), "",
               "## Per-category κ", "", "| Category | κ | units (pass 1) |", "|---|---|---|"]
     for k in keys:
         support = p.categories_1.map(lambda c: k in (c or [])).sum()
         lines.append(f"| {codebook['categories'][k]['name']} | {point['cat:' + k]:.2f} | {support} |")
+    tools = queue.drop_duplicates("unit_id").set_index("unit_id").tool
+    agent_rows = []
+    for t, g in p.assign(tool=p.unit_id.map(tools)).groupby("tool"):
+        agent_rows.append(f"| {t} | {len(g)} | {(g.coverage_1 == g.coverage_2).mean():.1%} | "
+                          f"{kappa(g.coverage_1, g.coverage_2):.2f} |")
+    repo = by_repo(p, queue)
+    lines += ["", "## By agent", "", "| Agent | Units | Agreement | κ |", "|---|---|---|---|", *agent_rows,
+              "", "## By repository", "",
+              f"Agreement per repository: median {repo.agreement.median():.0%}, mean {repo.agreement.mean():.0%}; "
+              f"{(repo.agreement == 1).sum()} of {len(repo)} repositories agree on every unit, "
+              f"{(repo.agreement >= .8).sum()} on at least 80%, {(repo.agreement < .6).sum()} below 60%.", "",
+              "Lowest agreement:", "", repo.sort_values("agreement").head(5).round(2).to_markdown()]
     lines += ["", "Interpretation (Landis & Koch): 0.61–0.80 substantial, > 0.80 almost perfect. "
               f"Pass 1 coder(s): {', '.join(sorted(map(str, c1)))}; pass 2 coder(s): "
               f"{', '.join(sorted(map(str, c2)))}, so this is {kind} agreement."]
+    by_repo(p, queue).to_csv(OUT.parent / "reliability_by_repo.csv")
+    info = annotators(coding_dir)
+    second = sorted(map(str, c2))
     status = {"status": "complete" if len(p) == total else "partial", "kind": kind, "units": int(len(p)),
+              "second_coders": second,
+              "second_coder_types": sorted({annotator_type(c, coding_dir) for c in second}),
+              "second_coder_models": sorted({info.get(c, {}).get("model") for c in second} - {None}),
+              "repo_agreement_median": round(float(repo.agreement.median()), 4),
+              "repos_full_agreement": int((repo.agreement == 1).sum()),
               "total": total, "repos": int(p.repo.nunique()),
               **{k: (None if pd.isna(point[k]) else round(float(point[k]), 4))
                  for k in ("coverage_agreement", "coverage_kappa", "coverage_weighted_kappa", "category_jaccard",

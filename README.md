@@ -8,11 +8,14 @@ Course project for CS507A, University of British Columbia.
 - **RQ2** Which newcomer needs and barriers does this agent-only knowledge address?
 - **RQ3** How reliably can agent-only knowledge be identified automatically?
 
-**Status.** Data collection, coding (single annotator), the gap detector, all analyses and the
-paper are complete and generated end to end by one command (below). Results:
-[`analysis/FINAL_RESULTS.md`](analysis/FINAL_RESULTS.md); paper: [`paper/main.pdf`](paper/main.pdf).
-A second, independent coding of the reliability set is pending; once its labels exist, rerunning
-the pipeline adds inter-rater agreement and switches the paper to its two-annotator text.
+**Status.** Data collection, coding, the gap detector, all analyses and the paper are complete
+and generated end to end by one command (below). Results:
+[`analysis/FINAL_RESULTS.md`](analysis/FINAL_RESULTS.md); paper: `paper/main.pdf` (built locally).
+Final labels are the first (human) annotator's. The blind reliability set (338 units) was also
+coded by an independent LLM annotator (OpenAI Codex), so the reported agreement is human–LLM
+agreement; agreement between two human coders has not been measured. Who produced which labels
+is recorded in [`coding/annotators.json`](coding/annotators.json), and the paper's wording follows
+it automatically.
 
 ## What is in this repository
 
@@ -45,7 +48,10 @@ From the coded labels to the final results and the paper:
 | paper | every number and table generated, PDF built | `paper/numbers.tex`, `paper/tables/`, `paper/main.pdf` |
 | summary | headline findings and a run record (inputs/outputs SHA-256, git commit) | `analysis/FINAL_RESULTS.md`, `analysis/pipeline_manifest.json` |
 
-The annotation mode is detected from the labels, not configured. Embedding and LLM scores need a
+The annotation mode is detected from the labels and `coding/annotators.json` (human or LLM
+per coder), not configured. When combining the passes, coverage, categories and evidence always
+come from pass 1; a missing newcomer need/barrier is taken from pass 2 only where both coders
+judged the unit a gap, and its source is kept in the `need_source` column. Embedding and LLM scores need a
 GPU and come from the Slurm jobs in `scripts/`; the pipeline reuses them.
 
 ## Pipeline, step by step

@@ -10,11 +10,11 @@
 \newcommand{\agentWords}{608}
 \newcommand{\anyGapOverall}{85.3\% [82.4\%, 88.0\%]}
 \newcommand{\barrierTopOne}{Lack of knowledge in project process and practices}
-\newcommand{\barrierTopOneShare}{25.0\%}
+\newcommand{\barrierTopOneShare}{35.8\%}
 \newcommand{\barrierTopThree}{Code/architecture hurdles}
-\newcommand{\barrierTopThreeShare}{14.0\%}
+\newcommand{\barrierTopThreeShare}{22.1\%}
 \newcommand{\barrierTopTwo}{Local environment setup hurdles}
-\newcommand{\barrierTopTwoShare}{19.7\%}
+\newcommand{\barrierTopTwoShare}{26.0\%}
 \newcommand{\catHighOne}{UI/UX}
 \newcommand{\catHighOneShare}{68.4\%}
 \newcommand{\catHighThree}{Debugging}
@@ -66,10 +66,12 @@
 \newcommand{\flowSnapshotCommitNotFound}{2{,}048}
 \newcommand{\geeAgentMinP}{0.41}
 \newcommand{\geeSigCats}{System Overview (OR 0.07), Development Process (OR 0.50), Configuration and Environment (OR 0.66), Build and Run (OR 0.71)}
-\newcommand{\kappaCoverage}{\TBD}
-\newcommand{\kappaWeighted}{\TBD}
+\newcommand{\kappaCoverage}{0.78}
+\newcommand{\kappaCoverageCI}{[0.71, 0.85]}
+\newcommand{\kappaWeighted}{0.80}
+\newcommand{\kappaWeightedCI}{[0.73, 0.86]}
 \newcommand{\nAgentUnits}{2{,}664}
-\newcommand{\nAiFilled}{51}
+\newcommand{\nAiFilled}{58}
 \newcommand{\nBlindCoded}{338}
 \newcommand{\nCodable}{2{,}661}
 \newcommand{\nCodedUnits}{1{,}564}
@@ -90,6 +92,9 @@
 \newcommand{\nKnowledgeUnits}{1{,}423}
 \newcommand{\nLinksOutUnits}{180}
 \newcommand{\nMainRepos}{141}
+\newcommand{\nNeedFilled}{20}
+\newcommand{\nNeedFirst}{930}
+\newcommand{\nNeedFromSecond}{266}
 \newcommand{\nPackageFiles}{2{,}303}
 \newcommand{\nPerAgent}{67}
 \newcommand{\nPilotRepos}{20}
@@ -98,30 +103,47 @@
 \newcommand{\nReadmeUnits}{2{,}594}
 \newcommand{\nReliabilityRepos}{40}
 \newcommand{\nReliabilityUnits}{338}
+\newcommand{\nRepoKnowledge}{197}
 \newcommand{\nSampleRepos}{201}
+\newcommand{\nSecondCodedUnits}{338}
 \newcommand{\nStubContributing}{13}
 \newcommand{\nUnits}{7{,}120}
-\newcommand{\needGroupDocs}{6.2\%}
-\newcommand{\needGroupProduct}{29.4\%}
-\newcommand{\needGroupTeamContext}{0.5\%}
+\newcommand{\needGroupDocs}{7.3\%}
+\newcommand{\needGroupProduct}{29.9\%}
+\newcommand{\needGroupTeamContext}{0.4\%}
 \newcommand{\needGroupTop}{Processes and Practices}
-\newcommand{\needGroupTopShare}{64.0\%}
+\newcommand{\needGroupTopShare}{62.4\%}
 \newcommand{\needTopOne}{Development Process}
-\newcommand{\needTopOneShare}{27.2\%}
+\newcommand{\needTopOneShare}{28.1\%}
 \newcommand{\needTopThree}{Software Architecture}
-\newcommand{\needTopThreeShare}{12.0\%}
+\newcommand{\needTopThreeShare}{11.4\%}
 \newcommand{\needTopTwo}{Development Environment and Tools}
-\newcommand{\needTopTwoShare}{26.6\%}
-\newcommand{\noBarrierShare}{23.1\%}
+\newcommand{\needTopTwoShare}{26.3\%}
+\newcommand{\noBarrierShare}{0.0\%}
 \newcommand{\readmeFlesch}{27.8}
 \newcommand{\readmeWords}{682}
+\newcommand{\relAgreement}{86.1\%}
+\newcommand{\relRepoMedian}{90\%}
+\newcommand{\relReposFull}{15}
+\newcommand{\repoAgentOnlyMedian}{37.5\%}
+\newcommand{\repoAgentOnlyQOne}{16.7\%}
+\newcommand{\repoAgentOnlyQThree}{66.7\%}
+\newcommand{\repoAllAgentOnly}{15}
+\newcommand{\repoAnyAgentOnly}{164}
+\newcommand{\repoAnyAgentOnlyShare}{83\%}
+\newcommand{\repoGapMedian}{90.0\%}
+\newcommand{\repoNoShared}{97}
+\newcommand{\repoNoSharedShare}{49\%}
 \newcommand{\sampleMedianStars}{445}
+\newcommand{\secondCoderModel}{OpenAI Codex}
 \newcommand{\sensHigh}{42.5\%}
 \newcommand{\sensLow}{38.8\%}
 \newcommand{\sharedOverall}{14.7\% [12.0\%, 17.6\%]}
 \newif\ifsecondcoder
-\secondcoderfalse
+\secondcodertrue
 \newif\ifagentsdiffer
 \agentsdifferfalse
 \newif\ifllmjudge
 \llmjudgefalse
+\newif\ifsecondcoderllm
+\secondcoderllmtrue

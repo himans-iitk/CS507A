@@ -126,3 +126,26 @@ def chi_square_descriptive(df: pd.DataFrame) -> dict:
     table = pd.crosstab(k.tool, k.coverage)
     chi2, p, dof, _ = chi2_contingency(table)
     return {"table": table, "chi2": chi2, "p": p, "dof": dof}
+
+
+BINS = [(-0.001, 0.0, "0%"), (0.0, 0.25, "1–25%"), (0.25, 0.5, "26–50%"), (0.5, 0.75, "51–75%"),
+        (0.75, 0.999, "76–99%"), (0.999, 1.0, "100%")]
+
+
+def repo_distribution(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Per-repository coverage shares (knowledge units only, unweighted), their spread, and a histogram
+    of the agent-only share. Complements the post-stratified means of `headline`."""
+    k = df[df.coverage.isin(KNOWLEDGE)]
+    per = k.groupby("repo").agg(tool=("tool", "first"), units=("coverage", "size"),
+                                agent_only=("coverage", lambda x: (x == "agent_only").mean()),
+                                partial=("coverage", lambda x: (x == "partial").mean()),
+                                shared=("coverage", lambda x: (x == "shared").mean()))
+    per["any_gap"] = per.agent_only + per.partial
+    spread = pd.DataFrame({c: {"mean": per[c].mean(), "median": per[c].median(), "q1": per[c].quantile(.25),
+                               "q3": per[c].quantile(.75)} for c in ("agent_only", "partial", "shared", "any_gap")}).T
+    hist = {label: int(((per.agent_only > lo) & (per.agent_only <= hi)).sum()) for lo, hi, label in BINS}
+    facts = {"repos": len(per), "any_agent_only": int((per.agent_only > 0).sum()),
+             "all_agent_only": int((per.agent_only == 1).sum()), "no_shared": int((per.shared == 0).sum()),
+             "all_shared": int((per.shared == 1).sum()), "hist": hist,
+             "median_by_tool": per.groupby("tool").agent_only.median().to_dict()}
+    return per, spread, facts
