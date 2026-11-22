@@ -94,7 +94,7 @@ def by_repo(p: pd.DataFrame, queue: pd.DataFrame) -> pd.DataFrame:
     return d.groupby("repo").agg(tool=("tool", "first"), units=("agree", "size"), agreement=("agree", "mean"))
 
 
-def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
+def report(coding_dir: Path, n_boot: int, out_dir: Path | None = None) -> tuple[str, dict]:
     codebook = json.loads((coding_dir / "codebook.json").read_text())
     keys = [k for k in codebook["categories"] if not k.startswith("_")]
     queue = pd.read_csv(coding_dir / "queue.csv")
@@ -145,7 +145,8 @@ def report(coding_dir: Path, n_boot: int) -> tuple[str, dict]:
     lines += ["", "Interpretation (Landis & Koch): 0.61–0.80 substantial, > 0.80 almost perfect. "
               f"Pass 1 coder(s): {', '.join(sorted(map(str, c1)))}; pass 2 coder(s): "
               f"{', '.join(sorted(map(str, c2)))}, so this is {kind} agreement."]
-    by_repo(p, queue).to_csv(OUT.parent / "reliability_by_repo.csv")
+    if out_dir is not None:
+        by_repo(p, queue).to_csv(Path(out_dir) / "reliability_by_repo.csv")
     info = annotators(coding_dir)
     second = sorted(map(str, c2))
     status = {"status": "complete" if len(p) == total else "partial", "kind": kind, "units": int(len(p)),
@@ -168,7 +169,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--boot", type=int, default=1000)
     args = ap.parse_args()
-    text, status = report(CODING, args.boot)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    text, status = report(CODING, args.boot, OUT.parent)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(text)
     OUT_JSON.write_text(json.dumps(status, indent=2) + "\n")

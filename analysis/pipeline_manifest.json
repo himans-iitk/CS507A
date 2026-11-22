@@ -1,7 +1,7 @@
 {
-  "run_at": "2026-11-22T07:17:09+00:00",
-  "git_commit": "50946bc953a3a2f3e2638799dbe36f72f417cfa1",
-  "git_dirty": true,
+  "run_at": "2026-11-22T07:25:22+00:00",
+  "git_commit": "f0b52be319f3a651995eb4c3bbc671871ea5f557",
+  "git_dirty": [],
   "bootstrap_draws": 1000,
   "stages": {
     "check": {
@@ -16,7 +16,50 @@
       ],
       "warnings": [],
       "status": "ok",
-      "seconds": 0.9
+      "seconds": 0.9,
+      "run_at": "2026-11-22T07:25:22+00:00"
+    },
+    "freeze": {
+      "notes": [
+        "✓ froze 1564 units → labels_v1.csv (sha256 a1e5a0ee1cba…)"
+      ],
+      "status": "ok",
+      "seconds": 0.8,
+      "run_at": "2026-11-22T07:25:22+00:00"
+    },
+    "reliability": {
+      "notes": [
+        "human-llm: κ = 0.78 on 338 units"
+      ],
+      "status": "ok",
+      "seconds": 13.3,
+      "run_at": "2026-11-22T07:25:22+00:00"
+    },
+    "detector": {
+      "notes": [
+        "best on dev: tfidf (item_mean); test F1 0.76, AUC 0.88"
+      ],
+      "status": "ok",
+      "seconds": 79.9,
+      "run_at": "2026-11-22T07:25:22+00:00"
+    },
+    "analysis": {
+      "notes": [
+        "agent-only 41.8%, agent-only or partial 85.3% (post-stratified)"
+      ],
+      "status": "ok",
+      "seconds": 10.7,
+      "run_at": "2026-11-22T07:25:22+00:00"
+    },
+    "paper": {
+      "notes": [
+        "wrote 139 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
+        "wrote 7 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance",
+        "paper/main.pdf built"
+      ],
+      "status": "ok",
+      "seconds": 2.2,
+      "run_at": "2026-11-22T07:25:22+00:00"
     }
   },
   "inputs": {
@@ -40,6 +83,6 @@
     "analysis/phase7/results.md": "e8fa4d694f3b5a6bc41c319c88287d4f9017e44675a6acc8d1cc15c1d37d17d5",
     "paper/numbers.tex": "f97e4658485fdd667d0a741a9cbda4aaa244e78eb228dd35bf543b6bf8cbf090",
     "paper/main.pdf": "308c1955d801014267a44dce1966545f1cbbaac4c59bef0edf90f5d9cf0d07f8",
-    "analysis/FINAL_RESULTS.md": "0d0152b15c9935ab3e23fb275016ca8cf5c0a98b759f621d36989dfdbc1993c4"
+    "analysis/FINAL_RESULTS.md": "9fd0ef663f9391a4a62a2211f8bfe6c946a196e5b2d5e132d18a0ba68f0aaea2"
   }
 }
