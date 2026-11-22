@@ -1,6 +1,6 @@
 {
-  "run_at": "2026-11-22T07:16:17+00:00",
-  "git_commit": "b5329a8deb90ff956b80f8ac719ff5d9283780f3",
+  "run_at": "2026-11-22T07:17:09+00:00",
+  "git_commit": "50946bc953a3a2f3e2638799dbe36f72f417cfa1",
   "git_dirty": true,
   "bootstrap_draws": 1000,
   "stages": {
@@ -17,43 +17,6 @@
       "warnings": [],
       "status": "ok",
       "seconds": 0.9
-    },
-    "freeze": {
-      "notes": [
-        "✓ froze 1564 units → labels_v1.csv (sha256 a1e5a0ee1cba…)"
-      ],
-      "status": "ok",
-      "seconds": 0.8
-    },
-    "reliability": {
-      "notes": [
-        "human-llm: κ = 0.78 on 338 units"
-      ],
-      "status": "ok",
-      "seconds": 14.0
-    },
-    "detector": {
-      "notes": [
-        "best on dev: tfidf (item_mean); test F1 0.76, AUC 0.88"
-      ],
-      "status": "ok",
-      "seconds": 78.0
-    },
-    "analysis": {
-      "notes": [
-        "agent-only 41.8%, agent-only or partial 85.3% (post-stratified)"
-      ],
-      "status": "ok",
-      "seconds": 46.9
-    },
-    "paper": {
-      "notes": [
-        "wrote 139 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
-        "wrote 7 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance",
-        "paper/main.pdf built"
-      ],
-      "status": "ok",
-      "seconds": 9.7
     }
   },
   "inputs": {
@@ -77,6 +40,6 @@
     "analysis/phase7/results.md": "e8fa4d694f3b5a6bc41c319c88287d4f9017e44675a6acc8d1cc15c1d37d17d5",
     "paper/numbers.tex": "f97e4658485fdd667d0a741a9cbda4aaa244e78eb228dd35bf543b6bf8cbf090",
     "paper/main.pdf": "308c1955d801014267a44dce1966545f1cbbaac4c59bef0edf90f5d9cf0d07f8",
-    "analysis/FINAL_RESULTS.md": "42e899e1fe3e09ef431a650d2de97cb9a5a639cf84c1becbdf0bb6440935b657"
+    "analysis/FINAL_RESULTS.md": "0d0152b15c9935ab3e23fb275016ca8cf5c0a98b759f621d36989dfdbc1993c4"
   }
 }
