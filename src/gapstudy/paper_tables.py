@@ -98,7 +98,8 @@ def rq2_needs(f: dict) -> str:
 def rq2_barriers(f: dict) -> str:
     rows = [rf"{tex(r.barrier)} & {r.units} & {p1(r.share_of_gap_units)} \\"
             for r in f["barriers"].itertuples() if r.group != "—"]
-    note = f"No barrier was coded for {p1(f['no_barrier_share'])}\\% of gap units. Multi-label."
+    note = ((f"No barrier was coded for {p1(f['no_barrier_share'])}\\% of gap units. " if f["no_barrier_share"] > 0 else "")
+            + "Multi-label: a unit can ease several barriers.")
     return table("table", "RQ2: newcomer barriers~\\cite{steinmacher2015barriers} that the gap knowledge would "
                  "mitigate (units, share of gap units, \\%).", "tab:rq2bar", "p{0.62\\linewidth}rr",
                  r"Barrier & Units & Share", rows, note)

@@ -76,3 +76,13 @@ def test_agreement_kind(tmp_path):
     assert agreement_kind({"A"}, {"A"}, tmp_path) == "intra-rater"
     assert agreement_kind({"A"}, {"B"}, tmp_path) == "inter-rater"
     assert agreement_kind({"A"}, {"L"}, tmp_path) == "human-llm"
+
+
+@pytest.mark.skipif(not FROZEN.exists(), reason="needs frozen labels and pipeline outputs")
+def test_rq1_figure_has_both_panels():
+    from gapstudy.paper_figures import figure
+    from gapstudy.summary import facts
+    f = facts()
+    tikz = figure(f)
+    assert r"\label{fig:rq1}" in tikz and "(a) By agent" in tikz and "(b) By instruction category" in tikz
+    assert tikz.count("\\fill[covA]") >= len(f["categories"]) + 4  # one agent-only segment per bar (+ legend)

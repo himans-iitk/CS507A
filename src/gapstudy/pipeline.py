@@ -13,7 +13,7 @@ Stages, in order (each one's output is the next one's input):
                automatically when data/processed/llm/ has its outputs) -> detector/config.json
   analysis     RQ1, RQ2, sensitivity (incl. the docs/ check, which needs the tuned detector),
                corpus readability, label provenance
-  paper        paper/numbers.tex, paper/tables/*.tex, paper/main.pdf
+  paper        paper/numbers.tex, paper/tables/*.tex, paper/figures/*.tex, paper/main.pdf
   summary      analysis/FINAL_RESULTS.md and analysis/pipeline_manifest.json
 
 The annotation mode is detected, not configured: with only pass-1 labels the results are
@@ -162,6 +162,7 @@ def stage_analysis(args) -> dict:
 def stage_paper(args) -> dict:
     notes = [run_module("paper", "gapstudy.paper_numbers").strip().splitlines()[-1]]
     notes.append(run_module("paper", "gapstudy.paper_tables").strip().splitlines()[-1])
+    notes.append(run_module("paper", "gapstudy.paper_figures").strip().splitlines()[-1])
     if not args.no_pdf:
         proc = subprocess.run(["latexmk", "-pdf", "-interaction=nonstopmode", "-silent", "main.tex"],
                               cwd=PAPER, capture_output=True, text=True)

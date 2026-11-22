@@ -45,7 +45,7 @@ From the coded labels to the final results and the paper:
 | reliability | pass 1 vs pass 2 if a second coder's labels exist, else "pending" | `analysis/phase5/reliability.{md,json}` |
 | detector | RQ3: tune on pilot repos, test on the rest (+ LLM judge if its outputs exist) | `analysis/phase6/`, `detector/config.json` |
 | analysis | RQ1, RQ2, sensitivity, readability, label provenance | `analysis/phase7/` |
-| paper | every number and table generated, PDF built | `paper/numbers.tex`, `paper/tables/`, `paper/main.pdf` |
+| paper | every number, table and figure generated, PDF built | `paper/numbers.tex`, `paper/tables/`, `paper/figures/`, `paper/main.pdf` |
 | summary | headline findings and a run record (inputs/outputs SHA-256, git commit) | `analysis/FINAL_RESULTS.md`, `analysis/pipeline_manifest.json` |
 
 The annotation mode is detected from the labels and `coding/annotators.json` (human or LLM

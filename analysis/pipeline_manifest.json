@@ -1,7 +1,14 @@
 {
-  "run_at": "2026-11-22T07:25:22+00:00",
-  "git_commit": "f0b52be319f3a651995eb4c3bbc671871ea5f557",
-  "git_dirty": [],
+  "run_at": "2026-11-22T07:39:29+00:00",
+  "git_commit": "c5a49aa9ca555e01aacd815d6274e6a9f8758f9d",
+  "git_dirty": [
+    "paper/main.tex",
+    "src/gapstudy/paper_tables.py",
+    "src/gapstudy/pipeline.py",
+    "tests/test_pipeline.py",
+    "paper/figures/",
+    "src/gapstudy/paper_figures.py"
+  ],
   "bootstrap_draws": 1000,
   "stages": {
     "check": {
@@ -16,8 +23,8 @@
       ],
       "warnings": [],
       "status": "ok",
-      "seconds": 0.9,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 19.3,
+      "run_at": "2026-11-22T07:39:29+00:00"
     },
     "freeze": {
       "notes": [
@@ -55,11 +62,12 @@
       "notes": [
         "wrote 139 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
         "wrote 7 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance",
+        "wrote /home/himishra/CS507A/paper/figures/rq1_coverage.tex",
         "paper/main.pdf built"
       ],
       "status": "ok",
-      "seconds": 2.2,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 6.5,
+      "run_at": "2026-11-22T07:39:29+00:00"
     }
   },
   "inputs": {
@@ -82,7 +90,7 @@
     "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
     "analysis/phase7/results.md": "e8fa4d694f3b5a6bc41c319c88287d4f9017e44675a6acc8d1cc15c1d37d17d5",
     "paper/numbers.tex": "f97e4658485fdd667d0a741a9cbda4aaa244e78eb228dd35bf543b6bf8cbf090",
-    "paper/main.pdf": "308c1955d801014267a44dce1966545f1cbbaac4c59bef0edf90f5d9cf0d07f8",
-    "analysis/FINAL_RESULTS.md": "9fd0ef663f9391a4a62a2211f8bfe6c946a196e5b2d5e132d18a0ba68f0aaea2"
+    "paper/main.pdf": "9d774c08ab34dd5fc4f114bc77992a83267be2f832cbd31b3a3a6d3babade0c8",
+    "analysis/FINAL_RESULTS.md": "5d528773156baa8159a3b2a181317c5bba5e343e0eb36a8fdf099dc98d60ee05"
   }
 }

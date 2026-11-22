@@ -1,9 +1,11 @@
 \documentclass[sigconf,nonacm]{acmart}
 \usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{tcolorbox}
 \input{numbers}
 
-% Results that need frozen labels print as a red [TBD] (see numbers.tex).
-% Regenerate the numbers with: python -m gapstudy.paper_numbers
+% Every number, table and figure is generated: python -m gapstudy.pipeline
+% (numbers.tex, tables/*.tex, figures/*.tex). Do not type results by hand.
 
 \begin{document}
 \setcounter{dbltopnumber}{3}\renewcommand{\dbltopfraction}{0.85}\renewcommand{\dblfloatpagefraction}{0.8}
@@ -16,20 +18,16 @@
 \email{himishra@student.ubc.ca}
 
 \begin{abstract}
-Coding agents such as Claude Code, OpenAI Codex and GitHub Copilot read a repository-level
-context file before they work. Maintainers use these files to state how a project is built and
-tested, how its code is organised and which conventions to follow --- knowledge a human newcomer
-needs just as much. We ask how much of this knowledge is given only to the agent. From the
-\nPackageFiles{} agent context files of the Agent READMEs dataset we sample \nSampleRepos{}
-repositories that also have a CONTRIBUTING file (\nPerAgent{} per agent), recover the exact commit
-of each agent file, and compare its \nCodable{} sections with the README and CONTRIBUTING at that
-commit. Coding \nQueued{} sections shows that \agentOnlyOverall{} of a repository's agent-file
-knowledge is absent from its human documentation and only \sharedOverall{} is fully shared. The
-missing knowledge is mostly about how to work on the project: \needGroupTopShare{} of it serves
-newcomer needs in the \emph{\needGroupTop{}} group, led by \needTopOne{} and \needTopTwo{}.
-Agent files are also harder to read than CONTRIBUTING files (median Flesch \agentFlesch{} vs
-\contribFlesch{}). An automatic gap detector reaches F1 \detectorFOne{} on held-out repositories.
-We release the dataset, codebook and detector.
+Coding agents such as Claude Code, Codex and GitHub Copilot read a repository context file that
+tells them how to build, test and change the project --- knowledge a human newcomer needs just as
+much. We measure how much of it is given only to the agent. For \nSampleRepos{} repositories
+(\nPerAgent{} per agent file type), we compare \nQueued{} sections of the agent file with the
+README and CONTRIBUTING at the same commit. On average, \agentOnlyOverall{} of a repository's
+agent-file knowledge is absent from its human documentation and only \sharedOverall{} is fully
+shared. The gap is about \emph{how to work on} the project: \needGroupTopShare{} of it concerns
+processes and practices, led by \needTopOne{} and \needTopTwo{}. A simple TF-IDF detector finds
+agent-only knowledge with F1 \detectorFOne{} on held-out repositories. We release the dataset,
+codebook, pipeline and detector.
 \end{abstract}
 
 \maketitle
@@ -37,80 +35,59 @@ We release the dataset, codebook and detector.
 \section{Introduction}
 
 Coding agents start every session by reading a context file --- \texttt{CLAUDE.md},
-\texttt{AGENTS.md} or \path{.github/copilot-instructions.md} --- that tells them how the project
-is built and tested, how its code is organised and which conventions to follow~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context}.
-That is exactly what a newcomer to the project needs to know. People joining a project struggle
-to learn its structure and unwritten rules~\cite{dagenais2010landscape}, and poor documentation is
-among the barriers newcomers report most often~\cite{steinmacher2015barriers}.
-
-Writing for an agent resembles writing for a newcomer: assume no prior context and make every
-instruction explicit. This can push maintainers to write down knowledge that otherwise stays
-implicit. A \texttt{CLAUDE.md} may say ``run \texttt{make verify} before committing; never edit
-\texttt{src/gen/}'' while the \texttt{CONTRIBUTING.md} says only ``PRs welcome''. Context files are
-most useful precisely when they capture such project-specific practice~\cite{gloaguen2026agentsmd}.
-If this pattern is common, projects onboard their agents better than their human contributors.
-
-Prior work describes what context files contain~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context}
-and whether they help agents~\cite{gloaguen2026agentsmd}. We ask what they reveal about a project's
-documentation for \emph{people}:
+\texttt{AGENTS.md} or \path{.github/copilot-instructions.md} --- that explains how the project is
+built and tested, how its code is organised and which conventions to
+follow~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context}. That is what a newcomer
+needs too: people joining a project struggle to learn its structure and unwritten
+rules~\cite{dagenais2010landscape}, and poor documentation is among the barriers they report most
+often~\cite{steinmacher2015barriers}. A \texttt{CLAUDE.md} may say ``run \texttt{make verify}
+before committing; never edit \texttt{src/gen/}'' while \texttt{CONTRIBUTING.md} says only ``PRs
+welcome''. If this is common, projects onboard their agents better than their people. We ask:
 
 \begin{itemize}
-\item \textbf{RQ1:} What knowledge captured in agent context files is absent from the same repository's README and CONTRIBUTING files?
-\item \textbf{RQ2:} Which newcomer needs and barriers does this agent-only knowledge address?
-\item \textbf{RQ3:} How reliably can agent-only knowledge be identified automatically?
+\item \textbf{RQ1:} How much agent-file knowledge is absent from the README and CONTRIBUTING?
+\item \textbf{RQ2:} Which newcomer needs and barriers does this knowledge address?
+\item \textbf{RQ3:} Can agent-only knowledge be detected automatically?
 \end{itemize}
 
-\noindent Our contributions are (1)~a measurement of how much project knowledge is documented only
-for agents, (2)~a mapping of that knowledge to established newcomer needs and barriers, and (3)~an
-open-source gap detector with a labelled dataset.
+\begin{tcolorbox}[colback=black!3,colframe=black!35,boxrule=0.4pt,arc=1pt,left=4pt,right=4pt,top=3pt,bottom=3pt]
+\small\textbf{Key findings.}
+\begin{itemize}\setlength{\itemsep}{1pt}\setlength{\topsep}{2pt}\setlength{\leftmargin}{1em}
+\item \textbf{RQ1:} \agentOnlyOverall{} of a repository's agent-file knowledge is agent-only;
+\anyGapOverall{} is not fully available to people. \catHighOne, \catHighTwo{} and \catHighThree{}
+knowledge is most often agent-only, \catLow{} least (\catLowShare).
+\item \textbf{RQ2:} \needGroupTopShare{} of the gap serves \emph{\needGroupTop} needs; it would
+most often ease newcomers' \emph{\barrierTopOne}.
+\item \textbf{RQ3:} TF-IDF detects agent-only knowledge with F1 \detectorFOne{} (recall
+\detectorRecall); sentence embeddings do no better.
+\end{itemize}
+\end{tcolorbox}
 
-\section{Background and Related Work}
+\section{Background}
 
-\paragraph{Agent context files.} \texttt{CLAUDE.md} is loaded at the start of every Claude Code
-session; \texttt{AGENTS.md} is a tool-neutral convention first used by OpenAI Codex; Copilot reads
-\path{.github/copilot-instructions.md}. Chatlatanagulchai et al.\ analysed 2{,}303 such files from
-1{,}925 repositories, derived a taxonomy of 16 instruction categories and found the files hard to
-read (median Flesch 16.6 for \texttt{CLAUDE.md})~\cite{chatlatanagulchai2026agentreadmes}.
-Mohsenimofidi et al.\ studied how open-source projects engineer this context~\cite{mohsenimofidi2026context},
-and Gloaguen et al.\ found that context files help agents mostly when they carry project-specific
-practice rather than generic overviews~\cite{gloaguen2026agentsmd}.
+\paragraph{Agent context files.} \texttt{CLAUDE.md} (Claude Code), \texttt{AGENTS.md} (a
+tool-neutral convention first used by Codex) and Copilot's instructions file are loaded into every
+agent session. Chatlatanagulchai et al.\ analysed 2{,}303 such files, derived 16 instruction
+categories and found them hard to read~\cite{chatlatanagulchai2026agentreadmes};
+Mohsenimofidi et al.\ studied how projects engineer this context~\cite{mohsenimofidi2026context};
+Gloaguen et al.\ found the files help agents mostly when they carry project-specific
+practice~\cite{gloaguen2026agentsmd}.
 
-\paragraph{Human documentation and newcomers.} README files describe what a project does and how
-to install and use it~\cite{prana2019readme}; CONTRIBUTING files tell contributors how to set up,
-test and submit changes. Dagenais et al.\ describe the ``landscape'' a newcomer must learn --- product,
-processes and practices, team, documentation and context --- and the obstacles in
-it~\cite{dagenais2010landscape}. Steinmacher et al.\ catalogue barriers newcomers face, including
-orientation, technical hurdles and documentation problems~\cite{steinmacher2015barriers,santos2024onboarding}.
-We use both frameworks to interpret agent-only knowledge.
+\paragraph{Newcomer onboarding.} READMEs describe what a project does and how to use
+it~\cite{prana2019readme}; CONTRIBUTING files how to set up, test and submit changes. Dagenais et
+al.\ describe the ``landscape'' a newcomer must learn~\cite{dagenais2010landscape} and Steinmacher
+et al.\ the barriers newcomers face~\cite{steinmacher2015barriers,santos2024onboarding}. We use
+both to interpret agent-only knowledge.
 
 \section{Study Design}
 
-\subsection{Data}
-
-\paragraph{Source.} We start from the replication package of Chatlatanagulchai et
-al.~\cite{chatlatanagulchai2026agentreadmes}: \nPackageFiles{} agent files (922 \texttt{CLAUDE.md},
-694 \texttt{AGENTS.md}, 687 Copilot) with their content, repository metadata and per-file commit
-history. The package records each file's \emph{blob} SHA rather than a commit SHA (also in its
-public mirror, under the name \path{content_commit_sha}). We therefore recover each file's
-\emph{snapshot commit}: the newest commit in the file's history at which the file has that blob,
-first from the package's history and otherwise from the GitHub API.
-
-\paragraph{Human documentation.} At the snapshot commit we locate the README and CONTRIBUTING the
-way GitHub does (\texttt{.github/}, then the root, then \texttt{docs/}), so the three documents of
-a repository are mutually consistent: the human documentation as it stood when this version of
-the agent file was committed. All \nSampleRepos{}$\times$3 documents were verified against their
-git blob SHAs.
-
-\paragraph{Exclusions and sampling.} Table~\ref{tab:flow} lists the exclusions in the order applied.
-Link-only files point elsewhere (e.g.\ \texttt{@AGENTS.md}); near-copies (TF-IDF cosine $\ge 0.9$
-with a file in another repository) are mostly tool-installed rule packs and mirrored projects;
-language is detected with \texttt{langdetect} as in~\cite{chatlatanagulchai2026agentreadmes}.
-Requiring a CONTRIBUTING file is by far the largest cut. From the \nEligible{} eligible files we drew
-\nPerAgent{} per agent (seeded, one file per repository), giving \nSampleRepos{} repositories. Equal
-allocation gives the per-agent comparisons equal power; overall estimates are post-stratified to the
-eligible frame. Unedited \texttt{/init} output (\nInitUnedited{} files) is kept and examined in a
-sensitivity analysis rather than excluded, because its body is generated from the repository's own
-code.
+\paragraph{Data and sample.} We start from the \nPackageFiles{} agent files of the Agent READMEs
+dataset~\cite{chatlatanagulchai2026agentreadmes}. The dataset records each file's blob SHA, so we
+recover its \emph{snapshot commit} (the newest commit with that blob) and take the README and
+CONTRIBUTING at that commit, located as GitHub does. After the exclusions in
+Table~\ref{tab:flow}, \nEligible{} files remain; we sample \nPerAgent{} per agent type (one per
+repository), giving \nSampleRepos{} repositories. Overall estimates are post-stratified to the
+eligible population.
 
 \begin{table}[t]
 \caption{Sampling flow (agent files).}
@@ -120,318 +97,177 @@ code.
 \toprule
 Step & Remaining \\
 \midrule
-All agent files in the package & \flowAllAgentFilesInPackage \\
-$-$ repository deleted & \flowRepoNoLongerExists \\
-$-$ fork & \flowFork \\
-$-$ archived & \flowArchived \\
+All agent files in the dataset & \flowAllAgentFilesInPackage \\
+$-$ repository deleted, fork or archived & \flowArchived \\
 $-$ snapshot commit not found & \flowSnapshotCommitNotFound \\
-$-$ agent file is a symlink & \flowAgentFileIsASymlink \\
-$-$ agent file only links elsewhere & \flowAgentFileOnlyLinksElsewhere \\
-$-$ not in English & \flowAgentFileNotInEnglish \\
-$-$ copy of another repository's file & \flowCopyOfAnotherRepoSAgentFile \\
-$-$ no README at snapshot & \flowNoReadmeAtSnapshot \\
-$-$ no CONTRIBUTING at snapshot & \flowNoContributingAtSnapshot \\
+$-$ symlink or link-only file & \flowAgentFileOnlyLinksElsewhere \\
+$-$ not English, or copy of another repository's file & \flowCopyOfAnotherRepoSAgentFile \\
+$-$ no README or no CONTRIBUTING at snapshot & \flowNoContributingAtSnapshot \\
 \midrule
 Sampled (\nPerAgent{} per agent) & \nSampleRepos \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Knowledge Units}
+\paragraph{Units.} Each document is split at its headings (H2/H3, and H1 when used for sections)
+into \nUnits{} units; the \nAgentUnits{} agent units have a median of \agentUnitMedianWords{} words.
+We code up to 10 random agent units per repository, \nQueued{} in all, weighted by the inverse
+sampling fraction.
 
-Each document is split with a CommonMark parser into sections at H2 and H3, plus H1 when a
-document uses several H1s as sections; a single leading H1 is the title. Text before the first
-section is a preamble unit; documents without section headings fall back to top-level blocks.
-Tables of contents are flagged and not coded. This yields \nUnits{} units (\nAgentUnits{} agent,
-\nReadmeUnits{} README, \nContribUnits{} CONTRIBUTING); agent units have a median of
-\agentUnitMedianWords{} words. A pilot on 15 repositories showed sections to be mostly single topics, so
-the section is the coding unit; checklists that are only partly documented are labelled
-\emph{partially covered}.
-
-\subsection{Coding}\label{sec:coding}
-
-To bound the effort we code at most 10 randomly chosen agent units per repository
-(\nQueued{} units; \nFullyCodedRepos{} repositories coded in full), weighting each unit by the inverse
-of its repository's sampling fraction. Each unit receives:
-(A)~its instruction categories, using the 16 categories of~\cite{chatlatanagulchai2026agentreadmes};
-(C)~its coverage in the README and CONTRIBUTING --- \emph{agent-only}, \emph{partially covered},
-\emph{shared}, or \emph{agent-directed} for units that only address the AI (persona, response
-style) and carry no project knowledge; paraphrases count, links elsewhere do not; the covering
-human sections are recorded as evidence; and, for agent-only and partial units,
-(D1)~the newcomer need, as one of Dagenais et al.'s landscape features~\cite{dagenais2010landscape},
-and (D2)~the barriers it would mitigate~\cite{steinmacher2015barriers,santos2024onboarding}.
-Flags record contradictions between agent and human documentation (\emph{conflict}) and topics
-for which the human documentation only links elsewhere.
-
-Coding used a purpose-built tool that shows the agent unit beside the full README and CONTRIBUTING
-with keyword search. It deliberately shows no similarity ranking, so the gold labels are not
-anchored on any matcher evaluated in RQ3. For the pilot and main sets, a large language model
-(Claude) drafted every label, citing the human sections it relied on; the author reviewed each
-draft against the documents and either kept it or corrected the coverage with a written note.
-Of \nDraftsReviewed{} drafts, \nDraftsKept{} (\draftKeepRate) kept the drafted coverage and
-\nDraftsCorrected{} were corrected; for \nAiFilled{} corrected labels the model then completed the
-evidence or newcomer need, and these fills are marked in the data (Table~\ref{tab:prov}).
-The codebook was refined on \nPilotRepos{} pilot repositories (\nPilotUnits{} units).
-The \nReliabilityRepos{} repositories of the reliability set (\nReliabilityUnits{} units,
-\nBlindCoded{} labels) were coded blind, without any model draft.
+\paragraph{Coding.} Each unit gets (A)~its instruction categories~\cite{chatlatanagulchai2026agentreadmes};
+(C)~its coverage in README and CONTRIBUTING --- \emph{agent-only}, \emph{partially covered},
+\emph{shared} (paraphrases count, links elsewhere do not), or \emph{agent-directed} when it only
+addresses the AI --- with the covering human sections as evidence; and, for agent-only and partial
+units, (D1)~the newcomer need~\cite{dagenais2010landscape} and (D2)~the barriers it would
+ease~\cite{steinmacher2015barriers,santos2024onboarding}. Coding used a tool showing the unit beside
+the full human documentation, without any similarity ranking. For the pilot and main sets an LLM
+(Claude) drafted each label and the author reviewed it against the documents: \nDraftsKept{} of
+\nDraftsReviewed{} drafts (\draftKeepRate) kept their coverage and \nDraftsCorrected{} were
+corrected. The \nReliabilityUnits{} units of the reliability set (\nReliabilityRepos{} repositories)
+were coded blind, without drafts.
 \ifsecondcoder
 \ifsecondcoderllm
-As an independent second annotator, an LLM (\secondCoderModel) labelled \nSecondCodedUnits{} of
-these units blind, with the author's labels hidden and the same codebook and tool. We report Cohen's
-$\kappa$ and linearly weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale:
-$\kappa = \kappaCoverage$ \kappaCoverageCI, $\kappa_w = \kappaWeighted$; the two assign the same
-coverage to \relAgreement{} of units (median per repository \relRepoMedian; \relReposFull{} of
-\nReliabilityRepos{} repositories agree on every unit). This is agreement between a human and an
-LLM, not between two human coders.
+An independent LLM annotator (\secondCoderModel) also coded them blind: Cohen's
+$\kappa = \kappaCoverage$ \kappaCoverageCI{} and weighted $\kappa_w = \kappaWeighted$~\cite{cohen1968weighted};
+the two agree on \relAgreement{} of units and on every unit in \relReposFull{} of
+\nReliabilityRepos{} repositories. This is human--LLM, not human--human, agreement.
 \else
-A second coder labelled \nSecondCodedUnits{} of these units independently, with each coder's labels
-hidden from the other and the order shuffled. We report Cohen's $\kappa$ and linearly
-weighted $\kappa$~\cite{cohen1968weighted} on the ordinal coverage scale: $\kappa = \kappaCoverage$
-\kappaCoverageCI, $\kappa_w = \kappaWeighted$.
+A second coder also coded them blind: Cohen's $\kappa = \kappaCoverage$ \kappaCoverageCI{} and
+weighted $\kappa_w = \kappaWeighted$~\cite{cohen1968weighted}.
 \fi
-The final labels are the author's; where the author's labels on this set lacked the newcomer need
-and barriers, they are taken from the second annotator when both judged the unit a gap
-(\nNeedFromSecond{} units) and otherwise filled by the drafting model (\nNeedFilled{} units in all).
+Final labels are the author's; missing need codes on this set come from the second annotator where
+both coded a gap (\nNeedFromSecond{} units).
 \else
-The results reported here rest on a single annotator; agreement with an independent second coder
-on the reliability set has not been measured yet (Section~\ref{sec:threats}).
+A second, independent coding of this set is pending (Section~\ref{sec:threats}).
 \fi
 
-\input{tables/provenance}
-
-\subsection{Analysis}
-
-\paragraph{RQ1.} For each repository we compute the share of its knowledge units (excluding
-agent-directed) that are agent-only, and average over repositories per agent; the overall figure
-is post-stratified to the eligible frame (\nEligibleClaude{} \texttt{CLAUDE.md}, \nEligibleAgents{}
-\texttt{AGENTS.md}, \nEligibleCopilot{} Copilot files). 95\% confidence intervals come from 1{,}000
-bootstrap draws that resample repositories within each agent. Because units are nested in
-repositories, differences across categories and agents are tested with a logistic GEE clustered by
-repository (exchangeable working correlation, robust standard errors)~\cite{liang1986gee}; $\chi^2$
-tests are reported only descriptively.
-
-\paragraph{RQ2.} We report the distribution of needs (D1) and barriers (D2) among agent-only and
-partially covered units, with examples.
-
-\paragraph{Sensitivity.} We recompute RQ1 without unedited \texttt{/init} files, without the
-\nStubContributing{} stub CONTRIBUTING files ($<$50 words, typically a link to a website), and without
-topics the human docs only link out for. \nDocsRepos{} of the \nSampleRepos{} repositories also keep
-Markdown under \texttt{docs/}; for a seeded subsample of \nDocsSubsample{} repositories
-(\nDocsFiles{} files) we estimate with the tuned detector how many agent-only units \texttt{docs/}
-would cover.
-
-\paragraph{RQ3: gap detector.} Units are split into items (list entries, sentences, code blocks), so
-a checklist is matched rule by rule. Each agent unit is scored against its repository's README and
-CONTRIBUTING by (i)~TF-IDF, (ii)~three sentence-embedding models~\cite{reimers2019sbert} ---
-all-MiniLM-L6-v2, bge-base-en-v1.5~\cite{xiao2023cpack} and Qwen3-Embedding-0.6B~\cite{zhang2025qwen3embedding}
---- at both section and item level\ifllmjudge, and (iii)~embeddings plus an LLM judge
-(Qwen3-Coder-30B-A3B-Instruct~\cite{yang2025qwen3}, served with vLLM~\cite{kwon2023vllm}) that
-sees the unit and its five best-matching human sections and decides only for borderline scores\fi.
-All model revisions are pinned. Score variants\ifllmjudge, thresholds and the LLM band\else{} and
-thresholds\fi{} are tuned on the pilot repositories only; we report precision, recall and F1 for agent-only, ROC-AUC and three-class
-macro-F1 on the remaining repositories, with repository-bootstrap confidence intervals.
+\paragraph{Analysis.} RQ1: per repository, the share of knowledge units (excluding agent-directed)
+in each coverage class, averaged per agent, with 95\% CIs from 1{,}000 bootstrap draws resampling
+repositories; category and agent effects via a logistic GEE clustered by
+repository~\cite{liang1986gee}. RQ2: distribution of needs and barriers over gap units (agent-only
+or partial). RQ3: each agent unit is scored against its README and CONTRIBUTING, item by item, with
+TF-IDF and three sentence-embedding models~\cite{reimers2019sbert,xiao2023cpack,zhang2025qwen3embedding}\ifllmjudge,
+and with an LLM judge~\cite{yang2025qwen3} on borderline scores\fi; thresholds are tuned on the
+\nPilotRepos{} pilot repositories and evaluated on the rest.
 
 \section{Results}
 
-\subsection{Agent files are harder to read than CONTRIBUTING files}
+\subsection{RQ1: Most agent-file knowledge is not available to people}
 
-Across all \nSampleRepos{} repositories (Table~\ref{tab:read}), agent files are about as long and
-as hard to read as READMEs, but harder to read than the same repository's CONTRIBUTING file in
-\fleschHarderShare{} of repositories (median difference \fleschGapContrib{} Flesch points,
-\fleschPairs{} pairs, Wilcoxon \fleschContribP). By agent, median Flesch scores are \fleschClaude{}
-(\texttt{CLAUDE.md}), \fleschCopilot{} (Copilot) and \fleschAgents{} (\texttt{AGENTS.md}); the
-\texttt{CLAUDE.md} figure is close to the 16.6 reported by~\cite{chatlatanagulchai2026agentreadmes}.
-Readability is computed with \texttt{textstat}~\cite{flesch1948readability} on prose with code removed.
+\input{figures/rq1_coverage}
 
-\begin{table}[t]
-\caption{Length and readability per document (medians; higher Flesch = easier).}
-\label{tab:read}
-\small
-\begin{tabular}{lrr}
-\toprule
-Document & Words & Flesch \\
-\midrule
-Agent file & \agentWords & \agentFlesch \\
-README & \readmeWords & \readmeFlesch \\
-CONTRIBUTING & \contribWords & \contribFlesch \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{RQ1: How much agent knowledge is agent-only?}
-
-Of \nCodedUnits{} coded units, \nKnowledgeUnits{} carry project knowledge; \agentDirectedOverall{} of
-units address only the agent. On average, \agentOnlyOverall{} of a repository's agent-file
-knowledge is absent from its README and CONTRIBUTING (Table~\ref{tab:rq1}); counting partial
-coverage, \anyGapOverall{} is not fully available to human readers, and only \sharedOverall{} is
-fully shared. The point estimates vary by agent (\texttt{CLAUDE.md} \agentOnlyClaude{},
-\texttt{AGENTS.md} \agentOnlyAgents{}, Copilot \agentOnlyCopilot{}),
+On average, \agentOnlyOverall{} of a repository's agent-file knowledge is agent-only,
+\anyGapOverall{} is not fully available to people, and only \sharedOverall{} is fully shared
+(Table~\ref{tab:rq1}, Figure~\ref{fig:rq1}a). \agentDirectedOverall{} of units speak only to the agent.
 \ifagentsdiffer
-and the agent type remains a significant predictor after adjusting for instruction category (GEE).
+The agent types differ significantly after adjusting for category (GEE).
 \else
-but after adjusting for instruction category the agent type has no significant effect (GEE,
-smallest $p = \geeAgentMinP$).
+Point estimates vary by agent (\texttt{CLAUDE.md} \agentOnlyClaude, \texttt{AGENTS.md}
+\agentOnlyAgents, Copilot \agentOnlyCopilot), but after adjusting for instruction category the agent
+type has no significant effect (GEE, $p \ge \geeAgentMinP$).
 \fi
-
-Per repository the picture varies widely: the median repository has \repoAgentOnlyMedian{} of its
-agent-file knowledge agent-only (middle half of repositories \repoAgentOnlyQOne--\repoAgentOnlyQThree),
-\repoAnyAgentOnly{} of \nRepoKnowledge{} repositories (\repoAnyAgentOnlyShare) have at least one
-agent-only unit, and \repoNoShared{} (\repoNoSharedShare) share no unit fully with their human
-documentation.
+Across repositories, the median repository has \repoAgentOnlyMedian{} agent-only knowledge (middle
+half \repoAgentOnlyQOne--\repoAgentOnlyQThree); \repoAnyAgentOnly{} of \nRepoKnowledge{}
+repositories (\repoAnyAgentOnlyShare) have some, and \repoNoShared{} (\repoNoSharedShare) share no
+unit fully.
 
 \input{tables/rq1_headline}
 
-Table~\ref{tab:rq1cat} breaks the result down by instruction category. Knowledge about
-\catHighOne{} (\catHighOneShare{} agent-only), \catHighTwo{} (\catHighTwoShare) and \catHighThree{}
-(\catHighThreeShare) is most often agent-only, and \catLow{} least often (\catLowShare): projects
-describe \emph{what} the project is to people, but much more of \emph{how to work on it} only to
-their agents. In the clustered model, the categories whose agent-only odds differ significantly
-from the rest are \geeSigCats{} (an odds ratio below one means less often agent-only).
+\textbf{What is missing is how to work on the project} (Figure~\ref{fig:rq1}b): \catHighOne{}
+(\catHighOneShare), \catHighTwo{} (\catHighTwoShare) and \catHighThree{} (\catHighThreeShare) are
+most often agent-only, \catLow{} least (\catLowShare). In the GEE, \geeSigCats{} differ
+significantly from other categories (odds ratio $<1$: less often agent-only).
 
-\input{tables/rq1_categories}
-
-The estimate is stable across the sensitivity variants (Table~\ref{tab:sens}): excluding unedited
-\texttt{/init} files, stub CONTRIBUTING files, or units the human documentation covers only by a
-link keeps the agent-only share between \sensLow{} and \sensHigh{}.
+\textbf{The result is robust.} Excluding unedited \texttt{/init} files, stub CONTRIBUTING files or
+units covered only by a link keeps the agent-only share between \sensLow{} and \sensHigh.
 \ifdefined\docsCheckShare
-Knowledge in \texttt{docs/} could close part of the gap: in the \docsCheckRepos{} repositories with
-Markdown under \texttt{docs/}, the detector matches \docsCheckCovered{} of \docsCheckUnits{} agent-only
-units (\docsCheckShare) to a \texttt{docs/} section.
+Documentation under \texttt{docs/} would close part of the gap: in \docsCheckRepos{} repositories
+it matches \docsCheckCovered{} of \docsCheckUnits{} agent-only units (\docsCheckShare).
 \fi
-In \nConflictUnits{} units the human documentation contradicts the agent file --- for example a
-different test command or minimum tool version --- and \nLinksOutUnits{} are covered only by a
-link to another document.
+In \nConflictUnits{} units the human documentation \emph{contradicts} the agent file, e.g.\ a
+different test command or tool version.
 
-\input{tables/sensitivity}
+\subsection{RQ2: The gap is about processes and practices}
 
-\subsection{RQ2: Which newcomer needs does it address?}
-
-Gap knowledge --- units that are agent-only or only partially covered --- serves one group of
-newcomer needs above all (Table~\ref{tab:rq2needs}): \needGroupTopShare{} falls under
-\emph{\needGroupTop{}}, led by \needTopOne{} (\needTopOneShare) and \needTopTwo{} (\needTopTwoShare).
-Product knowledge accounts for \needGroupProduct{} (the next most frequent need is \needTopThree{},
-\needTopThreeShare), pointers to documentation for \needGroupDocs{}, and team or context needs
-hardly appear (\needGroupTeamContext).
-
-Mapped to the barriers of Steinmacher et al.\ (Table~\ref{tab:rq2bar}), the gap knowledge would
-most often mitigate \emph{\barrierTopOne{}} (\barrierTopOneShare{} of gap units),
-\emph{\barrierTopTwo{}} (\barrierTopTwoShare) and \emph{\barrierTopThree{}} (\barrierTopThreeShare);
-for \noBarrierShare{} of gap units no barrier applied.
+\needGroupTopShare{} of gap units serve \emph{\needGroupTop} needs, led by \needTopOne{}
+(\needTopOneShare) and \needTopTwo{} (\needTopTwoShare); product knowledge accounts for
+\needGroupProduct{} and team or context needs hardly appear (\needGroupTeamContext;
+Table~\ref{tab:rq2needs}). The gap knowledge would most often ease \emph{\barrierTopOne}
+(\barrierTopOneShare{} of gap units), \emph{\barrierTopTwo} (\barrierTopTwoShare) and
+\emph{\barrierTopThree} (\barrierTopThreeShare; Table~\ref{tab:rq2bar}).
 
 \input{tables/rq2_needs}
 \input{tables/rq2_barriers}
 
-\subsection{RQ3: Can gaps be detected automatically?}
+\subsection{RQ3: A simple detector finds most gaps}
 
-Table~\ref{tab:rq3} compares the matchers on \detectorNTest{} held-out units. They reach similar
-quality (F1 \detectorFOneMin--\detectorFOneMax, ROC-AUC \detectorAUCMin--\detectorAUCMax). The matcher
-chosen on the pilot repositories, \detectorBestMatcher{}, finds agent-only units with recall
-\detectorRecall{} at precision \detectorPrecision{} (F1 \detectorFOne{}, ROC-AUC \detectorAUC);
-separating partial from shared coverage is harder (macro-F1 \detectorMacroFOne). As an evidence
-retriever it ranks the covering human section first for \detectorHitOne{} of covered units and in
-the top five for \detectorHitFive.
+On \detectorNTest{} held-out units all matchers perform alike (F1 \detectorFOneMin--\detectorFOneMax,
+ROC-AUC \detectorAUCMin--\detectorAUCMax; Table~\ref{tab:rq3}). The one chosen on the pilot
+repositories, \detectorBestMatcher{}, finds agent-only units with recall \detectorRecall{} at
+precision \detectorPrecision{} (F1 \detectorFOne) and puts the covering human section in its top
+five for \detectorHitFive{} of covered units. Separating partial from shared coverage is harder
+(macro-F1 \detectorMacroFOne).
 \ifdefined\detectorFalseAgentOnly
-Of its errors on held-out units, \detectorFalseAgentOnly{} are covered units it calls agent-only ---
-typically partially covered units whose topic, but not wording, appears in the human documentation
---- and \detectorMissedAgentOnly{} are agent-only units it calls covered.
+Most errors are covered units flagged as agent-only (\detectorFalseAgentOnly, vs.\
+\detectorMissedAgentOnly{} missed agent-only units), typically partially covered units whose topic,
+but not wording, appears in the human documentation.
 \fi
-\ifllmjudge
-Table~\ref{tab:rq3} also reports the LLM judge, alone and on borderline scores only.
-\else
-The LLM-judge stage was not run for this version; Table~\ref{tab:rq3} reports the matchers alone.
-\fi
+\ifllmjudge\else The LLM-judge stage was not run for this version.\fi
 
 \input{tables/rq3}
 
 \section{Discussion}
 
-\paragraph{Projects onboard their agents better than their newcomers.} \agentOnlyOverall{} of the
-knowledge in a typical agent file is missing from the README and CONTRIBUTING, and only
-\sharedOverall{} is fully there. The gap is not in what the project is --- \catLow{} is rarely
-agent-only --- but in how to work on it: commands, conventions, environment and architecture.
-This is the knowledge behind several barriers newcomers frequently report~\cite{steinmacher2015barriers}, and
-\needGroupTopShare{} of the gap serves \emph{\needGroupTop{}} needs.
+\paragraph{Projects onboard agents better than people.} The knowledge newcomers find hardest to
+get --- commands, conventions, environment, architecture --- is written down, but in the file
+addressed to the agent; what the project \emph{is} stays in the README.
 
-\paragraph{Agent files as a source for contributor documentation.} The gap is also an
-opportunity: the knowledge already exists in writing, in the same repository. Maintainers can move
-agent-only sections into CONTRIBUTING, and a lexical detector is enough to point them at candidates
-(recall \detectorRecall{} for agent-only units), with the covering human section among its top five
-suggestions for \detectorHitFive{} of covered units. Copying is not sufficient, though: agent files
-are written in a harder register than CONTRIBUTING files (median Flesch \agentFlesch{} vs.\
-\contribFlesch), so the text needs editing for people.
+\paragraph{Agent files are a ready source for contributor docs.} Maintainers can move agent-only
+sections into CONTRIBUTING, and a lexical detector is enough to flag candidates. Copying is not
+enough, though: agent files are harder to read than CONTRIBUTING files in \fleschHarderShare{} of
+repositories (median Flesch \agentFlesch{} vs.\ \contribFlesch; Wilcoxon \fleschContribP).
 
-\paragraph{Two documents, two truths.} In \nConflictUnits{} units the two documents disagree. One
-of them is stale, and a newcomer following CONTRIBUTING may build or test differently from the
-agent; a detector run in CI could flag such drift as well as gaps.
-
-\paragraph{Labels.} Most labels started as model drafts that the author reviewed\ifsecondcoder; the
-agreement with an independent second \ifsecondcoderllm LLM \fi annotator ($\kappa = \kappaCoverage$,
-Section~\ref{sec:coding}) indicates that the coverage judgements are not idiosyncratic\else; until a second coder's labels are in, the rates should be read as one careful
-annotator's judgement\fi.
+\paragraph{Two documents drift apart.} Where they contradict each other, one is stale; running the
+detector in CI could flag such drift along with new gaps.
 
 \section{Threats to Validity}\label{sec:threats}
 
-\paragraph{Construct.} Coverage is judged against README and CONTRIBUTING only. Knowledge in
-\texttt{docs/}, wikis or project websites is invisible to it; more than half of the repositories
-(\nDocsRepos{}/\nSampleRepos{}) keep Markdown under \texttt{docs/}, and the \texttt{docs/}
-sensitivity analysis estimates the effect. Units that only address the agent are separated out so
-that they do not inflate the agent-only rate.
-
-\paragraph{Internal.} Most labels (\nDraftsReviewed{} of \nCodedUnits) started from a model
-draft that the author reviewed, so the results may inherit the model's judgement and the author may
-have anchored on the drafts; the \nDraftsCorrected{} corrections show the drafts were not accepted
-unconditionally, but they bound rather than measure this effect.
-\ifsecondcoder
-\ifsecondcoderllm
-On the blind reliability set the author agrees substantially with an independent LLM annotator
-($\kappa = \kappaCoverage$, $\kappa_w = \kappaWeighted$), but agreement between two human coders has
-not been measured, and an LLM annotator may share blind spots with the model that drafted most
-labels. The newcomer needs of \nNeedFromSecond{} reliability units come from the LLM annotator.
-\else
-Agreement between two independent coders on the blind reliability set ($\kappa = \kappaCoverage$,
-$\kappa_w = \kappaWeighted$) indicates how far another coder would reproduce the coverage labels.
+\paragraph{Construct.} We compare with README and CONTRIBUTING only; wikis, websites and
+\texttt{docs/} are out of scope, which the \texttt{docs/} check bounds.
+\paragraph{Internal.} \nDraftsReviewed{} of \nCodedUnits{} labels started from an LLM draft that
+the author reviewed, so results may inherit the model's judgement; the \nDraftsCorrected{}
+corrections bound rather than measure this.
+\ifsecondcoder\ifsecondcoderllm
+Agreement on the blind set is with an LLM annotator, which may share the drafting model's blind
+spots; agreement between two human coders was not measured.
+\fi\else
+Coverage labels come from one annotator; inter-rater agreement is pending.
 \fi
-\else
-All labels come from a single annotator, and agreement with an independent second coder has not
-been measured yet, so the reproducibility of the coverage labels is not established.
-\fi
-The RQ3 gold labels share these limitations. Fork and archive status were checked at
-collection time, not at the snapshot.
-
-\paragraph{External.} Requiring a CONTRIBUTING file selects larger, more established projects: the
-sample's median is \sampleMedianStars{} stars versus 51--96 in the source dataset. Results describe
-English-language repositories with all three documents at one point in time; agent files and their
-conventions are evolving quickly.
-
-\paragraph{Conclusion.} Units are nested in repositories; we therefore report repository-level
-estimates with repository bootstrap intervals and use clustered models instead of plain $\chi^2$
-tests.
+\paragraph{External.} Requiring a CONTRIBUTING file selects established projects (median
+\sampleMedianStars{} stars); the files evolve quickly.
 
 \section{Conclusion}
 
-We compared what \nSampleRepos{} projects tell their coding agents with what their README and
-CONTRIBUTING tell people. \agentOnlyOverall{} of the agent-file knowledge is absent from the human
-documentation and \anyGapOverall{} is not fully available to people. The gap concentrates in
-\emph{\needGroupTop{}} knowledge (\needGroupTopShare{} of gap units), the kind of knowledge
-newcomers often struggle to find. A \detectorBestMatcher{} detector finds agent-only knowledge with F1 \detectorFOne{}, enough
-to point maintainers at sections worth adding to their contributor documentation.
+Projects tell their coding agents much that they do not tell their contributors:
+\agentOnlyOverall{} of agent-file knowledge is agent-only and \anyGapOverall{} is not fully
+available to people, mostly about how to work on the project. Because this knowledge already
+exists in the repository, a simple detector can point maintainers to it.
 \ifsecondcoder\ifsecondcoderllm Measuring agreement with a second human coder is the next step.\fi
 \else Measuring agreement with an independent second coder is the next step.\fi
 
 \section*{Data Availability}
-Code, codebook, coding tool, labels and the \texttt{gapcheck} detector:
+Dataset, codebook, labels, pipeline and \texttt{gapcheck} detector:
 \url{https://github.com/himans-iitk/CS507A} (archived release: DOI \TBD).
 
 \section*{Use of AI Tools}
 % EDIT: check that this describes your own use accurately.
-The study's data pipeline, coding tool, analysis code and a first draft of this paper were written
-with the help of an AI coding assistant (Claude); the author reviewed and is responsible for all
-of it. The same assistant drafted the category, coverage, need and barrier labels of the pilot and
-main sets, which the author reviewed and kept or corrected, and completed missing fields of
-\nAiFilled{} corrected labels (Section~\ref{sec:coding}); the reliability set was coded without
-drafts. \ifsecondcoderllm An LLM (\secondCoderModel) served as the independent second annotator of
-the reliability set, and its newcomer-need codes fill gaps in the author's labels on that set. \fi
-\ifllmjudge An open-source LLM is one component of the evaluated gap detector.\fi
+The pipeline, coding tool, analysis code and a first draft of this paper were written with an AI
+coding assistant (Claude); the author reviewed and is responsible for all of it. Claude also
+drafted the labels of the pilot and main sets, which the author reviewed, and completed missing
+fields of \nAiFilled{} labels.
+\ifsecondcoderllm An LLM (\secondCoderModel) was the independent second annotator of the
+reliability set.\fi
+\ifllmjudge An open-source LLM is part of the evaluated detector.\fi
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
