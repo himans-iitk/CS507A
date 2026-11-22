@@ -16,7 +16,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from gapstudy.analysis.rq1 import estimate, repo_table
+from gapstudy.analysis.rq1 import bootstrap, estimate, repo_table
 from gapstudy.github_client import PROJECT_ROOT
 
 PROCESSED = PROJECT_ROOT / "data" / "processed"
@@ -29,17 +29,38 @@ def variants(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
         "without unedited /init files": df[~df.init_unedited.fillna(False).astype(bool)],
         "without stub CONTRIBUTING": df[~df.stub_contributing.fillna(False).astype(bool)],
         "without links_out units": df[~df["flags"].map(lambda f: "links_out" in (f or []))],
+        # How the labels were produced: AI draft reviewed by the annotator vs coded blind (reliability set).
+        "only AI-drafted repos (pilot + main)": df[df["set"] != "reliability"] if "set" in df else df.iloc[0:0],
+        "only blind-coded repos (reliability set)": df[df["set"] == "reliability"] if "set" in df else df.iloc[0:0],
     }
 
 
-def table(df: pd.DataFrame, shares: dict[str, float]) -> pd.DataFrame:
+def table(df: pd.DataFrame, shares: dict[str, float], n_boot: int = 1000) -> pd.DataFrame:
     rows = []
     for name, d in variants(df).items():
         repos = repo_table(d)
+        if repos.empty:
+            continue
         est = estimate(repos, shares, "agent_only")
-        rows.append({"variant": name, "repos": len(repos), "agent_only": est["overall"],
+        boot = bootstrap(repos, shares, "agent_only", n_boot) if n_boot else None
+        lo, hi = ((boot.overall.quantile(.025), boot.overall.quantile(.975)) if boot is not None
+                  else (np.nan, np.nan))
+        rows.append({"variant": name, "repos": len(repos), "agent_only": est["overall"], "lo": lo, "hi": hi,
                      **{f"agent_only:{t}": v for t, v in est.items() if t != "overall"}})
     return pd.DataFrame(rows)
+
+
+def coding_mode(df: pd.DataFrame, shares: dict[str, float], n_boot: int = 1000, seed: int = 507) -> dict | None:
+    """Agent-only share of AI-drafted minus blind-coded repositories, with a repository-bootstrap CI."""
+    if "set" not in df or not (df["set"] == "reliability").any():
+        return None
+    drafted, blind = repo_table(df[df["set"] != "reliability"]), repo_table(df[df["set"] == "reliability"])
+    diff = estimate(drafted, shares, "agent_only")["overall"] - estimate(blind, shares, "agent_only")["overall"]
+    a = bootstrap(drafted, shares, "agent_only", n_boot, seed).overall
+    b = bootstrap(blind, shares, "agent_only", n_boot, seed + 1).overall
+    d = a.to_numpy() - b.to_numpy()
+    return {"drafted_repos": len(drafted), "blind_repos": len(blind), "difference": diff,
+            "lo": float(np.quantile(d, .025)), "hi": float(np.quantile(d, .975))}
 
 
 def docs_check(df: pd.DataFrame) -> dict | None:

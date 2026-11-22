@@ -68,7 +68,12 @@ def facts() -> dict:
 
     s = pd.read_csv(P7 / "sensitivity.csv")
     f["sensitivity"] = s
-    f["sens_range"] = (float(s.agent_only.min()), float(s.agent_only.max()))
+    scope = s[~s.variant.str.startswith("only ")]  # scope variants; the "only ..." rows split by coding mode
+    f["sens_range"] = (float(scope.agent_only.min()), float(scope.agent_only.max()))
+    mode = s[s.variant.str.startswith("only ")].set_index("variant")
+    f["sens_mode"] = {("blind" if "blind" in v else "drafted"): r.to_dict() for v, r in mode.iterrows()}
+    cm = P7 / "sensitivity_coding_mode.csv"
+    f["coding_mode"] = pd.read_csv(cm).iloc[0].to_dict() if cm.exists() else None
 
     det = pd.read_csv(P6 / "detector_results.csv")
     matchers = det[det.variant.notna()] if "variant" in det else det
@@ -86,7 +91,10 @@ def facts() -> dict:
     rel = P5 / "reliability.json"
     f["reliability"] = json.loads(rel.read_text()) if rel.exists() else {"status": "pending"}
 
+    ex = P7 / "rq2_examples.csv"
+    f["examples"] = pd.read_csv(ex) if ex.exists() else pd.DataFrame()
     docs = pd.read_csv(P7 / "corpus_documents.csv")
+    f["docs"] = docs
     f["flesch"] = docs.groupby("doc").flesch.median().to_dict()
 
     if (P7 / "provenance_by_set.csv").exists():
@@ -122,6 +130,17 @@ def repo_sentence(f: dict) -> str:
             f"{rf['any_agent_only']} of {rf['repos']} repositories have at least one agent-only unit, "
             f"{rf['all_agent_only']} only agent-only units, and {rf['no_shared']} share no unit fully with their "
             "human docs (`analysis/phase7/rq1_repo_shares.csv`).")
+
+
+def coding_mode_sentence(f: dict) -> str:
+    cm, sm = f.get("coding_mode"), f.get("sens_mode", {})
+    if not cm or "blind" not in sm:
+        return "- Coding mode: no blind-coded set to compare with."
+    b = sm["blind"]
+    sig = "not significant" if cm["lo"] <= 0 <= cm["hi"] else "significant"
+    return (f"- Coding mode: blind-coded repositories (reliability set, {int(cm['blind_repos'])}) have agent-only "
+            f"{pct(b['agent_only'])} [{pct(b['lo'])}, {pct(b['hi'])}]; AI-drafted repositories are "
+            f"{100 * cm['difference']:+.1f} pp higher [{100 * cm['lo']:+.1f}, {100 * cm['hi']:+.1f}] ({sig} at 95%).")
 
 
 def render(mode: str, f: dict | None = None) -> str:
@@ -177,6 +196,7 @@ def render(mode: str, f: dict | None = None) -> str:
           repo_sentence(f),
           f"- Sensitivity: agent-only stays between {pct(f['sens_range'][0])} and {pct(f['sens_range'][1])} "
           "across the robustness variants.",
+          coding_mode_sentence(f),
           f"- {f['flags'].get('conflict', 0)} units contradict the human docs; {f['flags'].get('links_out', 0)} "
           "are covered only by a link elsewhere.", ""]
 

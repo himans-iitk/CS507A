@@ -70,12 +70,12 @@ def rq1_categories(f: dict) -> str:
             odds = f"{g.odds_ratio:.2f}{star} {{\\scriptsize[{g.lo:.2f}, {g.hi:.2f}]}}"
         else:
             odds = "--"
-        rows.append(f"{tex(r.category)} & {r.units} & {p1(r.agent_only)} & {p1(r.any_gap)} & {odds} " + r"\\")
-    return table("table*", "RQ1 by instruction category: share of units that are agent-only and agent-only or "
-                 "partially covered (\\%, unit level), and the odds ratio for agent-only from a logistic GEE "
-                 "clustered by repository (category vs.\\ all others, adjusted for agent; $^{*}$ $p < 0.05$). "
-                 "A unit can have several categories.", "tab:rq1cat", "lrrrr",
-                 r"Category & Units & Agent-only & Agent-only or partial & Odds ratio [95\% CI]", rows)
+        rows.append(f"{tex(r.category)} & {r.units} & {p1(r.agent_only)} & {odds} " + r"\\")
+    body = table("table", "RQ1 by instruction category: share of units that are agent-only (\\%, unit level) "
+                 "and the odds ratio for agent-only from a logistic GEE clustered by repository (category vs.\\ "
+                 "all others, adjusted for agent type; $^{*}$ $p < 0.05$). A unit can have several categories.",
+                 "tab:rq1cat", "@{}lrrr@{}", r"Category & Units & Agent-only & Odds ratio [95\% CI]", rows)
+    return body.replace(r"\small", r"\footnotesize\setlength{\tabcolsep}{3.5pt}", 1)
 
 
 def rq2_needs(f: dict) -> str:
@@ -131,10 +131,25 @@ def rq3(f: dict) -> str:
     return body.replace(r"\small", r"\small\setlength{\tabcolsep}{3.5pt}", 1)
 
 
+SENS_NAMES = {"all coded repos (primary)": "All coded repositories (primary)",
+              "without unedited /init files": r"Without unedited \texttt{/init} files",
+              "without stub CONTRIBUTING": "Without stub CONTRIBUTING files",
+              "without links_out units": "Without units whose topic is only linked",
+              "only AI-drafted repos (pilot + main)": "Only AI-drafted labels (pilot, main)",
+              "only blind-coded repos (reliability set)": "Only blind-coded labels (reliability)"}
+
+
 def sensitivity(f: dict) -> str:
-    rows = [rf"{tex(r.variant)} & {r.repos} & {p1(r.agent_only)} \\" for r in f["sensitivity"].itertuples()]
-    return table("table", "Sensitivity of the agent-only share (post-stratified, \\%).", "tab:sens", "lrr",
-                 r"Variant & Repos & Agent-only", rows)
+    rows = []
+    for r in f["sensitivity"].itertuples():
+        if r.variant.startswith("only ") and not any(x.startswith("Only") for x in rows):
+            rows.append(r"\midrule")  # rule before the coding-mode split
+        lo, hi = getattr(r, "lo", float("nan")), getattr(r, "hi", float("nan"))
+        rows.append(rf"{SENS_NAMES.get(r.variant, tex(r.variant))} & {r.repos} & "
+                    + (ci((r.agent_only, lo, hi)) if pd.notna(lo) else p1(r.agent_only)) + r" \\")
+    return table("table", "Sensitivity of the agent-only share (post-stratified, \\%; 95\\% repository-bootstrap "
+                 "CI). The last two rows split the sample by how the labels were produced.", "tab:sens",
+                 "@{}lrr@{}", r"Variant & Repos & Agent-only", rows)
 
 
 def provenance(f: dict) -> str:
@@ -152,13 +167,139 @@ def provenance(f: dict) -> str:
                  "Set & " + " & ".join(n for _, n in cols), rows)
 
 
+def flow(f: dict) -> str:
+    """Sampling flow per agent file type, from data/processed/sampling_flow.csv."""
+    path = PROJECT_ROOT / "data" / "processed" / "sampling_flow.csv"
+    if not path.exists():
+        return ""
+    fl = pd.read_csv(path)
+    names = {"all agent files in package": "Agent files in the dataset",
+             "minus repo no longer exists": "$-$ repository deleted", "minus fork": "$-$ fork",
+             "minus archived": "$-$ archived", "minus snapshot commit not found": "$-$ snapshot commit not found",
+             "minus agent file is a symlink": "$-$ agent file is a symlink",
+             "minus agent file only links elsewhere": "$-$ agent file only links elsewhere",
+             "minus agent file not in English": "$-$ not in English",
+             "minus copy of another repo's agent file": "$-$ copy of another repository's file",
+             "minus no README at snapshot": "$-$ no README at snapshot",
+             "minus no CONTRIBUTING at snapshot": "$-$ no CONTRIBUTING at snapshot"}
+    n = lambda x: f"{int(x):,}".replace(",", "{,}")  # noqa: E731
+    rows = [f"{names.get(r.step, tex(r.step))} & {n(r.claude)} & {n(r.agents)} & {n(r[3])} & {n(r.total)} " + r"\\"
+            for r in fl.itertuples(index=False)]
+    sample = pd.read_csv(path.with_name("sample.csv"), usecols=["tool", "in_sample"])
+    per = sample[sample.in_sample].tool.value_counts()
+    cells = [per.get(t, 0) for t in ("claude", "agents", "copilot-instructions")]
+    rows += [r"\midrule", r"\textbf{Sampled} (one per repository) & " + " & ".join(map(n, cells))
+             + f" & {n(sum(cells))} " + r"\\"]
+    return table("table", "Sampling flow: agent files remaining after each exclusion, applied in order "
+                 "(each file counted at its first failing rule).", "tab:flow", "@{}lrrrr@{}",
+                 r"Step & \texttt{CLAUDE} & \texttt{AGENTS} & Copilot & All", rows).replace(
+                     r"\small", r"\small\setlength{\tabcolsep}{3pt}", 1)
+
+
+def corpus(f: dict) -> str:
+    """Documents and knowledge units per document type."""
+    units_path = PROJECT_ROOT / "data" / "processed" / "units.csv"
+    if not units_path.exists():
+        return ""
+    u = pd.read_csv(units_path, usecols=["repo", "doc", "words", "toc", "code_only"])
+    d = f["docs"]
+    rows = []
+    for doc, name in (("agent", "Agent file"), ("README", "README"), ("CONTRIBUTING", "CONTRIBUTING")):
+        g, dd = u[u.doc == doc], d[d.doc == doc]
+        rows.append(f"{name} & {int(dd.words.median()):,} & {dd.flesch.median():.1f} & {len(g):,} & "
+                    f"{int(g.words.median())} & {int(g.groupby('repo').size().median())} " + r"\\")
+    rows = [r.replace(",", "{,}") for r in rows]
+    return table("table", "The corpus: \\nSampleRepos{} repositories, three documents each at the snapshot commit. "
+                 "Medians per document (words; Flesch Reading Ease~\\cite{flesch1948readability} on prose, "
+                 "higher is easier) and per knowledge unit (words; units per repository).", "tab:corpus", "@{}lrrrrr@{}",
+                 r"& \multicolumn{2}{c}{Per document} & \multicolumn{3}{c}{Knowledge units} \\ "
+                 r"\cmidrule(lr){2-3}\cmidrule(l){4-6} Document & Words & Flesch & All & Words & Per repo",
+                 rows).replace(r"\small", r"\small\setlength{\tabcolsep}{4pt}", 1)
+
+
+COV = (("agent_only", "Agent-only"), ("partial", "Partial"), ("shared", "Shared"), ("agent_directed", "Agent-dir."))
+
+
+def reliability(f: dict) -> str:
+    """Confusion matrix of the blind double-coded set (first annotator x second annotator)."""
+    rel = f["reliability"]
+    conf = rel.get("confusion")
+    if not conf:
+        return ""
+    second = "LLM annotator" if rel.get("kind") == "human-llm" else "Second coder"
+    rows = []
+    for a, name in COV:
+        row = conf.get(a, {})
+        cells = [(rf"\textbf{{{row.get(b, 0)}}}" if a == b else str(row.get(b, 0))) for b, _ in COV]
+        rows.append(f"{name} & " + " & ".join(cells) + f" & {sum(row.values())} " + r"\\")
+    col = [sum(conf.get(a, {}).get(b, 0) for a, _ in COV) for b, _ in COV]
+    rows += [r"\midrule", "Total & " + " & ".join(map(str, col)) + f" & {sum(col)} " + r"\\"]
+    kind = "human--LLM" if rel.get("kind") == "human-llm" else "inter-rater"
+    return table("table", f"Coverage labels on the blind reliability set ({rel['units']} units, {rel['repos']} "
+                 f"repositories; {kind} agreement). Rows: first annotator; columns: {second}.",
+                 "tab:rel", "@{}lrrrrr@{}", r"First $\downarrow$ / " + second.split()[0] + r" $\rightarrow$ & " +
+                 " & ".join(n for _, n in COV) + " & Total", rows).replace(
+                     r"\small", r"\small\setlength{\tabcolsep}{3.5pt}", 1)
+
+
+def latex_text(s: str) -> str:
+    """Markdown excerpt -> safe LaTeX: inline code to \\texttt, bold dropped, specials escaped."""
+    import re
+    s = re.sub(r"\s+", " ", str(s)).strip()
+    s = s.replace("**", "")
+    s = "".join(ch for ch in s if ord(ch) < 0x2000 or ch in "–—’“”…")
+    parts = re.split(r"(`[^`]*`)", s)
+    out = []
+    for p in parts:
+        code = p.startswith("`") and p.endswith("`") and len(p) > 1
+        p = p.strip("`") if code else p
+        p = (p.replace("\\", "\0").replace("{", r"\{").replace("}", r"\}")
+             .replace("\0", r"\textbackslash{}").replace("$", r"\$").replace("^", r"\^{}").replace("~", r"\~{}")
+             .replace("<", r"\textless{}").replace(">", r"\textgreater{}"))
+        p = tex(p)
+        if not code:
+            p = re.sub(r"(^|\s)[-*]\s+", lambda m: m.group(1) + r"\textbullet\ ", p)  # list markers
+        out.append(rf"\texttt{{{p}}}" if code else p)
+    return "".join(out)
+
+
+def clip(s: str, words: int) -> str:
+    """First `words` words as LaTeX, with an ellipsis if shortened."""
+    w = str(s).split()
+    return latex_text(" ".join(w[:words])) + (r" \dots" if len(w) > words else "")
+
+
+def examples(f: dict, rows_max: int = 6, words: int = 32) -> str:
+    ex = f.get("examples")
+    if ex is None or ex.empty:
+        return ""
+    ex = ex[~ex.text.str.contains("```", regex=False)].drop_duplicates("need")
+    file = {"claude": r"\texttt{CLAUDE.md}", "agents": r"\texttt{AGENTS.md}",
+            "copilot-instructions": "Copilot"}
+    rows = []
+    for r in ex.head(rows_max).itertuples():
+        heading = str(r.heading).split(" > ")[-1] if isinstance(r.heading, str) and r.heading else ""
+        where = rf"{tex(r.repo)} ({file.get(r.tool, tex(r.tool))})"
+        rows.append(rf"{tex(r.need)} & {where}" + (rf"\newline\emph{{{latex_text(heading)}}}" if heading else "")
+                    + rf" & {clip(r.text, words)} \\")
+        rows.append(r"\addlinespace[2pt]")
+    rows = rows[:-1]
+    body = table("table*", "Examples of agent-only knowledge, one per frequent newcomer need (seeded random draw "
+                 "among agent-only units of at most 60 words without code blocks; text shortened). None of it "
+                 "appears in the repository's README or CONTRIBUTING.", "tab:examples",
+                 r"@{}p{0.17\linewidth}p{0.22\linewidth}p{0.57\linewidth}@{}",
+                 r"Newcomer need & Repository (file), section & Agent-file text", rows)
+    return body.replace(r"\small", r"\footnotesize", 1)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     f = facts()
     written = []
     for name, fn in (("rq1_headline", rq1_headline), ("rq1_categories", rq1_categories), ("rq2_needs", rq2_needs),
                      ("rq2_barriers", rq2_barriers), ("rq3", rq3), ("sensitivity", sensitivity),
-                     ("provenance", provenance)):
+                     ("provenance", provenance), ("flow", flow), ("corpus", corpus), ("reliability", reliability),
+                     ("examples", examples)):
         (OUT / f"{name}.tex").write_text(fn(f) or "% not available\n")
         written.append(name)
     print(f"wrote {len(written)} tables to {OUT}: {', '.join(written)}")

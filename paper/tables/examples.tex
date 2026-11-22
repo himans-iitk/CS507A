@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\caption{Examples of agent-only knowledge, one per frequent newcomer need (seeded random draw among agent-only units of at most 60 words without code blocks; text shortened). None of it appears in the repository's README or CONTRIBUTING.}
+\label{tab:examples}
+\footnotesize
+\begin{tabular}{@{}p{0.17\linewidth}p{0.22\linewidth}p{0.57\linewidth}@{}}
+\toprule
+Newcomer need & Repository (file), section & Agent-file text \\
+\midrule
+Development Process & paradigmxyz/reth (\texttt{CLAUDE.md})\newline\emph{Common Pitfalls} & 1. Don't Block Async Tasks: Use \texttt{spawn\_blocking} for CPU-intensive work or work with lots of blocking I/O 2. Handle Errors Properly: Use \texttt{?} operator and proper error types \\
+\addlinespace[2pt]
+Development Environment and Tools & microsoft/generative-ai-with-javascript (\texttt{AGENTS.md})\newline\emph{Local Development} & 1. Ensure Node.js 20+ is installed 2. Set \texttt{GITHUB\_TOKEN} environment variable 3. Navigate to the directory you want to work with 4. Run \texttt{npm install} followed by \texttt{npm start} \\
+\addlinespace[2pt]
+Low-level Design \& Runtime Behavior & logancyang/obsidian-copilot (\texttt{AGENTS.md})\newline\emph{Obsidian Plugin Environment} & \textbullet\ Global \texttt{app} variable: In Obsidian plugins, \texttt{app} is a globally available variable that provides access to the Obsidian API. It's automatically available in all files without needing to import or declare \dots \\
+\addlinespace[2pt]
+Software Architecture & netz98/n98-magerun2 (\texttt{AGENTS.md})\newline\emph{Project Structure} & \textbullet\ \texttt{src/N98/Magento/Command/}: Contains all the commands \textbullet\ \texttt{src/N98/Util/}: More general utility classes \textbullet\ \texttt{src/N98/Magento/Application.php}: Main application class \textbullet\ \texttt{config.yaml}: Configuration for commands and other settings \textbullet\ \texttt{tests/N98}: Unit Test classes to cover \dots \\
+\addlinespace[2pt]
+Task Process & microsoft/poml (\texttt{CLAUDE.md})\newline\emph{Updating Language Grammar} & 1. Modify \texttt{poml.tmLanguage.json} 2. Test in VS Code with sample files 3. Update syntax test cases \\
+\bottomrule
+\end{tabular}
+\end{table*}

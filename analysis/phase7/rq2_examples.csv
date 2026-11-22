@@ -1,0 +1,41 @@
+need,repo,tool,heading,text
+Development Process,paradigmxyz/reth,claude,Development Workflow > Common Pitfalls,"1. **Don't Block Async Tasks**: Use `spawn_blocking` for CPU-intensive work or work with lots of blocking I/O
+2. **Handle Errors Properly**: Use `?` operator and proper error types"
+Development Process,dotnet/docs-desktop,copilot-instructions,Writing Style > Formatting Conventions,"- **Bold** for UI elements.
+- `Code style` for file names, folders, custom types, non-localizable text.
+- Raw URLs in angle brackets.
+- Use relative links for files in this repo.
+- Remove `https://learn.microsoft.com/en-us` from learn.microsoft.com links."
+Development Environment and Tools,microsoft/generative-ai-with-javascript,agents,Development Workflow > Local Development,"1. Ensure Node.js 20+ is installed
+2. Set `GITHUB_TOKEN` environment variable
+3. Navigate to the directory you want to work with
+4. Run `npm install` followed by `npm start`"
+Development Environment and Tools,stellar/stellar-cli,copilot-instructions,Common Tasks > Known Issues,"- **Network timeouts**: `make install` frequently encounters network timeouts with crates.io. This is normal in CI environments.
+- **Memory constraints**: Full workspace build and test may fail with OOM or ""No space left on device"" errors in constrained environments.
+- **Documentation generation**: `make docs` may fail due to disk space constraints."
+Low-level Design & Runtime Behavior,mkwatson/ai-fastify-template,agents,🚨 MANDATORY Architecture Rules > Error Handling: Fastify Patterns Only,"```typescript
+// ✅ Good: Fastify error handling
+if (!user) {
+  throw fastify.httpErrors.notFound('User not found');
+}
+
+// ❌ Bad: Generic error throwing
+throw new Error('Something went wrong'); // Too generic!
+```"
+Low-level Design & Runtime Behavior,logancyang/obsidian-copilot,agents,Important Notes > Obsidian Plugin Environment,"- **Global `app` variable**: In Obsidian plugins, `app` is a globally available variable that provides access to the Obsidian API. It's automatically available in all files without needing to import or declare it."
+Software Architecture,netz98/n98-magerun2,agents,Additional Development Information > Project Structure,"- `src/N98/Magento/Command/`: Contains all the commands
+- `src/N98/Util/`: More general utility classes
+- `src/N98/Magento/Application.php`: Main application class
+- `config.yaml`: Configuration for commands and other settings
+- `tests/N98`: Unit Test classes to cover src/N98 classes
+- `tests/bats`: Functional tests using BATS (Bash Automated Testing System)
+- `res/`: Resources like autocompletion files
+- `bin/`: Executable scripts"
+Software Architecture,tech-systems/panes,claude,Code Architecture > Core Structure,"- **Main Class**: `CupertinoPane` in `/src/cupertino-pane.ts` - Primary API class
+- **Settings**: Configuration managed through `/src/settings.ts` with TypeScript interfaces in `/src/models.ts`
+- **Module System**: Modular architecture with feature modules in `/src/modules/`"
+Task Process,microsoft/poml,claude,Common Development Tasks > Updating Language Grammar,"1. Modify `poml.tmLanguage.json`
+2. Test in VS Code with sample files
+3. Update syntax test cases"
+Task Process,microsoft/azure-devops-mcp,copilot-instructions,Adding new prompts,"Ensure the instructions for the language model are clear and concise so that the language model can follow them reliably.
+The prompts are located in the `src/prompts.ts` file."

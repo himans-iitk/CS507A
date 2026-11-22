@@ -1,0 +1,39 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\definecolor{covA}{HTML}{184F95}
+\definecolor{covP}{HTML}{3987E5}
+\definecolor{covS}{HTML}{86B6EF}
+\definecolor{ink}{HTML}{3A3A38}
+\definecolor{rule}{HTML}{D6D5D0}
+\draw[rule,line width=0.3pt] (0,0.000) -- (6.300,0.000);
+\node[font=\tiny\sffamily,text=ink,anchor=east,inner sep=1pt] at (-0.05,0.000) {0};
+\draw[rule,line width=0.3pt] (0,0.786) -- (6.300,0.786);
+\node[font=\tiny\sffamily,text=ink,anchor=east,inner sep=1pt] at (-0.05,0.786) {20};
+\draw[rule,line width=0.3pt] (0,1.571) -- (6.300,1.571);
+\node[font=\tiny\sffamily,text=ink,anchor=east,inner sep=1pt] at (-0.05,1.571) {40};
+\fill[covA] (0.090,0) rectangle (0.960,1.296);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (0.525,1.296) {33};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (0.525,0) {0\%};
+\fill[covA] (1.140,0) rectangle (2.010,1.611);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (1.575,1.611) {41};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (1.575,0) {1--25\%};
+\fill[covA] (2.190,0) rectangle (3.060,2.200);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (2.625,2.200) {56};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (2.625,0) {26--50\%};
+\fill[covA] (3.240,0) rectangle (4.110,1.493);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (3.675,1.493) {38};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (3.675,0) {51--75\%};
+\fill[covA] (4.290,0) rectangle (5.160,0.550);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (4.725,0.550) {14};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (4.725,0) {76--99\%};
+\fill[covA] (5.340,0) rectangle (6.210,0.589);
+\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at (5.775,0.589) {15};
+\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at (5.775,0) {100\%};
+\draw[ink!70,line width=0.4pt] (0,0) -- (6.300,0);
+\node[font=\scriptsize\sffamily,text=ink,anchor=north] at (3.150,-0.38) {Share of the repository's agent-file knowledge that is agent-only};
+\node[font=\scriptsize\sffamily,text=ink,rotate=90,anchor=south] at (-0.45,1.100) {Repositories};
+\end{tikzpicture}
+\caption{Repositories by their share of agent-only knowledge (197 repositories with at least one knowledge unit; unweighted). In the 0\% bin every unit is covered at least partly by README or CONTRIBUTING; in the 100\% bin none is.}
+\label{fig:repos}
+\end{figure}

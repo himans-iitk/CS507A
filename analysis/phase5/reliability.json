@@ -20,6 +20,49 @@
   "coverage_weighted_kappa": 0.7973,
   "category_jaccard": 0.5328,
   "need_kappa": null,
+  "confusion": {
+    "agent_directed": {
+      "agent_directed": 22,
+      "agent_only": 0,
+      "partial": 1,
+      "shared": 1
+    },
+    "agent_only": {
+      "agent_directed": 2,
+      "agent_only": 92,
+      "partial": 22,
+      "shared": 0
+    },
+    "partial": {
+      "agent_directed": 1,
+      "agent_only": 7,
+      "partial": 145,
+      "shared": 4
+    },
+    "shared": {
+      "agent_directed": 1,
+      "agent_only": 1,
+      "partial": 7,
+      "shared": 32
+    }
+  },
+  "by_agent": {
+    "agents": {
+      "units": 92,
+      "agreement": 0.8696,
+      "kappa": 0.7537
+    },
+    "claude": {
+      "units": 116,
+      "agreement": 0.8966,
+      "kappa": 0.8488
+    },
+    "copilot-instructions": {
+      "units": 130,
+      "agreement": 0.8231,
+      "kappa": 0.7098
+    }
+  },
   "coverage_kappa_ci": [
     0.7064,
     0.8474

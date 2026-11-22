@@ -1,13 +1,18 @@
 {
-  "run_at": "2026-11-22T07:39:29+00:00",
-  "git_commit": "c5a49aa9ca555e01aacd815d6274e6a9f8758f9d",
+  "run_at": "2026-11-22T09:50:27+00:00",
+  "git_commit": "f3e52469d695ff22c87c058a6ff385a7587e4bc7",
   "git_dirty": [
     "paper/main.tex",
+    "paper/refs.bib",
+    "src/gapstudy/analysis/report.py",
+    "src/gapstudy/analysis/sensitivity.py",
+    "src/gapstudy/paper_figures.py",
+    "src/gapstudy/paper_numbers.py",
     "src/gapstudy/paper_tables.py",
-    "src/gapstudy/pipeline.py",
+    "src/gapstudy/reliability.py",
+    "src/gapstudy/summary.py",
     "tests/test_pipeline.py",
-    "paper/figures/",
-    "src/gapstudy/paper_figures.py"
+    "paper/figures/rq1_repos.tex"
   ],
   "bootstrap_draws": 1000,
   "stages": {
@@ -23,51 +28,51 @@
       ],
       "warnings": [],
       "status": "ok",
-      "seconds": 19.3,
-      "run_at": "2026-11-22T07:39:29+00:00"
+      "seconds": 0.9,
+      "run_at": "2026-11-22T09:50:27+00:00"
     },
     "freeze": {
       "notes": [
         "✓ froze 1564 units → labels_v1.csv (sha256 a1e5a0ee1cba…)"
       ],
       "status": "ok",
-      "seconds": 0.8,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 0.7,
+      "run_at": "2026-11-22T09:49:38+00:00"
     },
     "reliability": {
       "notes": [
         "human-llm: κ = 0.78 on 338 units"
       ],
       "status": "ok",
-      "seconds": 13.3,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 13.6,
+      "run_at": "2026-11-22T09:49:38+00:00"
     },
     "detector": {
       "notes": [
         "best on dev: tfidf (item_mean); test F1 0.76, AUC 0.88"
       ],
       "status": "ok",
-      "seconds": 79.9,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 76.8,
+      "run_at": "2026-11-22T09:49:38+00:00"
     },
     "analysis": {
       "notes": [
         "agent-only 41.8%, agent-only or partial 85.3% (post-stratified)"
       ],
       "status": "ok",
-      "seconds": 10.7,
-      "run_at": "2026-11-22T07:25:22+00:00"
+      "seconds": 15.4,
+      "run_at": "2026-11-22T09:49:38+00:00"
     },
     "paper": {
       "notes": [
-        "wrote 139 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
-        "wrote 7 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance",
-        "wrote /home/himishra/CS507A/paper/figures/rq1_coverage.tex",
+        "wrote 183 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
+        "wrote 11 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance, flow, corpus, reliability, examples",
+        "wrote /home/himishra/CS507A/paper/figures/rq1_coverage.tex and /home/himishra/CS507A/paper/figures/rq1_repos.tex",
         "paper/main.pdf built"
       ],
       "status": "ok",
-      "seconds": 6.5,
-      "run_at": "2026-11-22T07:39:29+00:00"
+      "seconds": 6.8,
+      "run_at": "2026-11-22T09:50:27+00:00"
     }
   },
   "inputs": {
@@ -85,12 +90,12 @@
   },
   "outputs": {
     "coding/labels_v1.csv": "a1e5a0ee1cba3c39c55089912f1215e667ca442a0ee87698635e8c3e3ac225d2",
-    "analysis/phase5/reliability.json": "530b0cb4068305df78607a0073fd63f39fc2c90c36022a459d7f5bcae23a7323",
+    "analysis/phase5/reliability.json": "8acee183e3b95aa595386d6ada88f99d44549bca8c442153163534eed5656d22",
     "analysis/phase6/detector_results.csv": "9fd968f25ec3af4b4071cef818c246643e22f4451893ba3d6e461a1a9aefd16d",
     "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
-    "analysis/phase7/results.md": "e8fa4d694f3b5a6bc41c319c88287d4f9017e44675a6acc8d1cc15c1d37d17d5",
-    "paper/numbers.tex": "f97e4658485fdd667d0a741a9cbda4aaa244e78eb228dd35bf543b6bf8cbf090",
-    "paper/main.pdf": "9d774c08ab34dd5fc4f114bc77992a83267be2f832cbd31b3a3a6d3babade0c8",
-    "analysis/FINAL_RESULTS.md": "5d528773156baa8159a3b2a181317c5bba5e343e0eb36a8fdf099dc98d60ee05"
+    "analysis/phase7/results.md": "447b92aa5625fb2f7d69181283607db7a263087061151e1847373c0fd235a01d",
+    "paper/numbers.tex": "bdcd3f7b3b46f72dd0eaa6b4d3ed003fc41eab72832fb14b68dfca2d9fd64570",
+    "paper/main.pdf": "893fdb0096839933097864487c9df14ee473fd48a8270fe7ad965cd6872168a0",
+    "analysis/FINAL_RESULTS.md": "395685632f5a10e727e04e01117645f10620b45f00b5e3098796a0e797275ee8"
   }
 }

@@ -1,0 +1,14 @@
+\begin{table}[t]
+\caption{The corpus: \nSampleRepos{} repositories, three documents each at the snapshot commit. Medians per document (words; Flesch Reading Ease~\cite{flesch1948readability} on prose, higher is easier) and per knowledge unit (words; units per repository).}
+\label{tab:corpus}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{Per document} & \multicolumn{3}{c}{Knowledge units} \\ \cmidrule(lr){2-3}\cmidrule(l){4-6} Document & Words & Flesch & All & Words & Per repo \\
+\midrule
+Agent file & 608 & 28.5 & 2{,}664 & 39 & 11 \\
+README & 682 & 27.8 & 2{,}594 & 52 & 10 \\
+CONTRIBUTING & 445 & 51.0 & 1{,}862 & 44 & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}

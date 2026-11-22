@@ -141,12 +141,16 @@ By group: Processes and Practices 62.4%; Product 29.9%; Documentation 7.3%; Cont
 
 ## Sensitivity
 
-| Variant | Repos | Agent-only (post-stratified) |
+| Variant | Repos | Agent-only (post-stratified) [95% CI] |
 |---|---|---|
-| all coded repos (primary) | 197 | 41.8% |
-| without unedited /init files | 185 | 42.5% |
-| without stub CONTRIBUTING | 184 | 39.2% |
-| without links_out units | 191 | 38.8% |
+| all coded repos (primary) | 197 | 41.8% [37.6%, 46.1%] |
+| without unedited /init files | 185 | 42.5% [38.0%, 46.8%] |
+| without stub CONTRIBUTING | 184 | 39.2% [35.4%, 43.6%] |
+| without links_out units | 191 | 38.8% [34.7%, 42.9%] |
+| only AI-drafted repos (pilot + main) | 158 | 43.4% [38.1%, 48.3%] |
+| only blind-coded repos (reliability set) | 39 | 34.9% [27.7%, 42.5%] |
+
+AI-drafted minus blind-coded repositories: +8.5 pp [-0.5, +17.3] (158 vs 39 repos; repository bootstrap).
 
 docs/ check (detector estimate, 24 repos): 52 of 87 agent-only units (59.8%) match a docs/ section.
 

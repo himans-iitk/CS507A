@@ -86,3 +86,49 @@ def test_rq1_figure_has_both_panels():
     tikz = figure(f)
     assert r"\label{fig:rq1}" in tikz and "(a) By agent" in tikz and "(b) By instruction category" in tikz
     assert tikz.count("\\fill[covA]") >= len(f["categories"]) + 4  # one agent-only segment per bar (+ legend)
+
+
+def test_latex_text_escapes_markdown_excerpts():
+    from gapstudy.paper_tables import clip, latex_text
+    out = latex_text("- Run `make test_unit` with **care** & a $VAR {x} \\ y")
+    assert r"\textbullet" in out and r"\texttt{make test\_unit}" in out
+    assert "**" not in out and r"\&" in out and r"\$VAR" in out and r"\{x\}" in out and r"\textbackslash{}" in out
+    assert clip("one two three four", 2).endswith(r"\dots") and not clip("one two", 5).endswith(r"\dots")
+
+
+def test_new_paper_tables_render():
+    from gapstudy.paper_tables import corpus, examples, flow, reliability, sensitivity
+    from gapstudy.summary import facts
+    f = facts()
+    assert r"\label{tab:flow}" in flow(f) and r"\textbf{Sampled}" in flow(f)
+    assert r"\label{tab:corpus}" in corpus(f)
+    if f["reliability"].get("confusion"):
+        rel = reliability(f)
+        n = f["reliability"]["units"]
+        assert r"\label{tab:rel}" in rel and f"& {n} \\\\" in rel  # grand total = units re-coded
+    sens = sensitivity(f)
+    assert sens.count(r"\midrule") == 2 or "Only" not in sens  # primary rows, then the coding-mode split
+    ex = examples(f)
+    assert ex == "" or (r"\label{tab:examples}" in ex and "```" not in ex)
+
+
+def test_repo_histogram_counts_every_repo():
+    import re
+    from gapstudy.paper_figures import repo_histogram
+    from gapstudy.summary import facts
+    f = facts()
+    tikz = repo_histogram(f)
+    counts = [int(c) for c in re.findall(r"anchor=south,inner sep=1pt\] at \([^)]*\) \{(\d+)\}", tikz)]
+    assert sum(counts) == len(f["repo_shares"])
+
+
+def test_coding_mode_difference_is_drafted_minus_blind():
+    from gapstudy.analysis.sensitivity import coding_mode
+    rows = []
+    for i in range(6):  # three drafted repos all agent-only, three blind repos all shared
+        s = "main" if i < 3 else "reliability"
+        for tool in ("claude", "agents", "copilot-instructions"):
+            rows.append({"repo": f"r{i}{tool}", "tool": tool, "set": s,
+                         "coverage": "agent_only" if s == "main" else "shared"})
+    cm = coding_mode(pd.DataFrame(rows), {"claude": 1 / 3, "agents": 1 / 3, "copilot-instructions": 1 / 3}, n_boot=50)
+    assert cm["difference"] == pytest.approx(1.0) and cm["drafted_repos"] == 9 and cm["blind_repos"] == 9

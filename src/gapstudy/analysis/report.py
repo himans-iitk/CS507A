@@ -126,6 +126,7 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
         L += [f"| {r.group} | {r.barrier} | {r.units} | {r.repos} | {pct(r.share_of_gap_units)} |" for r in b.itertuples()]
         L.append("")
         ex = rq2.examples(df, units, codebook)
+        tables["rq2_examples"] = pd.DataFrame(ex, columns=["need", "repo", "tool", "heading", "text"])
         if ex:
             L += ["### Example agent-only knowledge (seeded sample, ≤ 60 words)", ""]
             for e in ex:
@@ -134,12 +135,18 @@ def build(df: pd.DataFrame, provisional: bool, shares: dict, codebook: dict, uni
             L.append("")
 
         flags = df["flags"].explode().value_counts()
-        L += ["## Sensitivity", "", "| Variant | Repos | Agent-only (post-stratified) |", "|---|---|---|"]
+        L += ["## Sensitivity", "", "| Variant | Repos | Agent-only (post-stratified) [95% CI] |", "|---|---|---|"]
         s = sensitivity.table(df, shares)
         tables["sensitivity"] = s
-        L += [f"| {r.variant} | {r.repos} | {pct(r.agent_only)} |" for r in s.itertuples()]
-        d = sensitivity.docs_check(df)
+        L += [f"| {r.variant} | {r.repos} | {pct(r.agent_only)} [{pct(r.lo)}, {pct(r.hi)}] |" for r in s.itertuples()]
+        cm = sensitivity.coding_mode(df, shares)
         L += [""]
+        if cm:
+            tables["sensitivity_coding_mode"] = pd.DataFrame([cm])
+            L += [f"AI-drafted minus blind-coded repositories: {100 * cm['difference']:+.1f} pp "
+                  f"[{100 * cm['lo']:+.1f}, {100 * cm['hi']:+.1f}] ({cm['drafted_repos']} vs {cm['blind_repos']} repos; "
+                  "repository bootstrap).", ""]
+        d = sensitivity.docs_check(df)
         if d:
             tables["docs_check"] = pd.DataFrame([d])
             L += [f"docs/ check (detector estimate, {d['repos']} repos): {d['covered_by_docs']} of "

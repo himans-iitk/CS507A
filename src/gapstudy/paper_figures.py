@@ -105,10 +105,48 @@ def figure(f: dict) -> str:
     return "\n".join(L)
 
 
+def repo_histogram(f: dict) -> str:
+    """Repositories by their share of agent-only knowledge (unweighted, knowledge units)."""
+    from gapstudy.analysis.rq1 import BINS
+    per = f.get("repo_shares")
+    if per is None:
+        return "% not available\n"
+    counts = [int(((per.agent_only > lo) & (per.agent_only <= hi)).sum()) for lo, hi, _ in BINS]
+    labels = [lab.replace("%", r"\%").replace("–", "--") for _, _, lab in BINS]
+    W, GAP, H = 1.05, 0.18, 2.2  # bar slot width, gap, plot height (cm)
+    top = max(counts)
+    L = [r"\begin{figure}[t]", r"\centering", r"\begin{tikzpicture}[x=1cm,y=1cm]"]
+    L += [rf"\definecolor{{{k}}}{{HTML}}{{{v}}}" for k, v in COLORS.items()]
+    width = len(counts) * W
+    for t in range(0, top + 1, 20):
+        y = t / top * H
+        L.append(rf"\draw[rule,line width=0.3pt] (0,{y:.3f}) -- ({width:.3f},{y:.3f});")
+        L.append(rf"\node[font=\tiny\sffamily,text=ink,anchor=east,inner sep=1pt] at (-0.05,{y:.3f}) {{{t}}};")
+    for i, (c, lab) in enumerate(zip(counts, labels)):
+        x0 = i * W + GAP / 2
+        h = c / top * H
+        if h > 0:
+            L.append(rf"\fill[covA] ({x0:.3f},0) rectangle ({x0 + W - GAP:.3f},{h:.3f});")
+        L.append(rf"\node[font=\scriptsize\sffamily,text=ink,anchor=south,inner sep=1pt] at ({x0 + (W - GAP) / 2:.3f},{h:.3f}) {{{c}}};")
+        L.append(rf"\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at ({x0 + (W - GAP) / 2:.3f},0) {{{lab}}};")
+    L.append(rf"\draw[ink!70,line width=0.4pt] (0,0) -- ({width:.3f},0);")
+    L.append(rf"\node[font=\scriptsize\sffamily,text=ink,anchor=north] at ({width / 2:.3f},-0.38) "
+             r"{Share of the repository's agent-file knowledge that is agent-only};")
+    L.append(rf"\node[font=\scriptsize\sffamily,text=ink,rotate=90,anchor=south] at (-0.45,{H / 2:.3f}) {{Repositories}};")
+    L += [r"\end{tikzpicture}",
+          rf"\caption{{Repositories by their share of agent-only knowledge ({len(per)} repositories with at "
+          r"least one knowledge unit; unweighted). In the 0\% bin every unit is covered at least partly by README "
+          r"or CONTRIBUTING; in the 100\% bin none is.}",
+          r"\label{fig:repos}", r"\end{figure}", ""]
+    return "\n".join(L)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "rq1_coverage.tex").write_text(figure(facts()))
-    print(f"wrote {OUT / 'rq1_coverage.tex'}")
+    f = facts()
+    (OUT / "rq1_coverage.tex").write_text(figure(f))
+    (OUT / "rq1_repos.tex").write_text(repo_histogram(f))
+    print(f"wrote {OUT / 'rq1_coverage.tex'} and {OUT / 'rq1_repos.tex'}")
 
 
 if __name__ == "__main__":

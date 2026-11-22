@@ -60,11 +60,33 @@ def sampling() -> dict[str, str]:
         "nPilotRepos": num((assign.set == "pilot").sum()), "nReliabilityRepos": num((assign.set == "reliability").sum()),
         "nMainRepos": num((assign.set == "main").sum()),
         "nPilotUnits": num((queue.set == "pilot").sum()), "nReliabilityUnits": num((queue.set == "reliability").sum()),
+        "nMainUnits": num((queue.set == "main").sum()),
         "nFullyCodedRepos": num((assign.codable_units <= 10).sum()),
         "nStubContributing": num(assign.stub_contributing.sum()), "nInitUnedited": num(assign.init_unedited.sum()),
         "nDocsRepos": num((inv.docs_files > 0).sum()), "nDocsSubsample": num(inv.in_docs_subsample.sum()),
         "nDocsFiles": num(inv.docs_fetched.sum()),
     }
+    # Dataset and corpus descriptives for the methods section.
+    dates = pd.to_datetime(sample.snapshot_date)
+    src = sample.snapshot_source.value_counts()
+    m |= {"snapshotFirst": dates.min().strftime("%B %Y"), "snapshotLast": dates.max().strftime("%B %Y"),
+          "nSnapshotPackage": num(src.get("package_history", 0)), "nSnapshotAPI": num(src.get("api_history", 0)),
+          "nDuplicateDropped": num(flow.total.iloc[7] - flow.total.iloc[8]),
+          "nDroppedNoContributing": num(flow.total.iloc[-2] - flow.total.iloc[-1])}
+    multi = PROJECT_ROOT / "analysis" / "phase1" / "repo_agent_files.csv"
+    if multi.exists():
+        r = pd.read_csv(multi)
+        m |= {"nPackageRepos": num(len(r)), "nMultiAgentRepos": num((r.n_files > 1).sum())}
+    agent = units[units.doc == "agent"]
+    per_repo = agent.groupby("repo").size()
+    m |= {"agentUnitsPerRepoMedian": num(per_repo.median()), "agentUnitsPerRepoNinety": num(per_repo.quantile(.9)),
+          "agentUnitsPerRepoMax": num(per_repo.max()), "nCodeOnlyAgentUnits": num(agent.code_only.sum()),
+          "readmeUnitMedianWords": num(units[units.doc == "README"].words.median()),
+          "contribUnitMedianWords": num(units[units.doc == "CONTRIBUTING"].words.median())}
+    from gapstudy.detector.items import split_items
+    n_items = units[~units.toc].assign(n=lambda d: d.text.fillna("").map(lambda t: len(split_items(t))))
+    m |= {"nItemsAgent": num(n_items[n_items.doc == "agent"].n.sum()),
+          "nItemsHuman": num(n_items[n_items.doc != "agent"].n.sum())}
     return m
 
 
@@ -83,6 +105,8 @@ def corpus() -> dict[str, str]:
     m["fleschHarderShare"] = pct((diff < 0).mean(), 0)
     m["fleschPairs"] = num(len(pair))
     m["fleschContribP"] = r"$p < 0.0001$" if p < 1e-4 else f"$p = {p:.3g}$"
+    words = d.pivot(index="repo", columns="doc", values="words")[["agent", "CONTRIBUTING"]].dropna()
+    m["wordsGapContrib"] = num((words.agent - words.CONTRIBUTING).median())
     by_tool = d[d.doc == "agent"].groupby("tool").flesch.median()
     m |= {"fleschClaude": num(by_tool["claude"], 1), "fleschAgents": num(by_tool["agents"], 1),
           "fleschCopilot": num(by_tool["copilot-instructions"], 1)}
@@ -133,6 +157,27 @@ def results() -> dict[str, str]:
         if rel.get("repo_agreement_median") is not None:
             m["relRepoMedian"] = pct(rel["repo_agreement_median"], 0)
             m["relReposFull"] = num(rel["repos_full_agreement"])
+        if rel.get("category_jaccard") is not None:
+            m["relCategoryJaccard"] = num(rel["category_jaccard"], 2)
+        for tool, key in (("claude", "Claude"), ("agents", "Agents"), ("copilot-instructions", "Copilot")):
+            if tool in rel.get("by_agent", {}):
+                m[f"relKappa{key}"] = num(rel["by_agent"][tool]["kappa"], 2)
+        conf = rel.get("confusion", {})
+        if conf:
+            off = [(a, b, n) for a, row in conf.items() for b, n in row.items() if a != b]
+            a, b, n = max(off, key=lambda t: t[2])
+            m["relTopConfusionN"] = num(n)
+            m["relTopConfusionShare"] = pct(n / sum(t[2] for t in off), 0)
+            m["relTopConfusionFrom"] = a.replace("_", "-")
+            m["relTopConfusionTo"] = b.replace("_", "-")
+    det = PROJECT_ROOT / "data" / "processed" / "scores"
+    if det.exists():
+        cols = {p.stem: pd.read_csv(p, usecols=["unit_id", "item_mean"]).set_index("unit_id").item_mean
+                for p in sorted(det.glob("*.csv"))}
+        if len(cols) > 1:
+            rho = pd.DataFrame(cols).corr(method="spearman").to_numpy()
+            off = rho[~np.eye(len(rho), dtype=bool)]
+            m["matcherRhoMin"], m["matcherRhoMax"] = num(off.min(), 2), num(off.max(), 2)
     m |= provenance_numbers(labels)
     return m
 
@@ -175,6 +220,24 @@ def findings() -> dict[str, str]:
     sig = f["gee_sig_cats"]
     m["geeSigCats"] = ", ".join(f"{tex(r.term)} (OR {r.odds_ratio:.2f})" for r in sig.itertuples()) or "none"
     m["geeAgentMinP"] = num(f["gee_agent_min_p"], 2)
+    n_terms = len(f["gee"])
+    bonf = sig[sig.p < 0.05 / n_terms]
+    m["geeNTerms"] = num(n_terms)
+    m["geeBonferroniCats"] = " and ".join(tex(t) for t in bonf.term) or "none"
+    m["geeNBonferroni"] = num(len(bonf))
+    g = f["gee"]
+    for term, key in (("agent:agents", "Agents"), ("agent:copilot-instructions", "Copilot")):
+        if term in g.index:
+            r = g.loc[term]
+            m[f"geeOr{key}"] = f"{r.odds_ratio:.2f} [{r.lo:.2f}, {r.hi:.2f}]"
+    if "provenance_by_draft" in f:
+        pd_ = f["provenance_by_draft"]
+        m |= {f"draftCorr{k}": pct(pd_.loc[c, "correction_rate"]) for c, k in
+              (("agent_only", "AgentOnly"), ("partial", "Partial"), ("shared", "Shared"),
+               ("agent_directed", "AgentDirected")) if c in pd_.index}
+    best = f["detector_best"]
+    m["detectorDevFOne"] = num(best["dev_f1"], 2)
+    m["detectorBestVariant"] = tex(str(best["variant"]).replace("_", " "))
     m["geeAgentsDiffer"] = "no" if f["gee_agent_min_p"] >= 0.05 else "yes"
     groups = f["need_groups"]
     m["needGroupTop"], m["needGroupTopShare"] = tex(groups.index[0]), pct(groups.iloc[0])
@@ -189,6 +252,16 @@ def findings() -> dict[str, str]:
         m[f"barrierTop{word}"], m[f"barrierTop{word}Share"] = tex(b["barrier"]), pct(b["share_of_gap_units"])
     m["noBarrierShare"] = pct(f["no_barrier_share"])
     m["sensLow"], m["sensHigh"] = pct(f["sens_range"][0]), pct(f["sens_range"][1])
+    for key, name in (("blind", "Blind"), ("drafted", "Drafted")):
+        r = f.get("sens_mode", {}).get(key)
+        if r:
+            m[f"agentOnly{name}"] = f"{pct(r['agent_only'])} [{pct(r['lo'])}, {pct(r['hi'])}]"
+            m[f"n{name}Repos"] = num(r["repos"])
+    cm = f.get("coding_mode")
+    if cm:
+        pp = lambda x: f"{100 * x:+.1f}".replace("-", "$-$")  # noqa: E731
+        m["codingModeDiff"] = f"{pp(cm['difference'])} percentage points [{pp(cm['lo'])}, {pp(cm['hi'])}]"
+        m["codingModeSignificant"] = "no" if cm["lo"] <= 0 <= cm["hi"] else "yes"
     if "repo_facts" in f:
         rf, sp = f["repo_facts"], f["repo_spread"]
         m |= {"nRepoKnowledge": num(rf["repos"]), "repoAnyAgentOnly": num(rf["any_agent_only"]),
@@ -220,7 +293,8 @@ def main() -> None:
     macros = {**sampling(), **corpus(), **results(), **findings()}
     switches = {"agentsdiffer": macros.pop("geeAgentsDiffer", "no") == "yes",
                 "llmjudge": macros.pop("detectorLLM", "no") == "yes",
-                "secondcoderllm": reliability_status().get("kind") == "human-llm"}
+                "secondcoderllm": reliability_status().get("kind") == "human-llm",
+                "codingmodediffers": macros.pop("codingModeSignificant", "no") == "yes"}
     lines = ["% Generated by `python -m gapstudy.paper_numbers`. Do not edit by hand.",
              r"\providecommand{\TBD}{\textcolor{red}{\textbf{[TBD]}}}"]
     lines += [rf"\newcommand{{\{k}}}{{{v}}}" for k, v in sorted(macros.items())]

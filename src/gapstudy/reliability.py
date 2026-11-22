@@ -131,10 +131,14 @@ def report(coding_dir: Path, n_boot: int, out_dir: Path | None = None) -> tuple[
         support = p.categories_1.map(lambda c: k in (c or [])).sum()
         lines.append(f"| {codebook['categories'][k]['name']} | {point['cat:' + k]:.2f} | {support} |")
     tools = queue.drop_duplicates("unit_id").set_index("unit_id").tool
-    agent_rows = []
+    agent_rows, by_agent = [], {}
     for t, g in p.assign(tool=p.unit_id.map(tools)).groupby("tool"):
         agent_rows.append(f"| {t} | {len(g)} | {(g.coverage_1 == g.coverage_2).mean():.1%} | "
                           f"{kappa(g.coverage_1, g.coverage_2):.2f} |")
+        by_agent[t] = {"units": int(len(g)), "agreement": round(float((g.coverage_1 == g.coverage_2).mean()), 4),
+                       "kappa": round(float(kappa(g.coverage_1, g.coverage_2)), 4)}
+    confusion = {str(a): {str(b): int(n) for b, n in row.items()}
+                 for a, row in pd.crosstab(p.coverage_1, p.coverage_2).iterrows()}
     repo = by_repo(p, queue)
     lines += ["", "## By agent", "", "| Agent | Units | Agreement | κ |", "|---|---|---|---|", *agent_rows,
               "", "## By repository", "",
@@ -158,7 +162,8 @@ def report(coding_dir: Path, n_boot: int, out_dir: Path | None = None) -> tuple[
               "total": total, "repos": int(p.repo.nunique()),
               **{k: (None if pd.isna(point[k]) else round(float(point[k]), 4))
                  for k in ("coverage_agreement", "coverage_kappa", "coverage_weighted_kappa", "category_jaccard",
-                           "need_kappa")}}
+                           "need_kappa")},
+              "confusion": confusion, "by_agent": by_agent}
     if n_boot:
         for k in ("coverage_kappa", "coverage_weighted_kappa"):
             status[f"{k}_ci"] = [round(float(boot[k].quantile(.025)), 4), round(float(boot[k].quantile(.975)), 4)]
