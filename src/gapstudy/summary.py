@@ -102,6 +102,10 @@ def facts() -> dict:
         f["provenance_by_draft"] = pd.read_csv(P7 / "provenance_by_draft.csv", index_col=0)
     labels = pd.read_csv(PROJECT_ROOT / "coding" / "labels_v1.csv")
     f["n_units"], f["n_repos"] = len(labels), labels.repo.nunique()
+    # Trivial RQ3 baseline on the same test set as the detector: call every knowledge unit agent-only.
+    test = labels[(labels["set"] != "pilot") & labels.coverage.isin(["agent_only", "partial", "shared"])]
+    prev = float((test.coverage == "agent_only").mean()) if len(test) else float("nan")
+    f["baseline"] = {"n": len(test), "precision": prev, "recall": 1.0, "f1": 2 * prev / (1 + prev), "auc": 0.5}
     f["flags"] = labels["flags"].map(json.loads).explode().value_counts().to_dict()
     return f
 

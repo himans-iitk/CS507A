@@ -235,6 +235,10 @@ def findings() -> dict[str, str]:
         m |= {f"draftCorr{k}": pct(pd_.loc[c, "correction_rate"]) for c, k in
               (("agent_only", "AgentOnly"), ("partial", "Partial"), ("shared", "Shared"),
                ("agent_directed", "AgentDirected")) if c in pd_.index}
+    bl = f.get("baseline")
+    if bl and bl["n"]:
+        m |= {"baselinePrecision": num(bl["precision"], 2), "baselineFOne": num(bl["f1"], 2),
+              "testAgentOnlyShare": pct(bl["precision"], 0)}
     best = f["detector_best"]
     m["detectorDevFOne"] = num(best["dev_f1"], 2)
     m["detectorBestVariant"] = tex(str(best["variant"]).replace("_", " "))

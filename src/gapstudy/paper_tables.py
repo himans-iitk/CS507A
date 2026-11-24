@@ -122,13 +122,19 @@ def rq3(f: dict) -> str:
     for r in f["detector_llm"].to_dict("records"):
         rows.append(f"{tex(r['matcher'])} ({tex(r.get('mode', 'LLM'))}) & {r['precision']:.2f} & {r['recall']:.2f} & "
                     f"{r['f1']:.2f} & n/a & {r['macro_f1']:.2f} & n/a " + r"\\")
+    bl = f.get("baseline")
+    if bl and bl["n"]:
+        rows.append(r"\midrule")
+        rows.append(rf"\emph{{All agent-only}} & {bl['precision']:.2f} & {bl['recall']:.2f} & {bl['f1']:.2f} & "
+                    rf"{bl['auc']:.2f} & n/a & n/a \\")
     b = f["detector_best"]
     body = table("table", "RQ3: How well each matcher finds agent-only sections in repositories not used for "
                  f"tuning ({int(b['n_test'])} sections). P, R and F1: precision, recall and F1 for agent-only. "
                  "Mac.\\,F1: average F1 over agent-only, partial and shared. @1/@5: share of covered sections whose "
                  "matching human section is ranked first, or in the top five. The score (italics) and thresholds "
                  f"were chosen on {int(b['n_dev'])} pilot sections; bold marks the matcher chosen there. "
-                 "Brackets: 95\\% confidence intervals.", "tab:rq3", "@{}lrrrrrr@{}",
+                 "Brackets: 95\\% confidence intervals. \\emph{All agent-only} is a trivial baseline that labels every "
+                 "section agent-only.", "tab:rq3", "@{}lrrrrrr@{}",
                  r"Matcher & P & R & F1 & AUC & Mac.\,F1 & @1/@5", rows)
     return body.replace(r"\small", r"\small\setlength{\tabcolsep}{3.5pt}", 1)
 

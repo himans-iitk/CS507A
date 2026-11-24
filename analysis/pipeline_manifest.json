@@ -1,12 +1,11 @@
 {
-  "run_at": "2026-11-22T10:24:27+00:00",
-  "git_commit": "66f8fcae20d7b4a70229a0d84e8bffae1f77ba4e",
+  "run_at": "2026-11-24T18:49:26+00:00",
+  "git_commit": "29dc9748ee6031de0b3be07f6f269a7c2dc1e349",
   "git_dirty": [
-    "paper/figures/rq1_coverage.tex",
-    "paper/figures/rq1_repos.tex",
     "paper/main.tex",
-    "src/gapstudy/paper_figures.py",
-    "src/gapstudy/paper_tables.py"
+    "src/gapstudy/paper_numbers.py",
+    "src/gapstudy/paper_tables.py",
+    "src/gapstudy/summary.py"
   ],
   "bootstrap_draws": 1000,
   "stages": {
@@ -22,8 +21,8 @@
       ],
       "warnings": [],
       "status": "ok",
-      "seconds": 0.9,
-      "run_at": "2026-11-22T10:24:27+00:00"
+      "seconds": 1.0,
+      "run_at": "2026-11-24T18:49:26+00:00"
     },
     "freeze": {
       "notes": [
@@ -59,14 +58,14 @@
     },
     "paper": {
       "notes": [
-        "wrote 183 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
+        "wrote 186 macros to /home/himishra/CS507A/paper/numbers.tex (0 still TBD; human + LLM second annotator)",
         "wrote 11 tables to /home/himishra/CS507A/paper/tables: rq1_headline, rq1_categories, rq2_needs, rq2_barriers, rq3, sensitivity, provenance, flow, corpus, reliability, examples",
         "wrote /home/himishra/CS507A/paper/figures/rq1_coverage.tex and /home/himishra/CS507A/paper/figures/rq1_repos.tex",
         "paper/main.pdf built"
       ],
       "status": "ok",
-      "seconds": 7.2,
-      "run_at": "2026-11-22T10:24:27+00:00"
+      "seconds": 6.4,
+      "run_at": "2026-11-24T18:49:26+00:00"
     }
   },
   "inputs": {
@@ -88,8 +87,8 @@
     "analysis/phase6/detector_results.csv": "9fd968f25ec3af4b4071cef818c246643e22f4451893ba3d6e461a1a9aefd16d",
     "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
     "analysis/phase7/results.md": "447b92aa5625fb2f7d69181283607db7a263087061151e1847373c0fd235a01d",
-    "paper/numbers.tex": "bdcd3f7b3b46f72dd0eaa6b4d3ed003fc41eab72832fb14b68dfca2d9fd64570",
-    "paper/main.pdf": "a8d18efd81bb15ad1e618c0c8eb335cf567a71279ac7c045d786d63061568255",
-    "analysis/FINAL_RESULTS.md": "e2e30b3fa0b41e795ff54db85c047684ffa8e0b9888b9442bec234aef2542213"
+    "paper/numbers.tex": "815c7f62d1a347dd0c9afc7fcae1052c59aa04a6b2eb6baffd5ecc2eaeb0bba5",
+    "paper/main.pdf": "5ea0b48153b0e26d67dc9d5c4c999d1e2c97eff7b76d753cf68844025a176cd4",
+    "analysis/FINAL_RESULTS.md": "aaa3a4b4a1320cd2886e1bb762bf120337998b381bdc6613d6b46e0f0dc4146c"
   }
 }

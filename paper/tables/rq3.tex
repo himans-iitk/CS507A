@@ -1,5 +1,5 @@
 \begin{table}[t]
-\caption{RQ3: How well each matcher finds agent-only sections in repositories not used for tuning (1284 sections). P, R and F1: precision, recall and F1 for agent-only. Mac.\,F1: average F1 over agent-only, partial and shared. @1/@5: share of covered sections whose matching human section is ranked first, or in the top five. The score (italics) and thresholds were chosen on 139 pilot sections; bold marks the matcher chosen there. Brackets: 95\% confidence intervals.}
+\caption{RQ3: How well each matcher finds agent-only sections in repositories not used for tuning (1284 sections). P, R and F1: precision, recall and F1 for agent-only. Mac.\,F1: average F1 over agent-only, partial and shared. @1/@5: share of covered sections whose matching human section is ranked first, or in the top five. The score (italics) and thresholds were chosen on 139 pilot sections; bold marks the matcher chosen there. Brackets: 95\% confidence intervals. \emph{All agent-only} is a trivial baseline that labels every section agent-only.}
 \label{tab:rq3}
 \small\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
@@ -14,6 +14,8 @@ Qwen3-Emb-0.6B & 0.67 & 0.83 & 0.74 & 0.84 & 0.62 & 0.69/0.95 \\
 \quad{\scriptsize\itshape item\_cov@0.65} & & & {\scriptsize[0.70, 0.78]} & {\scriptsize[0.82, 0.87]} & & \\
 bge-base & 0.68 & 0.84 & 0.75 & 0.87 & 0.59 & 0.71/0.96 \\
 \quad{\scriptsize\itshape item\_mean} & & & {\scriptsize[0.71, 0.79]} & {\scriptsize[0.85, 0.89]} & & \\
+\midrule
+\emph{All agent-only} & 0.41 & 1.00 & 0.58 & 0.50 & n/a & n/a \\
 \bottomrule
 \end{tabular}
 \end{table}
