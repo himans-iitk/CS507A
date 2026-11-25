@@ -1,5 +1,5 @@
 \begin{table}[t]
-\caption{Agent-only share by instruction category (\% of sections). The odds ratio compares sections with the category to all other sections; below 1 means less often agent-only ($^{*}$ $p < 0.05$). A section can have several categories.}
+\caption{Agent-only share by instruction category. \emph{Sections}: labelled sections (raw count); \emph{Agent-only}: \% of them, weighted for the limit of 10 labelled sections per repository. The odds ratio (GEE, clustered by repository) compares sections with the category to all other sections; below 1 means less often agent-only. $^{*}$~$p < 0.05$ unadjusted; $^{**}$~significant after Bonferroni correction for \geeNTerms{} terms. A section can have several categories. Shares for categories with few sections are descriptive.}
 \label{tab:rq1cat}
 \footnotesize\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lrrr@{}}
@@ -19,9 +19,9 @@ Configuration and Environment & 175 & 39.9 & 0.66$^{*}$ \\
 Build and Run & 249 & 38.7 & 0.71$^{*}$ \\
 Maintainability & 24 & 38.0 & 0.52 \\
 Testing & 354 & 36.7 & 0.73 \\
-Development Process & 223 & 32.3 & 0.50$^{*}$ \\
+Development Process & 223 & 32.3 & 0.50$^{**}$ \\
 Security & 41 & 30.8 & 0.72 \\
-System Overview & 124 & 6.8 & 0.07$^{*}$ \\
+System Overview & 124 & 6.8 & 0.07$^{**}$ \\
 \bottomrule
 \end{tabular}
 \end{table}

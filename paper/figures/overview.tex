@@ -5,8 +5,8 @@
   ex/.style={draw=black!25,rounded corners=1.5pt,align=left,font=\scriptsize,text width=2.5cm,minimum height=2.45cm,inner sep=2.5pt,anchor=north},
   arr/.style={-{Latex[length=1.6mm]},black!60,line width=0.5pt}]
 \node[stage] (s0) at (0.00,0) {\textbf{Agent READMEs dataset}\\\nPackageFiles{} agent files};
-\node[stage] (s1) at (2.95,0) {\textbf{Same commit}\\README and CONTRIBUTING at the agent file's commit; \nEligible{} eligible};
-\node[stage] (s2) at (5.90,0) {\textbf{Sample}\\\nPerAgent{} per file type; \nSampleRepos{} repositories};
+\node[stage] (s1) at (2.95,0) {\textbf{Same commit}\\README and CONTRIBUTING at the agent file's snapshot commit};
+\node[stage] (s2) at (5.90,0) {\textbf{Filter and sample}\\\nEligible{} eligible files; \nPerAgent{} per file type; \nSampleRepos{} repositories};
 \node[stage] (s3) at (8.85,0) {\textbf{Sections}\\split at headings; \nUnits{} sections};
 \node[stage] (s4) at (11.80,0) {\textbf{Labelling (RQ1, RQ2)}\\up to 10 sections per repository; \nQueued{} labelled};
 \node[stage] (s5) at (14.75,0) {\textbf{Detector (RQ3)}\\score of each section against the human sections};
@@ -29,6 +29,7 @@
 \draw[black!30,densely dotted,line width=0.5pt] (s5.south) -- (e5.north);
 \node[draw=black!25,fill=black!3,rounded corners=1.5pt,align=left,font=\scriptsize,text width=17.05cm,inner sep=3pt,anchor=north west] at (-1.25,-3.95) {\textbf{Example section} (\texttt{AGENTS.md}, \emph{Local Development}): 1. Ensure Node.js 20+ is installed 2. Set \texttt{GITHUB\_TOKEN} environment variable 3. Navigate to the directory you want to work with 4. Run \texttt{npm install} followed by \texttt{npm start}};
 \end{tikzpicture}
-\caption{Architecture of the method. Top: the six stages. Bottom: one real section from our data traced through every stage, labelled agent-only by the annotator and predicted agent-only by the detector.}
+\Description{Six method stages in a row, from the Agent READMEs dataset to the detector, with one real agent-file section traced below each stage.}
+\caption{Overview of the pipeline. Top: the six stages. Bottom: one real section from our data traced through every stage, labelled agent-only by the annotator and predicted agent-only by the detector.}
 \label{fig:overview}
 \end{figure*}

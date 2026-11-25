@@ -170,8 +170,8 @@ def results() -> dict[str, str]:
             a, b, n = max(off, key=lambda t: t[2])
             m["relTopConfusionN"] = num(n)
             m["relTopConfusionShare"] = pct(n / sum(t[2] for t in off), 0)
-            m["relTopConfusionFrom"] = a.replace("_", "-")
-            m["relTopConfusionTo"] = b.replace("_", "-")
+            m["relTopConfusionFrom"] = {"partial": "partially covered"}.get(a, a.replace("_", "-"))
+            m["relTopConfusionTo"] = {"partial": "partially covered"}.get(b, b.replace("_", "-"))
     det = PROJECT_ROOT / "data" / "processed" / "scores"
     if det.exists():
         cols = {p.stem: pd.read_csv(p, usecols=["unit_id", "item_mean"]).set_index("unit_id").item_mean
@@ -213,20 +213,25 @@ def findings() -> dict[str, str]:
     except FileNotFoundError:
         return {}
     tex = lambda s: str(s).replace("&", r"\&").replace("_", r"\_")  # noqa: E731
+    sc = lambda s: rf"\textsc{{{tex(s)}}}"  # noqa: E731  (instruction categories)
     m: dict[str, str] = {}
     for i, c in enumerate(f["cat_highest"], 1):
         word = ("One", "Two", "Three")[i - 1]
-        m[f"catHigh{word}"] = tex(c["category"])
+        m[f"catHigh{word}"] = sc(c["category"])
         m[f"catHigh{word}Share"] = pct(c["agent_only"])
-    m |= {"catLow": tex(f["cat_lowest"]["category"]), "catLowShare": pct(f["cat_lowest"]["agent_only"])}
+    m |= {"catLow": sc(f["cat_lowest"]["category"]), "catLowShare": pct(f["cat_lowest"]["agent_only"])}
     sig = f["gee_sig_cats"]
-    m["geeSigCats"] = ", ".join(f"{tex(r.term)} (OR {r.odds_ratio:.2f})" for r in sig.itertuples()) or "none"
+    m["geeSigCats"] = ", ".join(f"{sc(r.term)} (OR {r.odds_ratio:.2f})" for r in sig.itertuples()) or "none"
     m["geeAgentMinP"] = num(f["gee_agent_min_p"], 2)
     n_terms = len(f["gee"])
     bonf = sig[sig.p < 0.05 / n_terms]
     m["geeNTerms"] = num(n_terms)
-    m["geeBonferroniCats"] = " and ".join(tex(t) for t in bonf.term) or "none"
+    m["geeBonferroniCats"] = " and ".join(sc(t) for t in bonf.term) or "none"
     m["geeNBonferroni"] = num(len(bonf))
+    with_or = lambda d: " and ".join(f"{sc(r.term)} (OR {r.odds_ratio:.2f})" for r in d.itertuples()) or "none"  # noqa: E731
+    m["geeBonferroniCatsOR"] = with_or(bonf)
+    m["geeUnadjustedOnlyCats"] = with_or(sig[sig.p >= 0.05 / n_terms])
+    m["geeBonferroniAlpha"] = f"{0.05 / n_terms:.4f}".rstrip("0")
     g = f["gee"]
     for term, key in (("agent:agents", "Agents"), ("agent:copilot-instructions", "Copilot")):
         if term in g.index:
@@ -295,8 +300,93 @@ def findings() -> dict[str, str]:
     return m
 
 
+def rng(lo, hi, digits: int = 1, percent: bool = True) -> str:
+    """A 95% interval as 'lo--hi' text (percentages or plain numbers)."""
+    if percent:
+        return f"{100 * lo:.{digits}f}--{100 * hi:.{digits}f}\\%"
+    return f"{lo:.{digits}f}--{hi:.{digits}f}"
+
+
+def uncertainty_and_counts() -> dict[str, str]:
+    """Confidence intervals and the counts that explain the paper's denominators (review round 1)."""
+    m: dict[str, str] = {}
+    p7, p6 = PROJECT_ROOT / "analysis" / "phase7", PROJECT_ROOT / "analysis" / "phase6"
+    labels_path = PROJECT_ROOT / "coding" / "labels_v1.csv"
+    if not labels_path.exists():
+        return m
+    h = pd.read_csv(p7 / "rq1_headline.csv").set_index(["outcome", "scope"])
+    for outcome, key in (("agent_only", "agentOnlyOverall"), ("shared", "sharedOverall"), ("any_gap", "anyGapOverall")):
+        r = h.loc[(outcome, "overall")]
+        m[key + "CI"] = rng(r.lo, r.hi)
+    s = pd.read_csv(p7 / "sensitivity.csv").set_index("variant")
+    for variant, key in (("only blind-coded repos (reliability set)", "agentOnlyBlindCI"),
+                         ("only AI-drafted repos (pilot + main)", "agentOnlyDraftedCI")):
+        if variant in s.index:
+            m[key] = rng(s.loc[variant, "lo"], s.loc[variant, "hi"])
+    cm = p7 / "sensitivity_coding_mode.csv"
+    if cm.exists():
+        c = pd.read_csv(cm).iloc[0]
+        pp = lambda x: f"{100 * x:+.1f}".replace("-", "$-$")  # noqa: E731
+        m["codingModeCI"] = f"{pp(c.lo)} to {pp(c.hi)}"
+    rel = reliability_status()
+    for field, key in (("coverage_kappa_ci", "kappaCoverageCI"), ("coverage_weighted_kappa_ci", "kappaWeightedCI")):
+        if rel.get(field):
+            m[key] = rng(*rel[field], digits=2, percent=False)
+    det = pd.read_csv(p6 / "detector_results.csv")
+    det = det[det.variant.notna()].sort_values("dev_f1", ascending=False)
+    if len(det):
+        lo, hi = (float(x) for x in str(det.iloc[0].f1_ci).strip("()").split(","))
+        m["detectorFOneCI"] = rng(lo, hi, digits=2, percent=False)
+    labels = pd.read_csv(labels_path)
+    know = labels.coverage.isin(["agent_only", "partial", "shared"])
+    m["nReposNoKnowledge"] = num(labels.repo.nunique() - labels[know].repo.nunique())
+    m["nPilotDirected"] = num(((labels["set"] == "pilot") & (labels.coverage == "agent_directed")).sum())
+    rel_repos = labels[labels["set"] == "reliability"].groupby("tool").repo.nunique()
+    m["relReposMin"], m["relReposMax"] = num(rel_repos.min()), num(rel_repos.max())
+    gap = labels[labels.coverage.isin(["agent_only", "partial"])]
+    src = gap.need_source.fillna("")
+    m["nGapUnits"] = num(len(gap))
+    m["draftedLabelShare"] = pct((labels["set"] != "reliability").mean(), 0)
+    m["nNeedFilledMain"] = num((src.str.startswith("fill") & (gap["set"] != "reliability")).sum())
+    m["nNeedFilledRel"] = num((src.str.startswith("fill") & (gap["set"] == "reliability")).sum())
+    m["needModelOnlyShare"] = pct((~src.str.startswith("pass1")).mean())
+    m["nRelGapFirst"] = num(((labels["set"] == "reliability") & labels.coverage.isin(["agent_only", "partial"])).sum())
+    flags = labels["flags"].map(json.loads)
+    m["conflictShare"] = pct(flags.map(lambda f: "conflict" in f).sum() / know.sum())
+    flow = pd.read_csv(PROCESSED / "sampling_flow.csv")
+    m["nLinkOnlyFiles"] = num(flow.total.iloc[5] - flow.total.iloc[6])
+    inv = pd.read_csv(PROCESSED / "docs_inventory.csv")
+    m["nDocsSubsampleFetched"] = num((inv.in_docs_subsample & (inv.docs_fetched > 0)).sum())
+    units = pd.read_csv(PROCESSED / "units.csv", usecols=["repo", "doc", "toc"])
+    m["humanSectionsPerRepoMedian"] = num(units[(units.doc != "agent") & ~units.toc].groupby("repo").size().median())
+    # Review round 2: counts that reconcile the text with the tables.
+    m["partialOverall"] = pct(h.loc[("partial", "overall")].estimate)
+    k = labels[know]
+    m["sectionGapShare"] = pct(np.average(k.coverage.isin(["agent_only", "partial"]), weights=k.weight.fillna(1)))
+    cand = pd.read_csv(PROCESSED / "candidates.csv")
+    m["datasetMedianStars"] = num(cand.drop_duplicates("repo").stars.median())
+    m["eligibleMedianStars"] = num(cand[cand.excluded_by.isna()].drop_duplicates("repo").stars.median())
+    filled = labels[labels.filled_by.notna()].filled_fields.fillna("")
+    m["nFilledEvidence"] = num(filled.str.contains("evidence").sum())
+    m["nFilledBoth"] = num((filled.str.contains("evidence") & filled.str.contains("need")).sum())
+    m["nFilledMain"] = num((labels.filled_by.notna() & (labels["set"] != "reliability")).sum())
+    prov = pd.read_csv(p7 / "provenance_by_set.csv", index_col=0).sum()
+    m["nDraftsKeptUnchanged"] = num(prov["draft_accepted"])
+    m["nDraftsEdited"] = num(prov["draft_details_edited"])
+    others = det.iloc[1:]
+    m["embedFOneMin"], m["embedFOneMax"] = num(others.f1.min(), 2), num(others.f1.max(), 2)
+    drafted = labels[labels.drafter.notna()]
+    m["drafterModel"] = {"claude-opus-5.5": "Claude Opus 5.5"}.get(drafted.drafter.iloc[0], drafted.drafter.iloc[0])
+    drafts = pd.read_json(PROJECT_ROOT / "coding" / "drafts.jsonl", lines=True)
+    when = pd.to_datetime(drafts.drafted_at)
+    m["draftFirstDate"], m["draftLastDate"] = when.min().strftime("%-d %B"), when.max().strftime("%-d %B %Y")
+    second = pd.read_json(PROJECT_ROOT / "coding" / "labels" / "pass2.jsonl", lines=True)
+    m["secondCoderDate"] = pd.to_datetime(second.saved_at).min().strftime("%-d %B %Y")
+    return m
+
+
 def main() -> None:
-    macros = {**sampling(), **corpus(), **results(), **findings()}
+    macros = {**sampling(), **corpus(), **results(), **findings(), **uncertainty_and_counts()}
     switches = {"agentsdiffer": macros.pop("geeAgentsDiffer", "no") == "yes",
                 "llmjudge": macros.pop("detectorLLM", "no") == "yes",
                 "secondcoderllm": reliability_status().get("kind") == "human-llm",

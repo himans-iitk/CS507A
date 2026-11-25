@@ -1,5 +1,5 @@
 {
-  "_doc": "Who produced each label. type: human or llm. Names must match the 'coder' field in labels/*.jsonl (after coder_aliases.json).",
+  "_doc": "Who produced each label. type: human. Names must match the 'coder' field in labels/*.jsonl (after coder_aliases.json).",
   "Himanshu Mishra": {"type": "human", "role": "primary annotator (pass 1)"},
-  "Codex (AI reviewer)": {"type": "llm", "model": "OpenAI Codex", "role": "independent second annotator of the reliability set (pass 2, blind)"}
+  "Sharthak Sharma": {"type": "human", "model": "Secondary annotator (pass 2)""}
 }

@@ -5,16 +5,20 @@
 \newcommand{\agentLongerShare}{57\%}
 \newcommand{\agentOnlyAgents}{33.4\%}
 \newcommand{\agentOnlyBlind}{34.9\%}
+\newcommand{\agentOnlyBlindCI}{27.7--42.5\%}
 \newcommand{\agentOnlyClaude}{40.0\%}
 \newcommand{\agentOnlyCopilot}{49.5\%}
 \newcommand{\agentOnlyDrafted}{43.4\%}
+\newcommand{\agentOnlyDraftedCI}{38.1--48.3\%}
 \newcommand{\agentOnlyOverall}{41.8\%}
+\newcommand{\agentOnlyOverallCI}{37.6--46.1\%}
 \newcommand{\agentUnitMedianWords}{39}
 \newcommand{\agentUnitsPerRepoMax}{45}
 \newcommand{\agentUnitsPerRepoMedian}{11}
 \newcommand{\agentUnitsPerRepoNinety}{26}
 \newcommand{\agentWords}{608}
 \newcommand{\anyGapOverall}{85.3\%}
+\newcommand{\anyGapOverallCI}{82.4--88.0\%}
 \newcommand{\barrierTopOne}{Lack of knowledge in project process and practices}
 \newcommand{\barrierTopOneShare}{35.8\%}
 \newcommand{\barrierTopThree}{Code/architecture hurdles}
@@ -23,18 +27,21 @@
 \newcommand{\barrierTopTwoShare}{26.0\%}
 \newcommand{\baselineFOne}{0.58}
 \newcommand{\baselinePrecision}{0.41}
-\newcommand{\catHighOne}{UI/UX}
+\newcommand{\catHighOne}{\textsc{UI/UX}}
 \newcommand{\catHighOneShare}{68.4\%}
-\newcommand{\catHighThree}{Debugging}
+\newcommand{\catHighThree}{\textsc{Debugging}}
 \newcommand{\catHighThreeShare}{61.7\%}
-\newcommand{\catHighTwo}{Performance}
+\newcommand{\catHighTwo}{\textsc{Performance}}
 \newcommand{\catHighTwoShare}{65.6\%}
-\newcommand{\catLow}{System Overview}
+\newcommand{\catLow}{\textsc{System Overview}}
 \newcommand{\catLowShare}{6.8\%}
+\newcommand{\codingModeCI}{$-$0.5 to +17.3}
 \newcommand{\codingModeDiff}{+8.5 percentage points}
+\newcommand{\conflictShare}{2.7\%}
 \newcommand{\contribFlesch}{51.0}
 \newcommand{\contribUnitMedianWords}{44}
 \newcommand{\contribWords}{445}
+\newcommand{\datasetMedianStars}{59}
 \newcommand{\detectorAUC}{0.88}
 \newcommand{\detectorAUCMax}{0.88}
 \newcommand{\detectorAUCMin}{0.83}
@@ -42,6 +49,7 @@
 \newcommand{\detectorBestVariant}{item mean}
 \newcommand{\detectorDevFOne}{0.85}
 \newcommand{\detectorFOne}{0.76}
+\newcommand{\detectorFOneCI}{0.72--0.79}
 \newcommand{\detectorFOneMax}{0.76}
 \newcommand{\detectorFOneMin}{0.73}
 \newcommand{\detectorFalseAgentOnly}{200}
@@ -61,7 +69,14 @@
 \newcommand{\draftCorrAgentOnly}{7.4\%}
 \newcommand{\draftCorrPartial}{3.0\%}
 \newcommand{\draftCorrShared}{2.4\%}
+\newcommand{\draftFirstDate}{28 October}
 \newcommand{\draftKeepRate}{94.8\%}
+\newcommand{\draftLastDate}{5 November 2026}
+\newcommand{\draftedLabelShare}{78\%}
+\newcommand{\drafterModel}{Claude Opus 5.5}
+\newcommand{\eligibleMedianStars}{338}
+\newcommand{\embedFOneMax}{0.75}
+\newcommand{\embedFOneMin}{0.73}
 \newcommand{\fleschAgents}{37.6}
 \newcommand{\fleschClaude}{18.6}
 \newcommand{\fleschContribP}{$p < 0.0001$}
@@ -81,14 +96,20 @@
 \newcommand{\flowRepoNoLongerExists}{2{,}238}
 \newcommand{\flowSnapshotCommitNotFound}{2{,}048}
 \newcommand{\geeAgentMinP}{0.41}
-\newcommand{\geeBonferroniCats}{System Overview and Development Process}
+\newcommand{\geeBonferroniAlpha}{0.0028}
+\newcommand{\geeBonferroniCats}{\textsc{System Overview} and \textsc{Development Process}}
+\newcommand{\geeBonferroniCatsOR}{\textsc{System Overview} (OR 0.07) and \textsc{Development Process} (OR 0.50)}
 \newcommand{\geeNBonferroni}{2}
 \newcommand{\geeNTerms}{18}
 \newcommand{\geeOrAgents}{0.90}
 \newcommand{\geeOrCopilot}{1.25}
-\newcommand{\geeSigCats}{System Overview (OR 0.07), Development Process (OR 0.50), Configuration and Environment (OR 0.66), Build and Run (OR 0.71)}
+\newcommand{\geeSigCats}{\textsc{System Overview} (OR 0.07), \textsc{Development Process} (OR 0.50), \textsc{Configuration and Environment} (OR 0.66), \textsc{Build and Run} (OR 0.71)}
+\newcommand{\geeUnadjustedOnlyCats}{\textsc{Configuration and Environment} (OR 0.66) and \textsc{Build and Run} (OR 0.71)}
+\newcommand{\humanSectionsPerRepoMedian}{19}
 \newcommand{\kappaCoverage}{0.78}
+\newcommand{\kappaCoverageCI}{0.71--0.85}
 \newcommand{\kappaWeighted}{0.80}
+\newcommand{\kappaWeightedCI}{0.73--0.86}
 \newcommand{\matcherRhoMax}{0.91}
 \newcommand{\matcherRhoMin}{0.78}
 \newcommand{\nAgentUnits}{2{,}664}
@@ -103,9 +124,12 @@
 \newcommand{\nDocsFiles}{525}
 \newcommand{\nDocsRepos}{113}
 \newcommand{\nDocsSubsample}{30}
+\newcommand{\nDocsSubsampleFetched}{30}
 \newcommand{\nDraftedRepos}{158}
 \newcommand{\nDraftsCorrected}{64}
+\newcommand{\nDraftsEdited}{1}
 \newcommand{\nDraftsKept}{1{,}162}
+\newcommand{\nDraftsKeptUnchanged}{1{,}161}
 \newcommand{\nDraftsReviewed}{1{,}226}
 \newcommand{\nDroppedNoContributing}{1{,}069}
 \newcommand{\nDuplicateDropped}{34}
@@ -113,28 +137,38 @@
 \newcommand{\nEligibleAgents}{214}
 \newcommand{\nEligibleClaude}{252}
 \newcommand{\nEligibleCopilot}{289}
+\newcommand{\nFilledBoth}{3}
+\newcommand{\nFilledEvidence}{41}
+\newcommand{\nFilledMain}{51}
 \newcommand{\nFullyCodedRepos}{93}
+\newcommand{\nGapUnits}{1{,}216}
 \newcommand{\nInitUnedited}{12}
 \newcommand{\nItemsAgent}{12{,}871}
 \newcommand{\nItemsHuman}{22{,}446}
 \newcommand{\nKnowledgeUnits}{1{,}423}
+\newcommand{\nLinkOnlyFiles}{40}
 \newcommand{\nLinksOutUnits}{180}
 \newcommand{\nMainRepos}{141}
 \newcommand{\nMainUnits}{1{,}065}
 \newcommand{\nMultiAgentRepos}{347}
 \newcommand{\nNeedFilled}{20}
+\newcommand{\nNeedFilledMain}{13}
+\newcommand{\nNeedFilledRel}{7}
 \newcommand{\nNeedFirst}{930}
 \newcommand{\nNeedFromSecond}{266}
 \newcommand{\nPackageFiles}{2{,}303}
 \newcommand{\nPackageRepos}{1{,}925}
 \newcommand{\nPerAgent}{67}
+\newcommand{\nPilotDirected}{22}
 \newcommand{\nPilotRepos}{20}
 \newcommand{\nPilotUnits}{161}
 \newcommand{\nQueued}{1{,}564}
 \newcommand{\nReadmeUnits}{2{,}594}
+\newcommand{\nRelGapFirst}{273}
 \newcommand{\nReliabilityRepos}{40}
 \newcommand{\nReliabilityUnits}{338}
 \newcommand{\nRepoKnowledge}{197}
+\newcommand{\nReposNoKnowledge}{4}
 \newcommand{\nSampleRepos}{201}
 \newcommand{\nSecondCodedUnits}{338}
 \newcommand{\nSnapshotAPI}{23}
@@ -147,6 +181,7 @@
 \newcommand{\needGroupTeamContext}{0.4\%}
 \newcommand{\needGroupTop}{Processes and Practices}
 \newcommand{\needGroupTopShare}{62.4\%}
+\newcommand{\needModelOnlyShare}{1.6\%}
 \newcommand{\needTopOne}{Development Process}
 \newcommand{\needTopOneShare}{28.1\%}
 \newcommand{\needTopThree}{Software Architecture}
@@ -154,6 +189,7 @@
 \newcommand{\needTopTwo}{Development Environment and Tools}
 \newcommand{\needTopTwoShare}{26.3\%}
 \newcommand{\noBarrierShare}{0.0\%}
+\newcommand{\partialOverall}{43.5\%}
 \newcommand{\readmeFlesch}{27.8}
 \newcommand{\readmeUnitMedianWords}{52}
 \newcommand{\readmeWords}{682}
@@ -164,10 +200,12 @@
 \newcommand{\relKappaCopilot}{0.71}
 \newcommand{\relRepoMedian}{90\%}
 \newcommand{\relReposFull}{15}
+\newcommand{\relReposMax}{14}
+\newcommand{\relReposMin}{13}
 \newcommand{\relTopConfusionFrom}{agent-only}
 \newcommand{\relTopConfusionN}{22}
 \newcommand{\relTopConfusionShare}{47\%}
-\newcommand{\relTopConfusionTo}{partial}
+\newcommand{\relTopConfusionTo}{partially covered}
 \newcommand{\repoAgentOnlyMedian}{37.5\%}
 \newcommand{\repoAgentOnlyQOne}{16.7\%}
 \newcommand{\repoAgentOnlyQThree}{66.7\%}
@@ -178,10 +216,12 @@
 \newcommand{\repoNoShared}{97}
 \newcommand{\repoNoSharedShare}{49\%}
 \newcommand{\sampleMedianStars}{445}
-\newcommand{\secondCoderModel}{OpenAI Codex}
+\newcommand{\secondCoderDate}{22 November 2026}
+\newcommand{\sectionGapShare}{85.6\%}
 \newcommand{\sensHigh}{42.5\%}
 \newcommand{\sensLow}{38.8\%}
 \newcommand{\sharedOverall}{14.7\%}
+\newcommand{\sharedOverallCI}{12.0--17.6\%}
 \newcommand{\snapshotFirst}{March 2025}
 \newcommand{\snapshotLast}{October 2025}
 \newcommand{\testAgentOnlyShare}{41\%}
@@ -195,6 +235,6 @@
 \newif\ifllmjudge
 \llmjudgefalse
 \newif\ifsecondcoderllm
-\secondcoderllmtrue
+\secondcoderllmfalse
 \newif\ifcodingmodediffers
 \codingmodediffersfalse

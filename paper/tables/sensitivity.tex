@@ -1,18 +1,17 @@
 \begin{table}[t]
-\caption{How the agent-only share (\%) changes when we leave out parts of the data. The last two rows split the sample by how the labels were made.}
+\caption{Mean percentage of agent-only knowledge sections per repository after each exclusion.
+Estimates use the eligible file-type weights. The 95\% confidence intervals come from resampling
+repositories within file types.}
 \label{tab:sens}
-\small
-\begin{tabular}{@{}lrr@{}}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
-Variant & Repos & Agent-only \\
+Variant & Repos & Agent-only & 95\% CI \\
 \midrule
-All coded repositories (primary) & 197 & 41.8 \\
-Without unedited \texttt{/init} files & 185 & 42.5 \\
-Without stub CONTRIBUTING files & 184 & 39.2 \\
-Without sections whose topic is only linked & 191 & 38.8 \\
-\midrule
-Only AI-drafted labels (pilot, main) & 158 & 43.4 \\
-Only blind-coded labels (reliability) & 39 & 34.9 \\
+All labelled repositories (primary) & 197 & 41.8 & {\scriptsize[37.6, 46.1]} \\
+Without unedited \texttt{/init} files & 185 & 42.5 & {\scriptsize[38.0, 46.8]} \\
+Without stub CONTRIBUTING files & 184 & 39.2 & {\scriptsize[35.4, 43.6]} \\
+Without link-only sections & 191 & 38.8 & {\scriptsize[34.7, 42.9]} \\
 \bottomrule
 \end{tabular}
 \end{table}

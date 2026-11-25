@@ -97,9 +97,14 @@ def figure(f: dict) -> str:
     L += axis(y + ROW_CM - THICK_CM / 2 - 0.08)
 
     L += [r"\end{tikzpicture}",
+          r"\Description{Two panels of stacked horizontal bars showing, for each agent file type and for each "
+          r"instruction category, the shares of agent-file sections that are agent-only, partially covered and "
+          r"shared with README and CONTRIBUTING.}",
           r"\caption{RQ1: How much agent-file knowledge is also in README and CONTRIBUTING. (a)~Average share "
-          r"per repository; $^{*}$file types weighted by how common they are. (b)~Share of sections in each instruction category (a section can have "
-          r"several), sorted by the agent-only share printed on the bars (\%).}",
+          r"per repository; $^{*}$file types weighted by how common they are. (b)~Share of sections in each "
+          r"instruction category (a section can have several), weighted for the limit of 10 labelled sections per "
+          r"repository and sorted by the agent-only share printed on the bars (\%; values rounded, so a bar's "
+          r"labels may not sum to 100).}",
           r"\label{fig:rq1}", r"\end{figure}", ""]
     return "\n".join(L)
 
@@ -113,7 +118,7 @@ def repo_histogram(f: dict) -> str:
     counts = [int(((per.agent_only > lo) & (per.agent_only <= hi)).sum()) for lo, hi, _ in BINS]
     labels = [lab.replace("%", r"\%").replace("–", " to ") for _, _, lab in BINS]
     W, GAP, H = 1.12, 0.14, 2.2  # bar slot width, gap, plot height (cm)
-    top = max(counts)
+    top = -(-max(counts) // 20) * 20  # axis ends on a gridline above the tallest bar
     L = [r"\begin{figure}[t]", r"\centering", r"\begin{tikzpicture}[x=1cm,y=1cm]"]
     L += [rf"\definecolor{{{k}}}{{HTML}}{{{v}}}" for k, v in COLORS.items()]
     width = len(counts) * W
@@ -130,11 +135,13 @@ def repo_histogram(f: dict) -> str:
         L.append(rf"\node[font=\scriptsize\sffamily,text=ink,anchor=north,inner sep=2pt] at ({x0 + (W - GAP) / 2:.3f},0) {{{lab}}};")
     L.append(rf"\draw[ink!70,line width=0.4pt] (0,0) -- ({width:.3f},0);")
     L.append(rf"\node[font=\scriptsize\sffamily,text=ink,anchor=north] at ({width / 2:.3f},-0.38) "
-             r"{Share of the repository's agent-file knowledge that is agent-only};")
+             r"{Share of the repository's agent-file sections that are agent-only};")
     L.append(rf"\node[font=\scriptsize\sffamily,text=ink,rotate=90,anchor=south] at (-0.45,{H / 2:.3f}) {{Repositories}};")
     L += [r"\end{tikzpicture}",
-          rf"\caption{{How many repositories have how much agent-only knowledge ({len(per)} repositories, each "
-          r"counted once). In the 0\% bar, every coded section is at least partly in README or CONTRIBUTING; "
+          r"\Description{Histogram of repositories by the share of their labelled agent-file sections that are "
+          r"agent-only, in six bins from 0\% to 100\%.}",
+          rf"\caption{{How many repositories have how many agent-only sections ({len(per)} repositories, each "
+          r"counted once). In the 0\% bar, every labelled section is at least partly in README or CONTRIBUTING; "
           r"in the 100\% bar, none is.}",
           r"\label{fig:repos}", r"\end{figure}", ""]
     return "\n".join(L)
@@ -196,8 +203,8 @@ def architecture(e: dict | None) -> str:
     clean = lambda s: tex(re.sub(r"<[^>]+>", "", str(s)).strip())  # noqa: E731  (drop HTML anchors in headings)
     brk = lambda s: tex(s).replace("/", r"/\allowbreak ")  # noqa: E731  (let long paths wrap in narrow boxes)
     stages = [(r"Agent READMEs dataset", r"\nPackageFiles{} agent files"),
-              (r"Same commit", r"README and CONTRIBUTING at the agent file's commit; \nEligible{} eligible"),
-              (r"Sample", r"\nPerAgent{} per file type; \nSampleRepos{} repositories"),
+              (r"Same commit", r"README and CONTRIBUTING at the agent file's snapshot commit"),
+              (r"Filter and sample", r"\nEligible{} eligible files; \nPerAgent{} per file type; \nSampleRepos{} repositories"),
               (r"Sections", r"split at headings; \nUnits{} sections"),
               (r"Labelling (RQ1, RQ2)", r"up to 10 sections per repository; \nQueued{} labelled"),
               (r"Detector (RQ3)", r"score of each section against the human sections")]
@@ -241,7 +248,9 @@ def architecture(e: dict | None) -> str:
                  rf"{{\textbf{{Example section}} (\texttt{{{tex(e['file'])}}}, \emph{{{clean(e['heading'])}}}): "
                  rf"{latex_text(e['text'])}}};")
     L += [r"\end{tikzpicture}",
-          (r"\caption{Architecture of the method. Top: the six stages. Bottom: one real section from our data "
+          r"\Description{Six method stages in a row, from the Agent READMEs dataset to the detector, with one "
+          r"real agent-file section traced below each stage.}",
+          (r"\caption{Overview of the pipeline. Top: the six stages. Bottom: one real section from our data "
            r"traced through every stage" + (f", labelled {e['coverage'].lower()} by the annotator and "
            f"{'predicted' if e['predicted_agent_only'] else 'not predicted'} agent-only by the detector."
            if e else ".") + "}"),
