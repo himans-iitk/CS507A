@@ -30,15 +30,15 @@ however, rely on the README and CONTRIBUTING files, and no study has examined wh
 written for agents also reaches them. This paper aims to find the onboarding knowledge that projects
 give only to their agents, to show which newcomer needs it would serve, and to detect it
 automatically so that maintainers can move it into their contributor documentation. We sampled \nSampleRepos{} GitHub repositories with an agent file, a README and a
-CONTRIBUTING file, and compared the three documents at the same commit. We manually labelled
-\nQueued{} agent file sections for their coverage in the human documents, their instruction
-category, and the newcomer needs and barriers they address. On average, \agentOnlyOverall{} of a
+CONTRIBUTING file, and compared the three documents at the same commit. In each repository,
+we labelled up to 10 agent file sections, \nQueued{} in total, for their coverage in the human
+documents, their instruction category, and the newcomer needs and barriers they address. On average, \agentOnlyOverall{} of a
 repository's agent file knowledge is absent from its human documentation, and only
 \sharedOverall{} is fully shared. The missing knowledge concerns how to work on the project:
 \needGroupTopShare{} of it serves process and practice needs, mainly the development workflow and
 environment. A lexical matcher based on term frequency and inverse document
 frequency (TF-IDF) detects this knowledge with an F1 score of \detectorFOne{} on unseen
-repositories, against \baselineFOne{} for a trivial baseline. Agent files are therefore a ready
+repositories. Agent files are therefore a ready
 source of material for improving contributor documentation. We release the data, codebook, labels,
 pipeline and detector.
 \end{abstract}
