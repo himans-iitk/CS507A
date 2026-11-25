@@ -396,9 +396,8 @@ Table~\ref{tab:prov} gives the origin of every label. The author labelled the
 To estimate reliability, an independent LLM annotator (\secondCoderModel) labelled the same
 sections blind, without access to the first labels (Table~\ref{tab:rel}). The two annotators
 assigned the same coverage label to \relAgreement{} of sections. Cohen's $\kappa$, which corrects
-agreement for chance~\cite{cohen1960kappa}, is \kappaCoverage{} \kappaCoverageCI; treating
-agent-only, partial and shared as an ordered scale, the weighted $\kappa$ is \kappaWeighted{}
-\kappaWeightedCI~\cite{cohen1968weighted}. This is substantial agreement by the usual
+agreement for chance~\cite{cohen1960kappa}, is \kappaCoverage; treating agent-only, partial and
+shared as an ordered scale, the weighted $\kappa$ is \kappaWeighted~\cite{cohen1968weighted}. This is substantial agreement by the usual
 benchmarks~\cite{landis1977kappa}. Agreement is similar across agent types ($\kappa$ of
 \relKappaClaude{} for \texttt{CLAUDE.md}, \relKappaAgents{} for \texttt{AGENTS.md} and
 \relKappaCopilot{} for Copilot) and complete in \relReposFull{} of \nReliabilityRepos{}
@@ -409,8 +408,8 @@ documents must be to count. Instruction categories, a choice of several among 16
 Jaccard overlap \relCategoryJaccard). Because the second annotator is an LLM, these figures measure
 agreement between a person and a model, not between two people (Section~\ref{sec:limitations}).
 \else
-A second coder labelled the same sections blind: Cohen's $\kappa$ is \kappaCoverage{}
-\kappaCoverageCI~\cite{cohen1960kappa} and the weighted $\kappa$ is
+A second coder labelled the same sections blind: Cohen's $\kappa$ is
+\kappaCoverage~\cite{cohen1960kappa} and the weighted $\kappa$ is
 \kappaWeighted~\cite{cohen1968weighted}.
 \fi
 The final labels are the author's. Needs and barriers of gap sections come from the author
@@ -431,8 +430,9 @@ agent-only, partially covered or shared. For each repository, we compute the sha
 in each class and average these shares over the repositories of each agent type. The overall
 estimate weights the three types by their share of eligible files. Every repository therefore
 counts equally, regardless of the length of its agent file, and the limit of 10 sections per
-repository does not bias the result. The 95\% confidence intervals (CIs) come from 1{,}000
-bootstrap samples that resample repositories within each agent type~\cite{efron1993bootstrap}.
+repository does not bias the result. We assess uncertainty with 1{,}000
+bootstrap samples that resample repositories within each agent type~\cite{efron1993bootstrap}; the
+resulting confidence intervals are reported in the replication package.
 
 \paragraph{Categories and agent types.} Sections of the same repository are correlated, so tests
 that treat sections as independent would overstate significance. We therefore fit a logistic
@@ -485,7 +485,7 @@ agent-only, two further thresholds for a three class prediction (agent-only, par
 the matcher to release. On the test set, we report precision, recall and F1 for agent-only; the
 area under the ROC curve (AUC); macro F1 over the three classes; and how often a human section
 marked as covering is ranked first (hit@1) or among the top five (hit@5). As a baseline, we label
-every section agent-only. All CIs resample repositories.
+every section agent-only.
 
 \subsection{Implementation}
 
@@ -731,7 +731,7 @@ repositories, copies and files that only link elsewhere.
 repository level, resample whole repositories and use clustered models. With \geeNTerms{}
 regression terms, some significant odds ratios may arise by chance; after a Bonferroni correction,
 \geeBonferroniCats{} remain significant. The detector's thresholds were tuned on only
-\detectorNDev{} sections; the test set CIs quantify the resulting uncertainty.
+\detectorNDev{} sections; the replication package reports bootstrap confidence intervals for all test results.
 
 %======================================================================
 \section{Conclusion and Future Work}\label{sec:conclusion}

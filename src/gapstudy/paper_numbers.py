@@ -134,7 +134,7 @@ def results() -> dict[str, str]:
     head = phase7 / "rq1_headline.csv"
     if head.exists():
         h = pd.read_csv(head).set_index(["outcome", "scope"])
-        fmt = lambda o, s: f"{pct(h.loc[(o, s), 'estimate'])} [{pct(h.loc[(o, s), 'lo'])}, {pct(h.loc[(o, s), 'hi'])}]"
+        fmt = lambda o, s: pct(h.loc[(o, s), 'estimate'])  # point estimate only; CIs stay in analysis/
         m |= {"agentOnlyOverall": fmt("agent_only", "overall"), "agentOnlyClaude": fmt("agent_only", "claude"),
               "agentOnlyAgents": fmt("agent_only", "agents"), "agentOnlyCopilot": fmt("agent_only", "copilot-instructions"),
               "anyGapOverall": fmt("any_gap", "overall"), "sharedOverall": fmt("shared", "overall"),
@@ -153,9 +153,6 @@ def results() -> dict[str, str]:
         for key, field in (("kappaCoverage", "coverage_kappa"), ("kappaWeighted", "coverage_weighted_kappa")):
             if rel.get(field) is not None:
                 m[key] = num(rel[field], 2)
-                if rel.get(f"{field}_ci"):
-                    lo, hi = rel[f"{field}_ci"]
-                    m[key + "CI"] = f"[{num(lo, 2)}, {num(hi, 2)}]"
         m["nSecondCodedUnits"] = num(rel["units"])
         m["relAgreement"] = pct(rel["coverage_agreement"])
         m["secondCoderModel"] = ", ".join(rel.get("second_coder_models") or []) or "an LLM"
@@ -234,7 +231,7 @@ def findings() -> dict[str, str]:
     for term, key in (("agent:agents", "Agents"), ("agent:copilot-instructions", "Copilot")):
         if term in g.index:
             r = g.loc[term]
-            m[f"geeOr{key}"] = f"{r.odds_ratio:.2f} [{r.lo:.2f}, {r.hi:.2f}]"
+            m[f"geeOr{key}"] = f"{r.odds_ratio:.2f}"
     if "provenance_by_draft" in f:
         pd_ = f["provenance_by_draft"]
         m |= {f"draftCorr{k}": pct(pd_.loc[c, "correction_rate"]) for c, k in
@@ -264,12 +261,12 @@ def findings() -> dict[str, str]:
     for key, name in (("blind", "Blind"), ("drafted", "Drafted")):
         r = f.get("sens_mode", {}).get(key)
         if r:
-            m[f"agentOnly{name}"] = f"{pct(r['agent_only'])} [{pct(r['lo'])}, {pct(r['hi'])}]"
+            m[f"agentOnly{name}"] = pct(r['agent_only'])
             m[f"n{name}Repos"] = num(r["repos"])
     cm = f.get("coding_mode")
     if cm:
         pp = lambda x: f"{100 * x:+.1f}".replace("-", "$-$")  # noqa: E731
-        m["codingModeDiff"] = f"{pp(cm['difference'])} percentage points [{pp(cm['lo'])}, {pp(cm['hi'])}]"
+        m["codingModeDiff"] = f"{pp(cm['difference'])} percentage points"
         m["codingModeSignificant"] = "no" if cm["lo"] <= 0 <= cm["hi"] else "yes"
     if "repo_facts" in f:
         rf, sp = f["repo_facts"], f["repo_spread"]

@@ -49,12 +49,11 @@ def rq1_headline(f: dict) -> str:
     rows = []
     for outcome, name in (("agent_only", "Agent-only"), ("partial", "Partially covered"), ("shared", "Shared"),
                           ("any_gap", "Agent-only or partial")):
-        rows.append(f"{name} & " + " & ".join(ci(hl[(outcome, s)]) for s in ("overall", *TOOLS)) + r" \\")
+        rows.append(f"{name} & " + " & ".join(p1(hl[(outcome, s)][0]) for s in ("overall", *TOOLS)) + r" \\")
     rows.append(r"\midrule")
     rows.append("Repositories & " + " & ".join(str(hl[("agent_only", s)][3]) for s in ("overall", *TOOLS)) + r" \\")
     return table("table*", "RQ1: How much of a repository's agent-file knowledge is also in its README and "
-                 "CONTRIBUTING. Each value is the average share per repository (\\%), with a 95\\% confidence interval "
-                 "in brackets. The \\emph{All} column weights each file type by how common it is among eligible "
+                 "CONTRIBUTING. Each value is the average share per repository (\\%). The \\emph{All} column weights each file type by how common it is among eligible "
                  "files.", "tab:rq1", "lrrrr",
                  r"Coverage & All & \texttt{CLAUDE.md} & \texttt{AGENTS.md} & Copilot", rows)
 
@@ -68,14 +67,14 @@ def rq1_categories(f: dict) -> str:
         if key is not None and key in gee.index:
             g = gee.loc[key]
             star = "$^{*}$" if g.p < 0.05 else ""
-            odds = f"{g.odds_ratio:.2f}{star} {{\\scriptsize[{g.lo:.2f}, {g.hi:.2f}]}}"
+            odds = f"{g.odds_ratio:.2f}{star}"
         else:
             odds = "n/a"
         rows.append(f"{tex(r.category)} & {r.units} & {p1(r.agent_only)} & {odds} " + r"\\")
     body = table("table", "Agent-only share by instruction category (\\% of sections). The odds ratio compares "
                  "sections with the category to all other sections; below 1 means less often agent-only "
                  "($^{*}$ $p < 0.05$). A section can have several categories.",
-                 "tab:rq1cat", "@{}lrrr@{}", r"Category & Sections & Agent-only & Odds ratio [95\% CI]", rows)
+                 "tab:rq1cat", "@{}lrrr@{}", r"Category & Sections & Agent-only & Odds ratio", rows)
     return body.replace(r"\small", r"\footnotesize\setlength{\tabcolsep}{3.5pt}", 1)
 
 
@@ -111,14 +110,11 @@ def rq3(f: dict) -> str:
     short = {"tfidf": "TF-IDF", "sentence-transformers/all-MiniLM-L6-v2": "MiniLM-L6",
              "BAAI/bge-base-en-v1.5": "bge-base", "Qwen/Qwen3-Embedding-0.6B": "Qwen3-Emb-0.6B"}
     for r in f["detector"].to_dict("records"):
-        lo, hi = (float(x) for x in str(r["f1_ci"]).strip("()").split(","))
-        alo, ahi = (float(x) for x in str(r["auc_ci"]).strip("()").split(","))
         name = tex(short.get(r["matcher"], r["matcher"].split("/")[-1]))
         name = rf"\textbf{{{name}}}" if r["matcher"] == f["detector_best"]["matcher"] else name
         rows.append(f"{name} & {r['precision']:.2f} & {r['recall']:.2f} & {r['f1']:.2f} & {r['auc']:.2f} & "
                     f"{r['macro_f1']:.2f} & {r['retrieval_hit@1']:.2f}/{r['retrieval_hit@5']:.2f} " + r"\\")
-        rows.append(rf"\quad{{\scriptsize\itshape {tex(r['variant'])}}} & & & {{\scriptsize[{lo:.2f}, {hi:.2f}]}} & "
-                    rf"{{\scriptsize[{alo:.2f}, {ahi:.2f}]}} & & \\")
+        rows.append(rf"\quad{{\scriptsize\itshape {tex(r['variant'])}}} & & & & & & \\")
     for r in f["detector_llm"].to_dict("records"):
         rows.append(f"{tex(r['matcher'])} ({tex(r.get('mode', 'LLM'))}) & {r['precision']:.2f} & {r['recall']:.2f} & "
                     f"{r['f1']:.2f} & n/a & {r['macro_f1']:.2f} & n/a " + r"\\")
@@ -133,7 +129,7 @@ def rq3(f: dict) -> str:
                  "Mac.\\,F1: average F1 over agent-only, partial and shared. @1/@5: share of covered sections whose "
                  "matching human section is ranked first, or in the top five. The score (italics) and thresholds "
                  f"were chosen on {int(b['n_dev'])} pilot sections; bold marks the matcher chosen there. "
-                 "Brackets: 95\\% confidence intervals. \\emph{All agent-only} is a trivial baseline that labels every "
+                 "\\emph{All agent-only} is a trivial baseline that labels every "
                  "section agent-only.", "tab:rq3", "@{}lrrrrrr@{}",
                  r"Matcher & P & R & F1 & AUC & Mac.\,F1 & @1/@5", rows)
     return body.replace(r"\small", r"\small\setlength{\tabcolsep}{3.5pt}", 1)
@@ -152,11 +148,10 @@ def sensitivity(f: dict) -> str:
     for r in f["sensitivity"].itertuples():
         if r.variant.startswith("only ") and not any(x.startswith("Only") for x in rows):
             rows.append(r"\midrule")  # rule before the coding-mode split
-        lo, hi = getattr(r, "lo", float("nan")), getattr(r, "hi", float("nan"))
         rows.append(rf"{SENS_NAMES.get(r.variant, tex(r.variant))} & {r.repos} & "
-                    + (ci((r.agent_only, lo, hi)) if pd.notna(lo) else p1(r.agent_only)) + r" \\")
-    return table("table", "How the agent-only share (\\%) changes when we leave out parts of the data, with 95\\% "
-                 "confidence intervals. The last two rows split the sample by how the labels were made.", "tab:sens",
+                    + p1(r.agent_only) + r" \\")
+    return table("table", "How the agent-only share (\\%) changes when we leave out parts of the data. "
+                 "The last two rows split the sample by how the labels were made.", "tab:sens",
                  "@{}lrr@{}", r"Variant & Repos & Agent-only", rows)
 
 

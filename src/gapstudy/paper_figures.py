@@ -98,8 +98,7 @@ def figure(f: dict) -> str:
 
     L += [r"\end{tikzpicture}",
           r"\caption{RQ1: How much agent-file knowledge is also in README and CONTRIBUTING. (a)~Average share "
-          r"per repository; $^{*}$file types weighted by how common they are (confidence intervals in "
-          r"Table~\ref{tab:rq1}). (b)~Share of sections in each instruction category (a section can have "
+          r"per repository; $^{*}$file types weighted by how common they are. (b)~Share of sections in each instruction category (a section can have "
           r"several), sorted by the agent-only share printed on the bars (\%).}",
           r"\label{fig:rq1}", r"\end{figure}", ""]
     return "\n".join(L)
