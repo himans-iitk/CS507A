@@ -24,7 +24,7 @@
 
 \begin{abstract}
 AI coding agents such as Claude Code, OpenAI Codex and GitHub Copilot read a repository context
-file at the start of every session. This file tells the agent how to build, test and change the
+file, which we call an \emph{agent file}, at the start of every session. This file tells the agent how to build, test and change the
 project, which is the same knowledge a new human contributor needs. Human newcomers,
 however, rely on the README and CONTRIBUTING files, and no study has examined whether the knowledge
 written for agents also reaches them. This paper aims to find the onboarding knowledge that projects
@@ -71,7 +71,7 @@ Since 2025, projects also write documentation for a second kind of newcomer. AI 
 as Claude Code, OpenAI Codex and GitHub Copilot load a \emph{context file} into every session:
 \texttt{CLAUDE.md}, \texttt{AGENTS.md} or
 \path{.github/copilot-instructions.md}~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context}.
-An agent starts in the same position as a human newcomer: it knows the programming language but
+We call these \emph{agent files}. An agent starts in the same position as a human newcomer: it knows the programming language but
 not the project. Maintainers therefore tell it how to build and test, how the code is organised,
 which conventions to follow and which files not to touch. Such files help agents most when they
 contain this kind of practical project knowledge~\cite{gloaguen2026agentsmd}.
