@@ -25,17 +25,18 @@
 \begin{abstract}
 AI coding agents such as Claude Code, OpenAI Codex and GitHub Copilot read a repository context
 file at the start of every session. This file tells the agent how to build, test and change the
-project, which is the same knowledge a new human contributor needs. Newcomers, however, read the
-README and CONTRIBUTING files, and it is unknown how much of the agent's knowledge reaches them.
-This paper measures that gap. We sampled \nSampleRepos{} GitHub repositories that have a
-\texttt{CLAUDE.md}, \texttt{AGENTS.md} or Copilot instructions file together with a README and a
+project, which is the same knowledge a new human contributor needs. Human newcomers,
+however, rely on the README and CONTRIBUTING files, and no study has examined whether the knowledge
+written for agents also reaches them. This paper aims to find the onboarding knowledge that projects
+give only to their agents, to show which newcomer needs it would serve, and to detect it
+automatically so that maintainers can move it into their contributor documentation. We sampled \nSampleRepos{} GitHub repositories with an agent file, a README and a
 CONTRIBUTING file, and compared the three documents at the same commit. We manually labelled
 \nQueued{} agent file sections for their coverage in the human documents, their instruction
 category, and the newcomer needs and barriers they address. On average, \agentOnlyOverall{} of a
 repository's agent file knowledge is absent from its human documentation, and only
 \sharedOverall{} is fully shared. The missing knowledge concerns how to work on the project:
 \needGroupTopShare{} of it serves process and practice needs, mainly the development workflow and
-the development environment. A lexical matcher based on term frequency and inverse document
+environment. A lexical matcher based on term frequency and inverse document
 frequency (TF-IDF) detects this knowledge with an F1 score of \detectorFOne{} on unseen
 repositories, against \baselineFOne{} for a trivial baseline. Agent files are therefore a ready
 source of material for improving contributor documentation. We release the data, codebook, labels,

@@ -1,11 +1,8 @@
 {
-  "run_at": "2026-11-25T02:25:40+00:00",
-  "git_commit": "86953af7cf89137e1aed8263e27fe8cf0a10c0f5",
+  "run_at": "2026-11-25T04:47:47+00:00",
+  "git_commit": "ce7a00bb5f3d86474b3fcb0d73156886c5d7393a",
   "git_dirty": [
-    "paper/main.tex",
-    "src/gapstudy/paper_figures.py",
-    "src/gapstudy/paper_numbers.py",
-    "paper/figures/overview.tex"
+    "paper/main.tex"
   ],
   "bootstrap_draws": 1000,
   "stages": {
@@ -21,8 +18,8 @@
       ],
       "warnings": [],
       "status": "ok",
-      "seconds": 1.2,
-      "run_at": "2026-11-25T02:25:40+00:00"
+      "seconds": 0.7,
+      "run_at": "2026-11-25T04:47:47+00:00"
     },
     "freeze": {
       "notes": [
@@ -64,8 +61,8 @@
         "paper/main.pdf built"
       ],
       "status": "ok",
-      "seconds": 11.1,
-      "run_at": "2026-11-25T02:25:40+00:00"
+      "seconds": 5.3,
+      "run_at": "2026-11-25T04:47:47+00:00"
     }
   },
   "inputs": {
@@ -88,7 +85,7 @@
     "detector/config.json": "99c2390ef5a21a38868f62e9914222da9b2a1d89ad1117f82096c4c5c17d32e4",
     "analysis/phase7/results.md": "447b92aa5625fb2f7d69181283607db7a263087061151e1847373c0fd235a01d",
     "paper/numbers.tex": "3090efc25087a587532590a74e6d5791f314e7829537bf4928c45e02969bb7cb",
-    "paper/main.pdf": "e28ad11867ec7ac427551518dd2706dbfbea531c3ace124946b9ba876e3e717c",
-    "analysis/FINAL_RESULTS.md": "6d5fc439f8166186aee9f8acbecddce19440d0c0f406dd8ddc670956c512eb47"
+    "paper/main.pdf": "fd74cf39c65ff11d07b9a67cd2ddb018c6f000f4f6de587e056fde2bab361247",
+    "analysis/FINAL_RESULTS.md": "501965bdb191f57539d194588e3a5ef928b3bfcc14997f3d81b9fb97bc343028"
   }
 }
