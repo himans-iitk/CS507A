@@ -141,8 +141,118 @@ def repo_histogram(f: dict) -> str:
     return "\n".join(L)
 
 
+EXAMPLE_UNIT = "microsoft/generative-ai-with-javascript::agent::4"  # test-set section traced in Figure 1
+FILE_NAMES = {"claude": "CLAUDE.md", "agents": "AGENTS.md", "copilot-instructions": "copilot-instructions.md"}
+
+
+def example_facts(unit_id: str = EXAMPLE_UNIT) -> dict | None:
+    """Everything Figure 1 says about the worked example, read from the pipeline outputs."""
+    import json
+    import pandas as pd
+    from gapstudy.detector.items import split_items
+    root = PROJECT_ROOT
+    paths = {"units": root / "data/processed/units.csv", "labels": root / "coding/labels_v1.csv",
+             "sample": root / "data/processed/sample.csv", "config": root / "detector/config.json",
+             "codebook": root / "coding/codebook.json"}
+    if not all(p.exists() for p in paths.values()):
+        return None
+    units = pd.read_csv(paths["units"]).set_index("unit_id")
+    labels = pd.read_csv(paths["labels"]).set_index("unit_id")
+    if unit_id not in labels.index:
+        return None
+    cfg = json.loads(paths["config"].read_text())
+    cb = json.loads(paths["codebook"].read_text())
+    scores = pd.read_csv(root / "data/processed/scores" / f"{cfg['matcher'].replace('/', '__')}.csv").set_index("unit_id")
+    lab, unit = labels.loc[unit_id], units.loc[unit_id]
+    repo = unit.repo
+    smp = pd.read_csv(paths["sample"])
+    row = smp[(smp.repo == repo) & smp.in_sample].iloc[0]
+    per_doc = units[units.repo == repo].doc.value_counts()
+    best = json.loads(scores.loc[unit_id, "item_max"])
+    top_id = json.loads(scores.loc[unit_id, "top"])[0][0]
+    score = float(scores.loc[unit_id, cfg["variant"]])
+    name = lambda group, key: cb[group].get(key, {}).get("name", key)  # noqa: E731
+    return {
+        "repo": repo, "file": FILE_NAMES[unit.tool], "stars": int(row.stars), "set": lab["set"],
+        "commit": str(row.snapshot_commit)[:7], "date": pd.to_datetime(row.snapshot_date).strftime("%-d %B %Y"),
+        "readme": row.readme_path, "contributing": row.contributing_path,
+        "n_agent": int(per_doc.get("agent", 0)), "n_readme": int(per_doc.get("README", 0)),
+        "n_contrib": int(per_doc.get("CONTRIBUTING", 0)),
+        "heading": str(unit.heading_path).split(" > ")[-1], "words": int(unit.words), "text": unit.text,
+        "n_items": len(split_items(unit.text)), "item_best": best,
+        "coverage": name("coverage", lab.coverage),
+        "categories": [name("categories", c) for c in json.loads(lab.categories)],
+        "need": name("needs", lab.need), "barriers": [name("barriers", b) for b in json.loads(lab.barriers)],
+        "score": score, "threshold": float(cfg["threshold"]), "variant": cfg["variant"].replace("_", " "),
+        "matcher": {"tfidf": "TF-IDF"}.get(cfg["matcher"], cfg["matcher"]),
+        "predicted_agent_only": score < float(cfg["threshold"]),
+        "top_heading": str(units.loc[top_id, "heading_path"]).split(" > ")[-1],
+    }
+
+
+def architecture(e: dict | None) -> str:
+    """Figure 1: the method's stages (top) and one real section traced through them (bottom)."""
+    import re
+    from gapstudy.paper_tables import latex_text
+    clean = lambda s: tex(re.sub(r"<[^>]+>", "", str(s)).strip())  # noqa: E731  (drop HTML anchors in headings)
+    brk = lambda s: tex(s).replace("/", r"/\allowbreak ")  # noqa: E731  (let long paths wrap in narrow boxes)
+    stages = [(r"Agent READMEs dataset", r"\nPackageFiles{} agent files"),
+              (r"Same commit", r"README and CONTRIBUTING at the agent file's commit; \nEligible{} eligible"),
+              (r"Sample", r"\nPerAgent{} per file type; \nSampleRepos{} repositories"),
+              (r"Sections", r"split at headings; \nUnits{} sections"),
+              (r"Labelling (RQ1, RQ2)", r"up to 10 sections per repository; \nQueued{} labelled"),
+              (r"Detector (RQ3)", r"score of each section against the human sections")]
+    L = [r"\begin{figure*}[t]", r"\centering",
+         r"\begin{tikzpicture}[x=1cm,y=1cm,",
+         r"  stage/.style={draw=black!50,fill=black!6,rounded corners=1.5pt,align=center,font=\scriptsize,"
+         r"text width=2.5cm,minimum height=1.05cm,inner sep=2pt,anchor=north},",
+         r"  ex/.style={draw=black!25,rounded corners=1.5pt,align=left,font=\scriptsize,text width=2.5cm,"
+         r"minimum height=2.45cm,inner sep=2.5pt,anchor=north},",
+         r"  arr/.style={-{Latex[length=1.6mm]},black!60,line width=0.5pt}]"]
+    step = 2.95
+    for i, (title, body) in enumerate(stages):
+        L.append(rf"\node[stage] (s{i}) at ({i * step:.2f},0) {{\textbf{{{title}}}\\{body}}};")
+    for i in range(len(stages) - 1):
+        L.append(rf"\draw[arr] (s{i}.east) -- (s{i + 1}.west);")
+    if e:
+        best = ", ".join(f"{x:.2f}" for x in e["item_best"])
+        cmp_ = "<" if e["predicted_agent_only"] else r"\geq"
+        verdict = "agent-only" if e["predicted_agent_only"] else "covered"
+        correct = "correct" if (e["predicted_agent_only"] == (e["coverage"] == "Agent-only")) else "wrong"
+        cells = [
+            rf"\texttt{{{tex(e['file'])}}} of the repository {brk(e['repo'])} "
+            rf"({e['stars']} stars).",
+            rf"Snapshot commit \texttt{{{e['commit']}}} ({e['date']}). Human documents: "
+            rf"{tex(e['readme'])} and {brk(e['contributing'])}.",
+            rf"Drawn for the \texttt{{{tex(e['file'])}}} group; labelled in the {tex(e['set'])} set, so it is "
+            r"part of the RQ3 test data.",
+            rf"{e['n_agent']} agent, {e['n_readme']} README and {e['n_contrib']} CONTRIBUTING sections. "
+            rf"This one: \emph{{{clean(e['heading'])}}} ({e['words']} words, text below).",
+            rf"\textbf{{Coverage:}} {tex(e['coverage'])}. \textbf{{Categories:}} {tex('; '.join(e['categories']))}. "
+            rf"\textbf{{Need:}} {tex(e['need'])}. \textbf{{Barrier:}} {tex('; '.join(e['barriers']))}.",
+            rf"{e['matcher']}, {e['n_items']} items; best matches {best}. {tex(e['variant']).capitalize()} "
+            rf"${e['score']:.3f} {cmp_} {e['threshold']:.3f}$: {verdict} ({correct}). Closest human "
+            rf"section: \emph{{{clean(e['top_heading'])}}}."]
+        for i, c in enumerate(cells):
+            L.append(rf"\node[ex] (e{i}) at ({i * step:.2f},-1.35) {{{c}}};")
+            L.append(rf"\draw[black!30,densely dotted,line width=0.5pt] (s{i}.south) -- (e{i}.north);")
+        width = (len(stages) - 1) * step + 2.5
+        L.append(rf"\node[draw=black!25,fill=black!3,rounded corners=1.5pt,align=left,font=\scriptsize,"
+                 rf"text width={width - 0.2:.2f}cm,inner sep=3pt,anchor=north west] at (-1.25,-3.95) "
+                 rf"{{\textbf{{Example section}} (\texttt{{{tex(e['file'])}}}, \emph{{{clean(e['heading'])}}}): "
+                 rf"{latex_text(e['text'])}}};")
+    L += [r"\end{tikzpicture}",
+          (r"\caption{Architecture of the method. Top: the six stages. Bottom: one real section from our data "
+           r"traced through every stage" + (f", labelled {e['coverage'].lower()} by the annotator and "
+           f"{'predicted' if e['predicted_agent_only'] else 'not predicted'} agent-only by the detector."
+           if e else ".") + "}"),
+          r"\label{fig:overview}", r"\end{figure*}", ""]
+    return "\n".join(L)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "overview.tex").write_text(architecture(example_facts()))
     f = facts()
     (OUT / "rq1_coverage.tex").write_text(figure(f))
     (OUT / "rq1_repos.tex").write_text(repo_histogram(f))

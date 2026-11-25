@@ -132,3 +132,14 @@ def test_coding_mode_difference_is_drafted_minus_blind():
                          "coverage": "agent_only" if s == "main" else "shared"})
     cm = coding_mode(pd.DataFrame(rows), {"claude": 1 / 3, "agents": 1 / 3, "copilot-instructions": 1 / 3}, n_boot=50)
     assert cm["difference"] == pytest.approx(1.0) and cm["drafted_repos"] == 9 and cm["blind_repos"] == 9
+
+
+def test_architecture_figure_traces_a_real_section():
+    from gapstudy.paper_figures import architecture, example_facts
+    e = example_facts()
+    if e is None:
+        pytest.skip("pipeline outputs not available")
+    tikz = architecture(e)
+    assert r"\label{fig:overview}" in tikz and tikz.count(r"\node[ex]") == 6
+    assert e["n_items"] == len(e["item_best"]) and f"{e['score']:.3f}" in tikz
+    assert e["set"] != "pilot"  # the traced section must come from the RQ3 test data

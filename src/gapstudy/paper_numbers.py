@@ -72,7 +72,11 @@ def sampling() -> dict[str, str]:
     m |= {"snapshotFirst": dates.min().strftime("%B %Y"), "snapshotLast": dates.max().strftime("%B %Y"),
           "nSnapshotPackage": num(src.get("package_history", 0)), "nSnapshotAPI": num(src.get("api_history", 0)),
           "nDuplicateDropped": num(flow.total.iloc[7] - flow.total.iloc[8]),
-          "nDroppedNoContributing": num(flow.total.iloc[-2] - flow.total.iloc[-1])}
+          "nDroppedNoContributing": num(flow.total.iloc[-2] - flow.total.iloc[-1]),
+          # Motivation: of the screened files whose repository has a README, how many also have CONTRIBUTING.
+          "nWithReadme": num(flow.total.iloc[-2]),
+          "withContributingShare": pct(flow.total.iloc[-1] / flow.total.iloc[-2], 0),
+          "withoutContributingShare": pct(1 - flow.total.iloc[-1] / flow.total.iloc[-2], 0)}
     multi = PROJECT_ROOT / "analysis" / "phase1" / "repo_agent_files.csv"
     if multi.exists():
         r = pd.read_csv(multi)
@@ -107,6 +111,7 @@ def corpus() -> dict[str, str]:
     m["fleschContribP"] = r"$p < 0.0001$" if p < 1e-4 else f"$p = {p:.3g}$"
     words = d.pivot(index="repo", columns="doc", values="words")[["agent", "CONTRIBUTING"]].dropna()
     m["wordsGapContrib"] = num((words.agent - words.CONTRIBUTING).median())
+    m["agentLongerShare"] = pct((words.agent > words.CONTRIBUTING).mean(), 0)
     by_tool = d[d.doc == "agent"].groupby("tool").flesch.median()
     m |= {"fleschClaude": num(by_tool["claude"], 1), "fleschAgents": num(by_tool["agents"], 1),
           "fleschCopilot": num(by_tool["copilot-instructions"], 1)}

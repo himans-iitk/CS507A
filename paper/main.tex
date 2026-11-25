@@ -59,32 +59,52 @@ source, software documentation, mining software repositories}
 Joining a software project is difficult. A newcomer must learn how the code is organised, how to
 set up a working environment, which commands build and test the project, and which unwritten rules
 apply to a change~\cite{sim1998rampup,begel2008novice,dagenais2010landscape}. In open source,
-mentors are rarely available. Many newcomers give up before their first contribution, and the
+mentors are rarely available, and many newcomers give up before their first contribution. The
 barriers they report most often include missing knowledge of the project's process, problems with
 the local environment, and difficulty finding their way in the
-code~\cite{steinmacher2015barriers,steinmacher2015social}. Projects address these barriers with
-documentation: a README that explains what the project is, and a CONTRIBUTING file that explains
-how to work on it~\cite{prana2019readme,steinmacher2019letmein}. Yet most CONTRIBUTING files leave
-several of these barriers unaddressed~\cite{fronchetti2023contributing}.
+code~\cite{steinmacher2015barriers,steinmacher2015social}. Projects address these barriers with a
+README that explains what the project is and a CONTRIBUTING file that explains how to work on
+it~\cite{prana2019readme,steinmacher2019letmein}.
 
-Since 2025, projects have also written documentation for a second kind of newcomer. AI coding
-agents such as Claude Code, OpenAI Codex and GitHub Copilot load a \emph{context file} into every
-session: \texttt{CLAUDE.md}, \texttt{AGENTS.md} or
+Since 2025, projects also write documentation for a second kind of newcomer. AI coding agents such
+as Claude Code, OpenAI Codex and GitHub Copilot load a \emph{context file} into every session:
+\texttt{CLAUDE.md}, \texttt{AGENTS.md} or
 \path{.github/copilot-instructions.md}~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context}.
-An agent starts in the same position as a human newcomer. It knows the programming language but
+An agent starts in the same position as a human newcomer: it knows the programming language but
 not the project. Maintainers therefore tell it how to build and test, how the code is organised,
 which conventions to follow and which files not to touch. Such files help agents most when they
 contain this kind of practical project knowledge~\cite{gloaguen2026agentsmd}.
 
-This raises a question that has not been studied. Suppose a maintainer writes ``run
-\texttt{make verify} before committing; never edit \texttt{src/gen/}'' in \texttt{CLAUDE.md}. The
-same rule may or may not appear in \texttt{CONTRIBUTING.md}, which may only say ``pull requests
-welcome''. If agent files often hold knowledge that the human documents lack, projects onboard
-their agents better than their people. The agent file would then also be a ready source for
-improving the human documents. Prior studies examined agent files in
+\paragraph{Motivation.} Four observations motivate this study.
+\begin{enumerate}
+\item \emph{Human onboarding documents are incomplete.} In a study of CONTRIBUTING files, 52\% of
+projects omitted at least three of six common newcomer barriers~\cite{fronchetti2023contributing}.
+\item \emph{Agent files are already widespread.} The Agent READMEs dataset alone contains
+\nPackageFiles{} agent files from \nPackageRepos{} GitHub
+repositories~\cite{chatlatanagulchai2026agentreadmes}, and \nMultiAgentRepos{} of these
+repositories maintain more than one.
+\item \emph{Many projects write for their agent but not for their contributors.} Of the
+\nWithReadme{} agent files that pass our screening and whose repository has a README, only
+\withContributingShare{} come with a CONTRIBUTING file. In the other \withoutContributingShare{},
+the agent file is the only document written specifically for someone who will change the code.
+\item \emph{Where both exist, maintainers write more for the agent.} In our sample, the agent file
+is longer than CONTRIBUTING in \agentLongerShare{} of repositories (median \agentWords{} against
+\contribWords{} words).
+\end{enumerate}
+Figure~\ref{fig:overview} shows a typical case from our data. The \texttt{AGENTS.md} of
+\texttt{microsoft/generative-ai-with-javascript} tells the agent to install Node.js 20 or later,
+set a \texttt{GITHUB\_TOKEN} variable, and run \texttt{npm install} and \texttt{npm start}. Neither
+the README nor the CONTRIBUTING file of the same commit gives these setup steps, so a human newcomer
+must discover them alone. If such cases are common, projects onboard their agents better than
+their people, and the agent file is a ready source for improving the human documents.
+
+\input{figures/overview}
+
+Prior studies examined agent files in
 isolation~\cite{chatlatanagulchai2026agentreadmes,mohsenimofidi2026context} and onboarding
 documents in isolation~\cite{prana2019readme,fronchetti2023contributing}. To the best of our
-knowledge, no study has compared the two within the same repository. This paper addresses three
+knowledge, no study has measured how much of the agent's knowledge reaches people within the same
+repository. This paper addresses three
 research questions (RQs):
 
 \begin{itemize}
@@ -218,27 +238,12 @@ reviews and as an independent second annotator, and reports the effect of both o
 \section{Methodology}\label{sec:method}
 %======================================================================
 
-Figure~\ref{fig:overview} gives an overview of the study. A single pipeline implements every step,
-and its outputs feed this paper directly.
+Figure~\ref{fig:overview} shows the architecture of the method. The top row lists the six
+stages; the bottom row traces one real section from our data through every stage, which serves as
+a running example in this section. A single pipeline implements every stage, and its outputs feed
+this paper directly.
 
-\begin{figure*}[t]
-\centering
-\begin{tikzpicture}[
-  box/.style={draw=black!45,fill=black!3,rounded corners=1.5pt,align=center,font=\scriptsize,
-              minimum height=1.25cm,text width=2.35cm,inner sep=2pt},
-  arr/.style={-{Latex[length=1.6mm]},black!60,line width=0.5pt}]
-\node[box] (a) {\textbf{Agent READMEs}\\dataset\\\nPackageFiles{} agent files};
-\node[box,right=0.32cm of a] (b) {\textbf{Same commit}\\README and CONTRIBUTING at the agent file's commit\\\nEligible{} eligible files};
-\node[box,right=0.32cm of b] (c) {\textbf{Sample}\\\nPerAgent{} per agent file type\\\nSampleRepos{} repositories};
-\node[box,right=0.32cm of c] (d) {\textbf{Sections}\\split at headings\\\nUnits{} sections};
-\node[box,right=0.32cm of d] (e) {\textbf{Labelling}\\up to 10 sections per repository\\\nQueued{} agent sections};
-\node[box,right=0.32cm of e] (f) {\textbf{Analysis}\\RQ1 coverage, RQ2 needs\\RQ3 gap detector};
-\foreach \x/\y in {a/b,b/c,c/d,d/e,e/f} \draw[arr] (\x) -- (\y);
-\end{tikzpicture}
-\caption{Overview of the study. The README and CONTRIBUTING come from the same commit as the agent
-file, so the three documents are consistent in time.}
-\label{fig:overview}
-\end{figure*}
+
 
 \subsection{Data source and snapshot commit}
 
@@ -324,7 +329,10 @@ documents~\cite{steinmacher2015barriers,santos2024onboarding}.
 Coverage judges knowledge rather than wording. A paraphrase counts as coverage; a link to a
 website or wiki does not; mentioning the same topic without the section's specific details is
 still agent-only. A section that mixes agent-directed sentences with project knowledge is labelled
-by its project knowledge.
+by its project knowledge. In the running example (Figure~\ref{fig:overview}), the README and
+CONTRIBUTING mention neither Node.js nor \texttt{GITHUB\_TOKEN}, so the section is agent-only; it
+serves the need \emph{Development Environment and Tools} and would ease the barrier \emph{Local
+environment setup hurdles}.
 
 \begin{table*}[t]
 \caption{Codebook. Coverage (C) answers RQ1. D1 and D2 are labelled only for gap sections
@@ -458,7 +466,9 @@ Each matcher compares an agent file section only with the README and CONTRIBUTIN
 repository and computes three scores: \emph{unit max}, the best similarity between the whole
 section and any whole human section; \emph{item mean}, the mean over items of each item's best
 match; and \emph{item cov@$\tau$}, the share of items whose best match exceeds a threshold $\tau$.
-The matcher also ranks the human sections, which shows a maintainer where a match comes from. The
+The matcher also ranks the human sections, which shows a maintainer where a match comes from. Figure~\ref{fig:overview} shows these scores for the running example: none
+of its four items has a close match in the human documents, so its item mean falls below the
+threshold and the section is predicted agent-only. The
 matchers agree only partly (rank correlation of item mean between \matcherRhoMin{} and
 \matcherRhoMax), so the choice of matcher matters.
 \ifllmjudge
